@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/bottom_home"
+        android:title="Home"
+        android:icon="@drawable/bottom_nav_home_img"
+        />
+
+    <item android:id="@+id/bottom_jobs"
+        android:title="Applied Jobs"
+        android:icon="@drawable/bottom_nav_job"
+        />
+
+    <item android:id="@+id/bottom_interview"
+        android:title="Interview Date"
+        android:icon="@drawable/bottom_nav_interview"
+        />
+
+    <item android:id="@+id/bottom_faq"
+        android:title="FAQ"
+        android:icon="@drawable/bottom_nav_faq"
+        />
+
+    <item android:id="@+id/bottom_profile"
+        android:title="Profile"
+        android:icon="@drawable/bottom_nav_user"
+        />
+
+</menu>

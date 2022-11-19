@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    tools:context=".HomeFragment">
+
+
+    <ImageView
+        android:id="@+id/openDrawer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/ic_baseline_format_list_bulleted_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView16"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/alarm_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/image_view_search"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/search_img"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+        app:layout_constraintEnd_toStartOf="@+id/imageView16"
+        app:layout_constraintTop_toTopOf="@+id/imageView16" />
+
+    <TextView
+        android:id="@+id/textView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/roboto"
+        android:text="Select Subject"
+        android:textColor="@color/main_text_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/image_view_search"
+        app:layout_constraintStart_toEndOf="@+id/openDrawer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView37">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:id="@+id/rl_img_slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:layout_marginTop="10dp"/>
+
+
+<!--                <com.denzcoskun.imageslider.ImageSlider-->
+<!--                    android:id="@+id/image_slider"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="170dp"-->
+<!--                    app:iss_auto_cycle="true"-->
+<!--                    app:iss_period="1000"-->
+<!--                    app:iss_delay="0"/>-->
+
+
+<!--            <ImageView-->
+<!--                android:layout_toRightOf="@+id/imageView18"-->
+<!--                android:id="@+id/imageView19"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="170dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:src="@drawable/slider_img"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintHorizontal_bias="0.5"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dotsRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/slider_dot_selected"
+                app:layout_constraintTop_toBottomOf="@+id/rl_img_slider"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!--            <ImageView-->
+<!--                android:id="@+id/img_slider_dot"-->
+<!--                android:layout_width="11dp"-->
+<!--                android:layout_height="11dp"-->
+<!--                android:src="@drawable/slider_dot_selected"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/rl_img_slider"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"/>-->
+
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main_text_color"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical"
+                android:padding="7dp"
+                android:text="Sales and Marketing Jobs"
+                android:textColor="@color/home_screen_text_color"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/bottom_nav_job"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dotsRecyclerView" />
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:backgroundTint="@color/main_text_color"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/white"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical"
+                android:padding="7dp"
+                android:text="IIT JEE NEET NDA IIT JAM GATE Coaching Jobs"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/training_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView38" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main_text_color"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical"
+                android:padding="7dp"
+                android:paddingStart="10dp"
+                android:text="School and College Jobs "
+                android:textColor="@color/home_screen_text_color"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/knowledge_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main_text_color"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical"
+                android:padding="7dp"
+                android:paddingStart="10dp"
+                android:text="Coaching Foundation Jobs"
+                android:textColor="@color/home_screen_text_color"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/package_tracking_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main_text_color"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical"
+                android:padding="7dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Govt Exam Coaching Jobs Coming Soon"
+                android:textColor="@color/home_screen_text_color"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/test_passed_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:drawablePadding="15dp"
+                android:drawableTint="@color/main_text_color"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center_vertical"
+                android:padding="7dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="College and Universities Jobs"
+                android:textColor="@color/home_screen_text_color"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/student_center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_begin="206dp"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_latest_job"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/custom_button_bg"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Latest Job"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_all_job"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/cutom_button_unselected_bg"
+                android:fontFamily="@font/poppins_bold"
+                android:text="All Jobs"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline8"
+                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_latest_job"
+                tools:itemCount="5"
+                tools:listitem="@layout/recycler_item_latest_job_layout" />
+
+            <include
+                android:id="@+id/include_layout"
+                layout="@layout/recycler_item_latest_job_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_latest_job" />
+
+            <include
+                android:id="@+id/include_layout1"
+                layout="@layout/recycler_item_latest_job_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_layout" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

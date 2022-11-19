@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_text_color"
+    tools:context=".EmployeeHistoryActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Employee History"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="Current organisation"
+            android:textAllCaps="true"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView28" />
+
+        <EditText
+            android:id="@+id/someEdit17"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Organisation Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner20"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit17" >
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"
+            android:entries="@array/test3"
+            />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/someEdit10"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of joining"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit17" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner21"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner20" >
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"
+            android:entries="@array/test12"
+           />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner22"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit10" >
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"
+            android:entries="@array/test5"
+            />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="@string/second_org"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner23" />
+
+        <EditText
+            android:id="@+id/someEdit21"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Organisation Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+
+        <EditText
+            android:id="@+id/someEdit22"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of joining"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit21" />
+
+        <EditText
+            android:id="@+id/someEdit23"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of Reliving"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit21" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner23"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit19" >
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"
+            android:entries="@array/test12"
+           />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner24"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit20" >
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:spinnerMode="dropdown"
+            style="@style/spinner_style"
+            android:entries="@array/test5"
+            />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="@string/first_org"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner21" />
+
+        <EditText
+            android:id="@+id/someEdit18"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Organisation Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
+
+
+        <EditText
+            android:id="@+id/someEdit19"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of joining"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit18" />
+
+        <EditText
+            android:id="@+id/someEdit20"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of Reliving"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit18" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner25"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit22">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"
+            android:entries="@array/test5"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="@string/third_org"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner25" />
+
+        <EditText
+            android:id="@+id/someEdit24"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Organisation Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+
+
+        <EditText
+            android:id="@+id/someEdit25"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of joining"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit24" />
+
+        <EditText
+            android:id="@+id/someEdit26"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Date of Reliving"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit24" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner26"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit25" >
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown"
+            android:entries="@array/test5"
+          />
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner26" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_update"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="140dp"
+            android:layout_height="42dp"
+            android:background="@drawable/buttonbordershadow"
+            android:fontFamily="@font/inter_semi_bold"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

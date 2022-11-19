@@ -1,0 +1,1192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_text_color"
+    tools:context=".PersonalInfoActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="PERSONAL INFORMATION"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/add_profile_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="-20dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            >
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/test"
+            style="@style/spinner_style"
+            android:spinnerMode="dropdown" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="-20dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/imageView7">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:entries="@array/test1"
+                style="@style/spinner_style"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.cardview.widget.CardView>
+        <EditText
+            android:id="@+id/someEdit1"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Full Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+   <EditText
+            android:id="@+id/txtbday"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Birthday"
+       android:keepScreenOn="false"
+       android:focusable="false"
+            android:inputType="text"
+       android:editable="false"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.35"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.65"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/someEdit2"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:visibility="gone"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="MM"
+            android:inputType="phone"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+        <EditText
+            android:id="@+id/someEdit3"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="2dp"
+            android:visibility="gone"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="DD"
+            android:inputType="phone"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+
+        <EditText
+            android:id="@+id/someEdit4"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:visibility="gone"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="YYYY"
+            android:inputType="phone"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner3"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtbday">
+
+            <Spinner
+                android:id="@+id/spState"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:entries="@array/test2"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner4"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/txtbday">
+
+        <Spinner
+            android:id="@+id/spCity"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/someEdit5"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Mobile Number"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner3" />
+
+        <EditText
+            android:id="@+id/someEdit6"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Alternate Number"
+            android:inputType="phone"
+            android:maxLength="10"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/spinner4" />
+
+        <EditText
+            android:id="@+id/someEdit7"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Password"
+            android:maxLength="10"
+            android:inputType="textPassword"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit5" />
+
+        <EditText
+            android:id="@+id/someEdit7_1"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Upload Your Resume *Doc/PDF"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:focusable="false"
+            android:enabled="false"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            android:drawableEnd="@drawable/upload_doc"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit7" />
+
+        <EditText
+            android:id="@+id/someEdit7_2"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Upload ID proof"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:focusable="false"
+            android:enabled="false"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            android:drawableEnd="@drawable/upload_doc"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit7_1" />
+
+        <EditText
+            android:id="@+id/someEdit7_3"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Add video lecture link"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:focusable="false"
+            android:enabled="false"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            android:drawableEnd="@drawable/link_img"
+            android:paddingEnd="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit7_2" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="INTERESTED FIELD"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit7_3" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView12">
+
+            <RadioGroup
+                android:id="@+id/rgInterested"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+
+            <RadioButton
+                android:id="@+id/radio_teaching"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:layoutDirection="rtl"
+                android:padding="10dp"
+                android:text="Teaching"
+                android:textAlignment="textStart"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/radio_non_teaching"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:layoutDirection="rtl"
+                android:padding="10dp"
+                android:text="Non-Teaching"
+                android:textAlignment="textStart"
+                android:textSize="12sp" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDivision"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout3">
+
+        <Spinner
+            android:id="@+id/spDivision"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:entries="@array/test4"
+            />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardStream"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardDivision" >
+
+        <Spinner
+            android:id="@+id/spStream"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            style="@style/spinner_style"
+            android:entries="@array/test5"
+            />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSubject"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardStream">
+
+        <Spinner
+            android:id="@+id/spSubject"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+           style="@style/spinner_style"
+            android:entries="@array/test6"
+            />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="EXPERIENCE"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardSubject" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView13">
+
+            <RadioGroup
+                android:id="@+id/radio_experience_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                >
+
+            <RadioButton
+                android:id="@+id/radio_fresher"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:layoutDirection="rtl"
+                android:padding="10dp"
+                android:text="Fresher"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_experienced"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:layoutDirection="rtl"
+                android:padding="10dp"
+                android:text="Experienced"
+                android:textAlignment="textStart"
+                android:textSize="14sp" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtOrganizationName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Organization Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtOrganizationName">
+
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="When is your first job?"
+                android:textColor="@color/main_text_color"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Please select Month and Year?"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/spinner9"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/custom_edittext_bg"
+                app:strokeWidth="1dp"
+                app:strokeColor="#E4E4E4"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView17">
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:entries="@array/test7"
+              />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/spinner10"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/custom_edittext_bg"
+                app:strokeWidth="1dp"
+                app:strokeColor="#E4E4E4"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" >
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:entries="@array/test8"
+               />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <!-- <EditText
+            android:id="@+id/someEdit9"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Annual Salary"
+            android:inputType="number"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+-->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardAnnual"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayoutYear"
+            >
+            <Spinner
+                android:id="@+id/spAnnual"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:entries="@array/test"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@id/constraintLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:padding="20dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardAnnual">
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Are you working with these groups in your career ?"
+                android:textAlignment="center"
+                android:textColor="@color/main_text_color"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Yes"
+                android:textAllCaps="false"
+                android:textColor="@color/main_text_color"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button2"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:text="No"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Organisation are not selected yet."
+                android:textColor="@color/main_text_color"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+            <include
+                android:id="@+id/include13"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+            <include
+                android:id="@+id/include12"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline4"
+                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+            <include
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/include12"
+                app:layout_constraintStart_toStartOf="@+id/include13"
+                app:layout_constraintTop_toBottomOf="@+id/include13" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit1"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="140dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/buttonbordershadow"
+            android:fontFamily="@font/inter_semi_bold"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="100dp"
+            android:background="@drawable/custom_view_bg"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="20dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Are you worked with these groups (in your career) ?"
+                android:textAlignment="center"
+                android:textColor="@color/main_text_color"
+                android:textSize="11sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView13" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_close_24" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button3"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Yes"
+                android:textAllCaps="false"
+                android:textColor="@color/main_text_color"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button4"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edittext_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:text="No"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Select the organisations that you worked in your career."
+                android:textAlignment="center"
+                android:textColor="@color/main_text_color"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button3" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="(Select maximum of 3 organisations )"
+                android:textColor="#616161"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="140dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/buttonbordershadow"
+                android:fontFamily="@font/inter_semi_bold"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flow" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:constraint_referenced_ids="include14,include15,include16,include17,include18,include19,include20,include21,include22"
+                app:flow_horizontalGap="5dp"
+                app:flow_maxElementsWrap="3"
+                app:flow_verticalGap="10dp"
+                app:flow_wrapMode="chain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+            <include
+                android:id="@+id/include22"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+            <include
+                android:id="@+id/include18"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+            <include
+                android:id="@+id/include20"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="10dp" />
+
+            <include
+                android:id="@+id/include16"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+            <include
+                android:id="@+id/include14"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+            <include
+                android:id="@+id/include17"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+            <include
+                android:id="@+id/include15"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+            <include
+                android:id="@+id/include19"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+            <include
+                android:id="@+id/include21"
+                layout="@layout/recycler_item_organization_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="05dp"
+                tools:layout_editor_absoluteY="05dp" />
+
+
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progress_info"
+                android:visibility="gone"
+
+                android:foregroundGravity="center"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/btn_submit"
+                ></ProgressBar>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

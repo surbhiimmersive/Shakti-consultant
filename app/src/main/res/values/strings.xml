@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">Shakti Consultant</string>
+
+    <string name="first_org">1<sup>st</sup> PREVIOUS ORGANISATION</string>
+    <string name="second_org">2<sup>nd</sup> PREVIOUS ORGANISATION</string>
+    <string name="third_org">3<sup>rd</sup> PREVIOUS ORGANISATION</string>
+
+    // for testing
+    <string-array name="test">
+        <item>Prefix</item>
+        <item>MR</item>
+        <item>MS</item>
+        <item>MRS</item>
+    </string-array>
+
+    <string-array name="test1">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="test2">
+        <item>Select State</item>
+    </string-array>
+
+    <string-array name="test3">
+        <item>City</item>
+    </string-array>
+
+    <string-array name="test4">
+        <item>Select Division</item>
+    </string-array>
+
+    <string-array name="test5">
+        <item>Select Stream</item>
+    </string-array>
+
+    <string-array name="test6">
+        <item>Select Subject</item>
+    </string-array>
+
+    <string-array name="test7">
+        <item>Select Month</item>
+    </string-array>
+
+    <string-array name="test8">
+        <item>Select Year</item>
+    </string-array>
+
+    <string-array name="test9">
+        <item>Select Board</item>
+    </string-array>
+
+    <string-array name="test10">
+        <item>Graduation</item>
+    </string-array>
+
+    <string-array name="test11">
+        <item>Select Passed Year</item>
+    </string-array>
+
+    <string-array name="test12">
+        <item>Annual Salary</item>
+    </string-array>
+
+    <string-array name="test13">
+        <item>Min Salary</item>
+    </string-array>
+
+    <string-array name="test14">
+        <item>Max Salary</item>
+    </string-array>
+
+    <string-array name="test15">
+        <item>Experience</item>
+    </string-array>
+
+    <string-array name="test16">
+        <item>Mumbai</item>
+    </string-array>
+
+    <string-array name="test17">
+        <item>Physics Faculty</item>
+    </string-array>
+
+    <string-array name="test18">
+        <item>5 years</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="job_description"><![CDATA[Company Description \n\n Physics Wallah is an Indian online education technology startup based in Delhi, originally created as a YouTube channel in 2014 by Mr Alakh Pandey. We are the first company aiming to build an affordable online education platform for each Indian student who dreams of IIT & AIIMS but is unable to afford the existing offline/online education providers. We provide e-learning via our YouTube Channel and PhysicsWallah App/Website by providing lectures for JEE Mains and Advanced level, NEET and Board Exams. We are India\'s first most viewed Educational channel on Youtube.\n YouTube Channel- https://youtube.com/c /PhysicsWallah\n Process Information\n Online interview\n \n Document Required \n CV\n \n Process Location \n Nagpur\n \n Important Instruction\n user can apply 2-3 job at a time \n Please carry your resume.\n Please be in formal Dressup\n come with full prepration for demo class\n Please be assured your pressence\n Experience Certificate (If Any )]]></string>
+    <string name="about_us">The shakti consultant allows job seekers and recruiters to connect.The application provides the ability for job seekers to create their accounts, upload their profile and resume, search for jobs, apply for jobs, view different job openings. The application provides the ability for companies to create their accounts, search candidates, create job postings, and view candidates applications.</string>
+    <string name="education_1">• B.E. Computer Science and Engineering Velammal Institute of Technology Panchetti - 04. | 2019 - 2023 CGPA - 8.97/10</string>
+    <string name="education_2">• 12th Standard State Board Shrishti Matric. Hr. Sec. School Vellore - 01. | 2018 - 2019 Percentage - 79.0</string>
+    <string name="education_3">• 10th Standard State Board Shrishti Matric. Hr. Sec. School Vellore - 01. | 2016 - 2017 Percentage - 94.6</string>
+    <string name="languages">• English \n • Hindi</string>
+    <string name="employee_history">• Physics Teacher, August 2022 – Present\n• Carroll County Public School, Clermont, FL\n• Planned and provided appropriate learning experiences for the students. \n• Supervised students in a variety of school-related facilities.\n• Monitored and evaluated the student outcomes and guided further.\n• Communicated and interacted effectively with students, parents and staff.\n• Provided an atmosphere and environment conducive to development of children.\n• Ensured to develop, select, and modify instructional plans and materials effectively to meet the student’s needs and abilities.\n\n\n\n• Physics Teacher, May 2000 – July 2021\n•  AAkash institute Indore\n• Encouraged the students to be actively engaged in the learning process. \n• Collaborated with peers to enhance the instructional environment.\n• Established and maintained cooperative working relationships.\n• Assumed responsibility to meet course and school-wide performance goals.\n• Ensured to maintain and improve professional competence.</string>
+    <string name="employee_history1">• Physics Teacher, August 2022 – Present\n• Carroll County Public School, Clermont, FL\n• Planned and provided appropriate learning experiences for the students.\n• Supervised students in a variety of school-related facilities.\n• Monitored and evaluated the student outcomes and guided further.\n• Communicated and interacted effectively with students, parents and staff.\n• Provided an atmosphere and environment conducive to development of children.\n• Ensured to develop, select, and modify instructional plans and materials effectively to meet the student’s needs and abilities.\n\n\n\n• Physics Teacher, May 2000 – July 2021\n• AAkash institute Indore\n• Encouraged the students to be actively engaged in the learning process.\n• Collaborated with peers to enhance the instructional environment.\n• Established and maintained cooperative working relationships. Assumed responsibility to meet course and school-wide performance goals.\n• Ensured to maintain and improve professional competence.</string>
+    <string name="declaration"><b>Declaration:</b>\nI agree to all terms and condition. I certify that all statements &amp; information above are complete &amp; correct to the best of my knowledge and belief.</string>
+</resources>

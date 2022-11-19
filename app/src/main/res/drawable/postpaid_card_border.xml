@@ -1,0 +1,8 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/shadow_layout" />
+
+    <item
+        android:bottom="6px"
+        android:drawable="@drawable/package_post_bg" />
+</layer-list>

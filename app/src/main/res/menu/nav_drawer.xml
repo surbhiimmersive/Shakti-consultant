@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/drawer_home"
+        android:title="Home"
+        android:icon="@drawable/nav_home_img"
+        />
+
+    <item android:id="@+id/drawer_reset_password"
+        android:title="Reset Password"
+        android:icon="@drawable/nav_reset_password"
+        />
+
+    <item android:id="@+id/drawer_jobs"
+        android:title="Jobs"
+        android:icon="@drawable/nav_job_img"
+        android:actionLayout="@layout/action_layout_drawer"
+        >
+
+
+
+<!--        <menu>-->
+<!--            <item android:id="@+id/drawer_jobs1"-->
+<!--                android:title="Jobs Applied On"-->
+<!--                android:icon="@drawable/nav_job_img"-->
+<!--                />-->
+
+<!--            <item android:id="@+id/drawer_jobs2"-->
+<!--                android:title="Jobs Shortlisted"-->
+<!--                android:icon="@drawable/nav_job_img"-->
+<!--                />-->
+
+<!--            <item android:id="@+id/drawer_jobs3"-->
+<!--                android:title="Jobs Recommended"-->
+<!--                android:icon="@drawable/nav_job_img"-->
+<!--                />-->
+<!--        </menu>-->
+
+    </item>
+
+    <group
+        android:id="@+id/job_group"
+        android:checkableBehavior="single"
+        >
+                       <item android:id="@+id/drawer_jobs1"
+                        android:title="Jobs Applied On"
+                        android:icon="@drawable/white_box"
+                        android:visible="false"
+                        />
+
+                    <item android:id="@+id/drawer_jobs2"
+                        android:title="Jobs Shortlisted"
+                        android:icon="@drawable/white_box"
+                        android:visible="false"
+                        />
+
+                    <item android:id="@+id/drawer_jobs3"
+                        android:title="Jobs Recommended"
+                        android:icon="@drawable/white_box"
+                        android:visible="false"
+                        />
+    </group>
+
+
+
+    <item android:id="@+id/drawer_job_app_status"
+        android:title="Job Application Status"
+        android:icon="@drawable/nav_job_status_img"
+        />
+
+    <group
+        android:id="@+id/job_status_group"
+        android:checkableBehavior="single"
+        >
+        <item android:id="@+id/drawer_job_app_status1"
+            android:title="Scheduled Interviews"
+            android:icon="@drawable/white_box"
+            android:visible="false"
+            />
+
+        <item android:id="@+id/drawer_job_app_status2"
+            android:title="Rejected application"
+            android:icon="@drawable/white_box"
+            android:visible="false"
+            />
+
+    </group>
+
+    <item android:id="@+id/drawer_resume_preview"
+        android:title="Resume Preview"
+        android:icon="@drawable/nav_resume"
+        />
+
+    <item android:id="@+id/drawer_invite_friends"
+        android:title="Invite Friends"
+        android:icon="@drawable/nav_invite"
+        />
+
+    <item android:id="@+id/drawer_faq"
+        android:title="FAQs"
+        android:icon="@drawable/nav_faq"
+        />
+
+    <item android:id="@+id/drawer_chat_with_us"
+        android:title="Chat With Us"
+        android:icon="@drawable/nav_chat"
+        />
+
+    <item android:id="@+id/drawer_subscription_plans"
+        android:title="Subscription Plans"
+        android:icon="@drawable/nav_about"
+        />
+
+    <item android:id="@+id/drawer_our_client"
+        android:title="Our Client"
+        android:icon="@drawable/nav_client"
+        />
+
+    <item android:id="@+id/drawer_rate_us"
+        android:title="Rate Us"
+        android:icon="@drawable/nav_rate"
+        />
+
+    <item android:id="@+id/drawer_contact_us"
+        android:title="Contact Us"
+        android:icon="@drawable/nav_contact"
+        />
+
+    <item android:id="@+id/drawer_testimonial"
+        android:title="Testimonial"
+        android:icon="@drawable/nav_testimonial"
+        />
+
+    <item android:id="@+id/drawer_about_us"
+        android:title="About Us"
+        android:icon="@drawable/nav_about_us"
+        />
+
+    <item android:id="@+id/drawer_logout"
+        android:title="Logout"
+        android:icon="@drawable/nav_logout"
+        />
+
+</menu>
