@@ -25,17 +25,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
+    String MobilePattern = "[0-9]{10}";
 
     ActivitySignUpBinding binding;
     ApiInterface apiInterface;
     ConnectionDetector cd;
-    String emailPattern = "[a-zA-Z0-9+._%-+]{1,256}" +
-            "@" +
-            "[a-zA-Z0-9][a-zA-Z0-9-]{0,64}" +
-            "(" +
-            "." +
-            "com" +
-            ")+";
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +81,16 @@ public class SignUpActivity extends AppCompatActivity {
 
                     snackbar.show();
 
-                } else if (binding.edtEmail.getText().toString().trim().equals("")) {
+                } else if(!binding.edtMobile.getText().toString().matches(MobilePattern)) {
+
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter valid 10 digit phone number.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
+
+                }else if (binding.edtEmail.getText().toString().trim().equals("")) {
 
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter email.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
@@ -95,7 +99,17 @@ public class SignUpActivity extends AppCompatActivity {
 
                     snackbar.show();
 
-                } else if (binding.edtPassword.getText().toString().trim().equals("")) {
+                }else if(!binding.edtEmail.getText().toString().matches(emailPattern)) {
+
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter valid email address.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
+
+
+                }  else if (binding.edtPassword.getText().toString().trim().equals("")) {
 
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter password.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
@@ -172,6 +186,7 @@ public class SignUpActivity extends AppCompatActivity {
                         Intent i=new Intent(SignUpActivity.this,OTPActivity.class);
                         i.putExtra("userid",response.body().getData().getId());
                         startActivity(i);
+                        finish();
                     }  else {
                         Utils.showFailureDialog(SignUpActivity.this, response.body().getMessage());
 

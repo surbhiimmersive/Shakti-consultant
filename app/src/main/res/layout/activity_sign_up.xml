@@ -54,6 +54,8 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
                 android:background="@drawable/custom_edittext_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:outlineProvider="paddedBounds"

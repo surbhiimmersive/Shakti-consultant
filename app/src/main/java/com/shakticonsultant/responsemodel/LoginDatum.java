@@ -21,6 +21,44 @@ private String name;
 private String mobile;
 
 
+@SerializedName("personal")
+@Expose
+private String personal;
+
+
+@SerializedName("academic")
+@Expose
+private String academic;
+
+
+@SerializedName("employee")
+@Expose
+private String employee;
+
+    public String getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(String personal) {
+        this.personal = personal;
+    }
+
+    public String getAcademic() {
+        return academic;
+    }
+
+    public void setAcademic(String academic) {
+        this.academic = academic;
+    }
+
+    public String getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(String employee) {
+        this.employee = employee;
+    }
+
     public String getId() {
         return id;
     }

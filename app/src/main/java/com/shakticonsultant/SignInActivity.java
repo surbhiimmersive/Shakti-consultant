@@ -7,12 +7,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivitySignInBinding;
 import com.shakticonsultant.responsemodel.LoginResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -109,11 +111,48 @@ cd=new ConnectionDetector(SignInActivity.this);
 
                 if (response.isSuccessful()) {
                     binding.idLoadingPB.setVisibility(View.GONE);
-                    if (response.body().getMessage().equals("Login successfully")) {
+                    if (response.body().isSuccess()==true) {
                        Log.e( "User ID",response.body().getData().getId());
                        // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
-                    }  else {
+String personal=response.body().getData().getPersonal();
+String acedemic=response.body().getData().getAcademic();
+String employee=response.body().getData().getEmployee();
+                        if(personal.equals("0") && acedemic.equals("0") && employee.equals("0") ) {
+                            Intent i = new Intent(SignInActivity.this, PersonalInfoActivity.class);
+                            i.putExtra("userid",response.body().getData().getId());
+                            startActivity(i);
+                            finish();
+
+                        }else if(employee.equals("0")&& acedemic.equals("0") ) {
+
+                                Intent i = new Intent(SignInActivity.this, AcademicDetailsActivity.class);
+                            i.putExtra("userid",response.body().getData().getId());
+
+                            startActivity(i);
+                                finish();
+
+
+                        }else if(employee.equals("0") ){
+
+                            Intent i = new Intent(SignInActivity.this, EmployeeHistoryActivity.class);
+                            i.putExtra("userid",response.body().getData().getId());
+
+                            startActivity(i);
+                            finish();
+
+                        }else{
+                            AppPrefrences.setLogin_status(SignInActivity.this,true);
+
+                            Intent i = new Intent(SignInActivity.this, MainActivity.class);
+                            i.putExtra("userid",response.body().getData().getId());
+
+                            startActivity(i);
+                            finish();
+                               // startActivity(new Intent(SignInActivity.this, MainActivity.class));
+
+                    }
+                        //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
+                    } else {
                         Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
 
 

@@ -8,6 +8,7 @@
     tools:context=".EmployeeHistoryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrainRecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
@@ -73,6 +74,7 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintGuide_percent="0.5"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,41 +87,100 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="5dp"
+
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/someEdit17" >
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:spinnerMode="dropdown"
-            android:entries="@array/test3"
-            />
+            <Spinner
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test3"
+                />
 
         </androidx.cardview.widget.CardView>
 
+
         <EditText
             android:id="@+id/someEdit10"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Date of joining"
+            android:hint="Date of Joining"
             android:inputType="text"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
+
+
             android:textColor="@color/input_text_color"
             android:textColorHint="@color/hint_color_1"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/someEdit17" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinnerState"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit10" >
+
+            <Spinner
+                android:id="@+id/spState"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test2"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinnerCity"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit10" >
+
+            <Spinner
+                android:id="@+id/spCity"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test3"
+                />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/spinner21"
@@ -132,15 +193,16 @@
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner20" >
+            app:layout_constraintTop_toBottomOf="@+id/spinnerState" >
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:spinnerMode="dropdown"
-            android:entries="@array/test12"
-           />
+            <Spinner
+                android:id="@+id/spAnnual"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test12"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -155,18 +217,18 @@
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit10" >
+            app:layout_constraintTop_toBottomOf="@+id/spinnerState" >
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:spinnerMode="dropdown"
-            android:entries="@array/test5"
-            />
+            <Spinner
+                android:id="@+id/spStream"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test5"
+                />
 
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:id="@+id/textView31"
             android:layout_width="0dp"
@@ -216,6 +278,9 @@
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Date of joining"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:inputType="text"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -236,6 +301,9 @@
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Date of Reliving"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:inputType="text"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -246,7 +314,6 @@
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/someEdit21" />
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/spinner23"
             android:layout_width="0dp"
@@ -256,17 +323,19 @@
             android:layout_marginEnd="5dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
+
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/someEdit19" >
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:spinnerMode="dropdown"
-            android:entries="@array/test12"
-           />
+            <Spinner
+                android:id="@+id/spAnnual2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test12"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -279,17 +348,19 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
+            android:layout_marginLeft="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit20" >
+            app:layout_constraintTop_toBottomOf="@+id/someEdit19" >
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:spinnerMode="dropdown"
-            style="@style/spinner_style"
-            android:entries="@array/test5"
-            />
+            <Spinner
+                android:id="@+id/spStream1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown"
+                style="@style/spinner_style"
+                android:entries="@array/test5"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -345,6 +416,9 @@
             android:inputType="text"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:textColor="@color/input_text_color"
             android:textColorHint="@color/hint_color_1"
             android:textSize="14sp"
@@ -363,6 +437,10 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="Date of Reliving"
             android:inputType="text"
+            android:clickable="true"
+            android:focusable="false"
+            android:editable="false"
+
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -375,23 +453,51 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/spinner25"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit22" >
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test5"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner30"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
+            android:layout_marginLeft="10sp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit22">
+            app:layout_constraintStart_toStartOf="@+id/guideline7"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit22" >
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:spinnerMode="dropdown"
-            android:entries="@array/test5"/>
+            <Spinner
+                android:id="@+id/spStream2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown"
+                style="@style/spinner_style"
+                android:entries="@array/test5"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -445,6 +551,9 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="Date of joining"
             android:inputType="text"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -464,6 +573,9 @@
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Date of Reliving"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:inputType="text"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -473,30 +585,63 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline7"
             app:layout_constraintTop_toBottomOf="@+id/someEdit24" />
-
+<LinearLayout
+    android:id="@+id/l1"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    app:layout_constraintTop_toBottomOf="@+id/someEdit25"
+    android:layout_height="wrap_content"
+    android:weightSum="2"
+    android:layout_marginStart="30dp"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="30dp"
+    tools:ignore="MissingConstraints">
         <androidx.cardview.widget.CardView
             android:id="@+id/spinner26"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
+            android:layout_weight="1"
+android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/someEdit25" >
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:spinnerMode="dropdown"
-            android:entries="@array/test5"
-          />
+            <Spinner
+                android:id="@+id/spAnnual3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+
+                android:entries="@array/test5"
+                />
 
         </androidx.cardview.widget.CardView>
+  <androidx.cardview.widget.CardView
+            android:id="@+id/spinner31"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+         android:layout_marginLeft="5sp"
+      android:layout_weight="1"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+          >
 
+            <Spinner
+                android:id="@+id/spStream3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test5"
+                />
+
+        </androidx.cardview.widget.CardView>
+</LinearLayout>
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
@@ -507,7 +652,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner26" />
+            app:layout_constraintTop_toBottomOf="@+id/l1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_update"
@@ -526,6 +671,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view" />
 
+
+
+        <ProgressBar
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressemployee"
+            android:visibility="gone"
+            android:foregroundGravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/textView30"
+            ></ProgressBar>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

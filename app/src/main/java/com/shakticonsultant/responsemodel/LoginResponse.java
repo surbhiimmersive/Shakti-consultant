@@ -8,11 +8,23 @@ import java.io.Serializable;
 public class LoginResponse implements Serializable
 {
 
+@SerializedName("success")
+@Expose
+private boolean success;
+
 @SerializedName("message")
 @Expose
 private String message;
 
-@SerializedName("data")
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    @SerializedName("data")
     @Expose
     private LoginDatum data;
 

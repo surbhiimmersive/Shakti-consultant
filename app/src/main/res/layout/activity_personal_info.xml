@@ -29,29 +29,49 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:id="@+id/imageView8"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
             android:background="@drawable/add_profile_img"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="pick"
             app:layout_constraintHorizontal_bias="0.5"
+android:visibility="visible"
+            android:scaleType="centerInside"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="5sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+<ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="pick"
+            app:layout_constraintHorizontal_bias="0.5"
+android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginBottom="5sp"
+            app:layout_constraintBottom_toTopOf="@+id/spinner"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/spinner"
             android:layout_width="0dp"
+
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="-20dp"
             android:layout_marginEnd="5dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
+            android:layout_marginTop="10sp"
+
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView7"
             >
         <Spinner
+            android:id="@+id/spprefix"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:entries="@array/test"
@@ -78,15 +98,17 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="-20dp"
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
+            android:layout_marginTop="10sp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/imageView7">
 
             <Spinner
+                android:id="@+id/spGender"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:entries="@array/test1"
@@ -95,15 +117,19 @@
 
         </androidx.cardview.widget.CardView>
         <EditText
-            android:id="@+id/someEdit1"
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+            android:singleLine="true"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Full Name"
+
             android:inputType="text"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -124,7 +150,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Birthday"
+            android:hint="Birthdate"
        android:keepScreenOn="false"
        android:focusable="false"
             android:inputType="text"
@@ -137,7 +163,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+            app:layout_constraintTop_toBottomOf="@+id/edtName" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -183,7 +209,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+            app:layout_constraintTop_toBottomOf="@+id/txtbday" />
         <EditText
             android:id="@+id/someEdit3"
             android:layout_width="0dp"
@@ -203,7 +229,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+            app:layout_constraintTop_toBottomOf="@+id/txtbday" />
 
         <EditText
             android:id="@+id/someEdit4"
@@ -224,7 +250,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit1" />
+            app:layout_constraintTop_toBottomOf="@+id/txtbday" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/spinner3"
@@ -268,12 +294,13 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             style="@style/spinner_style"
+            android:entries="@array/test3"
             />
 
         </androidx.cardview.widget.CardView>
 
         <EditText
-            android:id="@+id/someEdit5"
+            android:id="@+id/edtMobile"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_marginStart="30dp"
@@ -315,7 +342,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spinner4" />
 
         <EditText
-            android:id="@+id/someEdit7"
+            android:id="@+id/edtpwd"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginStart="30dp"
@@ -325,6 +352,7 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="Password"
             android:maxLength="10"
+            android:visibility="gone"
             android:inputType="textPassword"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -334,22 +362,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit5" />
+            app:layout_constraintTop_toBottomOf="@+id/edtMobile" />
 
-        <EditText
-            android:id="@+id/someEdit7_1"
+        <TextView
+            android:id="@+id/txtdoc"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+            android:onClick="pickdoc"
+            android:singleLine="true"
+            android:gravity="left|center"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Upload Your Resume *Doc/PDF"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
-            android:focusable="false"
-            android:enabled="false"
+
             android:textColor="@color/input_text_color"
             android:textColorHint="@color/hint_color_1"
             android:textSize="14sp"
@@ -358,22 +388,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit7" />
+            app:layout_constraintTop_toBottomOf="@+id/edtpwd" />
 
-        <EditText
-            android:id="@+id/someEdit7_2"
+        <TextView
+            android:id="@+id/uploadProof"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+            android:onClick="pickIdProof"
+            android:singleLine="true"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Upload ID proof"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
-            android:focusable="false"
-            android:enabled="false"
+
+            android:gravity="center|left"
             android:textColor="@color/input_text_color"
             android:textColorHint="@color/hint_color_1"
             android:textSize="14sp"
@@ -382,10 +414,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit7_1" />
+            app:layout_constraintTop_toBottomOf="@+id/txtdoc" />
 
         <EditText
-            android:id="@+id/someEdit7_3"
+            android:id="@+id/edtVideoLink"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginStart="30dp"
@@ -395,9 +427,11 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="Add video lecture link"
             android:outlineProvider="paddedBounds"
+
             android:paddingStart="10dp"
             android:focusable="false"
             android:enabled="false"
+            android:singleLine="true"
             android:textColor="@color/input_text_color"
             android:textColorHint="@color/hint_color_1"
             android:textSize="14sp"
@@ -406,7 +440,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit7_2" />
+            app:layout_constraintTop_toBottomOf="@+id/uploadProof" />
 
         <TextView
             android:id="@+id/textView12"
@@ -423,7 +457,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/someEdit7_3" />
+            app:layout_constraintTop_toBottomOf="@+id/edtVideoLink" />
 
 
         <LinearLayout
@@ -640,7 +674,9 @@
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Organization Name"
+            android:visibility="gone"
             android:inputType="text"
+            android:singleLine="true"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -658,6 +694,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+            android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -709,11 +746,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView17">
 
             <Spinner
+                android:id="@+id/spfirst_job_month"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
-                android:entries="@array/test7"
+                android:entries="@array/month"
               />
+
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -740,10 +779,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView17" >
 
             <Spinner
+                android:id="@+id/spfirstjobyear"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
-                android:entries="@array/test8"
+                android:entries="@array/year"
                />
 
             </com.google.android.material.card.MaterialCardView>
@@ -776,7 +816,7 @@
             android:id="@+id/cardAnnual"
             android:layout_width="0dp"
             android:layout_height="50dp"
-
+android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
             android:layout_marginStart="30dp"
@@ -790,7 +830,6 @@
                 android:id="@+id/spAnnual"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:entries="@array/test"
                 style="@style/spinner_style"
                 android:spinnerMode="dropdown" />
 
@@ -805,6 +844,7 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             android:padding="20dp"
+            android:visibility="gone"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -884,7 +924,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/button" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView10"
+                android:id="@+id/recyclerOrganization"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -894,43 +934,10 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
-            <include
-                android:id="@+id/include13"
-                layout="@layout/recycler_item_organization_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="5dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-            <include
-                android:id="@+id/include12"
-                layout="@layout/recycler_item_organization_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline4"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
-            <include
-                layout="@layout/recycler_item_organization_layout"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="@+id/include12"
-                app:layout_constraintStart_toStartOf="@+id/include13"
-                app:layout_constraintTop_toBottomOf="@+id/include13" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit1"
+            android:id="@+id/btnPersonalSubmit"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="140dp"
             android:layout_height="42dp"
@@ -948,6 +955,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constrainRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
@@ -1173,19 +1181,22 @@
                 tools:layout_editor_absoluteY="05dp" />
 
 
-            <ProgressBar
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/progress_info"
-                android:visibility="gone"
 
-                android:foregroundGravity="center"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/btn_submit"
-                ></ProgressBar>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progresspersonal"
+            android:visibility="gone"
+
+            android:foregroundGravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/constrainRecycler"
+            ></ProgressBar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -118,8 +118,11 @@ if(binding.otpView.getOtp().equals("")){
                     binding.progressBar3.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
-                        startActivity(new Intent(OTPActivity.this, PersonalInfoActivity.class));                    }  else {
-
+                      //  startActivity(new Intent(OTPActivity.this, PersonalInfoActivity.class));                    }  else {
+Intent i=new Intent(OTPActivity.this,PersonalInfoActivity.class);
+i.putExtra("userid",userid);
+startActivity(i);
+finish();
 
                     }
                 }else{

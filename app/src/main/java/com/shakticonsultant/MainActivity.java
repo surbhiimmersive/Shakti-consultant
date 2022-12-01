@@ -13,7 +13,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.navigation.ui.NavigationViewKt;
 
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,13 +27,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.shakticonsultant.databinding.ActivityMainBinding;
+import com.shakticonsultant.utils.AppPrefrences;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
   //  private AppBarConfiguration mAppBarConfiguration;
-
+String userid;
     NavHostFragment navHostFragment;
     NavController navController;
     @Override
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
+        userid = getIntent().getStringExtra("userid");
 
 
         /* Navigation Drawer */
@@ -194,7 +198,45 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        else if (item.getItemId() == R.id.drawer_job_app_status1){
+        else if (item.getItemId() == R.id.drawer_logout){
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            builder.setTitle("Shakti Consultant");
+            builder.setIcon(R.drawable.shakti_consultant_logo);
+            builder.setMessage("Are you sure you want to logout?");
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                   /*     System.exit(0);
+                        int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
+                finishAffinity();*/
+
+                    AppPrefrences.setLogin_status(MainActivity.this,false);
+                    Intent i = new Intent(MainActivity.this, SignInActivity.class);
+                    startActivity(i);
+                    finish();
+
+
+
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
 //            startActivity(new Intent(getApplicationContext(), ScheduledInterviews1Activity.class));
         }
 //        else if (item.getItemId() == R.id.drawer_job_app_status2){
