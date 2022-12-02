@@ -20,5 +20,8 @@ public class FAQActivity extends AppCompatActivity {
             onBackPressed();
         });
 
+
+
+
     }
 }

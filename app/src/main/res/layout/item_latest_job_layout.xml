@@ -53,6 +53,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:padding="5dp">
 
             <ImageView
@@ -62,6 +64,7 @@
                 android:src="@drawable/money_img" />
 
             <TextView
+                android:id="@+id/tvPackage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
@@ -104,6 +107,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -115,6 +120,7 @@
                 android:src="@drawable/internship_img" />
 
             <TextView
+                android:id="@+id/tvYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
@@ -145,6 +151,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:padding="5dp">
 
             <ImageView
@@ -155,6 +163,7 @@
                 android:src="@drawable/address_img" />
 
             <TextView
+                android:id="@+id/tvlocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

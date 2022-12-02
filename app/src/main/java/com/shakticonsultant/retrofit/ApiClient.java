@@ -26,7 +26,8 @@ public class ApiClient extends Application {
 
     private static Retrofit retrofit = null;
 
-
+public static String Baseurl="https://shakticonsultant.manageprojects.in/api/";
+public static String Photourl="https://shakticonsultant.manageprojects.in/";
     @Override
     public void onCreate() {
         super.onCreate();

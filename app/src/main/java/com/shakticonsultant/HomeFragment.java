@@ -19,10 +19,21 @@ import android.view.ViewGroup;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.shakticonsultant.adapter.JobCategoryAdapter;
 import com.shakticonsultant.databinding.FragmentHomeBinding;
+import com.shakticonsultant.responsemodel.JobCategoryResponse;
+import com.shakticonsultant.retrofit.ApiClient;
+import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,7 +103,7 @@ public class HomeFragment extends Fragment {
         viewPager= binding.viewpager;
          adapter=new ImageViewPagerAdapter(getContext());
         viewPager.setAdapter(adapter);
-
+        getJobCategory();
         setDots(0);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -122,12 +133,12 @@ public class HomeFragment extends Fragment {
 
 
         // for testing
-        binding.textView39.setOnClickListener(new View.OnClickListener() {
+       /* binding.textView39.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), JobsListActivity.class));
             }
-        });
+        });*/
 
         binding.imageView16.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,5 +183,51 @@ public class HomeFragment extends Fragment {
 
         buttonToDeselect.setBackgroundResource(R.drawable.cutom_button_unselected_bg);
         buttonToDeselect.setTextColor(Color.parseColor("#000000"));
+    }
+
+    public void getJobCategory() {
+      binding.progressBarcategory.setVisibility(View.VISIBLE);
+        Map<String, String> map = new HashMap<>();
+       // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
+
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<JobCategoryResponse> resultCall = apiInterface.callJobCategory();
+
+        resultCall.enqueue(new Callback<JobCategoryResponse>() {
+            @Override
+            public void onResponse(Call<JobCategoryResponse> call, Response<JobCategoryResponse> response) {
+
+                if (response.isSuccessful()) {
+                    binding.progressBarcategory.setVisibility(View.GONE);
+
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess()==true) {
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                        binding.recyclerJobCategory.setLayoutManager(linearLayoutManager);
+                        JobCategoryAdapter adapter=new JobCategoryAdapter(getActivity(),response.body().getData());
+                        binding.recyclerJobCategory.setAdapter(adapter);
+                        binding.recyclerJobCategory.getAdapter().notifyDataSetChanged();
+
+                    } else {
+                        binding.progressBarcategory.setVisibility(View.GONE);
+
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobCategoryResponse> call, Throwable t) {
+                binding.progressBarcategory.setVisibility(View.GONE);
+
+              //  lemprtNotification.setVisibility(View.VISIBLE);
+            //    pd_loading.setVisibility(View.GONE);
+                Utils.showFailureDialog(getActivity(), "Something went wrong!");
+            }
+        });
     }
 }

@@ -1190,6 +1190,7 @@ android:visibility="gone"
             android:layout_height="wrap_content"
             android:id="@+id/progresspersonal"
             android:visibility="gone"
+            android:indeterminateDrawable="@drawable/loading_img"
 
             android:foregroundGravity="center"
             app:layout_constraintRight_toRightOf="parent"

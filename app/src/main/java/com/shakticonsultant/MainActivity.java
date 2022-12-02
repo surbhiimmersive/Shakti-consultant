@@ -239,9 +239,6 @@ String userid;
             alert.show();
 //            startActivity(new Intent(getApplicationContext(), ScheduledInterviews1Activity.class));
         }
-//        else if (item.getItemId() == R.id.drawer_job_app_status2){
-//            startActivity(new Intent(getApplicationContext(), RejectedApplicationActivity.class));
-//        }
 
 
         return super.onOptionsItemSelected(item);

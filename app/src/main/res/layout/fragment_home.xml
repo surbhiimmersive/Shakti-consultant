@@ -111,155 +111,174 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <!--            <ImageView-->
-<!--                android:id="@+id/img_slider_dot"-->
-<!--                android:layout_width="11dp"-->
-<!--                android:layout_height="11dp"-->
-<!--                android:src="@drawable/slider_dot_selected"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/rl_img_slider"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"/>-->
-
-
-            <TextView
-                android:id="@+id/textView38"
-                android:layout_width="0dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerJobCategory"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_edittext_bg"
-                android:drawablePadding="15dp"
-                android:drawableTint="@color/main_text_color"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical"
-                android:padding="7dp"
-                android:text="Sales and Marketing Jobs"
-                android:textColor="@color/home_screen_text_color"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/bottom_nav_job"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
+                android:layout_centerInParent="true"
+                android:src="@drawable/slider_dot_selected"
+                app:layout_constraintTop_toBottomOf="@+id/dotsRecyclerView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dotsRecyclerView" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/textView39"
-                android:layout_width="0dp"
+            <ProgressBar
+                android:id="@+id/progressBarcategory"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_edittext_bg"
-                android:backgroundTint="@color/main_text_color"
-                android:drawablePadding="15dp"
-                android:drawableTint="@color/white"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical"
-                android:padding="7dp"
-                android:text="IIT JEE NEET NDA IIT JAM GATE Coaching Jobs"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/training_img"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView38" />
+                android:visibility="gone"
+                android:indeterminateDrawable="@drawable/loading_img"
+                app:layout_constraintBottom_toBottomOf="@id/dotsRecyclerView"
+                app:layout_constraintHorizontal_bias="0.523"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+            <!--
 
-            <TextView
-                android:id="@+id/textView40"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_edittext_bg"
-                android:drawablePadding="15dp"
-                android:drawableTint="@color/main_text_color"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical"
-                android:padding="7dp"
-                android:paddingStart="10dp"
-                android:text="School and College Jobs "
-                android:textColor="@color/home_screen_text_color"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/knowledge_img"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView39" />
+                        <TextView
+                            android:id="@+id/textView38"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="25dp"
+                            android:layout_marginEnd="30dp"
+                            android:background="@drawable/custom_edittext_bg"
+                            android:drawablePadding="15dp"
+                            android:drawableTint="@color/main_text_color"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center_vertical"
+                            android:padding="7dp"
+                            android:text="Sales and Marketing Jobs"
+                            android:textColor="@color/home_screen_text_color"
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/bottom_nav_job"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/dotsRecyclerView" />
 
-            <TextView
-                android:id="@+id/textView41"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_edittext_bg"
-                android:drawablePadding="15dp"
-                android:drawableTint="@color/main_text_color"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical"
-                android:padding="7dp"
-                android:paddingStart="10dp"
-                android:text="Coaching Foundation Jobs"
-                android:textColor="@color/home_screen_text_color"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/package_tracking_img"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView40" />
+                        <TextView
+                            android:id="@+id/textView39"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="30dp"
+                            android:background="@drawable/custom_edittext_bg"
+                            android:backgroundTint="@color/main_text_color"
+                            android:drawablePadding="15dp"
+                            android:drawableTint="@color/white"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center_vertical"
+                            android:padding="7dp"
+                            android:text="IIT JEE NEET NDA IIT JAM GATE Coaching Jobs"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/training_img"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
-            <TextView
-                android:id="@+id/textView42"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_edittext_bg"
-                android:drawablePadding="15dp"
-                android:drawableTint="@color/main_text_color"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical"
-                android:padding="7dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="Govt Exam Coaching Jobs Coming Soon"
-                android:textColor="@color/home_screen_text_color"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/test_passed_img"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+                        <TextView
+                            android:id="@+id/textView40"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="30dp"
+                            android:background="@drawable/custom_edittext_bg"
+                            android:drawablePadding="15dp"
+                            android:drawableTint="@color/main_text_color"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center_vertical"
+                            android:padding="7dp"
+                            android:paddingStart="10dp"
+                            android:text="School and College Jobs "
+                            android:textColor="@color/home_screen_text_color"
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/knowledge_img"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
-            <TextView
-                android:id="@+id/textView43"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/custom_edittext_bg"
-                android:drawablePadding="15dp"
-                android:drawableTint="@color/main_text_color"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center_vertical"
-                android:padding="7dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:text="College and Universities Jobs"
-                android:textColor="@color/home_screen_text_color"
-                android:textSize="16sp"
-                app:drawableStartCompat="@drawable/student_center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+                        <TextView
+                            android:id="@+id/textView41"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="30dp"
+                            android:background="@drawable/custom_edittext_bg"
+                            android:drawablePadding="15dp"
+                            android:drawableTint="@color/main_text_color"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center_vertical"
+                            android:padding="7dp"
+                            android:paddingStart="10dp"
+                            android:text="Coaching Foundation Jobs"
+                            android:textColor="@color/home_screen_text_color"
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/package_tracking_img"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+                        <TextView
+                            android:id="@+id/textView42"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="30dp"
+                            android:background="@drawable/custom_edittext_bg"
+                            android:drawablePadding="15dp"
+                            android:drawableTint="@color/main_text_color"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center_vertical"
+                            android:padding="7dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="Govt Exam Coaching Jobs Coming Soon"
+                            android:textColor="@color/home_screen_text_color"
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/test_passed_img"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+                        <TextView
+                            android:id="@+id/textView43"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginEnd="30dp"
+                            android:background="@drawable/custom_edittext_bg"
+                            android:drawablePadding="15dp"
+                            android:drawableTint="@color/main_text_color"
+                            android:fontFamily="@font/poppins_medium"
+                            android:gravity="center_vertical"
+                            android:padding="7dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:text="College and Universities Jobs"
+                            android:textColor="@color/home_screen_text_color"
+                            android:textSize="16sp"
+                            app:drawableStartCompat="@drawable/student_center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView42" />
+            -->
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline8"
@@ -287,7 +306,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerJobCategory" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_all_job"
@@ -304,7 +323,7 @@
                 android:clickable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline8"
-                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerJobCategory" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView2"
@@ -317,11 +336,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_latest_job"
                 tools:itemCount="5"
-                tools:listitem="@layout/recycler_item_latest_job_layout" />
+                tools:listitem="@layout/item_latest_job_layout" />
 
             <include
                 android:id="@+id/include_layout"
-                layout="@layout/recycler_item_latest_job_layout"
+                layout="@layout/item_latest_job_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
@@ -334,7 +353,7 @@
 
             <include
                 android:id="@+id/include_layout1"
-                layout="@layout/recycler_item_latest_job_layout"
+                layout="@layout/item_latest_job_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"

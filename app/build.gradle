@@ -54,6 +54,7 @@ dependencies {
         // exclude Retrofit’s OkHttp dependency module and define your own module import
         exclude module: 'okhttp'
     }
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 
     implementation 'com.squareup.okhttp3:logging-interceptor:4.4.1'
     implementation 'com.squareup.okhttp3:okhttp:4.4.1'

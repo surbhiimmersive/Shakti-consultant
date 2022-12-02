@@ -5,10 +5,17 @@ import com.shakticonsultant.responsemodel.ChangePasswordResponse;
 import com.shakticonsultant.responsemodel.CityResponse;
 import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.EducationResponse;
+import com.shakticonsultant.responsemodel.FaqsResponse;
 import com.shakticonsultant.responsemodel.ForgotResponse;
 import com.shakticonsultant.responsemodel.IntrestedFieldResponse;
+import com.shakticonsultant.responsemodel.JobCategoryResponse;
+import com.shakticonsultant.responsemodel.JobDetailDatumResponse;
+import com.shakticonsultant.responsemodel.JobDetailResponse;
+import com.shakticonsultant.responsemodel.JobSkillResponse;
+import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.responsemodel.LoginResponse;
 import com.shakticonsultant.responsemodel.OrganizationResponse;
+import com.shakticonsultant.responsemodel.PackageResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
 
@@ -80,10 +87,31 @@ public interface ApiInterface {
    @GET("organizationList")
    Call<OrganizationResponse> callOrganizationList();
 
+   @GET("jobCategory")
+   Call<JobCategoryResponse> callJobCategory();
+
+   @GET("packageList")
+   Call<PackageResponse> callPackageList();
+
+   @GET("faqList")
+   Call<FaqsResponse> callFaqsList();
+
 
    @POST("cityList")
    @FormUrlEncoded
    Call<CityResponse>callCityListApi(@FieldMap Map<String, String> params);
+
+   @POST("jobSkill")
+   @FormUrlEncoded
+   Call<JobSkillResponse>callJobSkillList(@FieldMap Map<String, String> params);
+
+   @POST("jobSkillWiseList")
+   @FormUrlEncoded
+   Call<JobSkillWiseListResponse>callJobSkillWiseList(@FieldMap Map<String, String> params);
+
+   @POST("jobDetails")
+   @FormUrlEncoded
+   Call<JobDetailResponse>callJobDetail(@FieldMap Map<String, String> params);
 
    @POST("educationList")
    @FormUrlEncoded
