@@ -17,6 +17,7 @@ import com.shakticonsultant.responsemodel.LoginResponse;
 import com.shakticonsultant.responsemodel.OrganizationResponse;
 import com.shakticonsultant.responsemodel.PackageResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
+import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
 
 import java.util.List;
@@ -128,5 +129,13 @@ public interface ApiInterface {
    @POST("employeeHistory")
    @FormUrlEncoded
    Call<CommonResponse>callEmployeeHistory(@FieldMap Map<String, String> params);
+
+   @POST("slider")
+   @FormUrlEncoded
+   Call<SliderResponse>callSliderApi(@FieldMap Map<String, String> params);
+
+   @POST("latestJob")
+   @FormUrlEncoded
+   Call<SliderResponse>callLatestJob(@FieldMap Map<String, String> params);
 
 }

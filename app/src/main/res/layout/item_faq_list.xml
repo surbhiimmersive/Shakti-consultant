@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    android:paddingBottom="5sp"
+>
+<LinearLayout
+    android:id="@+id/layout_faq_1"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    >
+<LinearLayout
+    android:id="@+id/l1"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="0.2"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="What is a subscription invoice?"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+        />
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_weight="0.8"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/imgArrow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_baseline_keyboard_arrow_down_colored"
+        />
+   <ImageView
+            android:id="@+id/imguparrpw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+       android:visibility="gone"
+            android:src="@drawable/ic_baseline_keyboard_arrow_up_24"
+           />
+</LinearLayout>
+</LinearLayout>
+    <TextView
+        android:id="@+id/dummy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:visibility="visible"
+        android:singleLine="true"
+        android:fontFamily="@font/poppins_medium"
+        android:text="What is a subscription invoice? dsdsdsdsdsxx"
+        android:textColor="@color/white"
+        android:textSize="5sp"
+        />
+        <TextView
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Subscriptions allow businesses to automate the billing for customers on a recurring basis. With subscription billing on Invoiced, you can charge customers automatically each billing cycle, or issue an invoice that can be paid with payment methods accepted on the account."
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="5sp"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/l1"
+            app:layout_constraintTop_toBottomOf="@+id/l1" />
+    </LinearLayout>
+
+</LinearLayout>
