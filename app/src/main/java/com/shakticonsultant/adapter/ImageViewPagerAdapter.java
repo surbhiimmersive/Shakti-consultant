@@ -48,7 +48,7 @@ public class ImageViewPagerAdapter extends PagerAdapter {
         ImageView imageView=new ImageView(context);
        /* imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(imageList[position]);*/
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        //imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
         Picasso.get()
                 .load(ApiClient.Photourl+advertisingDatum.get(position).getImage())
                 .memoryPolicy(MemoryPolicy.NO_CACHE)

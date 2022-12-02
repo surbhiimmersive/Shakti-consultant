@@ -34,6 +34,17 @@ private String academic;
 @SerializedName("employee")
 @Expose
 private String employee;
+@SerializedName("location")
+@Expose
+private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public String getPersonal() {
         return personal;

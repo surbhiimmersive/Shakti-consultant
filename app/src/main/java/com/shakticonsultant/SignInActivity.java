@@ -142,6 +142,7 @@ String employee=response.body().getData().getEmployee();
 
                         }else{
                             AppPrefrences.setLogin_status(SignInActivity.this,true);
+                            AppPrefrences.setLocation(SignInActivity.this,response.body().getData().getLocation());
 
                             Intent i = new Intent(SignInActivity.this, MainActivity.class);
                             i.putExtra("userid",response.body().getData().getId());

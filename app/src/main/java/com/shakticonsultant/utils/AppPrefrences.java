@@ -31,6 +31,7 @@ public class AppPrefrences
     SharedPreferences.Editor editor;
     SharedPreferences.Editor editor2;
     public static final String LATITUDE = "latitude";
+    public static final String Location = "location";
     public static final String LONGITUDE = "longitude";
     public static final String IS_LOGIN = "isLogin";
     public static final String IS_SIGNUP = "isSignUp";
@@ -47,6 +48,17 @@ public class AppPrefrences
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(NAME, value);
+        editor.commit();
+    }
+    public static String getLocation(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        return preferences.getString(Location, "");
+    }
+
+    public static void setLocation(Context context, String value) {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Location, value);
         editor.commit();
     }
 public static String getPACKAGE(Context context) {

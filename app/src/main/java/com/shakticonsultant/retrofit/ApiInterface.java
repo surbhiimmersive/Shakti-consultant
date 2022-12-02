@@ -136,6 +136,9 @@ public interface ApiInterface {
 
    @POST("latestJob")
    @FormUrlEncoded
-   Call<SliderResponse>callLatestJob(@FieldMap Map<String, String> params);
+   Call<JobSkillWiseListResponse>callLatestJob(@FieldMap Map<String, String> params);
+
+   @GET("allJobs")
+   Call<JobSkillWiseListResponse> callAllJobs();
 
 }

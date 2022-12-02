@@ -18,8 +18,10 @@ import android.view.ViewGroup;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.shakticonsultant.adapter.ImageViewPagerAdapter;
 import com.shakticonsultant.adapter.JobCategoryAdapter;
+import com.shakticonsultant.adapter.JobSkillWiseListAdapter;
 import com.shakticonsultant.databinding.FragmentHomeBinding;
 import com.shakticonsultant.responsemodel.JobCategoryResponse;
+import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.responsemodel.SliderDatumResponse;
 import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.retrofit.ApiClient;
@@ -108,6 +110,9 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(adapter);*/
         getJobCategory();
         getSliderApi();
+        binding.recycAllJob.setVisibility(View.GONE);
+        binding.recycLatestJob.setVisibility(View.VISIBLE);
+        getLatestJob();
         setDots(0);
 
 
@@ -140,11 +145,19 @@ public class HomeFragment extends Fragment {
         binding.btnAllJob.setOnClickListener(v -> {
            setButtonSelected(binding.btnAllJob, binding.btnLatestJob);
 
+
+            binding.recycAllJob.setVisibility(View.VISIBLE);
+            binding.recycLatestJob.setVisibility(View.GONE);
+            getAllJob();
+
         });
 
 
         binding.btnLatestJob.setOnClickListener(v -> {
             setButtonSelected(binding.btnLatestJob, binding.btnAllJob);
+            binding.recycAllJob.setVisibility(View.VISIBLE);
+            binding.recycLatestJob.setVisibility(View.GONE);
+            getLatestJob();
 
             });
 
@@ -306,6 +319,105 @@ public class HomeFragment extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    public void getLatestJob() {
+        binding.progressBarcategory.setVisibility(View.VISIBLE);
+        Map<String, String> map = new HashMap<>();
+        map.put("location", "7");
+
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<JobSkillWiseListResponse> resultCall = apiInterface.callLatestJob(map);
+
+        resultCall.enqueue(new Callback<JobSkillWiseListResponse>() {
+            @Override
+            public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
+
+                if (response.isSuccessful()) {
+                    binding.progressBarcategory.setVisibility(View.GONE);
+
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess()==true) {
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                        binding.recycLatestJob.setLayoutManager(linearLayoutManager);
+                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(getActivity(),response.body().getData());
+                        binding.recycLatestJob.setAdapter(adapter);
+                        binding.recycLatestJob.getAdapter().notifyDataSetChanged();
+
+
+
+                    } else {
+                        binding.progressBarcategory.setVisibility(View.GONE);
+
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobSkillWiseListResponse> call, Throwable t) {
+
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+                binding.progressBarcategory.setVisibility(View.GONE);
+
+                Utils.showFailureDialog(getActivity(), "Something went wrong!");
+            }
+        });
+    }
+    public void getAllJob() {
+        binding.progressBarcategory.setVisibility(View.VISIBLE);
+
+        Map<String, String> map = new HashMap<>();
+        //map.put("location", "7");
+
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<JobSkillWiseListResponse> resultCall = apiInterface.callAllJobs();
+
+        resultCall.enqueue(new Callback<JobSkillWiseListResponse>() {
+            @Override
+            public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
+
+                if (response.isSuccessful()) {
+                    binding.progressBarcategory.setVisibility(View.GONE);
+
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess()==true) {
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                        binding.recycAllJob.setLayoutManager(linearLayoutManager);
+                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(getActivity(),response.body().getData());
+                        binding.recycAllJob.setAdapter(adapter);
+                        binding.recycAllJob.getAdapter().notifyDataSetChanged();
+
+
+
+                    } else {
+                        binding.progressBarcategory.setVisibility(View.GONE);
+
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobSkillWiseListResponse> call, Throwable t) {
+
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+                binding.progressBarcategory.setVisibility(View.GONE);
+
+                Utils.showFailureDialog(getActivity(), "Something went wrong!");
+            }
+        });
     }
 
 }
