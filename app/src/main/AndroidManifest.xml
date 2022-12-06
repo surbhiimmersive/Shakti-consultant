@@ -69,6 +69,11 @@
             android:name=".PackageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ApplyJobPackageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".JobDescriptionActivity"
             android:exported="false"

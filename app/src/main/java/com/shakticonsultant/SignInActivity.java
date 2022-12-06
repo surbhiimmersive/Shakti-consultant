@@ -141,8 +141,13 @@ String employee=response.body().getData().getEmployee();
                             finish();
 
                         }else{
+                            AppPrefrences.setUserid(SignInActivity.this,response.body().getData().getId());
+
                             AppPrefrences.setLogin_status(SignInActivity.this,true);
                             AppPrefrences.setLocation(SignInActivity.this,response.body().getData().getLocation());
+                            AppPrefrences.setName(SignInActivity.this,response.body().getData().getName());
+                            AppPrefrences.setMobile(SignInActivity.this,response.body().getData().getMobile());
+                            AppPrefrences.setMail(SignInActivity.this,response.body().getData().getEmail());
 
                             Intent i = new Intent(SignInActivity.this, MainActivity.class);
                             i.putExtra("userid",response.body().getData().getId());

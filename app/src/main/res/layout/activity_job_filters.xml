@@ -322,7 +322,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
+          <!--  <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView6"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -338,45 +338,48 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText"
                 tools:listitem="@layout/recyler_item_city_selection_layout" />
-
+-->
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:id="@+id/r1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/custom_edittext_bg"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
+                app:flow_verticalBias="2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editText"
-                app:layout_constraintVertical_bias="0.0">
 
-                <include layout="@layout/recyler_item_city_selection_layout" />
+                app:layout_constraintBottom_toBottomOf="parent"
+             >
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:scrollbars="none"
+                    android:fillViewport="true"
 
-                <include layout="@layout/recyler_item_city_selection_layout" />
+                    android:layout_height="200dp">
 
-                <include layout="@layout/recyler_item_city_selection_layout" />
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:minHeight="300dp"
+                        android:id="@+id/listViewCity"
+                        android:background="@color/white"
+                        android:nestedScrollingEnabled="true"
+                        android:scrollbars="vertical"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:choiceMode="multipleChoice" />
 
-                <include layout="@layout/recyler_item_city_selection_layout" />
-
-                <include layout="@layout/recyler_item_city_selection_layout" />
-
-                <include layout="@layout/recyler_item_city_selection_layout" />
-
-                <include layout="@layout/recyler_item_city_selection_layout" />
-
-                <include layout="@layout/recyler_item_city_selection_layout" />
-
-                <include layout="@layout/recyler_item_city_selection_layout" />
-
-                <include layout="@layout/recyler_item_city_selection_layout" />
+                </androidx.core.widget.NestedScrollView>
 
             </LinearLayout>
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -420,6 +423,7 @@
                         android:src="@drawable/experience_coloured" />
 
                     <Spinner
+                        android:id="@+id/spExperience"
                         style="@style/spinner_style"
                         android:layout_width="match_parent"
                         android:layout_height="33dp"

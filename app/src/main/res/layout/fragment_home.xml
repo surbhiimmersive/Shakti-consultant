@@ -75,7 +75,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="180sp"
                     android:layout_marginTop="10dp"/>
 
 
@@ -116,8 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginEnd="30dp"
+                android:layout_marginTop="20sp"
+                android:layout_marginEnd="20sp"
                 android:layout_centerInParent="true"
                 android:src="@drawable/slider_dot_selected"
                 app:layout_constraintTop_toBottomOf="@+id/dotsRecyclerView"

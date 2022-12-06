@@ -24,6 +24,7 @@ import com.shakticonsultant.responsemodel.StateDatumResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -729,6 +730,7 @@ if(strstate.equals("Select State")){
                       /*  startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
 */
+                        AppPrefrences.setUserid(EmployeeHistoryActivity.this,userid);
 
                         Intent i=new Intent(EmployeeHistoryActivity.this,MainActivity.class);
                         i.putExtra("userid",userid);

@@ -34,9 +34,22 @@ private String academic;
 @SerializedName("employee")
 @Expose
 private String employee;
+@SerializedName("email")
+@Expose
+private String email;
+
+
 @SerializedName("location")
 @Expose
 private String location;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getLocation() {
         return location;

@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shakticonsultant.databinding.ActivityMainBinding;
@@ -45,8 +46,7 @@ String userid;
 
 
         userid = getIntent().getStringExtra("userid");
-
-
+        Toast.makeText(this, ""+AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
         /* Navigation Drawer */
         binding.navView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
 
@@ -70,6 +70,16 @@ String userid;
 
         /* Bottom Nav */
         setUpNavigation();
+
+        View headerView = binding.navView.inflateHeaderView(R.layout.drawer_header);
+        TextView tvname=headerView.findViewById(R.id.textView33);
+        TextView tvemail=headerView.findViewById(R.id.textView34);
+        TextView tvmobile=headerView.findViewById(R.id.textView35);
+
+        tvname.setText(AppPrefrences.getName(MainActivity.this));
+        tvemail.setText(AppPrefrences.getMail(MainActivity.this));
+        tvmobile.setText(AppPrefrences.getMobile(MainActivity.this));
+
     }
 
     public void setUpNavigation(){
@@ -104,6 +114,8 @@ String userid;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
 
         /* Jobs  */
         LinearLayout actionLayout = (LinearLayout) binding.navView.getMenu().getItem(2).getActionView();

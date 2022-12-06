@@ -8,6 +8,7 @@ import com.shakticonsultant.responsemodel.EducationResponse;
 import com.shakticonsultant.responsemodel.FaqsResponse;
 import com.shakticonsultant.responsemodel.ForgotResponse;
 import com.shakticonsultant.responsemodel.IntrestedFieldResponse;
+import com.shakticonsultant.responsemodel.JobAppliedListResponse;
 import com.shakticonsultant.responsemodel.JobCategoryResponse;
 import com.shakticonsultant.responsemodel.JobDetailDatumResponse;
 import com.shakticonsultant.responsemodel.JobDetailResponse;
@@ -19,6 +20,7 @@ import com.shakticonsultant.responsemodel.PackageResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
+import com.shakticonsultant.responsemodel.WorkExpResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -138,7 +140,26 @@ public interface ApiInterface {
    @FormUrlEncoded
    Call<JobSkillWiseListResponse>callLatestJob(@FieldMap Map<String, String> params);
 
+   @POST("appliedJobsList")
+   @FormUrlEncoded
+   Call<JobAppliedListResponse>callAppliedJob(@FieldMap Map<String, String> params);
+
+   @POST("contactUs")
+   @FormUrlEncoded
+   Call<CommonResponse>callContactusApi(@FieldMap Map<String, String> params);
+
+   @POST("applyJob")
+   @FormUrlEncoded
+   Call<CommonResponse>callApplyJob(@FieldMap Map<String, String> params);
+
    @GET("allJobs")
    Call<JobSkillWiseListResponse> callAllJobs();
+
+   @GET("workExperience")
+   Call<WorkExpResponse> callWorkExperience();
+
+   @GET("allCityList")
+   Call<CityResponse> callAllCityList();
+
 
 }

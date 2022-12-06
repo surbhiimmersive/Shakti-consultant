@@ -30,7 +30,15 @@ public class SignUpActivity extends AppCompatActivity {
     ActivitySignUpBinding binding;
     ApiInterface apiInterface;
     ConnectionDetector cd;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+ //   String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+    String emailPattern = "[a-zA-Z0-9+._%-+]{1,256}" +
+            "@" +
+            "[a-zA-Z0-9][a-zA-Z0-9-]{0,64}" +
+            "(" +
+            "." +
+            "com" +
+            ")+";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     snackbar.show();
 
-                }else if(!binding.edtEmail.getText().toString().matches(emailPattern)) {
+                }/*else if(!binding.edtEmail.getText().toString().matches(emailPattern)) {
 
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter valid email address.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
@@ -109,7 +117,8 @@ public class SignUpActivity extends AppCompatActivity {
                     snackbar.show();
 
 
-                }  else if (binding.edtPassword.getText().toString().trim().equals("")) {
+                }*/
+                else if (binding.edtPassword.getText().toString().trim().equals("")) {
 
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter password.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);

@@ -20,15 +20,15 @@
 
     <ImageView
         android:id="@+id/imageView19"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="3dp"
         app:layout_constraintEnd_toStartOf="@+id/textView44"
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toTopOf="@+id/textView44"
-        app:srcCompat="@drawable/add_to_favorites_img" />
+        app:srcCompat="@drawable/black_like" />
 
     <TextView
         android:id="@+id/textView44"

@@ -80,13 +80,17 @@
         android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/poppins_medium"
         android:text="EDIT"
+        android:layout_marginEnd="10sp"
+        app:layout_constraintRight_toRightOf="parent"
         android:textColor="@color/main_text_color"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.937"
+        tools:layout_editor_absoluteX="358dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

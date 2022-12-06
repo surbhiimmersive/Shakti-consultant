@@ -26,6 +26,7 @@ import com.shakticonsultant.responsemodel.JobDetailResponse;
 import com.shakticonsultant.responsemodel.JobSkillResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -42,8 +43,8 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
     ActivityJobDescriptionBinding binding;
     DatePickerDialog datePickerDialog;
     String job_id,skill_name;
-        boolean isSelected;
-ConnectionDetector cd;
+    boolean isSelected;
+    ConnectionDetector cd;
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,9 +96,7 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
             });
 
 
-            binding.btnApply.setOnClickListener(v -> {
-                showSubscriptionDialog();
-            });
+
 
             binding.imgBackArrow.setOnClickListener(v -> {
                 onBackPressed();
@@ -135,6 +134,7 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
         binding.progressBardetail.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("job_id", job_id);
+        map.put("user_id",AppPrefrences.getUserid(JobDescriptionActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -162,6 +162,21 @@ binding.tvrange.setText(response.body().getData().get(0).getStarting_salary()+" 
 binding.tvExperience.setText(response.body().getData().get(0).getWork_experience());
 binding.tvLocation.setText(response.body().getData().get(0).getLocation());
 binding.textView51.setText(response.body().getData().get(0).getJob_description());
+
+
+                        binding.btnApply.setOnClickListener(v -> {
+
+                            if(response.body().getData().get(0).getPackage_balance()==0){
+                                showSubscriptionDialog(response.body().getData().get(0).getId());
+                            }else{
+
+
+                                showDateDialog();
+
+                            }
+
+
+                        });
                     } else {
                         binding.progressBardetail.setVisibility(View.GONE);
 
@@ -183,8 +198,58 @@ binding.textView51.setText(response.body().getData().get(0).getJob_description()
         });
     }
 
+    private void showDateDialog() {
+        Dialog dialog = new Dialog(JobDescriptionActivity.this);
+        dialog.setContentView(R.layout.dialog_select_interview_date);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
 
-    private void showSubscriptionDialog(){
+        AppCompatButton date1 = dialog.findViewById(R.id.btn_select_date_1);
+        AppCompatButton date2 = dialog.findViewById(R.id.btn_select_date_2);
+        AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
+        AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
+
+        date1.setOnClickListener(v -> {
+            datePickerDialog.show();
+        });
+
+        date2.setOnClickListener(v -> {
+            datePickerDialog.show();
+        });
+
+        confirm.setOnClickListener(v -> {
+            dialog.dismiss();
+            showConfirmationDialog();
+        });
+
+        cancel.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+    }
+
+
+    private void showConfirmationDialog(){
+        Dialog dialog = new Dialog(JobDescriptionActivity.this);
+        dialog.setContentView(R.layout.dialog_interview_further_process);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
+
+        AppCompatButton ok = dialog.findViewById(R.id.btn_interview_ok);
+        AppCompatButton faq = dialog.findViewById(R.id.btn_faq);
+
+        ok.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+        faq.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+    }
+
+
+
+    private void showSubscriptionDialog(String job_id){
         Dialog dialog = new Dialog(JobDescriptionActivity.this);
         dialog.setContentView(R.layout.dialog_subscription_plan);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -195,7 +260,12 @@ binding.textView51.setText(response.body().getData().get(0).getJob_description()
 
         ok.setOnClickListener(v -> {
             dialog.dismiss();
-            startActivity(new Intent(getApplicationContext(), PackageActivity.class));
+            //startActivity(new Intent(getApplicationContext(), ApplyJobPackageActivity.class));
+
+
+            Intent i=new Intent(JobDescriptionActivity.this,ApplyJobPackageActivity.class);
+            i.putExtra("job_id",job_id);
+            startActivity(i);
         });
 
         cancel.setOnClickListener(v -> {

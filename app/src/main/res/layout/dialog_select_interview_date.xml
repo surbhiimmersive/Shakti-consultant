@@ -54,7 +54,7 @@
 
         <ImageView
             android:id="@+id/imageView27"
-            android:layout_width="30dp"
+            android:layout_width="20dp"
             android:layout_height="30dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
@@ -68,7 +68,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="10sp"
             android:background="@drawable/buttonbordershadow"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="Date 1"
@@ -80,7 +80,7 @@
 
         <ImageView
             android:id="@+id/imageView28"
-            android:layout_width="30dp"
+            android:layout_width="20dp"
             android:layout_height="30dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="30dp"
@@ -94,7 +94,7 @@
             android:layout_height="33dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="20sp"
             android:background="@drawable/buttonbordershadow"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="Date 2"

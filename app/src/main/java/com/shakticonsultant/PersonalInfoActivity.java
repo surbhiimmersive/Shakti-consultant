@@ -371,7 +371,10 @@ ConnectionDetector cd;
 
                         snackbar.show();
 
-                    } else if (binding.radioExperienced.isChecked()) {
+                    }
+
+
+                    else if (binding.radioExperienced.isChecked()) {
 
 
                         if (binding.edtOrganizationName.getText().toString().trim().equals("")) {

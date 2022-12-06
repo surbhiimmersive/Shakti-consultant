@@ -46,7 +46,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 public class OrganizationDailog extends AppCompatActivity {
-    List<String>org_name_list=new ArrayList<>();
+
     ListView listview ;
 Context context;
 Button btnSubmit;
@@ -54,6 +54,7 @@ Button button4;
 String data;
 ImageView imageView13;
     SparseBooleanArray sparseBooleanArray ;
+    List<String>org_name_list=new ArrayList<>();
     List<String> selectedOrganization=new ArrayList<>();
 
     @Override

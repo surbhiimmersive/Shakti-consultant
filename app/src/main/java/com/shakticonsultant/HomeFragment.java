@@ -26,6 +26,7 @@ import com.shakticonsultant.responsemodel.SliderDatumResponse;
 import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.Utils;
 
 import java.util.ArrayList;
@@ -325,7 +326,7 @@ public class HomeFragment extends Fragment {
     public void getLatestJob() {
         binding.progressBarcategory.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        map.put("location", "7");
+        map.put("location", AppPrefrences.getLocation(getActivity()));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
