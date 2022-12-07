@@ -1,4 +1,5 @@
 package com.shakticonsultant.retrofit;
+import com.shakticonsultant.responsemodel.AboutResponse;
 import com.shakticonsultant.responsemodel.AnnualResponse;
 import com.shakticonsultant.responsemodel.BoardResponse;
 import com.shakticonsultant.responsemodel.ChangePasswordResponse;
@@ -17,6 +18,7 @@ import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.responsemodel.LoginResponse;
 import com.shakticonsultant.responsemodel.OrganizationResponse;
 import com.shakticonsultant.responsemodel.PackageResponse;
+import com.shakticonsultant.responsemodel.ShortListResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
@@ -152,6 +154,15 @@ public interface ApiInterface {
    @FormUrlEncoded
    Call<CommonResponse>callApplyJob(@FieldMap Map<String, String> params);
 
+
+   @POST("rejectedJobsList")
+   @FormUrlEncoded
+   Call<JobAppliedListResponse>callRejectedJobList(@FieldMap Map<String, String> params);
+
+   @POST("jobshortList")
+   @FormUrlEncoded
+   Call<ShortListResponse>callShortListApi(@FieldMap Map<String, String> params);
+
    @GET("allJobs")
    Call<JobSkillWiseListResponse> callAllJobs();
 
@@ -160,6 +171,9 @@ public interface ApiInterface {
 
    @GET("allCityList")
    Call<CityResponse> callAllCityList();
+
+   @GET("about")
+   Call<AboutResponse> callAboutUsApi();
 
 
 }

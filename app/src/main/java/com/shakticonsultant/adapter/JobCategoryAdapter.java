@@ -1,6 +1,7 @@
 package com.shakticonsultant.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -76,6 +77,8 @@ Intent i=new Intent(context,JobsListActivity.class);
 i.putExtra("category_id",list.get(position).getId());
 i.putExtra("category_name",list.get(position).getTitle());
 context.startActivity(i);
+        ((Activity)context).overridePendingTransition(R.anim.enter,
+                R.anim.exit);
      //   context.startActivity(new Intent(context, JobsListActivity.class));
 
     }

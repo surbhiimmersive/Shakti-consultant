@@ -115,6 +115,9 @@ public class AppliedJobsFragment extends Fragment {
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
+                        binding.imageView23.setVisibility(View.VISIBLE);
+                        binding.recyclerAppliedJob.setVisibility(View.VISIBLE);
+                        binding.lEmpty.setVisibility(View.GONE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.recyclerAppliedJob.setLayoutManager(linearLayoutManager);
@@ -126,10 +129,20 @@ public class AppliedJobsFragment extends Fragment {
 
                     } else {
                         binding.progressBarcategory.setVisibility(View.GONE);
+                        binding.imageView23.setVisibility(View.GONE);
+                        binding.recyclerAppliedJob.setVisibility(View.GONE);
+                        binding.lEmpty.setVisibility(View.VISIBLE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
+                }else
+                {
+                    binding.imageView23.setVisibility(View.GONE);
+                    binding.recyclerAppliedJob.setVisibility(View.GONE);
+                    binding.lEmpty.setVisibility(View.VISIBLE);
+                    binding.progressBarcategory.setVisibility(View.GONE);
+
                 }
             }
 
@@ -138,6 +151,9 @@ public class AppliedJobsFragment extends Fragment {
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
+                binding.imageView23.setVisibility(View.GONE);
+                binding.recyclerAppliedJob.setVisibility(View.GONE);
+                binding.lEmpty.setVisibility(View.VISIBLE);
                 binding.progressBarcategory.setVisibility(View.GONE);
 
                 Utils.showFailureDialog(getActivity(), "Please try again sometime later..");

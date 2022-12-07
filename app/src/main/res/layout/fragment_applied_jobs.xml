@@ -23,6 +23,7 @@
         android:layout_height="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
+        android:visibility="gone"
         android:src="@drawable/slider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -79,4 +80,37 @@
         app:layout_constraintVertical_bias="1.5" />
     <!--    For testing-->
 
+    <LinearLayout
+        android:id="@+id/lEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView47"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:gravity="center"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/box"
+            ></ImageView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No Record Found"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            ></TextView>
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

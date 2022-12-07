@@ -143,6 +143,10 @@ ConnectionDetector cd;
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
+                        binding.tvEmpty.setVisibility(View.GONE);
+                        binding.imgEmpty.setVisibility(View.GONE);
+                        binding.imageView23.setVisibility(View.VISIBLE);
+                        binding.recyclerJobSkillWiseList.setVisibility(View.VISIBLE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SpecificFacultyJobActivity.this);
                         binding.recyclerJobSkillWiseList.setLayoutManager(linearLayoutManager);
@@ -154,10 +158,22 @@ ConnectionDetector cd;
 
                     } else {
                         binding.progressBarSkillWise.setVisibility(View.GONE);
+                        binding.tvEmpty.setVisibility(View.VISIBLE);
+                        binding.imgEmpty.setVisibility(View.VISIBLE);
+                        binding.imageView23.setVisibility(View.GONE);
+                        binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
+                }else{
+                    binding.progressBarSkillWise.setVisibility(View.GONE);
+                    binding.tvEmpty.setVisibility(View.VISIBLE);
+                    binding.imgEmpty.setVisibility(View.VISIBLE);
+                    binding.imageView23.setVisibility(View.GONE);
+                    binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
+
+
                 }
             }
 

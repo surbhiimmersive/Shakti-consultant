@@ -215,8 +215,9 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
 
                 Toast.makeText(context, "Please select preferred date2", Toast.LENGTH_SHORT).show();
             }else {
-                dialog.dismiss();
-                getApplyJob(strdate1, strdate2);
+
+                getApplyJob(strdate1, strdate2,dialog);
+               // dialog.dismiss();
             }
             //showConfirmationDialog();
         });
@@ -252,7 +253,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
     }
 
 
-    public void getApplyJob(String date1,String date2) {
+    public void getApplyJob(String date1,String date2,Dialog dialog) {
         //binding.progressContatc.setVisibility(View.VISIBLE);
 
         Map<String, String> map = new HashMap<>();
@@ -272,7 +273,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
 
                 if (response.isSuccessful()) {
                     //binding.progressContatc.setVisibility(View.GONE);
-
+dialog.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
                         AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context)
@@ -293,7 +294,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
                         //binding.progressContatc.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
-                        // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
+                         Utils.showFailureDialog(context, response.message());
                     }
                 }
             }

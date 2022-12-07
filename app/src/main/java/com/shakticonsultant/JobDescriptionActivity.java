@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -21,9 +22,11 @@ import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.adapter.JobSkillListAdapter;
+import com.shakticonsultant.adapter.JobSkillWiseListAdapter;
 import com.shakticonsultant.databinding.ActivityJobDescriptionBinding;
 import com.shakticonsultant.responsemodel.JobDetailResponse;
 import com.shakticonsultant.responsemodel.JobSkillResponse;
+import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.AppPrefrences;
@@ -92,6 +95,7 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
                 setButtonSelected(binding.btnSimilarJobs, binding.btnJobDetails);
                 binding.layoutJobDescription.setVisibility(View.GONE);
                 binding.layoutSimilarJobs.setVisibility(View.VISIBLE);
+                //getSimilarJobList(job_id);
 
             });
 
@@ -341,5 +345,55 @@ binding.textView51.setText(response.body().getData().get(0).getJob_description()
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+    }
+
+
+    public void getSimilarJobList(String skill_id) {
+        binding.progressBardetail.setVisibility(View.VISIBLE);
+        Map<String, String> map = new HashMap<>();
+        map.put("skill_id", skill_id);
+
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<JobSkillWiseListResponse> resultCall = apiInterface.callJobSkillWiseList(map);
+
+        resultCall.enqueue(new Callback<JobSkillWiseListResponse>() {
+            @Override
+            public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
+
+                if (response.isSuccessful()) {
+                    binding.progressBardetail.setVisibility(View.GONE);
+
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess()==true) {
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(JobDescriptionActivity.this);
+                        binding.recyclerView7.setLayoutManager(linearLayoutManager);
+                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(JobDescriptionActivity.this,response.body().getData());
+                        binding.recyclerView7.setAdapter(adapter);
+                        binding.recyclerView7.getAdapter().notifyDataSetChanged();
+
+
+
+                    } else {
+                        binding.progressBardetail.setVisibility(View.GONE);
+
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JobSkillWiseListResponse> call, Throwable t) {
+
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+                binding.progressBardetail.setVisibility(View.GONE);
+
+                Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
+            }
+        });
     }
 }

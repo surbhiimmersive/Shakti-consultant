@@ -1,6 +1,7 @@
 package com.shakticonsultant.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -68,6 +69,8 @@ public class JobSkillWiseListAdapter extends RecyclerView.Adapter<JobSkillWiseLi
                 i.putExtra("skill_name",list.get(position).getTitle());
 
                 context.startActivity(i);
+                ((Activity)context).overridePendingTransition(R.anim.enter,
+                        R.anim.exit);
             }
         });
       //  viewHolder.tvDate.setText(list.get(position).getIcon());

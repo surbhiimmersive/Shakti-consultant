@@ -192,21 +192,42 @@ String userid;
                 }
             }, 50);
         }
+
+        else if (item.getItemId() == R.id.drawer_job_app_status1){
+                      startActivity(new Intent(getApplicationContext(), ScheduleInterviewActivity.class));
+            overridePendingTransition(
+                    R.anim.enter, R.anim.exit);
+
+        }  else if (item.getItemId() == R.id.drawer_job_app_status2){
+                      startActivity(new Intent(getApplicationContext(), RejectedApplicationActivity.class));
+            overridePendingTransition(
+                    R.anim.enter, R.anim.exit);
+        }
         else if (item.getItemId() == R.id.drawer_jobs1){
             navController.navigate(R.id.bottom_jobs);
             closeDrawer();
         }
         else if (item.getItemId() == R.id.drawer_jobs2){
-//            startActivity(new Intent(getApplicationContext(), JobsShortListedActivity.class));
+            startActivity(new Intent(getApplicationContext(), JobsShortListedActivity.class));
+            overridePendingTransition(
+                    R.anim.enter, R.anim.exit);
+
         }
         else if (item.getItemId() == R.id.drawer_jobs3){
-//            startActivity(new Intent(getApplicationContext(), JobsRecommendedActivity.class));
+           startActivity(new Intent(getApplicationContext(), JobsRecommendedActivity.class));
+            overridePendingTransition(
+                    R.anim.enter, R.anim.exit);
+
         }
         else if (item.getItemId() == R.id.drawer_subscription_plans){
             startActivity(new Intent(getApplicationContext(), PackageActivity.class));
+            overridePendingTransition(
+                    R.anim.enter, R.anim.exit);
         }
         else if (item.getItemId() == R.id.drawer_resume_preview){
             startActivity(new Intent(getApplicationContext(), ResumeActivity.class));
+            overridePendingTransition(
+                    R.anim.enter, R.anim.exit);
         }
 
 

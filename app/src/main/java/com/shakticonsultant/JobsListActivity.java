@@ -1,5 +1,6 @@
 package com.shakticonsultant;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -56,6 +57,16 @@ ConnectionDetector cd;
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        overridePendingTransition(R.anim.fade_in,
+                R.anim.fade_out);
+
+    }
+
     public void getJobSkillList() {
         binding.progressBarSkill.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
@@ -76,6 +87,9 @@ ConnectionDetector cd;
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
+                        binding.lEmpty.setVisibility(View.GONE);
+                        binding.recycleSkillList.setVisibility(View.VISIBLE);
+
                         GridLayoutManager linearLayoutManager = new GridLayoutManager(JobsListActivity.this,2);
                         binding.recycleSkillList.setLayoutManager(linearLayoutManager);
                         JobSkillListAdapter adapter=new JobSkillListAdapter(JobsListActivity.this,response.body().getData());
@@ -90,6 +104,11 @@ ConnectionDetector cd;
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
+                }else{
+                    binding.progressBarSkill.setVisibility(View.GONE);
+
+binding.lEmpty.setVisibility(View.VISIBLE);
+binding.recycleSkillList.setVisibility(View.GONE);
                 }
             }
 
@@ -100,6 +119,8 @@ ConnectionDetector cd;
                 //    pd_loading.setVisibility(View.GONE);
                 binding.progressBarSkill.setVisibility(View.GONE);
 
+                binding.lEmpty.setVisibility(View.VISIBLE);
+                binding.recycleSkillList.setVisibility(View.GONE);
                 Utils.showFailureDialog(JobsListActivity.this, "Something went wrong!");
             }
         });

@@ -674,6 +674,7 @@ ConnectionDetector cd;
 
                         if(cityList.size()>0){
                             binding.spCity.setVisibility(View.VISIBLE);
+                            binding.spinner4.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<cityList.size();i++){
 
@@ -706,10 +707,12 @@ ConnectionDetector cd;
                         //   Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
                         // Utils.showFailureDialog(PersonalInfoActivity.this, "No Data Found");
                         binding.spCity.setVisibility(View.GONE);
+                        binding.spinner4.setVisibility(View.INVISIBLE);
+/*
                         sp_city_name_list.add("Select City");
                         adp1=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
                         binding.spCity.setAdapter(adp1);
-                        adp1.notifyDataSetChanged();
+                        adp1.notifyDataSetChanged();*/
 
                     }
                 }
@@ -718,6 +721,7 @@ ConnectionDetector cd;
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
                 // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
+                binding.spinner4.setVisibility(View.INVISIBLE);
 
                 // binding.progressInfo.setVisibility(View.GONE);
                 //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
