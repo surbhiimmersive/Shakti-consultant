@@ -24,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
+    String MobilePattern = "[0-9]{10}";
 
     ActivityForgotPasswordBinding binding;
     ApiInterface apiInterface;
@@ -62,7 +63,19 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                     snackbar.show();
 
-                }else{
+                }
+
+                else if(!binding.edittextMobileNumber.getText().toString().matches(MobilePattern)) {
+
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter valid 10 digit phone number.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
+
+                }
+                else{
 
                     forgetApi();
 

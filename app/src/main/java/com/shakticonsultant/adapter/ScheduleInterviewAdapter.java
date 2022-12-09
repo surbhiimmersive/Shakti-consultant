@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.shakticonsultant.JobDescriptionActivity;
 import com.shakticonsultant.R;
 import com.shakticonsultant.responsemodel.JobAppliedListDatumResponse;
+import com.shakticonsultant.responsemodel.ScheduleInterviewDatumResponse;
 
 import java.util.List;
 
 public class ScheduleInterviewAdapter extends RecyclerView.Adapter<ScheduleInterviewAdapter.ViewHolder> {
 
-    List<JobAppliedListDatumResponse> list;
+    List<ScheduleInterviewDatumResponse> list;
     Context context;
 
     public ScheduleInterviewAdapter(Context context) {
@@ -29,7 +30,7 @@ public class ScheduleInterviewAdapter extends RecyclerView.Adapter<ScheduleInter
         this.list = list;
     }
 
-    public ScheduleInterviewAdapter(Context context, List<JobAppliedListDatumResponse> list) {
+    public ScheduleInterviewAdapter(Context context, List<ScheduleInterviewDatumResponse> list) {
 
         this.context = context;
         this.list = list;
@@ -52,21 +53,24 @@ public class ScheduleInterviewAdapter extends RecyclerView.Adapter<ScheduleInter
 
 
         viewHolder.tvTitle.setText(list.get(position).getTitle());
-        viewHolder.tvPackage.setText(list.get(position).getStarting_salary()+" "+list.get(position).getPay_according());
-        viewHolder.tvLocation.setText(list.get(position).getLocation());
-        viewHolder.tvYear.setText(list.get(position).getWork_experience());
-        viewHolder.txtDate.setText("Applied Date- "+list.get(position).getApplied_date());
+        viewHolder.tvTime.setText(list.get(position).getSchedule_time());
+        viewHolder.tvday.setText(list.get(position).getSchedule_day());
+        String currentdate = list.get(position).getSchedule_date();
+        String[] separated = currentdate.split("-");
+        String number=separated[0]; // this will contain "Fruit"
+        String month=separated[1]; // this will contain " they taste good"
 
-        viewHolder.btn_View.setOnClickListener(new View.OnClickListener() {
+        viewHolder.tvdate.setText(number);
+        viewHolder.tvmonth.setText(month);
+
+
+
+        viewHolder.btnJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                Intent i=new Intent(context, JobDescriptionActivity.class);
-                i.putExtra("job_id",list.get(position).getJob_id());
-                i.putExtra("skill_name",list.get(position).getTitle());
 
-                context.startActivity(i);
             }
         });
       //  viewHolder.tvDate.setText(list.get(position).getIcon());
@@ -87,20 +91,21 @@ context.startActivity(i);
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle,tvPackage,tvYear,tvLocation,txtDate;
+        TextView tvTitle,tvdate,tvday,tvTime,tvmonth;
         ImageView imgIcon;
-        Button btn_View;
+        Button btnJoin;
      //   LinearLayout lJobCategory;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
 
-            tvTitle = (TextView) itemLayoutView.findViewById(R.id.textView44);
-            tvPackage = (TextView) itemLayoutView.findViewById(R.id.tvPackage);
-            tvYear = (TextView) itemLayoutView.findViewById(R.id.tvYear);
-            tvLocation = (TextView) itemLayoutView.findViewById(R.id.tvlocation);
-            txtDate = (TextView) itemLayoutView.findViewById(R.id.txtDate);
-            btn_View = (Button) itemLayoutView.findViewById(R.id.btn_View);
+            tvTitle = (TextView) itemLayoutView.findViewById(R.id.textView79);
+            tvdate = (TextView) itemLayoutView.findViewById(R.id.textView76);
+            tvday = (TextView) itemLayoutView.findViewById(R.id.textView78);
+            tvTime = (TextView) itemLayoutView.findViewById(R.id.textView80);
+            tvmonth = (TextView) itemLayoutView.findViewById(R.id.textView77);
+
+            btnJoin = (Button) itemLayoutView.findViewById(R.id.btnJoin);
 
         }
 

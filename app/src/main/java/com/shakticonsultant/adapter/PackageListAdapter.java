@@ -4,15 +4,18 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -69,7 +72,36 @@ public class PackageListAdapter extends RecyclerView.Adapter<PackageListAdapter.
         viewHolder.tvPrice.setText(list.get(position).getPrice());
         viewHolder.tvJobs.setText(list.get(position).getNo_of_jobs());
         viewHolder.tvSubscriptiondays.setText(list.get(position).getSubscription_days());
+
+
         viewHolder.layout_diamond_package.setBackgroundColor(Color.parseColor(list.get(position).getBgcolor()));
+        viewHolder.tvdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context)
+                        .setTitle(R.string.app_name)
+                        .setMessage("Details  \n" +
+                                "* Package valid for one year \n" +
+                                "* Live job application status \n" +
+                                "* Be a priority applicant and increase your chance of get a job fast \n" +
+                                "* 100*% Job and Salary security \n" +
+                                "* Get first priority over one lacs + Users  \n" +
+                                "* You can apply upto 150 jobs \n" +
+                                "* Check the name of the company before applying on any jobs \n" +
+                                "* Receive profile based relevant jobs through App notifications, SMS and emails \n" +
+                                "* Selfy resume, Online test and Interviews \n" +
+                                "* No Hidden charges or any other charges, Subscription will not applicable for job applied before subscription package")
+                        .setIcon(R.drawable.shakti_consultant_logo)
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                logoutDialog.show();
+
+            }
+        });
 viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -98,7 +130,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvHeading,tvTitle,tvPrice,tvSubscriptiondays,tvJobs;
+        TextView tvHeading,tvTitle,tvPrice,tvSubscriptiondays,tvJobs,tvdetail;
         ImageView imgIcon;
         ConstraintLayout layout_diamond_package;
 
@@ -110,6 +142,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
             tvPrice = (TextView) itemLayoutView.findViewById(R.id.tvPrice);
             tvSubscriptiondays = (TextView) itemLayoutView.findViewById(R.id.tvSubscriptiondays);
             tvJobs = (TextView) itemLayoutView.findViewById(R.id.tvJobs);
+            tvdetail = (TextView) itemLayoutView.findViewById(R.id.tvdetail);
             layout_diamond_package = (ConstraintLayout) itemLayoutView.findViewById(R.id.layout_diamond_package);
 
         }
@@ -130,93 +163,9 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         notifyItemRangeRemoved(0, size);
     }
 
-    private void showDateDialog() {
-        Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_select_interview_date);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.show();
 
-        AppCompatButton date1 = dialog.findViewById(R.id.btn_select_date_1);
-        AppCompatButton date2 = dialog.findViewById(R.id.btn_select_date_2);
-        AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
-        AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
-        date1.setOnClickListener(v -> {
-            final Calendar c = Calendar.getInstance();
-            year = c.get(Calendar.YEAR);
-            month = c.get(Calendar.MONTH);
-            day = c.get(Calendar.DAY_OF_MONTH);
-
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(context,
-                    new DatePickerDialog.OnDateSetListener() {
-
-                        @Override
-                        public void onDateSet(DatePicker view, int year,
-                                              int monthOfYear, int dayOfMonth) {
-                          //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                            date1.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                        }
-                    }, year, month, day);
-
-            //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-            datePickerDialog.show();
-        });
-
-        date2.setOnClickListener(v -> {
-            //datePickerDialog.show();
-
-            final Calendar c = Calendar.getInstance();
-            year = c.get(Calendar.YEAR);
-            month = c.get(Calendar.MONTH);
-            day = c.get(Calendar.DAY_OF_MONTH);
-
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(context,
-                    new DatePickerDialog.OnDateSetListener() {
-
-                        @Override
-                        public void onDateSet(DatePicker view, int year,
-                                              int monthOfYear, int dayOfMonth) {
-                            //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                            date2.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                        }
-                    }, year, month, day);
-
-            //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-            datePickerDialog.show();
-        });
-
-        confirm.setOnClickListener(v -> {
-            dialog.dismiss();
-            showConfirmationDialog();
-        });
-
-        cancel.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-    }
-
-
-    private void showConfirmationDialog(){
-        Dialog dialog = new Dialog(context);
-        dialog.setContentView(R.layout.dialog_interview_further_process);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.show();
-
-        AppCompatButton ok = dialog.findViewById(R.id.btn_interview_ok);
-        AppCompatButton faq = dialog.findViewById(R.id.btn_faq);
-
-        ok.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-
-        faq.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
 
     }
 
 
-}
+

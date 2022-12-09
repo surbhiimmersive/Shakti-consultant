@@ -64,25 +64,16 @@ public class SignUpActivity extends AppCompatActivity {
                             .show();
                 } else if (binding.edtName.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter name", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The name field is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
 
-                } else if (binding.edtName.getText().toString().trim().equals("")) {
+                }  else if (binding.edtMobile.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter name", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null);
-                    View sbView = snackbar.getView();
-                    sbView.setBackgroundColor(getColor(R.color.purple_200));
-
-                    snackbar.show();
-
-                } else if (binding.edtMobile.getText().toString().trim().equals("")) {
-
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter name.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The mobile field is required", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -100,7 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }else if (binding.edtEmail.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter email.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The email field is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -120,7 +111,7 @@ public class SignUpActivity extends AppCompatActivity {
                 }*/
                 else if (binding.edtPassword.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter password.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password field is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -129,7 +120,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 } else if (binding.edtRePassword.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter re password.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The re password field is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -138,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
                 else if(!(binding.edtPassword.getText().toString().equals(binding.edtRePassword.getText().toString()))){
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please check password mismatch", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Password and re password should be same", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -201,6 +192,10 @@ public class SignUpActivity extends AppCompatActivity {
 
 
                     }
+                }else{
+
+                    binding.progressBar2.setVisibility(View.GONE);
+                    Utils.showFailureDialog(SignUpActivity.this, "Something went wrong!");
                 }
             }
 

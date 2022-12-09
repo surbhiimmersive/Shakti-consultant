@@ -7,7 +7,12 @@ import com.shakticonsultant.responsemodel.CityResponse;
 import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.EducationResponse;
 import com.shakticonsultant.responsemodel.FaqsResponse;
+import com.shakticonsultant.responsemodel.FavouriteResponse;
 import com.shakticonsultant.responsemodel.ForgotResponse;
+import com.shakticonsultant.responsemodel.GetAcademicDetailResponse;
+import com.shakticonsultant.responsemodel.GetEmployeeHistoryResponse;
+import com.shakticonsultant.responsemodel.GetPersonalInformationResponse;
+import com.shakticonsultant.responsemodel.InterestedCategoryResponse;
 import com.shakticonsultant.responsemodel.IntrestedFieldResponse;
 import com.shakticonsultant.responsemodel.JobAppliedListResponse;
 import com.shakticonsultant.responsemodel.JobCategoryResponse;
@@ -18,11 +23,14 @@ import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.responsemodel.LoginResponse;
 import com.shakticonsultant.responsemodel.OrganizationResponse;
 import com.shakticonsultant.responsemodel.PackageResponse;
+import com.shakticonsultant.responsemodel.ScheduleInterviewResponse;
 import com.shakticonsultant.responsemodel.ShortListResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
+import com.shakticonsultant.responsemodel.TestimonialResponse;
 import com.shakticonsultant.responsemodel.WorkExpResponse;
+import com.shakticonsultant.responsemodel.interestedSkillResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -118,6 +126,10 @@ public interface ApiInterface {
    @FormUrlEncoded
    Call<JobDetailResponse>callJobDetail(@FieldMap Map<String, String> params);
 
+   @POST("interviewSchedules")
+   @FormUrlEncoded
+   Call<ScheduleInterviewResponse>callInterviewSchedule(@FieldMap Map<String, String> params);
+
    @POST("educationList")
    @FormUrlEncoded
    Call<EducationResponse>callEducationList(@FieldMap Map<String, String> params);
@@ -125,6 +137,13 @@ public interface ApiInterface {
    @POST("interestedFields")
    @FormUrlEncoded
    Call<IntrestedFieldResponse>callInterestedFiledApi(@FieldMap Map<String, String> params);
+
+   @POST("interestedJobCategory")
+   @FormUrlEncoded
+   Call<InterestedCategoryResponse>callInterestedFiledCategory(@FieldMap Map<String, String> params);
+ @POST("interestedJobSkill")
+   @FormUrlEncoded
+   Call<interestedSkillResponse>callIntererstedSKill(@FieldMap Map<String, String> params);
 
    @POST("userInterestedField")
    @FormUrlEncoded
@@ -163,8 +182,31 @@ public interface ApiInterface {
    @FormUrlEncoded
    Call<ShortListResponse>callShortListApi(@FieldMap Map<String, String> params);
 
+ @POST("getPersonalDetails")
+   @FormUrlEncoded
+   Call<GetPersonalInformationResponse>callgetPersonalInformation(@FieldMap Map<String, String> params);
+
+ @POST("getAcademicDetails")
+   @FormUrlEncoded
+   Call<GetAcademicDetailResponse>callGetAcademicDetails(@FieldMap Map<String, String> params);
+
+ @POST("getEmployeeHistory")
+   @FormUrlEncoded
+   Call<GetEmployeeHistoryResponse>callGetEmployeeHistory(@FieldMap Map<String, String> params);
+
+ @POST("jobFilter")
+   @FormUrlEncoded
+   Call<JobSkillWiseListResponse>callFilterApi(@FieldMap Map<String, String> params);
+
+ @POST("shortlistStatus")
+   @FormUrlEncoded
+   Call<FavouriteResponse>callFavouriteApi(@FieldMap Map<String, String> params);
+
    @GET("allJobs")
    Call<JobSkillWiseListResponse> callAllJobs();
+
+   @GET("testimonial")
+   Call<TestimonialResponse> callTestimonialApi();
 
    @GET("workExperience")
    Call<WorkExpResponse> callWorkExperience();

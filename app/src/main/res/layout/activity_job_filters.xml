@@ -239,12 +239,13 @@
                         android:layout_marginStart="5dp"
                         android:src="@drawable/money_coloured" />
 
-                    <Spinner
-                        style="@style/spinner_style"
+                    <EditText
+                        android:id="@+id/edtMinSalary"
                         android:layout_width="match_parent"
-                        android:layout_height="33dp"
+                        android:layout_height="40dp"
+                        android:hint="Min Salary"
                         android:layout_marginStart="5dp"
-                        android:entries="@array/test13" />
+                         />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -275,13 +276,13 @@
                         android:layout_marginStart="5dp"
                         android:src="@drawable/money_coloured" />
 
-                    <Spinner
-                        style="@style/spinner_style"
+                    <EditText
+                        android:id="@+id/edtMaxSalary"
                         android:layout_width="match_parent"
-                        android:layout_height="33dp"
+                        android:layout_height="40dp"
+                        android:hint="Max Salary"
                         android:layout_marginStart="5dp"
-                        android:entries="@array/test14" />
-
+                        />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -306,6 +307,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="40dp"
+                android:visibility="gone"
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/custom_edittext_bg"
                 android:drawableStart="@drawable/search_img"
@@ -439,6 +441,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnApply"
         android:layout_width="176dp"
         android:layout_height="42dp"
         android:layout_marginStart="30dp"

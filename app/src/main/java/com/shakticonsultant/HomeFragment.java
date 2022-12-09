@@ -111,8 +111,7 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(adapter);*/
         getJobCategory();
         getSliderApi();
-        binding.recycAllJob.setVisibility(View.GONE);
-        binding.recycLatestJob.setVisibility(View.VISIBLE);
+
         getLatestJob();
         setDots(0);
 
@@ -147,8 +146,6 @@ public class HomeFragment extends Fragment {
            setButtonSelected(binding.btnAllJob, binding.btnLatestJob);
 
 
-            binding.recycAllJob.setVisibility(View.VISIBLE);
-            binding.recycLatestJob.setVisibility(View.GONE);
             getAllJob();
 
         });
@@ -156,8 +153,6 @@ public class HomeFragment extends Fragment {
 
         binding.btnLatestJob.setOnClickListener(v -> {
             setButtonSelected(binding.btnLatestJob, binding.btnAllJob);
-            binding.recycAllJob.setVisibility(View.VISIBLE);
-            binding.recycLatestJob.setVisibility(View.GONE);
             getLatestJob();
 
             });
@@ -327,6 +322,7 @@ public class HomeFragment extends Fragment {
         binding.progressBarcategory.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("location", AppPrefrences.getLocation(getActivity()));
+        map.put("user_id", AppPrefrences.getUserid(getActivity()));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -342,6 +338,8 @@ public class HomeFragment extends Fragment {
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
+                        binding.recycLatestJob.setVisibility(View.VISIBLE);
+                     //   binding.lEmpty.setVisibility(View.GONE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.recycLatestJob.setLayoutManager(linearLayoutManager);
@@ -353,10 +351,18 @@ public class HomeFragment extends Fragment {
 
                     } else {
                         binding.progressBarcategory.setVisibility(View.GONE);
+                       // binding.lEmpty.setVisibility(View.VISIBLE);
+                        binding.recycLatestJob.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
+                }else{
+
+                    binding.progressBarcategory.setVisibility(View.GONE);
+                  //  binding.lEmpty.setVisibility(View.VISIBLE);
+                    binding.recycLatestJob.setVisibility(View.GONE);
+
                 }
             }
 
@@ -366,6 +372,8 @@ public class HomeFragment extends Fragment {
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
                 binding.progressBarcategory.setVisibility(View.GONE);
+               // binding.lEmpty.setVisibility(View.VISIBLE);
+                binding.recycLatestJob.setVisibility(View.GONE);
 
                 Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
@@ -376,6 +384,7 @@ public class HomeFragment extends Fragment {
 
         Map<String, String> map = new HashMap<>();
         //map.put("location", "7");
+        map.put("user_id", AppPrefrences.getUserid(getActivity()));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -391,21 +400,31 @@ public class HomeFragment extends Fragment {
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
+                       // binding.lEmpty.setVisibility(View.GONE);
+                        binding.recycLatestJob.setVisibility(View.VISIBLE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        binding.recycAllJob.setLayoutManager(linearLayoutManager);
+                        binding.recycLatestJob.setLayoutManager(linearLayoutManager);
                         JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(getActivity(),response.body().getData());
-                        binding.recycAllJob.setAdapter(adapter);
-                        binding.recycAllJob.getAdapter().notifyDataSetChanged();
+                        binding.recycLatestJob.setAdapter(adapter);
+                        binding.recycLatestJob.getAdapter().notifyDataSetChanged();
 
 
 
                     } else {
                         binding.progressBarcategory.setVisibility(View.GONE);
+                       // binding.lEmpty.setVisibility(View.VISIBLE);
+                        binding.recycLatestJob.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
+                }else{
+                    binding.progressBarcategory.setVisibility(View.GONE);
+                    //binding.lEmpty.setVisibility(View.VISIBLE);
+                    binding.recycLatestJob.setVisibility(View.GONE);
+
+
                 }
             }
 
@@ -415,6 +434,7 @@ public class HomeFragment extends Fragment {
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
                 binding.progressBarcategory.setVisibility(View.GONE);
+               // binding.lEmpty.setVisibility(View.VISIBLE);
 
                 Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }

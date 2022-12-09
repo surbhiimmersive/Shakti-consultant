@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -15,11 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.adapter.PackageListAdapter;
+import com.shakticonsultant.adapter.ScheduleInterviewAdapter;
 import com.shakticonsultant.databinding.ActivityPackageBinding;
 import com.shakticonsultant.databinding.ActivityScheduleInterviewBinding;
 import com.shakticonsultant.responsemodel.PackageResponse;
+import com.shakticonsultant.responsemodel.ScheduleInterviewResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -54,69 +58,33 @@ ConnectionDetector cd;
                     .show();
         }
         else {
-          //  HorizontalCalendarView calendarView = findViewById(R.id.calendar);
 
-
-            getPackageListApi();
-            datePickerDialog = new DatePickerDialog(
-                    ScheduleInterviewActivity.this, this, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONDAY),
-                    Calendar.getInstance().get(Calendar.DATE));
+            getScheduleInterviewList("1");
 
             binding.imgBackArrow.setOnClickListener(v -> {
                 onBackPressed();
             });
+            binding.btnToday.setOnClickListener(v -> {
+                setButtonSelected(binding.btnToday, binding.btnUpcoming);
+                getScheduleInterviewList("1");
+
+            });
+binding.btnUpcoming.setOnClickListener(v -> {
+    setButtonSelected(binding.btnUpcoming, binding.btnToday);
+    getScheduleInterviewList("1");
+
+
+});
 
         }
     }
 
+    private void setButtonSelected(AppCompatButton buttonToSelect, AppCompatButton buttonToDeselect){
+        buttonToSelect.setBackgroundResource(R.drawable.custom_button_bg);
+        buttonToSelect.setTextColor(Color.parseColor("#FFFFFF"));
 
-    private void showDateDialog() {
-        Dialog dialog = new Dialog(ScheduleInterviewActivity.this);
-        dialog.setContentView(R.layout.dialog_select_interview_date);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-
-        AppCompatButton date1 = dialog.findViewById(R.id.btn_select_date_1);
-        AppCompatButton date2 = dialog.findViewById(R.id.btn_select_date_2);
-        AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
-        AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
-
-        date1.setOnClickListener(v -> {
-            datePickerDialog.show();
-        });
-
-        date2.setOnClickListener(v -> {
-            datePickerDialog.show();
-        });
-
-        confirm.setOnClickListener(v -> {
-            dialog.dismiss();
-            showConfirmationDialog();
-        });
-
-        cancel.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-    }
-
-
-    private void showConfirmationDialog(){
-        Dialog dialog = new Dialog(ScheduleInterviewActivity.this);
-        dialog.setContentView(R.layout.dialog_interview_further_process);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.show();
-
-        AppCompatButton ok = dialog.findViewById(R.id.btn_interview_ok);
-        AppCompatButton faq = dialog.findViewById(R.id.btn_faq);
-
-        ok.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-
-        faq.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-
+        buttonToDeselect.setBackgroundResource(R.drawable.cutom_button_unselected_bg);
+        buttonToDeselect.setTextColor(Color.parseColor("#000000"));
     }
 
     @Override
@@ -125,44 +93,59 @@ ConnectionDetector cd;
     }
 
 
-    public void getPackageListApi() {
+    public void getScheduleInterviewList(String type) {
           binding.progressBarpackage.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
+         map.put("user_id", AppPrefrences.getUserid(ScheduleInterviewActivity.this));
+         map.put("type", type);
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<PackageResponse> resultCall = apiInterface.callPackageList();
+        Call<ScheduleInterviewResponse> resultCall = apiInterface.callInterviewSchedule(map);
 
-        resultCall.enqueue(new Callback<PackageResponse>() {
+        resultCall.enqueue(new Callback<ScheduleInterviewResponse>() {
             @Override
-            public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
+            public void onResponse(Call<ScheduleInterviewResponse> call, Response<ScheduleInterviewResponse> response) {
 
                 if (response.isSuccessful()) {
                     binding.progressBarpackage.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
+                        binding.tvEmpty.setVisibility(View.GONE);
+                        binding.imgEmpty.setVisibility(View.GONE);
+                        binding.recyclerpackage.setVisibility(View.VISIBLE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ScheduleInterviewActivity.this);
                         binding.recyclerpackage.setLayoutManager(linearLayoutManager);
-                        PackageListAdapter adapter=new PackageListAdapter(ScheduleInterviewActivity.this,response.body().getData());
+                        ScheduleInterviewAdapter adapter=new ScheduleInterviewAdapter(ScheduleInterviewActivity.this,response.body().getData());
                         binding.recyclerpackage.setAdapter(adapter);
                         binding.recyclerpackage.getAdapter().notifyDataSetChanged();
 
                     } else {
                         binding.progressBarpackage.setVisibility(View.GONE);
+                        binding.tvEmpty.setVisibility(View.VISIBLE);
+                        binding.imgEmpty.setVisibility(View.VISIBLE);
+                        binding.recyclerpackage.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
+                }else{
+                    binding.progressBarpackage.setVisibility(View.GONE);
+                    binding.tvEmpty.setVisibility(View.VISIBLE);
+                    binding.imgEmpty.setVisibility(View.VISIBLE);
+                    binding.recyclerpackage.setVisibility(View.GONE);
+
                 }
             }
 
             @Override
-            public void onFailure(Call<PackageResponse> call, Throwable t) {
+            public void onFailure(Call<ScheduleInterviewResponse> call, Throwable t) {
                 binding.progressBarpackage.setVisibility(View.GONE);
-
+                binding.tvEmpty.setVisibility(View.VISIBLE);
+                binding.imgEmpty.setVisibility(View.VISIBLE);
+                binding.recyclerpackage.setVisibility(View.GONE);
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
                 Utils.showFailureDialog(ScheduleInterviewActivity.this, "Something went wrong!");

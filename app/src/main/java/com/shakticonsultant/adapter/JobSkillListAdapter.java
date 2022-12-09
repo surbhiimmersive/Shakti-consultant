@@ -30,6 +30,7 @@ public class JobSkillListAdapter extends RecyclerView.Adapter<JobSkillListAdapte
     List<JobSkillDatumResponse> list;
     Context context;
 
+
     public JobSkillListAdapter(Context context) {
 
         this.context = context;
@@ -74,8 +75,8 @@ Intent i=new Intent(context,SpecificFacultyJobActivity.class);
 i.putExtra("skill_id",list.get(position).getId());
 i.putExtra("skill_name",list.get(position).getTitle());
 context.startActivity(i);
-        ((Activity)context).overridePendingTransition(R.anim.enter,
-                R.anim.exit);
+        ((Activity)context).overridePendingTransition(R.anim.fade_in,
+                R.anim.fade_out);
     }
 });
     }

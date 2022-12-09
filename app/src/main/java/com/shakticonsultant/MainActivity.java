@@ -28,7 +28,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shakticonsultant.databinding.ActivityMainBinding;
+import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.utils.AppPrefrences;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +78,12 @@ String userid;
         TextView tvname=headerView.findViewById(R.id.textView33);
         TextView tvemail=headerView.findViewById(R.id.textView34);
         TextView tvmobile=headerView.findViewById(R.id.textView35);
+        ImageView imageView14=headerView.findViewById(R.id.imageView14);
+        Picasso.get()
+                .load(ApiClient.Photourl+AppPrefrences.getProfileImg(MainActivity.this))
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(imageView14);
+
 
         tvname.setText(AppPrefrences.getName(MainActivity.this));
         tvemail.setText(AppPrefrences.getMail(MainActivity.this));
@@ -196,12 +205,12 @@ String userid;
         else if (item.getItemId() == R.id.drawer_job_app_status1){
                       startActivity(new Intent(getApplicationContext(), ScheduleInterviewActivity.class));
             overridePendingTransition(
-                    R.anim.enter, R.anim.exit);
+                    R.anim.fade_in, R.anim.fade_in);
 
         }  else if (item.getItemId() == R.id.drawer_job_app_status2){
                       startActivity(new Intent(getApplicationContext(), RejectedApplicationActivity.class));
             overridePendingTransition(
-                    R.anim.enter, R.anim.exit);
+                    R.anim.fade_in, R.anim.fade_in);
         }
         else if (item.getItemId() == R.id.drawer_jobs1){
             navController.navigate(R.id.bottom_jobs);
@@ -210,24 +219,29 @@ String userid;
         else if (item.getItemId() == R.id.drawer_jobs2){
             startActivity(new Intent(getApplicationContext(), JobsShortListedActivity.class));
             overridePendingTransition(
-                    R.anim.enter, R.anim.exit);
+                    R.anim.fade_in, R.anim.fade_in);
 
         }
         else if (item.getItemId() == R.id.drawer_jobs3){
            startActivity(new Intent(getApplicationContext(), JobsRecommendedActivity.class));
             overridePendingTransition(
-                    R.anim.enter, R.anim.exit);
+                    R.anim.fade_in, R.anim.fade_in);
 
         }
         else if (item.getItemId() == R.id.drawer_subscription_plans){
             startActivity(new Intent(getApplicationContext(), PackageActivity.class));
             overridePendingTransition(
-                    R.anim.enter, R.anim.exit);
+                    R.anim.fade_in, R.anim.fade_in);
         }
         else if (item.getItemId() == R.id.drawer_resume_preview){
             startActivity(new Intent(getApplicationContext(), ResumeActivity.class));
             overridePendingTransition(
-                    R.anim.enter, R.anim.exit);
+                    R.anim.fade_in, R.anim.fade_in);
+        }
+ else if (item.getItemId() == R.id.drawer_testimonial){
+            startActivity(new Intent(getApplicationContext(), TestimonialActivity.class));
+            overridePendingTransition(
+                    R.anim.fade_in, R.anim.fade_in);
         }
 
 

@@ -31,12 +31,14 @@ public class AppPrefrences
     SharedPreferences.Editor editor;
     SharedPreferences.Editor editor2;
     public static final String LATITUDE = "latitude";
+    public static final String SKILL_ID = "skill_id";
     public static final String Location = "location";
     public static final String LONGITUDE = "longitude";
     public static final String IS_LOGIN = "isLogin";
     public static final String IS_SIGNUP = "isSignUp";
     public static final String VIEWPAGER = "viewpager";
     public static final String KEY_NAME = "user_fullname";
+    public static final String Profileimg = "AppPrefrences.getName(MainActivity.this)";
 
 
     public static String getName(Context context) {
@@ -48,6 +50,28 @@ public class AppPrefrences
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(NAME, value);
+        editor.commit();
+    }
+    public static String getSkillId(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        return preferences.getString(SKILL_ID, "");
+    }
+
+    public static void setSkillId(Context context, String value) {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(SKILL_ID, value);
+        editor.commit();
+    }
+    public static String getProfileImg(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        return preferences.getString(Profileimg, "");
+    }
+
+    public static void setProfileImg(Context context, String value) {
+        SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Profileimg, value);
         editor.commit();
     }
     public static String getLocation(Context context) {

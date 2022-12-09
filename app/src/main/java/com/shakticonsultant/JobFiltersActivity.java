@@ -42,6 +42,7 @@ String data;
     String strworkexp="";
     SparseBooleanArray sparseBooleanArray ;
     List<String>city_name_list=new ArrayList<>();
+    String strExperienceId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,19 @@ String data;
         binding.cardviewCities.setOnClickListener(this);
         binding.cardviewExperience.setOnClickListener(this);
 
-        binding.imgSearch.setOnClickListener(v -> {
+        binding.btnApply.setOnClickListener(v -> {
+            Intent intent=new Intent();
+            intent.putExtra("city",data);
+            intent.putExtra("experience",strExperienceId);
+            intent.putExtra("min_salary",binding.edtMinSalary.getText().toString().trim());
+            intent.putExtra("max_salary",binding.edtMaxSalary.getText().toString().trim());
+            setResult(2,intent);
+            finish();//finishing activity
+
+
+
+        });
+  binding.imgSearch.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), SearchJobActivity.class));
         });
 
@@ -195,7 +208,7 @@ getCityList();
                                     data=ValueHolder;
                                     // Toast.makeText(OrganizationDailog.this, "ListView Selected Values = " + ValueHolder, Toast.LENGTH_LONG).show();
 
-
+binding.listViewCity.setItemChecked(0,false);
 
                                 }
                             });
@@ -255,6 +268,7 @@ getCityList();
 
                                         strworkexp=(String)binding.spExperience.getSelectedItem();
 
+                                        strExperienceId = workExpList.get(i).getId();
 
 
 

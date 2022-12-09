@@ -45,7 +45,7 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
 
     ActivityJobDescriptionBinding binding;
     DatePickerDialog datePickerDialog;
-    String job_id,skill_name;
+    String job_id,skill_name,skill_id="";
     boolean isSelected;
     ConnectionDetector cd;
     @SuppressLint("ResourceAsColor")
@@ -56,6 +56,7 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
         setContentView(binding.getRoot());
         job_id = getIntent().getStringExtra("job_id");
         skill_name = getIntent().getStringExtra("skill_name");
+        skill_id = getIntent().getStringExtra("skill_id");
 cd=new ConnectionDetector(JobDescriptionActivity.this);
         if (!cd.isConnectingToInternet()) {
             Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
@@ -96,7 +97,7 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
                 binding.layoutJobDescription.setVisibility(View.GONE);
                 binding.layoutSimilarJobs.setVisibility(View.VISIBLE);
                 //getSimilarJobList(job_id);
-
+                getSimilarJobList();
             });
 
 
@@ -165,8 +166,9 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
 binding.tvrange.setText(response.body().getData().get(0).getStarting_salary()+" "+response.body().getData().get(0).getPay_according());
 binding.tvExperience.setText(response.body().getData().get(0).getWork_experience());
 binding.tvLocation.setText(response.body().getData().get(0).getLocation());
-binding.textView51.setText(response.body().getData().get(0).getJob_description());
+//binding.textView51.setText(response.body().getData().get(0).getJob_description());
 
+                        binding.textView51.loadData(response.body().getData().get(0).getJob_description(), "text/html; charset=utf-8", "UTF-8");
 
                         binding.btnApply.setOnClickListener(v -> {
 
@@ -348,10 +350,11 @@ binding.textView51.setText(response.body().getData().get(0).getJob_description()
     }
 
 
-    public void getSimilarJobList(String skill_id) {
+    public void getSimilarJobList() {
         binding.progressBardetail.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        map.put("skill_id", skill_id);
+        map.put("skill_id", AppPrefrences.getSkillId(JobDescriptionActivity.this));
+        map.put("user_id", AppPrefrences.getUserid(JobDescriptionActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);

@@ -16,6 +16,10 @@
         <action
             android:id="@+id/action_bottom_home_to_FAQFragment"
             app:destination="@id/bottom_faq" />
+
+        <action
+            android:id="@+id/action_bottom_home_to_profile"
+            app:destination="@id/bottom_profile" />
     </fragment>
     <fragment
         android:id="@+id/bottom_jobs"
@@ -27,4 +31,10 @@
         android:name="com.shakticonsultant.FAQFragment"
         android:label="fragment_f_a_q"
         tools:layout="@layout/fragment_f_a_q" />
+      <fragment
+        android:id="@+id/bottom_profile"
+        android:name="com.shakticonsultant.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>

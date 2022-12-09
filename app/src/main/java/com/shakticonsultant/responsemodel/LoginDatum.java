@@ -43,6 +43,29 @@ private String email;
 @Expose
 private String location;
 
+@SerializedName("profile_img")
+@Expose
+private String profile_img;
+@SerializedName("skill_id")
+@Expose
+private String skill_id;
+
+    public String getSkill_id() {
+        return skill_id;
+    }
+
+    public void setSkill_id(String skill_id) {
+        this.skill_id = skill_id;
+    }
+
+    public String getProfile_img() {
+        return profile_img;
+    }
+
+    public void setProfile_img(String profile_img) {
+        this.profile_img = profile_img;
+    }
+
     public String getEmail() {
         return email;
     }

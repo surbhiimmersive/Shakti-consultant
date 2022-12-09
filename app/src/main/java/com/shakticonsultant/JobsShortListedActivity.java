@@ -64,7 +64,7 @@ public class JobsShortListedActivity extends AppCompatActivity {
                         binding.imageView23.setVisibility(View.VISIBLE);
                         binding.recyclerView4.setVisibility(View.VISIBLE);
                         binding.lEmpty.setVisibility(View.GONE);
-                        binding.btnApply.setVisibility(View.VISIBLE);
+                        //binding.btnApply.setVisibility(View.VISIBLE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(JobsShortListedActivity.this);
                         binding.recyclerView4.setLayoutManager(linearLayoutManager);
@@ -78,7 +78,7 @@ public class JobsShortListedActivity extends AppCompatActivity {
                         binding.progressBarcategory.setVisibility(View.GONE);
                         binding.imageView23.setVisibility(View.GONE);
                         binding.recyclerView4.setVisibility(View.GONE);
-                        binding.btnApply.setVisibility(View.GONE);
+                      //  binding.btnApply.setVisibility(View.GONE);
                         binding.lEmpty.setVisibility(View.VISIBLE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
@@ -86,7 +86,7 @@ public class JobsShortListedActivity extends AppCompatActivity {
                     }
                 }else
                 {
-                    binding.btnApply.setVisibility(View.GONE);
+                  //  binding.btnApply.setVisibility(View.GONE);
 
                     binding.imageView23.setVisibility(View.GONE);
                     binding.recyclerView4.setVisibility(View.GONE);
@@ -104,11 +104,17 @@ public class JobsShortListedActivity extends AppCompatActivity {
                 binding.imageView23.setVisibility(View.GONE);
                 binding.recyclerView4.setVisibility(View.GONE);
                 binding.lEmpty.setVisibility(View.VISIBLE);
-                binding.btnApply.setVisibility(View.GONE);
+              //  binding.btnApply.setVisibility(View.GONE);
                 binding.progressBarcategory.setVisibility(View.GONE);
 
                 Utils.showFailureDialog(JobsShortListedActivity.this, "Please try again sometime later..");
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getShortListApi();
     }
 }

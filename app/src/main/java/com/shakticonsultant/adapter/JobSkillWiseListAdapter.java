@@ -12,25 +12,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shakticonsultant.JobDescriptionActivity;
 import com.shakticonsultant.R;
 import com.shakticonsultant.SpecificFacultyJobActivity;
+import com.shakticonsultant.responsemodel.FavouriteResponse;
 import com.shakticonsultant.responsemodel.JobSkillWiseListDatumResponse;
+import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
+import com.shakticonsultant.retrofit.ApiClient;
+import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
+import com.shakticonsultant.utils.Utils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class JobSkillWiseListAdapter extends RecyclerView.Adapter<JobSkillWiseListAdapter.ViewHolder> {
 
     List<JobSkillWiseListDatumResponse> list;
     Context context;
 
-    public JobSkillWiseListAdapter(Context context) {
-
-        this.context = context;
-        this.list = list;
-    }
 
     public JobSkillWiseListAdapter(Context context, List<JobSkillWiseListDatumResponse> list) {
 
@@ -59,6 +67,23 @@ public class JobSkillWiseListAdapter extends RecyclerView.Adapter<JobSkillWiseLi
         viewHolder.tvLocation.setText(list.get(position).getLocation());
         viewHolder.tvYear.setText(list.get(position).getWork_experience());
 
+        if(list.get(position).getIs_fav()==1) {
+            viewHolder.imageView19.setBackground(context.getDrawable(R.drawable.ic_like_c));
+        }else{
+
+            viewHolder.imageView19.setBackground(context.getDrawable(R.drawable.black_like));
+
+        }
+
+viewHolder.imageView19.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
+
+
+        getFavouriteAPi(list.get(position).getId(),viewHolder);
+    }
+});
         viewHolder.btn_View.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,8 +94,8 @@ public class JobSkillWiseListAdapter extends RecyclerView.Adapter<JobSkillWiseLi
                 i.putExtra("skill_name",list.get(position).getTitle());
 
                 context.startActivity(i);
-                ((Activity)context).overridePendingTransition(R.anim.enter,
-                        R.anim.exit);
+                ((Activity)context).overridePendingTransition(R.anim.fade_in,
+                        R.anim.fade_out);
             }
         });
       //  viewHolder.tvDate.setText(list.get(position).getIcon());
@@ -92,7 +117,7 @@ context.startActivity(i);
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvTitle,tvPackage,tvYear,tvLocation;
-        ImageView imgIcon;
+        ImageView imageView19;
         Button btn_View;
      //   LinearLayout lJobCategory;
 
@@ -103,6 +128,7 @@ context.startActivity(i);
             tvPackage = (TextView) itemLayoutView.findViewById(R.id.tvPackage);
             tvYear = (TextView) itemLayoutView.findViewById(R.id.tvYear);
             tvLocation = (TextView) itemLayoutView.findViewById(R.id.tvlocation);
+            imageView19 = (ImageView) itemLayoutView.findViewById(R.id.imageView19);
             btn_View = (Button) itemLayoutView.findViewById(R.id.btn_View);
 
         }
@@ -123,4 +149,57 @@ context.startActivity(i);
         notifyItemRangeRemoved(0, size);
     }
 
+    public void getFavouriteAPi(String jobid,ViewHolder viewHolder) {
+      //  binding.progressBarcategory.setVisibility(View.VISIBLE);
+
+        Map<String, String> map = new HashMap<>();
+        //map.put("location", "7");
+        map.put("user_id", AppPrefrences.getUserid(context));
+        map.put("job_id", jobid);
+
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<FavouriteResponse> resultCall = apiInterface.callFavouriteApi(map);
+
+        resultCall.enqueue(new Callback<FavouriteResponse>() {
+            @Override
+            public void onResponse(Call<FavouriteResponse> call, Response<FavouriteResponse> response) {
+
+                if (response.isSuccessful()) {
+                    //binding.progressBarcategory.setVisibility(View.GONE);
+
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess()==true) {
+if(response.body().getFavorite()==1) {
+    viewHolder.imageView19.setBackground(context.getDrawable(R.drawable.ic_like_c));
+}else{
+
+    viewHolder.imageView19.setBackground(context.getDrawable(R.drawable.black_like));
+
+}
+                    } else {
+                       // binding.progressBarcategory.setVisibility(View.GONE);
+
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
+                    }
+                }else
+                {
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FavouriteResponse> call, Throwable t) {
+
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+                //binding.progressBarcategory.setVisibility(View.GONE);
+
+               // Utils.showFailureDialog(context, "Something went wrong!");
+            }
+        });
+    }
 }

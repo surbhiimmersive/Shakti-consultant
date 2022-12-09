@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView23"
         app:layout_constraintVertical_bias="1.0" />
-
+<!--
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnApply"
         android:layout_width="176dp"
@@ -76,13 +76,14 @@
         android:text="Apply"
         android:textAllCaps="false"
         android:textColor="@color/white"
+        android:visibility="gone"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@id/recyclerView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView23"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0" />-->
 
     <ProgressBar
         android:id="@+id/progressBarcategory"

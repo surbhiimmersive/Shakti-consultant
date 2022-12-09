@@ -55,6 +55,84 @@
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal"
+        >
+
+        <EditText
+            android:id="@+id/edt1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center"
+            android:layout_margin="5sp"
+            android:gravity="center"
+            android:background="@drawable/custom_edittext_bg"
+
+            android:inputType="number"
+            android:maxLength="1"
+            android:textColor="#605A65"
+            android:textCursorDrawable="@android:color/black"
+
+            android:textSize="25dp"></EditText>
+        <EditText
+            android:id="@+id/edt2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5sp"
+            android:inputType="number"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#605A65"
+            android:textCursorDrawable="@android:color/black"
+            android:background="@drawable/custom_edittext_bg"
+
+            android:textSize="25dp"
+
+            android:maxLength="1"
+            ></EditText>
+
+        <EditText
+            android:id="@+id/edt3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="5sp"
+            android:inputType="number"
+            android:background="@drawable/custom_edittext_bg"
+            android:textSize="25dp"
+            android:textColor="#605A65"
+            android:textCursorDrawable="@android:color/black"
+
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLength="1"
+            ></EditText>
+        <EditText
+            android:id="@+id/edt4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:maxLength="1"
+            android:layout_margin="5sp"
+            android:inputType="number"
+            android:textSize="25dp"
+            android:textColor="#605A65"
+            android:textCursorDrawable="@android:color/black"
+            android:background="@drawable/custom_edittext_bg"
+
+            android:layout_gravity="center"
+            android:gravity="center"
+            ></EditText>
+    </LinearLayout>
+
+
     <com.freedomotpview.OTPView
         android:id="@+id/otp_view"
         android:layout_width="0dp"
@@ -68,6 +146,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         app:otpHeight="60dp"
         app:otpHintText=""
+        android:visibility="gone"
         app:otpLength="4"
         app:otpMargin="10dp"
         android:textCursorDrawable="@null"
@@ -127,6 +206,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/progressBar3"
         android:visibility="gone"
+        android:indeterminateDrawable="@drawable/loading_img"
 
         android:foregroundGravity="center"
         app:layout_constraintRight_toRightOf="parent"

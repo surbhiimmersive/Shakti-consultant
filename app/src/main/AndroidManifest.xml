@@ -41,6 +41,7 @@
             android:name=".RejectedApplicationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".ChatWIthUsActivity"
             android:exported="false"
@@ -79,6 +80,23 @@
             android:name=".ApplyJobPackageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".GetAcademicDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GetEmployeeHistoryActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GetPersonalInfoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+   <activity
+            android:name=".TestimonialActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".JobDescriptionActivity"
             android:exported="false"

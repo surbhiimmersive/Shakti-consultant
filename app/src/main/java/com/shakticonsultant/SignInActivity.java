@@ -62,7 +62,7 @@ cd=new ConnectionDetector(SignInActivity.this);
             else
             if (binding.edtEmail.getText().toString().trim().equals("") || !binding.edtEmail.getText().toString().trim().matches(emailPattern)) {
 
-                Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter valid email.", Snackbar.LENGTH_LONG)
+                Snackbar snackbar = Snackbar.make(binding.getRoot(), "The valid email field is required.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -73,7 +73,7 @@ cd=new ConnectionDetector(SignInActivity.this);
  else
     if(binding.edtPassword.getText().toString().trim().equals("")) {
 
-        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter password.", Snackbar.LENGTH_LONG)
+        Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password field is required.", Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -148,6 +148,8 @@ String employee=response.body().getData().getEmployee();
                             AppPrefrences.setName(SignInActivity.this,response.body().getData().getName());
                             AppPrefrences.setMobile(SignInActivity.this,response.body().getData().getMobile());
                             AppPrefrences.setMail(SignInActivity.this,response.body().getData().getEmail());
+                            AppPrefrences.setProfileImg(SignInActivity.this,response.body().getData().getProfile_img());
+                            AppPrefrences.setSkillId(SignInActivity.this,response.body().getData().getSkill_id());
 
                             Intent i = new Intent(SignInActivity.this, MainActivity.class);
                             i.putExtra("userid",response.body().getData().getId());
@@ -159,10 +161,17 @@ String employee=response.body().getData().getEmployee();
                     }
                         //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
                     } else {
+                        binding.idLoadingPB.setVisibility(View.GONE);
+
                         Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
 
 
                     }
+                }else{
+                    binding.idLoadingPB.setVisibility(View.GONE);
+
+                    Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
+
                 }
             }
 

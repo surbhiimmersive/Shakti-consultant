@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toStartOf="@+id/tvNameShoet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvNameShoet"
-        app:srcCompat="@drawable/black_like" />
+        />
 
     <TextView
         android:id="@+id/tvNameShoet"
