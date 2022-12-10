@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,15 +14,19 @@ import android.widget.DatePicker;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivityEmployeeHistoryBinding;
+import com.shakticonsultant.responsemodel.AboutResponse;
 import com.shakticonsultant.responsemodel.AnnualDatumResponse;
 import com.shakticonsultant.responsemodel.AnnualResponse;
 import com.shakticonsultant.responsemodel.CityDatumResponse;
 import com.shakticonsultant.responsemodel.CityResponse;
 import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.InterestedFiledDatumResponse;
+import com.shakticonsultant.responsemodel.InterestedSkillDatumResponse;
 import com.shakticonsultant.responsemodel.IntrestedFieldResponse;
 import com.shakticonsultant.responsemodel.StateDatumResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
+import com.shakticonsultant.responsemodel.UserCategoryResponse;
+import com.shakticonsultant.responsemodel.interestedSkillResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.AppPrefrences;
@@ -44,7 +49,7 @@ public class EmployeeHistoryActivity extends AppCompatActivity {
     String strAnnual,strAnnual2;
     String strstream,strstream1="",strstream2="";
     ArrayList<String> sp_stream_list=new ArrayList<>();
-    List<InterestedFiledDatumResponse> streamList=new ArrayList<>();
+    List<InterestedSkillDatumResponse> streamList=new ArrayList<>();
     List<StateDatumResponse> statelist=new ArrayList<>();
     List<CityDatumResponse> cityList=new ArrayList<>();
     String strstate,strcity;
@@ -74,7 +79,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
         }else {
             getAnnualSalary();
             getStateListApi();
-            getInterenstedFiledAPi();
+            getCatgoryId();
             binding.someEdit10.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -313,36 +318,70 @@ if(strstate.equals("Select State")){
 
 
     }
-///////----------Interesrted Filed-------------
+    public void getCatgoryId () {
+
+        Map<String, String> map = new HashMap<>();
+
+map.put("user_id",userid);
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<UserCategoryResponse> resultCall = apiInterface.calluserCategorySkill(map);
+
+        resultCall.enqueue(new Callback<UserCategoryResponse>() {
+            @Override
+            public void onResponse(Call<UserCategoryResponse> call, Response<UserCategoryResponse> response) {
+
+                if (response.isSuccessful()) {
+                    //binding.progressAbout.setVisibility(View.GONE);
+                    if (response.body().isSuccess() == true) {
+                        // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
+getJobSkill(response.body().getData().getCategory_id());
 
 
-    public void getInterenstedFiledAPi() {
+                        //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Utils.showFailureDialog(EmployeeHistoryActivity.this, response.body().getMessage());
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserCategoryResponse> call, Throwable t) {
+              //  binding.progressAbout.setVisibility(View.GONE);
+                Utils.showFailureDialog(EmployeeHistoryActivity.this, "Something went wrong!");
+            }
+        });
+    }
+
+
+
+
+    public void getJobSkill(String category_id) {
         //  binding.progressInfo.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        map.put("user_id", userid);
+        map.put("category_id", category_id);
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<IntrestedFieldResponse> resultCall = apiInterface.calluserIdInterestedFiled(map);
+        Call<interestedSkillResponse> resultCall = apiInterface.callIntererstedSKill(map);
 
-        resultCall.enqueue(new Callback<IntrestedFieldResponse>() {
+        resultCall.enqueue(new Callback<interestedSkillResponse>() {
             @Override
-            public void onResponse(Call<IntrestedFieldResponse> call, Response<IntrestedFieldResponse> response) {
-
+            public void onResponse(Call<interestedSkillResponse> call, Response<interestedSkillResponse> response) {
+                sp_stream_list.clear();
                 if (response.isSuccessful()) {
-                    sp_stream_list.clear();
 
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
-
-                        streamList=response.body().getStream();
+                        streamList=response.body().getData();
 
                         if(streamList.size()>0) {
-                            sp_stream_list.add("Select Stream");
 
                             for (int i = 0; i < streamList.size(); i++) {
 
-                                sp_stream_list.add(streamList.get(i).getName());
+                                sp_stream_list.add(streamList.get(i).getTitle());
 
                                 binding.spStream.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
@@ -429,14 +468,18 @@ if(strstate.equals("Select State")){
                 }
             }
 
-            @Override
-            public void onFailure(Call<IntrestedFieldResponse> call, Throwable t) {
 
-                //   binding.progressInfo.setVisibility(View.GONE);
-                //  Utils.showFailureDialog(PersonalInfoActivity.this, t.toString());
+            @Override
+            public void onFailure(Call<interestedSkillResponse> call, Throwable t) {
+                // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
+               // binding.spinner4.setVisibility(View.INVISIBLE);
+
+                // binding.progressInfo.setVisibility(View.GONE);
+                //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
             }
         });
     }
+
 //-----------------Annual Salary List------------------------------------------------------------
 
     public void getAnnualSalary() {

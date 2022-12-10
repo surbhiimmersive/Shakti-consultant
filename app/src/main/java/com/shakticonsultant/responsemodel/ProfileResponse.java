@@ -4,9 +4,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class OurClientResponse implements Serializable
+public class ProfileResponse implements Serializable
 {
 
     @SerializedName("success")
@@ -17,13 +16,8 @@ private boolean success;
 private String message;
     @SerializedName("data")
     @Expose
-    private List<OurClientDatumResponse> data = null;
+    private ProfileDatumResponse data = null;
     private final static long serialVersionUID = -6706837348014011869L;
-
-    public List<OurClientDatumResponse> getData() {
-        return data;
-    }
-
 
     public boolean isSuccess() {
         return success;
@@ -41,7 +35,11 @@ private String message;
         this.message = message;
     }
 
-    public void setData(List<OurClientDatumResponse> data) {
+    public ProfileDatumResponse getData() {
+        return data;
+    }
+
+    public void setData(ProfileDatumResponse data) {
         this.data = data;
     }
 }

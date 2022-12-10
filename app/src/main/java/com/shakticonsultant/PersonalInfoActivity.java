@@ -272,8 +272,16 @@ ConnectionDetector cd;
                 @Override
                 public void onClick(View view) {
 
+ if (profilefilepath == null) {
+                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select your profile image.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null);
+                        View sbView = snackbar.getView();
+                        sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-                    if (strprefix.equals("Prefix")) {
+                        snackbar.show();
+
+                    }
+ else if (strprefix.equals("Prefix")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select prefix.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -353,14 +361,6 @@ ConnectionDetector cd;
                         sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                         snackbar.show();
-                    } else if (profilefilepath == null) {
-                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select your profile image.", Snackbar.LENGTH_LONG)
-                                .setAction("Action", null);
-                        View sbView = snackbar.getView();
-                        sbView.setBackgroundColor(getColor(R.color.purple_200));
-
-                        snackbar.show();
-
                     } else if (strCategoryId.equals("0")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select category.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
@@ -1146,7 +1146,7 @@ ConnectionDetector cd;
         resultCall.enqueue(new Callback<interestedSkillResponse>() {
             @Override
             public void onResponse(Call<interestedSkillResponse> call, Response<interestedSkillResponse> response) {
-                sp_city_name_list.clear();
+                sp_stream_list.clear();
                 if (response.isSuccessful()) {
 
                     // binding.progressInfo.setVisibility(View.GONE);
@@ -1186,16 +1186,12 @@ ConnectionDetector cd;
                         }
 
                     } else {
-                        // binding.progressInfo.setVisibility(View.GONE);
-                        //   Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
-                        // Utils.showFailureDialog(PersonalInfoActivity.this, "No Data Found");
-                        binding.spCity.setVisibility(View.GONE);
-                        binding.spinner4.setVisibility(View.INVISIBLE);
-/*
+
+                        binding.spStream.setVisibility(View.INVISIBLE);
                         sp_city_name_list.add("Select City");
                         adp1=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
                         binding.spCity.setAdapter(adp1);
-                        adp1.notifyDataSetChanged();*/
+                        adp1.notifyDataSetChanged();
 
                     }
                 }

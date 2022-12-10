@@ -47,6 +47,8 @@
 </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/consprofile"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:background="@color/white">
@@ -57,6 +59,7 @@
             android:layout_height="80dp"
             android:layout_marginStart="10dp"
             android:padding="10dp"
+            android:scaleType="fitXY"
             android:layout_marginEnd="10sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="5sp"
-                    android:text="John"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -92,13 +95,25 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
+                <ImageView
+                    android:id="@+id/imgEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="20sp"
+                    android:layout_margin="10sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="@+id/textView33"
+                    android:src="@android:drawable/ic_menu_edit"
+                    tools:layout_editor_absoluteX="251dp"
+                    tools:layout_editor_absoluteY="0dp"></ImageView>
+
                 <TextView
                     android:id="@+id/textView34"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="5sp"
-                    android:text="john@gmail.com"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="12sp"
 
@@ -113,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:padding="5sp"
-                    android:text="+91 1234567890"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="12sp"
 

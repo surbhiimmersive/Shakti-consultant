@@ -22,13 +22,16 @@ import com.shakticonsultant.responsemodel.JobSkillResponse;
 import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.responsemodel.LoginResponse;
 import com.shakticonsultant.responsemodel.OrganizationResponse;
+import com.shakticonsultant.responsemodel.OurClientResponse;
 import com.shakticonsultant.responsemodel.PackageResponse;
+import com.shakticonsultant.responsemodel.ProfileResponse;
 import com.shakticonsultant.responsemodel.ScheduleInterviewResponse;
 import com.shakticonsultant.responsemodel.ShortListResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
 import com.shakticonsultant.responsemodel.TestimonialResponse;
+import com.shakticonsultant.responsemodel.UserCategoryResponse;
 import com.shakticonsultant.responsemodel.WorkExpResponse;
 import com.shakticonsultant.responsemodel.interestedSkillResponse;
 
@@ -202,7 +205,21 @@ public interface ApiInterface {
    @FormUrlEncoded
    Call<FavouriteResponse>callFavouriteApi(@FieldMap Map<String, String> params);
 
-   @GET("allJobs")
+ @POST("getProfile")
+   @FormUrlEncoded
+   Call<ProfileResponse>callgetProfileApi(@FieldMap Map<String, String> params);
+
+ @POST("userCategorySkill")
+   @FormUrlEncoded
+   Call<UserCategoryResponse>calluserCategorySkill(@FieldMap Map<String, String> params);
+
+
+
+    @POST("profileUpdate")
+    @Multipart
+    Call<CommonResponse> callUpdateProfile(@PartMap Map<String, RequestBody> params,@Part MultipartBody.Part id_proof);
+
+    @GET("allJobs")
    Call<JobSkillWiseListResponse> callAllJobs();
 
    @GET("testimonial")
@@ -216,6 +233,9 @@ public interface ApiInterface {
 
    @GET("about")
    Call<AboutResponse> callAboutUsApi();
+
+   @GET("ourClient")
+   Call<OurClientResponse> callOurClient();
 
 
 }

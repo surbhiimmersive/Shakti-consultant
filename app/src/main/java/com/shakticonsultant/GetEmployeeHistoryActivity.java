@@ -1,5 +1,7 @@
 package com.shakticonsultant;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,22 +11,22 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.shakticonsultant.databinding.ActiivtyGetEmployeeHostoryBinding;
 import com.shakticonsultant.databinding.ActivityEmployeeHistoryBinding;
-import com.shakticonsultant.responsemodel.AboutResponse;
 import com.shakticonsultant.responsemodel.AnnualDatumResponse;
 import com.shakticonsultant.responsemodel.AnnualResponse;
 import com.shakticonsultant.responsemodel.CityDatumResponse;
 import com.shakticonsultant.responsemodel.CityResponse;
 import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.GetEmployeeHistoryResponse;
-import com.shakticonsultant.responsemodel.InterestedFiledDatumResponse;
-import com.shakticonsultant.responsemodel.IntrestedFieldResponse;
+import com.shakticonsultant.responsemodel.InterestedSkillDatumResponse;
 import com.shakticonsultant.responsemodel.StateDatumResponse;
 import com.shakticonsultant.responsemodel.StateResponse;
+import com.shakticonsultant.responsemodel.UserCategoryResponse;
+import com.shakticonsultant.responsemodel.interestedSkillResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.AppPrefrences;
@@ -47,31 +49,30 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
     String strAnnual,strAnnual2;
     String strstream,strstream1="",strstream2="";
     ArrayList<String> sp_stream_list=new ArrayList<>();
-    List<InterestedFiledDatumResponse> streamList=new ArrayList<>();
+    List<InterestedSkillDatumResponse> streamList=new ArrayList<>();
     List<StateDatumResponse> statelist=new ArrayList<>();
     List<CityDatumResponse> cityList=new ArrayList<>();
     String strstate,strcity;
     ArrayAdapter<String> adspinnerStatep;
-    ArrayAdapter<String>  adp;
-    ArrayAdapter<String> adp1;
-    ArrayAdapter<String> adp2;
-    ArrayAdapter<String> adp3;
     String strStateid;
     String userid;
     ArrayList<String> sp_state_name_list=new ArrayList<>();
     ArrayList<String> sp_city_name_list=new ArrayList<>();
+    ArrayAdapter<String> adp1;
     String Cityid,Interested_id;
-    ActivityEmployeeHistoryBinding binding;
-   ApiInterface apiInterface;
-   int year,month,day;
-   ConnectionDetector cd;
-   String strstream3,currentdatejoining,firstdatejoining,first_Relivingdate,second_joiningdate,second_Relivingdate,third_joing,third_reliving;
+    ActiivtyGetEmployeeHostoryBinding binding;
+    ApiInterface apiInterface;
+    int year,month,day;
+    ArrayAdapter<String> adpstream;
+    ConnectionDetector cd;
+    String strstream3,currentdatejoining,firstdatejoining,first_Relivingdate,second_joiningdate,second_Relivingdate,third_joing,third_reliving;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityEmployeeHistoryBinding.inflate(getLayoutInflater());
+        binding = ActiivtyGetEmployeeHostoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-cd=new ConnectionDetector(GetEmployeeHistoryActivity.this);
+        userid=AppPrefrences.getUserid(GetEmployeeHistoryActivity.this);
+        cd=new ConnectionDetector(GetEmployeeHistoryActivity.this);
         if (!cd.isConnectingToInternet()) {
             Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
@@ -79,7 +80,7 @@ cd=new ConnectionDetector(GetEmployeeHistoryActivity.this);
         }else {
             getAnnualSalary();
             getStateListApi();
-            getInterenstedFiledAPi();
+            getCatgoryId();
 
             getEmployeeHistoryData();
             binding.someEdit10.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +134,7 @@ cd=new ConnectionDetector(GetEmployeeHistoryActivity.this);
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });binding.someEdit20.setOnClickListener(new View.OnClickListener() {
@@ -158,11 +159,11 @@ cd=new ConnectionDetector(GetEmployeeHistoryActivity.this);
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
-binding.someEdit22.setOnClickListener(new View.OnClickListener() {
+            binding.someEdit22.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -184,11 +185,11 @@ binding.someEdit22.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
-binding.someEdit23.setOnClickListener(new View.OnClickListener() {
+            binding.someEdit23.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -210,7 +211,7 @@ binding.someEdit23.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });binding.someEdit25.setOnClickListener(new View.OnClickListener() {
@@ -235,11 +236,11 @@ binding.someEdit23.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
-binding.someEdit26.setOnClickListener(new View.OnClickListener() {
+            binding.someEdit26.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
@@ -261,7 +262,7 @@ binding.someEdit26.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -269,87 +270,122 @@ binding.someEdit26.setOnClickListener(new View.OnClickListener() {
 
             binding.btnUpdate.setOnClickListener(v -> {
 
-if(binding.someEdit17.getText().toString().trim().equals("")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter current organization name", Snackbar.LENGTH_LONG)
-            .setAction("Action", null);
-    View sbView = snackbar.getView();
-    sbView.setBackgroundColor(getColor(R.color.purple_200));
+                if(binding.someEdit17.getText().toString().trim().equals("")){
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter current organization name", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-    snackbar.show();
+                    snackbar.show();
 
-}else
-if(strstate.equals("Select State")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select state", Snackbar.LENGTH_LONG)
-            .setAction("Action", null);
-    View sbView = snackbar.getView();
-    sbView.setBackgroundColor(getColor(R.color.purple_200));
+                }else
+                if(strstate.equals("Select State")){
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select state", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-    snackbar.show();
+                    snackbar.show();
 
-}else if(strcity.equals("Select City")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select city", Snackbar.LENGTH_LONG)
-            .setAction("Action", null);
-    View sbView = snackbar.getView();
-    sbView.setBackgroundColor(getColor(R.color.purple_200));
+                }else if(strcity.equals("Select City")){
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select city", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-    snackbar.show();
+                    snackbar.show();
 
-}else if(strAnnual.equals("Select Annual")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select annual salary", Snackbar.LENGTH_LONG)
-            .setAction("Action", null);
-    View sbView = snackbar.getView();
-    sbView.setBackgroundColor(getColor(R.color.purple_200));
+                }else if(strAnnual.equals("Select Annual")){
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select annual salary", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-    snackbar.show();
+                    snackbar.show();
 
-}else if(strstream.equals("Select Stream")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Stream", Snackbar.LENGTH_LONG)
-            .setAction("Action", null);
-    View sbView = snackbar.getView();
-    sbView.setBackgroundColor(getColor(R.color.purple_200));
+                }else if(strstream.equals("Select Stream")){
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Stream", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-    snackbar.show();
+                    snackbar.show();
 
-}else {
+                }else {
 
-   EmployeeHistoryApi();
-}
+                    EmployeeHistoryApi();
+                }
             });
         }
 
 
 
     }
-///////----------Interesrted Filed-------------
+    public void getCatgoryId () {
+
+        Map<String, String> map = new HashMap<>();
+
+        map.put("user_id",userid);
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<UserCategoryResponse> resultCall = apiInterface.calluserCategorySkill(map);
+
+        resultCall.enqueue(new Callback<UserCategoryResponse>() {
+            @Override
+            public void onResponse(Call<UserCategoryResponse> call, Response<UserCategoryResponse> response) {
+
+                if (response.isSuccessful()) {
+                    //binding.progressAbout.setVisibility(View.GONE);
+                    if (response.body().isSuccess() == true) {
+                        // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
+                        getJobSkill(response.body().getData().getCategory_id());
 
 
-    public void getInterenstedFiledAPi() {
+                        //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
+                    } else {
+                        Utils.showFailureDialog(GetEmployeeHistoryActivity.this, response.body().getMessage());
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserCategoryResponse> call, Throwable t) {
+                //  binding.progressAbout.setVisibility(View.GONE);
+                Utils.showFailureDialog( GetEmployeeHistoryActivity.this, "Something went wrong!");
+            }
+        });
+    }
+
+
+
+
+    public void getJobSkill(String category_id) {
         //  binding.progressInfo.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        map.put("user_id", AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
+        map.put("category_id", category_id);
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<IntrestedFieldResponse> resultCall = apiInterface.calluserIdInterestedFiled(map);
+        Call<interestedSkillResponse> resultCall = apiInterface.callIntererstedSKill(map);
 
-        resultCall.enqueue(new Callback<IntrestedFieldResponse>() {
+        resultCall.enqueue(new Callback<interestedSkillResponse>() {
             @Override
-            public void onResponse(Call<IntrestedFieldResponse> call, Response<IntrestedFieldResponse> response) {
-
+            public void onResponse(Call<interestedSkillResponse> call, Response<interestedSkillResponse> response) {
+               // sp_stream_list.clear();
                 if (response.isSuccessful()) {
-                    sp_stream_list.clear();
 
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
-
-                        streamList=response.body().getStream();
+                        streamList=response.body().getData();
 
                         if(streamList.size()>0) {
-                            sp_stream_list.add("Select Stream");
 
                             for (int i = 0; i < streamList.size(); i++) {
 
-                                sp_stream_list.add(streamList.get(i).getName());
+                                sp_stream_list.add(streamList.get(i).getTitle());
+
 
                                 binding.spStream.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
@@ -407,21 +443,23 @@ if(strstate.equals("Select State")){
                                     }
                                 });
 
-                                adp = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
-                                binding.spStream.setAdapter(adp);
+                                adpstream = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                                binding.spStream.setAdapter(adpstream);
+                                adpstream.notifyDataSetChanged();
 
 
-                                adp1 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
-                                binding.spStream1.setAdapter(adp1);
+                                ArrayAdapter<String> adpstream1 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                                binding.spStream1.setAdapter(adpstream1);
+                                adpstream1.notifyDataSetChanged();
 
-                               adp2 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
-                                binding.spStream2.setAdapter(adp2);
-
-
-                                 adp3 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
-                                binding.spStream3.setAdapter(adp3);
+                                ArrayAdapter<String> adpstream2 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                                binding.spStream2.setAdapter(adpstream2);
+                                adpstream2.notifyDataSetChanged();
 
 
+                                ArrayAdapter<String> adpstream3 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                                binding.spStream3.setAdapter(adpstream3);
+                                adpstream3.notifyDataSetChanged();
                             }
 
                         }
@@ -433,17 +471,23 @@ if(strstate.equals("Select State")){
 
                         // Utils.showFailureDialog(PersonalInfoActivity.this, "No Data Found");
                     }
+                }else{
+
                 }
             }
 
-            @Override
-            public void onFailure(Call<IntrestedFieldResponse> call, Throwable t) {
 
-                //   binding.progressInfo.setVisibility(View.GONE);
-                //  Utils.showFailureDialog(PersonalInfoActivity.this, t.toString());
+            @Override
+            public void onFailure(Call<interestedSkillResponse> call, Throwable t) {
+                // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
+                // binding.spinner4.setVisibility(View.INVISIBLE);
+
+                // binding.progressInfo.setVisibility(View.GONE);
+                //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
             }
         });
     }
+
 //-----------------Annual Salary List------------------------------------------------------------
 
     public void getAnnualSalary() {
@@ -499,7 +543,7 @@ if(strstate.equals("Select State")){
                                         strAnnual2=(String)binding.spAnnual2.getSelectedItem();
 
                                         // SpinnerModel model=(SpinnerModel) spinner_state_list.get(i);
-                                      //  String id = annualList.get(i).getId();
+                                        //  String id = annualList.get(i).getId();
 
                                         //   Toast.makeText(PersonalInfoActivity.this, "state" + id, Toast.LENGTH_SHORT).show();
 
@@ -519,9 +563,9 @@ if(strstate.equals("Select State")){
 
 
 
-                            ArrayAdapter<String> spAnnual2=new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_annual_income);
-                            binding.spAnnual2.setAdapter(spAnnual2);
-                            spAnnual2.notifyDataSetChanged();
+                            ArrayAdapter<String> adp1=new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_annual_income);
+                            binding.spAnnual2.setAdapter(adp1);
+                            adp1.notifyDataSetChanged();
 
                         }
 
@@ -697,11 +741,11 @@ if(strstate.equals("Select State")){
     }
 
     public void EmployeeHistoryApi() {
-          binding.progressemployee.setVisibility(View.VISIBLE);
+        binding.progressemployee.setVisibility(View.VISIBLE);
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("user_id", AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
+        map.put("user_id", userid);
         map.put("current_organisation", binding.someEdit17.getText().toString().trim());
         map.put("current_city", strcity);
         map.put("current_state", strstate);
@@ -731,14 +775,17 @@ if(strstate.equals("Select State")){
             public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
 
                 if (response.isSuccessful()) {
-                     binding.progressemployee.setVisibility(View.GONE);
+                    binding.progressemployee.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
                       /*  startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
 */
+                        AppPrefrences.setUserid(GetEmployeeHistoryActivity.this,userid);
 
-                        finish();
+                        Intent i=new Intent(GetEmployeeHistoryActivity.this,MainActivity.class);
+                        i.putExtra("userid",userid);
+                        startActivity(i);
                     }  else {
                         Utils.showFailureDialog(GetEmployeeHistoryActivity.this, response.body().getMessage());
 
@@ -755,7 +802,7 @@ if(strstate.equals("Select State")){
 
             @Override
             public void onFailure(Call<CommonResponse> call, Throwable t) {
-                 binding.progressemployee.setVisibility(View.GONE);
+                binding.progressemployee.setVisibility(View.GONE);
                 Utils.showFailureDialog(GetEmployeeHistoryActivity.this, t.toString());
             }
         });
@@ -765,7 +812,7 @@ if(strstate.equals("Select State")){
 
         Map<String, String> map = new HashMap<>();
 
-map.put("user_id",AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
+        map.put("user_id",AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         Call<GetEmployeeHistoryResponse> resultCall = apiInterface.callGetEmployeeHistory(map);
@@ -799,8 +846,7 @@ map.put("user_id",AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
                         binding.someEdit23.setText(response.body().getData().getSecond_date_of_reliving());
                         binding.someEdit26.setText(response.body().getData().getThird_date_of_reliving());
 
-
-
+                     //   Toast.makeText(GetEmployeeHistoryActivity.this, ""+response.body().getData().getCurrent_stream(), Toast.LENGTH_SHORT).show();
 
                         binding.spAnnual.setSelection(sp_annual_income.indexOf(response.body().getData().getCurrent_annual_salary()));
                         binding.spAnnual2.setSelection(sp_annual_income.indexOf(response.body().getData().getFirst_annual_salary()));
@@ -810,10 +856,9 @@ map.put("user_id",AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
                         binding.spStream3.setSelection(sp_stream_list.indexOf(response.body().getData().getThird_stream()));
 
 
-
-
                     } else {
-                        Utils.showFailureDialog(GetEmployeeHistoryActivity.this, response.body().getMessage());
+                        //Utils.showFailureDialog(GetEmployeeHistoryActivity.this, response.body().getMessage());
+                        binding.progressemployee.setVisibility(View.GONE);
 
 
                     }
@@ -827,5 +872,7 @@ map.put("user_id",AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
             }
         });
     }
+
+
 
 }

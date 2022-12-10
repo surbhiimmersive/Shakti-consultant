@@ -338,7 +338,7 @@ public class HomeFragment extends Fragment {
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
-                        binding.recycLatestJob.setVisibility(View.VISIBLE);
+                      //  binding.recycLatestJob.setVisibility(View.VISIBLE);
                      //   binding.lEmpty.setVisibility(View.GONE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -352,16 +352,16 @@ public class HomeFragment extends Fragment {
                     } else {
                         binding.progressBarcategory.setVisibility(View.GONE);
                        // binding.lEmpty.setVisibility(View.VISIBLE);
-                        binding.recycLatestJob.setVisibility(View.GONE);
+                      //  binding.recycLatestJob.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
 
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                   // binding.progressBarcategory.setVisibility(View.GONE);
                   //  binding.lEmpty.setVisibility(View.VISIBLE);
-                    binding.recycLatestJob.setVisibility(View.GONE);
+                    //binding.recycLatestJob.setVisibility(View.GONE);
 
                 }
             }
@@ -371,11 +371,11 @@ public class HomeFragment extends Fragment {
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressBarcategory.setVisibility(View.GONE);
-               // binding.lEmpty.setVisibility(View.VISIBLE);
-                binding.recycLatestJob.setVisibility(View.GONE);
+              //  binding.progressBarcategory.setVisibility(View.GONE);
+             //  // binding.lEmpty.setVisibility(View.VISIBLE);
+              //  binding.recycLatestJob.setVisibility(View.GONE);
 
-                Utils.showFailureDialog(getActivity(), "Something went wrong!");
+                //Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });
     }
@@ -401,7 +401,7 @@ public class HomeFragment extends Fragment {
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
                        // binding.lEmpty.setVisibility(View.GONE);
-                        binding.recycLatestJob.setVisibility(View.VISIBLE);
+                       // binding.recycLatestJob.setVisibility(View.VISIBLE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.recycLatestJob.setLayoutManager(linearLayoutManager);
@@ -414,7 +414,7 @@ public class HomeFragment extends Fragment {
                     } else {
                         binding.progressBarcategory.setVisibility(View.GONE);
                        // binding.lEmpty.setVisibility(View.VISIBLE);
-                        binding.recycLatestJob.setVisibility(View.GONE);
+                       // binding.recycLatestJob.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
@@ -422,7 +422,7 @@ public class HomeFragment extends Fragment {
                 }else{
                     binding.progressBarcategory.setVisibility(View.GONE);
                     //binding.lEmpty.setVisibility(View.VISIBLE);
-                    binding.recycLatestJob.setVisibility(View.GONE);
+                    //binding.recycLatestJob.setVisibility(View.GONE);
 
 
                 }

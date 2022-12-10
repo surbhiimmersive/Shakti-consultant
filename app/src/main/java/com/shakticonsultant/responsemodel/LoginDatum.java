@@ -50,6 +50,18 @@ private String profile_img;
 @Expose
 private String skill_id;
 
+@SerializedName("category_id")
+@Expose
+private String category_id;
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
+    }
+
     public String getSkill_id() {
         return skill_id;
     }

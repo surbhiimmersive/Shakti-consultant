@@ -395,7 +395,7 @@ ConnectionDetector cd;
         resultCall.enqueue(new Callback<EducationResponse>() {
             @Override
             public void onResponse(Call<EducationResponse> call, Response<EducationResponse> response) {
-                sp_graduation_list.clear();
+                sp_postgraduation_list.clear();
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -453,7 +453,7 @@ ConnectionDetector cd;
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("user_id", userid);
+        map.put("user_id", AppPrefrences.getUserid(GetAcademicDetailsActivity.this));
         map.put("board_X", strBoard1);
         map.put("passed_year_X",stryear1);
         map.put("percentage_X", binding.edtXPercent.getText().toString().trim());

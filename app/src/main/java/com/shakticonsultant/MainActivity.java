@@ -19,6 +19,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,19 +29,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shakticonsultant.databinding.ActivityMainBinding;
+import com.shakticonsultant.responsemodel.AboutResponse;
+import com.shakticonsultant.responsemodel.ProfileResponse;
 import com.shakticonsultant.retrofit.ApiClient;
+import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.AppPrefrences;
+import com.shakticonsultant.utils.Utils;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    String name,email,mobile,img;
 
   //  private AppBarConfiguration mAppBarConfiguration;
 String userid;
     NavHostFragment navHostFragment;
     NavController navController;
+    TextView tvname,tvemail,tvmobile,textView36;
+            ImageView imageView14;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +65,7 @@ String userid;
 
 
         userid = getIntent().getStringExtra("userid");
-        Toast.makeText(this, ""+AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, ""+AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
         /* Navigation Drawer */
         binding.navView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
 
@@ -75,19 +91,27 @@ String userid;
         setUpNavigation();
 
         View headerView = binding.navView.inflateHeaderView(R.layout.drawer_header);
-        TextView tvname=headerView.findViewById(R.id.textView33);
-        TextView tvemail=headerView.findViewById(R.id.textView34);
-        TextView tvmobile=headerView.findViewById(R.id.textView35);
-        ImageView imageView14=headerView.findViewById(R.id.imageView14);
-        Picasso.get()
-                .load(ApiClient.Photourl+AppPrefrences.getProfileImg(MainActivity.this))
-                .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .into(imageView14);
 
+         tvname=headerView.findViewById(R.id.textView33);
+         tvemail=headerView.findViewById(R.id.textView34);
+         tvmobile=headerView.findViewById(R.id.textView35);
+         imageView14=headerView.findViewById(R.id.imageView14);
+         textView36=headerView.findViewById(R.id.textView36);
+        getprofiledata();
 
-        tvname.setText(AppPrefrences.getName(MainActivity.this));
-        tvemail.setText(AppPrefrences.getMail(MainActivity.this));
-        tvmobile.setText(AppPrefrences.getMobile(MainActivity.this));
+        textView36.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i=new Intent(MainActivity.this,EditProfileActivity.class);
+                i.putExtra("name",name);
+                i.putExtra("email",email);
+                i.putExtra("mobile",mobile);
+                i.putExtra("profile_img",img);
+                startActivity(i);
+
+            }
+        });
 
     }
 
@@ -167,6 +191,11 @@ String userid;
         else if(item.getItemId() == R.id.drawer_faq){
             navController.navigate(R.id.bottom_faq);
             closeDrawer();
+        }
+
+        else if(item.getItemId() == R.id.drawer_our_client){
+            startActivity(new Intent(getApplicationContext(), OurClientActivity.class));
+
         }
         else if (item.getItemId() == R.id.drawer_jobs){
             new Handler().postDelayed(new Runnable() {
@@ -296,5 +325,54 @@ String userid;
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.nav_host_fragment, fragment)
                 .commit();
+    }
+
+    public void getprofiledata () {
+       // binding..setVisibility(View.VISIBLE);
+
+        Map<String, String> map = new HashMap<>();
+
+map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<ProfileResponse> resultCall = apiInterface.callgetProfileApi(map);
+
+        resultCall.enqueue(new Callback<ProfileResponse>() {
+            @Override
+            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+
+                if (response.isSuccessful()) {
+                   // binding.progressAbout.setVisibility(View.GONE);
+                    if (response.body().isSuccess() == true) {
+
+
+                        name=response.body().getData().getName();
+                        email=response.body().getData().getEmail();
+                        mobile=response.body().getData().getMobile();
+                        img=response.body().getData().getProfile_image();
+                        // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
+                        Picasso.get()
+                                .load(ApiClient.Photourl+response.body().getData().getProfile_image())
+                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                .into(imageView14);
+
+
+                        tvname.setText(response.body().getData().getName());
+                        tvemail.setText(response.body().getData().getEmail());
+                        tvmobile.setText(response.body().getData().getMobile());
+                    } else {
+                       // Utils.showFailureDialog(AboutUsActivity.this, response.body().getMessage());
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResponse> call, Throwable t) {
+               // binding.progressAbout.setVisibility(View.GONE);
+               // Utils.showFailureDialog(AboutUsActivity.this, "Something went wrong!");
+            }
+        });
     }
 }

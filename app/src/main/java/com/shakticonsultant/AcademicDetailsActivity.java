@@ -321,7 +321,7 @@ ConnectionDetector cd;
 
 
     public void getEducationApi() {
-        //  binding.progressInfo.setVisibility(View.VISIBLE);
+          binding.progressacadeic.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("degree_type", "Graduation");
 
@@ -334,7 +334,7 @@ ConnectionDetector cd;
             public void onResponse(Call<EducationResponse> call, Response<EducationResponse> response) {
                 sp_graduation_list.clear();
                 if (response.isSuccessful()) {
-                    // binding.progressInfo.setVisibility(View.GONE);
+                     binding.progressacadeic.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
                         graduationList=response.body().getData();
@@ -367,7 +367,7 @@ ConnectionDetector cd;
                         }
 
                     } else {
-
+binding.progressacadeic.setVisibility(View.GONE);
                     }
                 }
             }
@@ -375,6 +375,7 @@ ConnectionDetector cd;
             @Override
             public void onFailure(Call<EducationResponse> call, Throwable t) {
                 // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
+                binding.progressacadeic.setVisibility(View.GONE);
 
                 // binding.progressInfo.setVisibility(View.GONE);
                 //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");

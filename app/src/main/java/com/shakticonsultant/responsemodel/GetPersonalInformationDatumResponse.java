@@ -11,6 +11,21 @@ public class GetPersonalInformationDatumResponse implements Serializable
     @SerializedName("id")
     @Expose
     private String id;
+
+    @SerializedName("categoryname")
+    @Expose
+    private String categoryname;
+
+    @SerializedName("skillname")
+    @Expose
+    private String skillname;
+
+    @SerializedName("state")
+    @Expose
+    private String state;
+    @SerializedName("city")
+    @Expose
+    private String city;
    @SerializedName("profile_image")
    @Expose
    private String profile_image;
@@ -91,6 +106,37 @@ public class GetPersonalInformationDatumResponse implements Serializable
    @Expose
      private String worked_organization;
 
+    public String getState() {
+        return state;
+    }
+
+    public String getCategoryname() {
+        return categoryname;
+    }
+
+    public void setCategoryname(String categoryname) {
+        this.categoryname = categoryname;
+    }
+
+    public String getSkillname() {
+        return skillname;
+    }
+
+    public void setSkillname(String skillname) {
+        this.skillname = skillname;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     public String getId() {
         return id;

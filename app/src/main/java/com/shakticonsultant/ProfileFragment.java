@@ -18,6 +18,7 @@ import com.shakticonsultant.adapter.FaqListAdapter;
 import com.shakticonsultant.databinding.FragmentFAQBinding;
 import com.shakticonsultant.databinding.FragmentProfileBinding;
 import com.shakticonsultant.responsemodel.FaqsResponse;
+import com.shakticonsultant.responsemodel.ProfileResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.AppPrefrences;
@@ -39,6 +40,7 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class ProfileFragment extends Fragment {
+    String name,email,mobile,img;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -98,14 +100,7 @@ ConnectionDetector cd;
                     .show();
         }else {
 
-binding.textView33.setText(AppPrefrences.getName(getActivity()));
-binding.textView34.setText(AppPrefrences.getMail(getActivity()));
-binding.textView35.setText(AppPrefrences.getMobile(getActivity()));
-            Picasso.get()
-                    .load(ApiClient.Photourl+ AppPrefrences.getProfileImg(getActivity()))
-                    .memoryPolicy(MemoryPolicy.NO_CACHE)
-                    .into(binding.imageView14);
-
+getprofiledata();
             //  getFaqList();
             binding.imgBackArrow.setOnClickListener(v -> {
                 getActivity().onBackPressed();
@@ -116,6 +111,20 @@ binding.btnPersonalInfo.setOnClickListener(new View.OnClickListener() {
         startActivity(new Intent( getActivity(),GetPersonalInfoActivity.class));
 
 
+
+    }
+});
+
+binding.imgEdit.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
+       Intent i=new Intent(getActivity(),EditProfileActivity.class);
+       i.putExtra("name",name);
+       i.putExtra("email",email);
+       i.putExtra("mobile",mobile);
+       i.putExtra("profile_img",img);
+       startActivity(i);
 
     }
 });
@@ -144,4 +153,66 @@ binding.btnEmployeeHistory.setOnClickListener(new View.OnClickListener() {
 
 
 
+    public void getprofiledata () {
+        // binding..setVisibility(View.VISIBLE);
+        Map<String, String> map = new HashMap<>();
+
+        map.put("user_id",AppPrefrences.getUserid(getActivity()));
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<ProfileResponse> resultCall = apiInterface.callgetProfileApi(map);
+
+        resultCall.enqueue(new Callback<ProfileResponse>() {
+            @Override
+            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+
+                if (response.isSuccessful()) {
+                    // binding.progressAbout.setVisibility(View.GONE);
+                    binding.consprofile.setVisibility(View.VISIBLE);
+                    if (response.body().isSuccess() == true) {
+                        // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
+
+                        /*binding.textView33.setText(AppPrefrences.getName(getActivity()));
+                        binding.textView34.setText(AppPrefrences.getMail(getActivity()));
+                        binding.textView35.setText(AppPrefrences.getMobile(getActivity()));
+                        Picasso.get()
+                                .load(ApiClient.Photourl+ AppPrefrences.getProfileImg(getActivity()))
+                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                .into(binding.imageView14);
+
+*/
+
+                        name=response.body().getData().getName();
+                        email=response.body().getData().getEmail();
+                        mobile=response.body().getData().getMobile();
+                        img=response.body().getData().getProfile_image();
+                        binding.textView33.setText(response.body().getData().getName());
+                        binding.textView34.setText(response.body().getData().getEmail());
+                        binding.textView35.setText(response.body().getData().getMobile());
+                        Picasso.get()
+                                .load(ApiClient.Photourl+ response.body().getData().getProfile_image())
+                                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                .into(binding.imageView14);
+                    } else {
+                        // Utils.showFailureDialog(AboutUsActivity.this, response.body().getMessage());
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResponse> call, Throwable t) {
+                // binding.progressAbout.setVisibility(View.GONE);
+                // Utils.showFailureDialog(AboutUsActivity.this, "Something went wrong!");
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getprofiledata();
+    }
 }

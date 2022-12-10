@@ -8,12 +8,12 @@ import java.io.Serializable;
 public class OurClientDatumResponse implements Serializable
 {
 
-    @SerializedName("id")
+    @SerializedName("name")
     @Expose
     private String id;
- @SerializedName("salary")
+ @SerializedName("image")
     @Expose
-    private String salary;
+    private String image;
 
     public String getId() {
         return id;
@@ -23,11 +23,11 @@ public class OurClientDatumResponse implements Serializable
         this.id = id;
     }
 
-    public String getSalary() {
-        return salary;
+    public String getImage() {
+        return image;
     }
 
-    public void setSalary(String salary) {
-        this.salary = salary;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

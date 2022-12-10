@@ -72,12 +72,25 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".OurClientActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".PackageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".ApplyJobPackageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+  <activity
+            android:name=".GetPersonalInfoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".EditProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
@@ -88,11 +101,12 @@
             android:name=".GetEmployeeHistoryActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".GetPersonalInfoActivity"
+            android:name=".NewJobSearchListActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-   <activity
+        <activity
             android:name=".TestimonialActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

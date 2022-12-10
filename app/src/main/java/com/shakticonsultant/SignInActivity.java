@@ -150,6 +150,7 @@ String employee=response.body().getData().getEmployee();
                             AppPrefrences.setMail(SignInActivity.this,response.body().getData().getEmail());
                             AppPrefrences.setProfileImg(SignInActivity.this,response.body().getData().getProfile_img());
                             AppPrefrences.setSkillId(SignInActivity.this,response.body().getData().getSkill_id());
+                            AppPrefrences.setCategoryId(SignInActivity.this,response.body().getData().getCategory_id());
 
                             Intent i = new Intent(SignInActivity.this, MainActivity.class);
                             i.putExtra("userid",response.body().getData().getId());

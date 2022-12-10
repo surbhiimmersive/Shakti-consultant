@@ -104,10 +104,104 @@
                 app:strokeWidth="1dp">
 
                 <Spinner
+                    android:id="@+id/spCity"
                     style="@style/spinner_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:entries="@array/test16" />
+                    android:entries="@array/test3" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Salary"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#E4E4E4"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/money_coloured" />
+                    <EditText
+                        android:id="@+id/edtMinSalary"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Min Salary"
+                        android:backgroundTint="@android:color/transparent"
+
+                        android:singleLine="true"
+                        android:textSize="14sp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginStart="5dp"
+                        />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="#E4E4E4"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:src="@drawable/money_coloured" />
+
+                    <EditText
+                        android:id="@+id/edtMaxSalary"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Max Salary"
+                        android:singleLine="true"
+                        android:backgroundTint="@android:color/transparent"
+                        android:textSize="14sp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_marginStart="5dp"
+                        />
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -134,6 +228,7 @@
                 app:strokeWidth="1dp">
 
                 <Spinner
+                    android:id="@+id/spStream"
                     style="@style/spinner_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -164,6 +259,7 @@
                 app:strokeWidth="1dp">
 
                 <Spinner
+                    android:id="@+id/spExperience"
                     style="@style/spinner_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -171,91 +267,10 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/poppins_medium"
-                android:text="Salary"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="180dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="#E4E4E4"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/money_coloured" />
-
-                    <Spinner
-                        style="@style/spinner_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="33dp"
-                        android:layout_marginStart="5dp"
-                        android:entries="@array/test13" />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="180dp"
-                android:layout_height="33dp"
-                android:layout_marginTop="25dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:strokeColor="#E4E4E4"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
-                        android:src="@drawable/money_coloured" />
-
-                    <Spinner
-                        style="@style/spinner_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="33dp"
-                        android:layout_marginStart="5dp"
-                        android:entries="@array/test14" />
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
         </LinearLayout>
 
         <ImageView
-            android:id="@+id/img_search_job"
+            android:id="@+id/imgSearch"
             android:layout_width="47dp"
             android:layout_height="43dp"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout7"
@@ -264,6 +279,8 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
             android:background="@drawable/custom_img_bg"
             android:padding="5dp"
+            android:clickable="true"
+            android:focusable="true"
             app:srcCompat="@drawable/search_1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

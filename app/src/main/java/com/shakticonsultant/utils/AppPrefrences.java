@@ -24,7 +24,7 @@ public class AppPrefrences
     public static final String PACKAGE = "package";
     public static final String TypeOFBooking = "Book Now";
     public static final String ScheduleDate = "ScheduleDate";
-    public static final String ScheduleTime = "ScheduleTime";
+    public static final String CategoryId = "category_id";
 
     Context context;
     SharedPreferences prefs;
@@ -275,16 +275,16 @@ public static String getMainServiceId(Context context) {
 
 
 
-    public static void setScheduleTime(Context context, String headname) {
+    public static void setCategoryId(Context context, String headname) {
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(ScheduleTime, headname);
+        editor.putString(CategoryId, headname);
         editor.commit();
     }
 
-    public static String getScheduleTime(Context context) {
+    public static String getCategoryId(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
-        return preferences.getString(ScheduleTime, "");
+        return preferences.getString(CategoryId, "");
     }
 
 

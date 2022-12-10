@@ -152,6 +152,7 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
 
                 if (response.isSuccessful()) {
                     binding.progressBardetail.setVisibility(View.GONE);
+                    binding.const1.setVisibility(View.VISIBLE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {

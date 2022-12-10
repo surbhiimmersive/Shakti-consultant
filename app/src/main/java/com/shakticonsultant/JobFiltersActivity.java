@@ -256,7 +256,6 @@ binding.listViewCity.setItemChecked(0,false);
                         workExpList=response.body().getData();
 
                         if(workExpList.size()>0){
-                            sp_work_exp.add("Select Experience");
                             for(int i=0;i<workExpList.size();i++){
 
                                 sp_work_exp.add(workExpList.get(i).getExperience());
