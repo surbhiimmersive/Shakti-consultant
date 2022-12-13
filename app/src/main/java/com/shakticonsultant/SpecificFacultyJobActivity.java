@@ -202,7 +202,7 @@ ConnectionDetector cd;
                 //    pd_loading.setVisibility(View.GONE);
                 binding.progressBarSkillWise.setVisibility(View.GONE);
 
-                Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");
+            //    Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");
             }
         });
     }
@@ -296,4 +296,10 @@ ConnectionDetector cd;
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left,
+                R.anim.slide_out_right);
+    }
 }

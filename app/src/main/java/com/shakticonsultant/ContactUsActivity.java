@@ -39,6 +39,8 @@ ConnectionDetector cd;
 cd=new ConnectionDetector(ContactUsActivity.this);
         binding.imgBackArrow.setOnClickListener(v -> {
             onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left,
+                    R.anim.slide_out_right);
         });
 
         binding.imageView33.setOnClickListener(v -> {

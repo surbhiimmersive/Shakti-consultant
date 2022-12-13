@@ -89,6 +89,8 @@ public class AppliedJobsFragment extends Fragment {
 
 
             getActivity().onBackPressed();
+            getActivity().overridePendingTransition(R.anim.slide_in_left,
+                    R.anim.slide_out_right);
         });
         getAppliedJob();
 

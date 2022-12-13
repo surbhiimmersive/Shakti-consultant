@@ -4,6 +4,7 @@
     android:id="@+id/lJobCategory"
     android:layout_width="match_parent"
     android:layout_margin="5sp"
+    android:background="@drawable/custom_ripple"
     android:layout_height="wrap_content"
   >
 
@@ -38,7 +39,7 @@
         android:padding="5sp"
         android:gravity="center"
         android:fontFamily="@font/poppins_regular"
-        android:textColor="@color/text_color"
+        android:textColor="@color/purple_500"
         app:layout_constraintEnd_toEndOf="@+id/imageView20"
         app:layout_constraintStart_toStartOf="@+id/imageView20"
         app:layout_constraintTop_toBottomOf="@+id/imageView20" />

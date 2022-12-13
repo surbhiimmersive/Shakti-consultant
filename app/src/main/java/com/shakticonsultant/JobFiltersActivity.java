@@ -72,6 +72,8 @@ String data;
 
         binding.imgBackArrow.setOnClickListener(v -> {
             onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left,
+                    R.anim.slide_out_right);
         });
 
 
@@ -151,7 +153,7 @@ getCityList();
 
 
     public void getCityList() {
-        // pd_loading.setVisibility(View.VISIBLE);
+        binding.progressBar.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
 
@@ -165,7 +167,7 @@ getCityList();
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
 
                 if (response.isSuccessful()) {
-                    // pd_loading.setVisibility(View.GONE);
+                     binding.progressBar.setVisibility(View.GONE);
                     // lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
                         List<CityDatumResponse> orglist=response.body().getData();
@@ -218,7 +220,7 @@ binding.listViewCity.setItemChecked(0,false);
                         // adapter = new SelectableAdapter(OrganizationDailog.this,selectableItems,true);
                         // recyclerView.setAdapter(adapter);
                     } else {
-
+binding.progressBar.setVisibility(View.GONE);
                         //  lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
@@ -227,6 +229,7 @@ binding.listViewCity.setItemChecked(0,false);
 
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
 
                 //lemprtNotification.setVisibility(View.VISIBLE);
                 //  pd_loading.setVisibility(View.GONE);

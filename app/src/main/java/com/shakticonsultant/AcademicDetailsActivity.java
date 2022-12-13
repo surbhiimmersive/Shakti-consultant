@@ -493,6 +493,8 @@ binding.progressacadeic.setVisibility(View.GONE);
                         i.putExtra("userid",userid);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(R.anim.slide_in_right,
+                                R.anim.slide_out_left);
                     }  else {
                         Utils.showFailureDialog(AcademicDetailsActivity.this, response.body().getMessage());
 

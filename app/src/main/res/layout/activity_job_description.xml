@@ -307,20 +307,113 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_job_details">
 
+            <TextView
+                android:id="@+id/tvComapnydesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:text="Company Description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+               />
 
-            <WebView
+            <TextView
                 android:id="@+id/textView51"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="13sp"
+                android:text=""
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="WebViewLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/tvComapnydesc"
+                tools:ignore="MissingConstraints" />
+ <TextView
+                android:id="@+id/tvprocessinformation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:text="Process Information"
+             app:layout_constraintTop_toBottomOf="@+id/textView51"
+                app:layout_constraintHorizontal_bias="0.5"
+     tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tvpinfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:text="Online Interview"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@+id/tvprocessinformation"
+                tools:ignore="MissingConstraints" />
+ <TextView
+                android:id="@+id/tvdoc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:text="Document Required"
+             app:layout_constraintTop_toBottomOf="@+id/tvpinfo"
+                app:layout_constraintHorizontal_bias="0.5"
+     tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tvdocans"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:text=""
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@+id/tvdoc"
+                tools:ignore="MissingConstraints" />
+ <TextView
+                android:id="@+id/tvimportantInstr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:text="Important Instructions"
+             app:layout_constraintTop_toBottomOf="@+id/tvdocans"
+                app:layout_constraintHorizontal_bias="0.5"
+     tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tvimportant"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:text=""
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintTop_toBottomOf="@+id/tvimportantInstr"
+                tools:ignore="MissingConstraints" />
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_apply"
@@ -335,7 +428,7 @@ android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView51" />
+                app:layout_constraintTop_toBottomOf="@+id/tvimportant" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -452,7 +452,19 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:indeterminateDrawable="@drawable/loading_img"
+            android:foregroundGravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/btnApply"
+            ></ProgressBar>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnApply"
         android:layout_width="176dp"

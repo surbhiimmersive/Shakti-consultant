@@ -77,8 +77,8 @@ Intent i=new Intent(context,JobsListActivity.class);
 i.putExtra("category_id",list.get(position).getId());
 i.putExtra("category_name",list.get(position).getTitle());
 context.startActivity(i);
-        ((Activity)context).overridePendingTransition(R.anim.fade_in,
-                R.anim.fade_out);
+        ((Activity)context).overridePendingTransition(R.anim.slide_in_right,
+                R.anim.slide_out_left);
      //   context.startActivity(new Intent(context, JobsListActivity.class));
 
     }

@@ -38,6 +38,8 @@ public class AboutUsActivity extends AppCompatActivity {
 
         binding.imgBackArrow.setOnClickListener(v -> {
             onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left,
+                    R.anim.slide_out_right);
         });
         cd = new ConnectionDetector(AboutUsActivity.this);
         if (!cd.isConnectingToInternet()) {

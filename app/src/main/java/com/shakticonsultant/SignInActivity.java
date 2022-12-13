@@ -122,6 +122,8 @@ String employee=response.body().getData().getEmployee();
                             i.putExtra("userid",response.body().getData().getId());
                             startActivity(i);
                             finish();
+                            overridePendingTransition(R.anim.slide_in_right,
+                                    R.anim.slide_out_left);
 
                         }else if(employee.equals("0")&& acedemic.equals("0") ) {
 
@@ -131,6 +133,9 @@ String employee=response.body().getData().getEmployee();
                             startActivity(i);
                                 finish();
 
+                            overridePendingTransition(R.anim.slide_in_right,
+                                    R.anim.slide_out_left);
+
 
                         }else if(employee.equals("0") ){
 
@@ -139,6 +144,8 @@ String employee=response.body().getData().getEmployee();
 
                             startActivity(i);
                             finish();
+                            overridePendingTransition(R.anim.slide_in_right,
+                                    R.anim.slide_out_left);
 
                         }else{
                             AppPrefrences.setUserid(SignInActivity.this,response.body().getData().getId());
@@ -157,6 +164,8 @@ String employee=response.body().getData().getEmployee();
 
                             startActivity(i);
                             finish();
+                            overridePendingTransition(R.anim.slide_in_right,
+                                    R.anim.slide_out_left);
                                // startActivity(new Intent(SignInActivity.this, MainActivity.class));
 
                     }

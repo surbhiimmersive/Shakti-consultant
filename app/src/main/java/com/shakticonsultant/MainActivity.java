@@ -109,6 +109,8 @@ String userid;
                 i.putExtra("mobile",mobile);
                 i.putExtra("profile_img",img);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right,
+                        R.anim.slide_out_left);
 
             }
         });
@@ -161,6 +163,8 @@ String userid;
 
         if (item.getItemId() == R.id.drawer_about_us){
             startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
         else if (item.getItemId() == R.id.drawer_home){
             navController.navigate(R.id.bottom_home);
@@ -172,29 +176,44 @@ String userid;
             intent.setType("text/plain");
             intent.putExtra(Intent.EXTRA_TEXT, "Share this app.");
             startActivity(Intent.createChooser(intent, "Share using"));
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
           //  startActivity(new Intent(getApplicationContext(), HomeFragment.class));
         }
 
 
         else if (item.getItemId() == R.id.drawer_reset_password){
             startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
         else if (item.getItemId() == R.id.drawer_contact_us){
             startActivity(new Intent(getApplicationContext(), ContactUsActivity.class));
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
         else if (item.getItemId() == R.id.drawer_rate_us){
             startActivity(new Intent(getApplicationContext(), RateUsActivity.class));
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
         else if (item.getItemId() == R.id.drawer_chat_with_us){
             startActivity(new Intent(getApplicationContext(), ChatWIthUsActivity.class));
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
         else if(item.getItemId() == R.id.drawer_faq){
             navController.navigate(R.id.bottom_faq);
             closeDrawer();
+
         }
 
         else if(item.getItemId() == R.id.drawer_our_client){
             startActivity(new Intent(getApplicationContext(), OurClientActivity.class));
+            overridePendingTransition(
+                    R.anim.slide_in_right, R.anim.slide_out_left);
 
         }
         else if (item.getItemId() == R.id.drawer_jobs){
@@ -234,12 +253,12 @@ String userid;
         else if (item.getItemId() == R.id.drawer_job_app_status1){
                       startActivity(new Intent(getApplicationContext(), ScheduleInterviewActivity.class));
             overridePendingTransition(
-                    R.anim.fade_in, R.anim.fade_in);
+                    R.anim.slide_in_right, R.anim.slide_out_left);
 
         }  else if (item.getItemId() == R.id.drawer_job_app_status2){
                       startActivity(new Intent(getApplicationContext(), RejectedApplicationActivity.class));
             overridePendingTransition(
-                    R.anim.fade_in, R.anim.fade_in);
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
         else if (item.getItemId() == R.id.drawer_jobs1){
             navController.navigate(R.id.bottom_jobs);
@@ -248,29 +267,29 @@ String userid;
         else if (item.getItemId() == R.id.drawer_jobs2){
             startActivity(new Intent(getApplicationContext(), JobsShortListedActivity.class));
             overridePendingTransition(
-                    R.anim.fade_in, R.anim.fade_in);
+                    R.anim.slide_in_right, R.anim.slide_out_left);
 
         }
         else if (item.getItemId() == R.id.drawer_jobs3){
            startActivity(new Intent(getApplicationContext(), JobsRecommendedActivity.class));
             overridePendingTransition(
-                    R.anim.fade_in, R.anim.fade_in);
+                    R.anim.slide_in_right, R.anim.slide_out_left);
 
         }
         else if (item.getItemId() == R.id.drawer_subscription_plans){
             startActivity(new Intent(getApplicationContext(), PackageActivity.class));
             overridePendingTransition(
-                    R.anim.fade_in, R.anim.fade_in);
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
         else if (item.getItemId() == R.id.drawer_resume_preview){
             startActivity(new Intent(getApplicationContext(), ResumeActivity.class));
             overridePendingTransition(
-                    R.anim.fade_in, R.anim.fade_in);
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
  else if (item.getItemId() == R.id.drawer_testimonial){
             startActivity(new Intent(getApplicationContext(), TestimonialActivity.class));
             overridePendingTransition(
-                    R.anim.fade_in, R.anim.fade_in);
+                    R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
 

@@ -1,25 +1,27 @@
 package com.shakticonsultant;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.shakticonsultant.adapter.PackageListAdapter;
+import com.shakticonsultant.adapter.FaqListAdapter;
 import com.shakticonsultant.adapter.ScheduleInterviewAdapter;
-import com.shakticonsultant.databinding.ActivityPackageBinding;
 import com.shakticonsultant.databinding.ActivityScheduleInterviewBinding;
-import com.shakticonsultant.responsemodel.PackageResponse;
+import com.shakticonsultant.databinding.FragmentFAQBinding;
+import com.shakticonsultant.databinding.FragmentScheduleInterviewBinding;
+import com.shakticonsultant.responsemodel.FaqsResponse;
 import com.shakticonsultant.responsemodel.ScheduleInterviewResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
@@ -27,43 +29,95 @@ import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.akshit.horizontalcalendar.HorizontalCalendarView;
-import in.akshit.horizontalcalendar.Tools;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ScheduleInterviewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link ScheduleInterviewFragment#newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class ScheduleInterviewFragment extends Fragment {
 
-    ActivityScheduleInterviewBinding binding;
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+    FragmentScheduleInterviewBinding binding;
     DatePickerDialog datePickerDialog;
-ConnectionDetector cd;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityScheduleInterviewBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+    ConnectionDetector cd;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    public ScheduleInterviewFragment() {
+        // Required empty public constructor
+    }
 
-        cd=new ConnectionDetector(ScheduleInterviewActivity.this);
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment FAQFragment.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static ScheduleInterviewFragment newInstance(String param1, String param2) {
+        ScheduleInterviewFragment fragment = new ScheduleInterviewFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentScheduleInterviewBinding.inflate(getLayoutInflater());
+
+        /*binding.layoutFaq1.setOnClickListener(v -> {
+            changeFAQView(binding.layoutFaq1, binding.faq1Question, binding.faq1Answer, binding.faq1Arrow);
+        });
+
+        binding.layoutFaq2.setOnClickListener(v -> {
+            changeFAQView(binding.layoutFaq2, binding.faq2Question, binding.faq2Answer, binding.faq2Arrow);
+        });
+
+        binding.layoutFaq3.setOnClickListener(v -> {
+            changeFAQView(binding.layoutFaq3, binding.faq3Question, binding.faq3Answer, binding.faq3Arrow);
+        });
+*/
+
+        cd=new ConnectionDetector(getActivity());
 
 
         if (!cd.isConnectingToInternet()) {
-            Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
+            Snackbar.make(getActivity().findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
                     .show();
-        }
-        else {
+        }else {
 
             getScheduleInterviewList("1");
 
             binding.imgBackArrow.setOnClickListener(v -> {
-                onBackPressed();
-                overridePendingTransition(R.anim.slide_in_left,
+                getActivity().onBackPressed();
+                getActivity().overridePendingTransition(R.anim.slide_in_left,
                         R.anim.slide_out_right);
             });
             binding.btnToday.setOnClickListener(v -> {
@@ -71,15 +125,16 @@ ConnectionDetector cd;
                 getScheduleInterviewList("1");
 
             });
-binding.btnUpcoming.setOnClickListener(v -> {
-    setButtonSelected(binding.btnUpcoming, binding.btnToday);
-    getScheduleInterviewList("1");
+            binding.btnUpcoming.setOnClickListener(v -> {
+                setButtonSelected(binding.btnUpcoming, binding.btnToday);
+                getScheduleInterviewList("1");
 
 
-});
-
+            });
         }
+        return binding.getRoot();
     }
+
 
     private void setButtonSelected(AppCompatButton buttonToSelect, AppCompatButton buttonToDeselect){
         buttonToSelect.setBackgroundResource(R.drawable.custom_button_bg);
@@ -89,17 +144,13 @@ binding.btnUpcoming.setOnClickListener(v -> {
         buttonToDeselect.setTextColor(Color.parseColor("#000000"));
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-    }
 
 
     public void getScheduleInterviewList(String type) {
-          binding.progressBarpackage.setVisibility(View.VISIBLE);
+        binding.progressBarpackage.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-         map.put("user_id", AppPrefrences.getUserid(ScheduleInterviewActivity.this));
-         map.put("type", type);
+        map.put("user_id", AppPrefrences.getUserid(getActivity()));
+        map.put("type", type);
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -118,9 +169,9 @@ binding.btnUpcoming.setOnClickListener(v -> {
                         binding.imgEmpty.setVisibility(View.GONE);
                         binding.recyclerpackage.setVisibility(View.VISIBLE);
 
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ScheduleInterviewActivity.this);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.recyclerpackage.setLayoutManager(linearLayoutManager);
-                        ScheduleInterviewAdapter adapter=new ScheduleInterviewAdapter(ScheduleInterviewActivity.this,response.body().getData());
+                        ScheduleInterviewAdapter adapter=new ScheduleInterviewAdapter(getActivity(),response.body().getData());
                         binding.recyclerpackage.setAdapter(adapter);
                         binding.recyclerpackage.getAdapter().notifyDataSetChanged();
 
@@ -150,8 +201,10 @@ binding.btnUpcoming.setOnClickListener(v -> {
                 binding.recyclerpackage.setVisibility(View.GONE);
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                Utils.showFailureDialog(ScheduleInterviewActivity.this, "Something went wrong!");
+                Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });
     }
+
+
 }

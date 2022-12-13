@@ -187,6 +187,8 @@ public class SignUpActivity extends AppCompatActivity {
                         i.putExtra("userid",response.body().getData().getId());
                         startActivity(i);
                         finish();
+                        overridePendingTransition(R.anim.slide_in_right,
+                                R.anim.slide_out_left);
                     }  else {
                         Utils.showFailureDialog(SignUpActivity.this, response.body().getMessage());
 

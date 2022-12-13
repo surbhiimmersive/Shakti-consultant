@@ -94,8 +94,8 @@ viewHolder.imageView19.setOnClickListener(new View.OnClickListener() {
                 i.putExtra("skill_name",list.get(position).getTitle());
 
                 context.startActivity(i);
-                ((Activity)context).overridePendingTransition(R.anim.fade_in,
-                        R.anim.fade_out);
+                ((Activity)context).overridePendingTransition(R.anim.slide_in_right,
+                        R.anim.slide_out_left);
             }
         });
       //  viewHolder.tvDate.setText(list.get(position).getIcon());

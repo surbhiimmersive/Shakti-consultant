@@ -778,6 +778,8 @@ getJobSkill(response.body().getData().getCategory_id());
                         Intent i=new Intent(EmployeeHistoryActivity.this,MainActivity.class);
                         i.putExtra("userid",userid);
                         startActivity(i);
+                        overridePendingTransition(R.anim.slide_in_right,
+                                R.anim.slide_out_left);
                     }  else {
                         Utils.showFailureDialog(EmployeeHistoryActivity.this, response.body().getMessage());
 

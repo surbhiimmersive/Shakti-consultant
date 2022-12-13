@@ -104,13 +104,16 @@ getprofiledata();
             //  getFaqList();
             binding.imgBackArrow.setOnClickListener(v -> {
                 getActivity().onBackPressed();
+                getActivity().overridePendingTransition(R.anim.slide_in_left,
+                        R.anim.slide_out_right);
             });
 binding.btnPersonalInfo.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         startActivity(new Intent( getActivity(),GetPersonalInfoActivity.class));
 
-
+        getActivity().overridePendingTransition(R.anim.slide_in_right,
+                R.anim.slide_out_left);
 
     }
 });
@@ -125,6 +128,8 @@ binding.imgEdit.setOnClickListener(new View.OnClickListener() {
        i.putExtra("mobile",mobile);
        i.putExtra("profile_img",img);
        startActivity(i);
+        getActivity().overridePendingTransition(R.anim.slide_in_right,
+                R.anim.slide_out_left);
 
     }
 });
@@ -133,7 +138,8 @@ binding.btnAcademicDetail.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
 
         startActivity(new Intent( getActivity(),GetAcademicDetailsActivity.class));
-
+        getActivity().overridePendingTransition(R.anim.slide_in_right,
+                R.anim.slide_out_left);
     }
 });
 binding.btnEmployeeHistory.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +147,8 @@ binding.btnEmployeeHistory.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
 
         startActivity(new Intent( getActivity(),GetEmployeeHistoryActivity.class));
-
+        getActivity().overridePendingTransition(R.anim.slide_in_right,
+                R.anim.slide_out_left);
 
     }
 });

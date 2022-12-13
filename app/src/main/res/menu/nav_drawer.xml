@@ -45,19 +45,19 @@
         >
                        <item android:id="@+id/drawer_jobs1"
                         android:title="Jobs Applied On"
-                        android:icon="@drawable/white_box"
+                        android:icon="@drawable/dot_new"
                         android:visible="false"
                         />
 
                     <item android:id="@+id/drawer_jobs2"
                         android:title="Jobs Shortlisted"
-                        android:icon="@drawable/white_box"
+                        android:icon="@drawable/dot_new"
                         android:visible="false"
                         />
 
                     <item android:id="@+id/drawer_jobs3"
                         android:title="Jobs Recommended"
-                        android:icon="@drawable/white_box"
+                        android:icon="@drawable/dot_new"
                         android:visible="false"
                         />
     </group>
@@ -75,13 +75,13 @@
         >
         <item android:id="@+id/drawer_job_app_status1"
             android:title="Scheduled Interviews"
-            android:icon="@drawable/white_box"
+            android:icon="@drawable/dot"
             android:visible="false"
             />
 
         <item android:id="@+id/drawer_job_app_status2"
             android:title="Rejected application"
-            android:icon="@drawable/white_box"
+            android:icon="@drawable/dot"
             android:visible="false"
             />
 

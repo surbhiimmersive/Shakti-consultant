@@ -3,5 +3,5 @@
     android:color="@color/purple_500">
     <item
         android:id="@android:id/mask"
-        android:drawable="@color/purple_500" />
+        android:drawable="@drawable/custom_button_bg" />
 </ripple>

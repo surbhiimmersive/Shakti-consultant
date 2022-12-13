@@ -62,8 +62,8 @@ ConnectionDetector cd;
     public void onBackPressed() {
 
         super.onBackPressed();
-        overridePendingTransition(R.anim.fade_in,
-                R.anim.fade_out);
+        overridePendingTransition(R.anim.slide_in_left,
+                R.anim.slide_out_right);
 
     }
 

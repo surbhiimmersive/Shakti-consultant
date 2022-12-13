@@ -105,6 +105,8 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
 
             binding.imgBackArrow.setOnClickListener(v -> {
                 onBackPressed();
+                overridePendingTransition(R.anim.slide_in_left,
+                        R.anim.slide_out_right);
             });
 
             binding.shareVia.setOnClickListener(v -> {
@@ -167,9 +169,10 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
 binding.tvrange.setText(response.body().getData().get(0).getStarting_salary()+" "+response.body().getData().get(0).getPay_according());
 binding.tvExperience.setText(response.body().getData().get(0).getWork_experience());
 binding.tvLocation.setText(response.body().getData().get(0).getLocation());
-//binding.textView51.setText(response.body().getData().get(0).getJob_description());
+binding.textView51.setText(response.body().getData().get(0).getJob_description());
+binding.tvdocans.setText(response.body().getData().get(0).getDocument_required());
+binding.tvimportant.setText(response.body().getData().get(0).getImportant_instructions());
 
-                        binding.textView51.loadData(response.body().getData().get(0).getJob_description(), "text/html; charset=utf-8", "UTF-8");
 
                         binding.btnApply.setOnClickListener(v -> {
 

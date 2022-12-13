@@ -32,9 +32,8 @@
 
         <ImageView
             android:id="@+id/img_back_arrow"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView24"
@@ -42,13 +41,25 @@
 
         <ImageView
             android:id="@+id/imageView39"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+
             android:layout_marginEnd="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textView24"
-            app:srcCompat="@drawable/call" />
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+
+        <ImageView
+            android:id="@+id/imageView392"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/imageView39"
+            app:layout_constraintTop_toTopOf="@+id/textView24"
+            app:srcCompat="@android:drawable/ic_menu_share" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
@@ -71,6 +82,7 @@
             android:background="@drawable/custom_button_bg"
             android:fontFamily="@font/poppins_bold"
             android:text="View Resume"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
@@ -84,6 +96,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="30dp"
+            android:visibility="gone"
             android:background="@drawable/cutom_button_unselected_bg"
             android:fontFamily="@font/poppins_bold"
             android:text="Update Resume"
@@ -298,7 +311,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView85" />
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imageView46"
                         android:layout_width="75dp"
                         android:layout_height="80dp"
@@ -400,6 +413,7 @@
                         android:layout_marginStart="45dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="45dp"
+                        android:visibility="gone"
                         android:background="@drawable/custom_view_bg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -412,7 +426,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/roboto"
-                        android:text="Education"
+                        android:text="Employee History"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="9sp"
@@ -447,33 +461,51 @@
                         app:layout_constraintTop_toBottomOf="@+id/view11">
 
                         <TextView
+                            android:id="@+id/textView94"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
+                            android:layout_marginBottom="5sp"
                             android:text="@string/education_1"
                             android:textColor="@color/white"
-                            android:textSize="8sp" />
+                            android:textSize="10sp" />
+                        <TextView
+                            android:id="@+id/tvcurrentname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:lineSpacingExtra="4sp"
+                            android:layout_marginBottom="5sp"
+                            android:text="@string/education_1"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/tvFirstOrgaStream"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="7dp"
+                            android:layout_marginBottom="5sp"
+
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
                             android:text="@string/education_2"
                             android:textColor="@color/white"
-                            android:textSize="8sp" />
+                            android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/tvfirstorganization"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="7dp"
+                            android:layout_marginBottom="5sp"
+
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
                             android:text="@string/education_3"
                             android:textColor="@color/white"
-                            android:textSize="8sp" />
+                            android:textSize="10sp" />
 
                     </LinearLayout>
 
@@ -485,6 +517,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:text="Languages"
                         android:textAllCaps="true"
+                        android:visibility="gone"
                         android:textColor="@color/white"
                         android:textSize="8sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -499,6 +532,8 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="3dp"
                         android:layout_marginEnd="10dp"
+                        android:visibility="gone"
+
                         android:background="@drawable/custom_view_bg"
                         app:layout_constraintEnd_toEndOf="@+id/textView91"
                         app:layout_constraintStart_toStartOf="@+id/textView91"
@@ -513,6 +548,8 @@
                         android:fontFamily="@font/poppins_medium"
                         android:lineSpacingExtra="4sp"
                         android:text="@string/languages"
+                        android:visibility="gone"
+
                         android:textColor="@color/white"
                         android:textSize="8sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -526,7 +563,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="Employee History"
+                    android:text="Education"
                     android:textAllCaps="true"
                     android:textColor="@color/main_text_color"
                     android:textSize="10sp"
@@ -541,14 +578,14 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="30dp"
-                    android:background="@drawable/custom_view_bg"
+                    android:background="@color/main_text_color"
                     android:backgroundTint="@color/main_text_color"
                     app:layout_constraintEnd_toEndOf="@+id/textView93"
                     app:layout_constraintStart_toStartOf="@+id/textView93"
                     app:layout_constraintTop_toBottomOf="@+id/textView93" />
 
                 <TextView
-                    android:id="@+id/textView94"
+                    android:id="@+id/tvPostdegeree"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -556,12 +593,71 @@
                     android:layout_marginEnd="10dp"
                     android:fontFamily="@font/poppins_regular"
                     android:lineSpacingExtra="3sp"
-                    android:text="@string/employee_history1"
+                    android:text=""
                     android:textColor="@color/black"
-                    android:textSize="7sp"
+                    android:textSize="10sp"
+                    android:padding="5sp"
+
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/guideline13"
                     app:layout_constraintTop_toBottomOf="@+id/view13" />
+
+                <TextView
+                    android:id="@+id/tvdegeree"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="10sp"
+                    android:padding="5sp"
+
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="3sp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline13"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPostdegeree" />
+                <TextView
+                    android:id="@+id/tv12degree"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="10sp"
+                    android:padding="5sp"
+
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="3sp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline13"
+                    app:layout_constraintTop_toBottomOf="@+id/tvdegeree" />
+
+                <TextView
+                    android:id="@+id/tv10thboard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:textSize="10sp"
+                    android:padding="5sp"
+
+                    android:fontFamily="@font/poppins_regular"
+                    android:lineSpacingExtra="3sp"
+                    android:text=""
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline13"
+                    app:layout_constraintTop_toBottomOf="@+id/tv12degree" />
 
                 <TextView
                     android:id="@+id/textView95"
@@ -571,11 +667,12 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="ACHIEVEMENTS"
                     android:textAllCaps="true"
+                    android:visibility="gone"
                     android:textColor="@color/main_text_color"
                     android:textSize="9sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/guideline13"
-                    app:layout_constraintTop_toBottomOf="@+id/textView94" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvPostdegeree" />
 
                 <View
                     android:id="@+id/view14"
@@ -583,6 +680,7 @@
                     android:layout_height="1dp"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="2dp"
+                    android:visibility="gone"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/custom_view_bg"
                     android:backgroundTint="@color/main_text_color"
@@ -598,6 +696,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="Update Social History"
                     android:textAllCaps="true"
+                    android:visibility="gone"
                     android:textColor="@color/main_text_color"
                     android:textSize="9sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -611,6 +710,7 @@
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="52dp"
+                    android:visibility="gone"
                     android:background="@drawable/custom_view_bg"
                     android:backgroundTint="@color/main_text_color"
                     app:layout_constraintEnd_toEndOf="@+id/textView96"
@@ -620,6 +720,7 @@
                 <TextView
                     android:id="@+id/textView97"
                     android:layout_width="0dp"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
@@ -631,6 +732,21 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/constraintLayout12"
                     app:layout_constraintTop_toBottomOf="@+id/view15" />
+
+
+
+                <ProgressBar
+                    android:id="@+id/progressResume"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminateDrawable="@drawable/loading_img"
+                    android:visibility="gone"
+                    app:layout_constraintHorizontal_bias="0.523"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.5" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -658,6 +774,7 @@
             android:background="@drawable/buttonbordershadow"
             android:fontFamily="@font/poppins_bold"
             android:text="REFRESH"
+            android:visibility="gone"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -670,6 +787,7 @@
             android:layout_height="42dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:layout_marginEnd="20dp"
             android:background="@drawable/buttonbordershadow"
             android:fontFamily="@font/poppins_bold"
@@ -680,6 +798,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline14"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView8" />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

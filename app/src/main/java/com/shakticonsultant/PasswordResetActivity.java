@@ -39,6 +39,8 @@ cd=new ConnectionDetector(PasswordResetActivity.this);
         userid=getIntent().getStringExtra("userid");
         binding.imgBackArrow.setOnClickListener(v -> {
             onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left,
+                    R.anim.slide_out_right);
         });
 
         binding.btnResetPassword.setOnClickListener(v -> {

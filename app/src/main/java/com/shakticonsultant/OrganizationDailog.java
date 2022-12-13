@@ -76,6 +76,8 @@ ImageView imageView13;
                 intent.putExtra("Organization","no");
                 setResult(2,intent);
                 finish();//finishing activity
+                overridePendingTransition(R.anim.slide_in_left,
+                        R.anim.slide_out_right);
 
             }
         });

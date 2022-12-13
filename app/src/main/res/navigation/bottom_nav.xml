@@ -36,5 +36,10 @@
         android:name="com.shakticonsultant.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+ <activity
+        android:id="@+id/bottom_interview"
+        android:name="com.shakticonsultant.ScheduleInterviewActivity"
+        android:label="fragment_interview_schedule"
+        tools:layout="@layout/activity_schedule_interview" />
 
 </navigation>

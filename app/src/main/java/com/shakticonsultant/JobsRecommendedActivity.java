@@ -33,6 +33,8 @@ public class JobsRecommendedActivity extends AppCompatActivity {
         getJobSkillWiseList();
         binding.imageBackArrow.setOnClickListener(v -> {
             onBackPressed();
+            overridePendingTransition(R.anim.slide_in_left,
+                    R.anim.slide_out_right);
         });
 
     }

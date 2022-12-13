@@ -176,6 +176,8 @@ Intent i=new Intent(OTPActivity.this,PersonalInfoActivity.class);
 i.putExtra("userid",userid);
 startActivity(i);
 finish();
+                        overridePendingTransition(R.anim.slide_in_right,
+                                R.anim.slide_out_left);
 
                     }else{
                         binding.progressBar3.setVisibility(View.GONE);
@@ -270,4 +272,11 @@ finish();
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        overridePendingTransition(R.anim.slide_in_left,
+                R.anim.slide_out_right);
+    }
 }

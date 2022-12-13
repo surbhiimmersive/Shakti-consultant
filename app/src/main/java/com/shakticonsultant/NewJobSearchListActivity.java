@@ -71,6 +71,8 @@ Log.e("max_salary",max_salary);
 
             binding.imageBackArrow.setOnClickListener(v -> {
                 onBackPressed();
+                overridePendingTransition(R.anim.slide_in_left,
+                        R.anim.slide_out_right);
             });
             getJobFilterData();
 
@@ -146,7 +148,7 @@ Log.e("max_salary",max_salary);
                 //    pd_loading.setVisibility(View.GONE);
                 binding.progressBarSkillWise.setVisibility(View.GONE);
 
-                Utils.showFailureDialog(NewJobSearchListActivity.this, "Something went wrong!");
+              //  Utils.showFailureDialog(NewJobSearchListActivity.this, "Something went wrong!");
             }
         });
     }

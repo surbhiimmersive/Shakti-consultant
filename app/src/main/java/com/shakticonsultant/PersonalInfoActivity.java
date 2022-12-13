@@ -1313,7 +1313,8 @@ ConnectionDetector cd;
                     i.putExtra("userid",userid);
                     startActivity(i);
 
-
+                    overridePendingTransition(R.anim.slide_in_right,
+                            R.anim.slide_out_left);
 
                 } else {
                     //   pd_loading.setVisibility(View.GONE);

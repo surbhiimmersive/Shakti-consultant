@@ -70,6 +70,30 @@ private String third_date_of_reliving;
 @Expose
 private String third_stream;
 
+@SerializedName("city")
+@Expose
+private String city;
+
+@SerializedName("state")
+@Expose
+private String state;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getId() {
         return id;
     }
