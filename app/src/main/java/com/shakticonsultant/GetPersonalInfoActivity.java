@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,9 +21,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,6 +34,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.adapter.OrganizationAdapter;
 import com.shakticonsultant.databinding.ActivityPersonalInfoBinding;
+import com.shakticonsultant.databinding.ActivityUpdatePersonalInfoBinding;
 import com.shakticonsultant.responsemodel.AnnualDatumResponse;
 import com.shakticonsultant.responsemodel.AnnualResponse;
 import com.shakticonsultant.responsemodel.CityDatumResponse;
@@ -77,11 +82,12 @@ public class GetPersonalInfoActivity extends AppCompatActivity   {
     RecyclerView recyclerOrganization;
 String uploadedFileName="";
     PermissionManager permission;
-    ActivityPersonalInfoBinding binding;
+    ActivityUpdatePersonalInfoBinding binding;
     DatePickerDialog datePickerDialog;
     ApiInterface apiInterface;
     String strCategoryId;
     String strSkillId;
+    Spinner spSkill;
     String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     Uri selectedResume;
@@ -139,7 +145,7 @@ ConnectionDetector cd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPersonalInfoBinding.inflate(getLayoutInflater());
+        binding = ActivityUpdatePersonalInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         cd = new ConnectionDetector(GetPersonalInfoActivity.this);
@@ -177,7 +183,7 @@ ConnectionDetector cd;
                     startActivity(intent);
                 }
             }
-            userid = getIntent().getStringExtra("userid");
+            userid = AppPrefrences.getUserid(GetPersonalInfoActivity.this);
 
             // set up the RecyclerView
 
@@ -194,6 +200,216 @@ ConnectionDetector cd;
 
                 }
             });
+
+
+
+            binding.edtState.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCityApi(strStateid);
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select State");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstate = (String) spSkill.getSelectedItem();
+                            binding.edtState.setText(strstate);
+                            binding.edtCity.setText("Select City");
+
+                            strStateid = statelist.get(i).getId();
+                            getCityApi(strStateid);
+                            adspinnerStatep.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adspinnerStatep = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_state_name_list);
+                    spSkill.setAdapter(adspinnerStatep);
+                    adspinnerStatep.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strstate.equals("Select State")){
+
+                            Toast.makeText(GetPersonalInfoActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+            binding.edtCity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select City");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            strcity=(String)spSkill.getSelectedItem();
+                            Cityid = cityList.get(i).getId();
+                            binding.edtCity.setText(strcity);
+                            adp1.notifyDataSetChanged();
+                            // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    adp1 = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_city_name_list);
+                    spSkill.setAdapter(adp1);
+                    adp1.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strcity.equals("Select City")){
+
+                            Toast.makeText(GetPersonalInfoActivity.this, "Please select city.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+            binding.edtCategory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select Category");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strDivision = (String) spSkill.getSelectedItem();
+                            strCategoryId = designationList.get(i).getId();
+                            binding.edtCategory.setText(strDivision);
+binding.edtSkill.setText("Select skill");
+                            adpCategory.notifyDataSetChanged();
+                            getJobSkill(strCategoryId);
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                    adpCategory = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_division_list);
+                    spSkill.setAdapter(adpCategory);
+                    adpCategory.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strDivision.equals("Select category")){
+
+                            Toast.makeText(GetPersonalInfoActivity.this, "Please select category.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+            binding.edtSkill.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select Skill");
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strStream = (String) spSkill.getSelectedItem();
+                            strSkillId = streamList.get(i).getId();
+                            binding.edtSkill.setText(strStream);
+
+                            adaStream.notifyDataSetChanged();
+
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                    adaStream = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                    spSkill.setAdapter(adaStream);
+                    adaStream.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strStream.equals("Select skill")){
+
+                            Toast.makeText(GetPersonalInfoActivity.this, "Please select skill.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
             binding.spGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -207,7 +423,7 @@ ConnectionDetector cd;
 
                 }
             });
-            binding.spStream.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+          /*  binding.spStream.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -219,7 +435,7 @@ ConnectionDetector cd;
                 public void onNothingSelected(AdapterView<?> adapterView) {
 
                 }
-            });
+            });*/
             binding.spfirstJobMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -358,7 +574,7 @@ ConnectionDetector cd;
                         snackbar.show();
                     }
                     */
-                    else if (strCategoryId.equals("0")) {
+                    else if (strCategoryId=="0") {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select category.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -366,7 +582,7 @@ ConnectionDetector cd;
 
                         snackbar.show();
 
-                    }else if (strSkillId.equals("0")) {
+                    }else if (strSkillId=="0") {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select skill.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -677,7 +893,7 @@ ConnectionDetector cd;
                         cityList=response.body().getData();
 
                         if(cityList.size()>0){
-                            binding.spCity.setVisibility(View.VISIBLE);
+                           // binding.spCity.setVisibility(View.VISIBLE);
                             binding.spinner4.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<cityList.size();i++){
@@ -1153,7 +1369,7 @@ ConnectionDetector cd;
                         if(streamList.size()>0){
                           //  sp_stream_list.add("Select Skill");
 
-                            binding.spStream.setVisibility(View.VISIBLE);
+                          //  binding.spStream.setVisibility(View.VISIBLE);
                           //  binding.spinner4.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<streamList.size();i++){
@@ -1174,7 +1390,7 @@ ConnectionDetector cd;
                                     }
                                 });
                              adaStream=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_stream_list);
-                                binding.spStream.setAdapter(adaStream);
+                               // binding.spStream.setAdapter(adaStream);
                                 adaStream.notifyDataSetChanged();
 
                             }
@@ -1360,20 +1576,33 @@ ConnectionDetector cd;
                     binding.progresspersonal.setVisibility(View.GONE);
                     if (response.body().isSuccess() == true) {
                         Log.e("User ID", response.body().getData().getId());
+
                         // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
                         /*String content = response.body().getData().getContent();
                         binding.progressemployee.setText(content);
                         //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
                    */
+                        strbirthdate=response.body().getData().getDate_of_birth();
+                        strGender=response.body().getData().getGender();
+                        strprefix=response.body().getData().getName_prefix();
+                        strStateid=response.body().getData().getState_id();
+                        strInterested_id=response.body().getData().getInterested_field();
+                        strfre_exp=response.body().getData().getExperience();
+                        strstate=response.body().getData().getState();
+                        strcity=response.body().getData().getCity();
+                        strCategoryId=response.body().getData().getCategory_id();
+                        Cityid=response.body().getData().getCity_id();
+                        strSkillId=response.body().getData().getSkill_id();
+                       // working_organization_name=response.body().getData().getWorked_organization();
                         Picasso.get()
                                 .load(ApiClient.Photourl+response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                                 .into(binding.imageView8);
-                        getCityApi(response.body().getData().getState_id());
 
-                        binding.edtName.setText(AppPrefrences.getName(GetPersonalInfoActivity.this));
+                        getJobSkill(response.body().getData().getCategory_id());
+                        binding.edtName.setText(response.body().getData().getName());
                         binding.txtbday.setText(response.body().getData().getDate_of_birth());
-                        binding.edtMobile.setText(AppPrefrences.getMobile(GetPersonalInfoActivity.this));
+                        binding.edtMobile.setText(response.body().getData().getPhone());
                         binding.txtdoc.setText(response.body().getData().getResume());
                         binding.uploadProof.setText(response.body().getData().getId_proof());
                         binding.edtVideoLink.setText(response.body().getData().getLecture_video_link());
@@ -1384,6 +1613,10 @@ ConnectionDetector cd;
 
                         binding.someEdit6.setText(response.body().getData().getAlternate_mobile());
                         binding.edtOrganizationName.setText(response.body().getData().getOrganization_name());
+                        binding.edtState.setText(response.body().getData().getState());
+                        binding.edtCity.setText(response.body().getData().getCity());
+                        binding.edtCategory.setText(response.body().getData().getCategoryname());
+                        binding.edtSkill.setText(response.body().getData().getSkillname());
 
                         //  strInterested_id=response.body().getData().getInterested_field();
 

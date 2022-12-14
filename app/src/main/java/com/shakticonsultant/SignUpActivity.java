@@ -190,14 +190,14 @@ public class SignUpActivity extends AppCompatActivity {
                         overridePendingTransition(R.anim.slide_in_right,
                                 R.anim.slide_out_left);
                     }  else {
-                        Utils.showFailureDialog(SignUpActivity.this, response.body().getMessage());
+                        Utils.showFailureDialog(SignUpActivity.this, "Please try sometime later.");
 
 
                     }
                 }else{
 
                     binding.progressBar2.setVisibility(View.GONE);
-                    Utils.showFailureDialog(SignUpActivity.this, "Something went wrong!");
+                    Utils.showFailureDialog(SignUpActivity.this, "Please try sometime later.");
                 }
             }
 

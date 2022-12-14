@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AcademicDetailsActivity"
+    android:background="@color/main_text_color"
+    tools:ignore="SpeakableTextPresentCheck">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constrainRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Update Academic Details"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="XTH CLASS"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner11"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView24">
+
+            <Spinner
+                android:id="@+id/spBoard1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:entries="@array/test9"
+                />
+
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner12"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner11">
+
+            <Spinner
+                android:id="@+id/spYear1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/year"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+        <EditText
+            android:id="@+id/edtXPercent"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:singleLine="true"
+            android:maxLength="3"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="CGPA/Percentage"
+
+            android:inputType="number"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toBottomOf="@+id/spinner11" />
+
+
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="XIITH CLASS"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtXPercent" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner14"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView25">
+
+            <Spinner
+                android:id="@+id/spBoard2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:spinnerMode="dropdown"
+                style="@style/spinner_style"
+                android:entries="@array/test9"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner15"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner14">
+
+            <Spinner
+                android:id="@+id/spYear2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/year"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/edtXIIPercent"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="CGPA/Percentage"
+            android:singleLine="true"
+            android:maxLength="3"
+            android:inputType="number"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toBottomOf="@+id/spinner14" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="POST GRADUATION"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtUniversityName" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner18"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView27">
+
+            <Spinner
+                android:id="@+id/spPostGraduation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test10"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/someEdit14"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Specilization"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toBottomOf="@+id/spinner18" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner19"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit14" >
+
+            <Spinner
+                android:id="@+id/spYear4"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/year"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/someEdit15"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="CGPA/Percentage"
+            android:inputType="number"
+            android:singleLine="true"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit14" />
+
+        <EditText
+            android:id="@+id/edtUniversityName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="University/College Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner17" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:background="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center"
+            android:text="GRADUATION"
+            android:textAlignment="center"
+            android:textColor="@color/main_text_color"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner15" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner16"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView26">
+
+            <Spinner
+                android:id="@+id/spGraduation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test10"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/edtSpecilization"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="Specilization"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toBottomOf="@+id/spinner16" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/spinner17"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/custom_edittext_bg"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtSpecilization">
+
+            <Spinner
+                android:id="@+id/spyear3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown"
+                android:entries="@array/year"
+                />
+
+        </androidx.cardview.widget.CardView>
+
+        <EditText
+            android:id="@+id/edtGraduationPercentage"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="CGPA/Percentage"
+            android:singleLine="true"
+
+            android:maxLength="3"
+            android:inputType="number"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline6"
+            app:layout_constraintTop_toBottomOf="@+id/edtSpecilization" />
+
+        <EditText
+            android:id="@+id/someEdit16"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="University/College Name"
+            android:inputType="text"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color_1"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinner19" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/someEdit16" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_update"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="140dp"
+            android:layout_height="42dp"
+            android:background="@drawable/buttonbordershadow"
+            android:fontFamily="@font/inter_semi_bold"
+            android:text="Update"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <ProgressBar
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressacadeic"
+            android:visibility="gone"
+            android:indeterminateDrawable="@drawable/loading_img"
+            android:foregroundGravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/constrainRecycler"
+            ></ProgressBar>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

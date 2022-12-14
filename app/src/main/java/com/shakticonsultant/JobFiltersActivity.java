@@ -251,7 +251,7 @@ binding.progressBar.setVisibility(View.GONE);
         resultCall.enqueue(new Callback<WorkExpResponse>() {
             @Override
             public void onResponse(Call<WorkExpResponse> call, Response<WorkExpResponse> response) {
-
+sp_work_exp.clear();
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {

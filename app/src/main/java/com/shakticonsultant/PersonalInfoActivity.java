@@ -1328,7 +1328,7 @@ ConnectionDetector cd;
 
                 }
             } else {
-                Toast.makeText(PersonalInfoActivity.this, "ERROR" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(PersonalInfoActivity.this, "ERROR" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                 //
             }
@@ -1340,7 +1340,7 @@ ConnectionDetector cd;
             // pd_loading.setVisibility(View.GONE);
             binding.progresspersonal.setVisibility(View.GONE);
 
-            Toast.makeText(PersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(PersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
         }
     });
 }

@@ -180,7 +180,7 @@ String employee=response.body().getData().getEmployee();
                 }else{
                     binding.idLoadingPB.setVisibility(View.GONE);
 
-                    Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
+                    Utils.showFailureDialog(SignInActivity.this, "Please enter valid email & password");
 
                 }
             }

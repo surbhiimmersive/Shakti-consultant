@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:paddingBottom="15dp">
 
         <TextView
@@ -125,6 +126,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="visible"
+                android:id="@+id/constraintprofile"
                 android:paddingBottom="10dp">
 
                 <ImageView
@@ -496,6 +499,57 @@
 
                         <TextView
                             android:id="@+id/tvfirstorganization"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="5sp"
+
+                            android:fontFamily="@font/poppins_regular"
+                            android:lineSpacingExtra="4sp"
+                            android:text="@string/education_3"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tvSecondStream"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="5sp"
+
+                            android:fontFamily="@font/poppins_regular"
+                            android:lineSpacingExtra="4sp"
+                            android:text="@string/education_2"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tvSecondOrganization"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="5sp"
+
+                            android:fontFamily="@font/poppins_regular"
+                            android:lineSpacingExtra="4sp"
+                            android:text="@string/education_3"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+ <TextView
+                            android:id="@+id/tvThirdStream"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="5sp"
+
+                            android:fontFamily="@font/poppins_regular"
+                            android:lineSpacingExtra="4sp"
+                            android:text="@string/education_2"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/tvThirdOrganization"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="7dp"

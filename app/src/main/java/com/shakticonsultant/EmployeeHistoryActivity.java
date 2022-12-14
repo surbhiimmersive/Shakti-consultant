@@ -597,7 +597,7 @@ getJobSkill(response.body().getData().getCategory_id());
 
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
-
+                    sp_state_name_list.clear();
 
                     if (response.body().isSuccess()==true) {
                         statelist=response.body().getData();

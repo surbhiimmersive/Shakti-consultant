@@ -103,6 +103,9 @@ public class GetPersonalInformationDatumResponse implements Serializable
    @SerializedName("annual_salary")
    @Expose
      private String annual_salary;
+   @SerializedName("category_id")
+   @Expose
+     private String category_id;
    @SerializedName("are_you_working_with_these_group")
    @Expose
      private String are_you_working_with_these_group;
@@ -117,6 +120,25 @@ public class GetPersonalInformationDatumResponse implements Serializable
    @SerializedName("worked_organization")
    @Expose
      private String worked_organization;
+ @SerializedName("skill_id")
+   @Expose
+     private String skill_id;
+
+    public String getCategory_id() {
+        return category_id;
+    }
+
+    public String getSkill_id() {
+        return skill_id;
+    }
+
+    public void setSkill_id(String skill_id) {
+        this.skill_id = skill_id;
+    }
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
+    }
 
     public String getName() {
         return name;

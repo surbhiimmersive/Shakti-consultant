@@ -35,21 +35,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="pick"
             app:layout_constraintHorizontal_bias="0.5"
-android:visibility="visible"
+            android:visibility="visible"
             android:src="@drawable/add_profile_img"
             android:scaleType="centerInside"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="5sp"
             app:layout_constraintBottom_toTopOf="@+id/spinner"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
-<ImageView
+        <ImageView
             android:id="@+id/imageView7"
             android:layout_width="170dp"
             android:layout_height="170dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="pick"
             app:layout_constraintHorizontal_bias="0.5"
-android:visibility="gone"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="5sp"
             app:layout_constraintBottom_toTopOf="@+id/spinner"
@@ -70,13 +70,13 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView7"
             >
-        <Spinner
-            android:id="@+id/spprefix"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:entries="@array/test"
-            style="@style/spinner_style"
-            android:spinnerMode="dropdown" />
+            <Spinner
+                android:id="@+id/spprefix"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:entries="@array/test"
+                style="@style/spinner_style"
+                android:spinnerMode="dropdown" />
 
         </androidx.cardview.widget.CardView>
 
@@ -140,7 +140,7 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
-   <EditText
+        <EditText
             android:id="@+id/txtbday"
             android:layout_width="match_parent"
             android:layout_height="52dp"
@@ -150,11 +150,11 @@ android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Birthdate"
-       android:keepScreenOn="false"
-       android:focusable="false"
-       android:keyboardNavigationCluster="false"
+            android:keepScreenOn="false"
+            android:focusable="false"
+            android:keyboardNavigationCluster="false"
             android:inputType="text"
-       android:editable="false"
+            android:editable="false"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -272,8 +272,32 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
+                android:visibility="gone"
                 android:entries="@array/test2"
                 />
+
+            <EditText
+                android:id="@+id/edtState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Select State"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:editable="false"
+                android:clickable="true"
+                android:focusable="false"
+                android:outlineProvider="paddedBounds"
+                android:paddingStart="10dp"
+                android:textColor="@color/input_text_color"
+                android:textColorHint="@color/hint_color_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
 
         </androidx.cardview.widget.CardView>
 
@@ -292,14 +316,35 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/spinner3">
 
-        <Spinner
-            android:id="@+id/spCity"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-
-            android:entries="@array/test3"
-            />
+            <Spinner
+                android:id="@+id/spCity"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+android:visibility="gone"
+                android:entries="@array/test3"
+                />
+            <EditText
+                android:id="@+id/edtCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Select City"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:editable="false"
+                android:clickable="true"
+                android:focusable="false"
+                android:outlineProvider="paddedBounds"
+                android:paddingStart="10dp"
+                android:textColor="@color/input_text_color"
+                android:textColorHint="@color/hint_color_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
         </androidx.cardview.widget.CardView>
 
@@ -488,35 +533,35 @@ android:visibility="gone"
                 android:weightSum="2"
                 >
 
-            <RadioButton
-                android:id="@+id/radio_teaching"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_edittext_bg"
-                android:fontFamily="@font/poppins_regular"
-                android:layoutDirection="rtl"
-                android:padding="10dp"
-                android:text="Teaching"
-                android:textAlignment="textStart"
-                android:textSize="12sp" />
+                <RadioButton
+                    android:id="@+id/radio_teaching"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext_bg"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Teaching"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp" />
 
-            <RadioButton
-                android:id="@+id/radio_non_teaching"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_edittext_bg"
-                android:fontFamily="@font/poppins_regular"
-                android:layoutDirection="rtl"
-                android:padding="10dp"
-                android:text="Non-Teaching"
-                android:textAlignment="textStart"
-                android:textSize="12sp" />
+                <RadioButton
+                    android:id="@+id/radio_non_teaching"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext_bg"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Non-Teaching"
+                    android:textAlignment="textStart"
+                    android:textSize="12sp" />
 
             </RadioGroup>
 
@@ -537,14 +582,36 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout3">
 
-        <Spinner
-            android:id="@+id/spDivision"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:spinnerMode="dialog"
-            android:entries="@array/test4"
-            />
+            <Spinner
+                android:id="@+id/spDivision"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:visibility="gone"
+                android:spinnerMode="dialog"
+                android:entries="@array/test4"
+                />
+            <EditText
+                android:id="@+id/edtCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Select category"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:editable="false"
+                android:clickable="true"
+                android:focusable="false"
+                android:outlineProvider="paddedBounds"
+                android:paddingStart="10dp"
+                android:textColor="@color/input_text_color"
+                android:textColorHint="@color/hint_color_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
         </androidx.cardview.widget.CardView>
 
@@ -562,13 +629,36 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardDivision" >
 
-        <Spinner
-            android:id="@+id/spStream"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            style="@style/spinner_style"
-            android:entries="@array/test5"
-            />
+            <Spinner
+                android:id="@+id/spStream"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:visibility="gone"
+                android:entries="@array/test5"
+                />
+            <EditText
+                android:id="@+id/edtSkill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Select skill"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_regular"
+                android:editable="false"
+                android:clickable="true"
+                android:focusable="false"
+                android:outlineProvider="paddedBounds"
+                android:paddingStart="10dp"
+                android:textColor="@color/input_text_color"
+                android:textColorHint="@color/hint_color_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
+
 
         </androidx.cardview.widget.CardView>
 
@@ -587,13 +677,13 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardStream">
 
-        <Spinner
-            android:id="@+id/spSubject"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-           style="@style/spinner_style"
-            android:entries="@array/test6"
-            />
+            <Spinner
+                android:id="@+id/spSubject"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                style="@style/spinner_style"
+                android:entries="@array/test6"
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -638,35 +728,35 @@ android:visibility="gone"
                 android:weightSum="2"
                 >
 
-            <RadioButton
-                android:id="@+id/radio_fresher"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginStart="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_edittext_bg"
-                android:fontFamily="@font/poppins_regular"
-                android:layoutDirection="rtl"
-                android:padding="10dp"
-                android:text="Fresher"
-                android:textAlignment="textStart"
-                android:textSize="14sp" />
+                <RadioButton
+                    android:id="@+id/radio_fresher"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext_bg"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Fresher"
+                    android:textAlignment="textStart"
+                    android:textSize="14sp" />
 
-            <RadioButton
-                android:id="@+id/radio_experienced"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_marginEnd="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_edittext_bg"
-                android:fontFamily="@font/poppins_regular"
-                android:layoutDirection="rtl"
-                android:padding="10dp"
-                android:text="Experienced"
-                android:textAlignment="textStart"
-                android:textSize="14sp" />
+                <RadioButton
+                    android:id="@+id/radio_experienced"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/custom_edittext_bg"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layoutDirection="rtl"
+                    android:padding="10dp"
+                    android:text="Experienced"
+                    android:textAlignment="textStart"
+                    android:textSize="14sp" />
 
             </RadioGroup>
         </LinearLayout>
@@ -752,13 +842,13 @@ android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17">
 
-            <Spinner
-                android:id="@+id/spfirst_job_month"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:entries="@array/month"
-              />
+                <Spinner
+                    android:id="@+id/spfirst_job_month"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    style="@style/spinner_style"
+                    android:entries="@array/month"
+                    />
 
 
             </com.google.android.material.card.MaterialCardView>
@@ -785,45 +875,45 @@ android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" >
 
-            <Spinner
-                android:id="@+id/spfirstjobyear"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:entries="@array/year"
-               />
+                <Spinner
+                    android:id="@+id/spfirstjobyear"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    style="@style/spinner_style"
+                    android:entries="@array/year"
+                    />
 
             </com.google.android.material.card.MaterialCardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-       <!-- <EditText
-            android:id="@+id/someEdit9"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/custom_edittext_bg"
-            android:fontFamily="@font/poppins_regular"
-            android:hint="Annual Salary"
-            android:inputType="number"
-            android:outlineProvider="paddedBounds"
-            android:paddingStart="10dp"
-            android:textColor="@color/input_text_color"
-            android:textColorHint="@color/hint_color_1"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
--->
+        <!-- <EditText
+             android:id="@+id/someEdit9"
+             android:layout_width="match_parent"
+             android:layout_height="52dp"
+             android:layout_marginStart="30dp"
+             android:layout_marginTop="15dp"
+             android:layout_marginEnd="30dp"
+             android:background="@drawable/custom_edittext_bg"
+             android:fontFamily="@font/poppins_regular"
+             android:hint="Annual Salary"
+             android:inputType="number"
+             android:outlineProvider="paddedBounds"
+             android:paddingStart="10dp"
+             android:textColor="@color/input_text_color"
+             android:textColorHint="@color/hint_color_1"
+             android:textSize="14sp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHorizontal_bias="0.5"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+ -->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAnnual"
             android:layout_width="0dp"
             android:layout_height="50dp"
-android:visibility="gone"
+            android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
             android:layout_marginStart="30dp"

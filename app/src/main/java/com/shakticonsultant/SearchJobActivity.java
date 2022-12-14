@@ -122,7 +122,7 @@ binding.imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
 
-               // sp_city_name_list.clear();
+               sp_city_name_list.clear();
                 if (response.isSuccessful()) {
 
                     // binding.progressInfo.setVisibility(View.GONE);
@@ -187,7 +187,7 @@ binding.imgSearch.setOnClickListener(new View.OnClickListener() {
         resultCall.enqueue(new Callback<WorkExpResponse>() {
             @Override
             public void onResponse(Call<WorkExpResponse> call, Response<WorkExpResponse> response) {
-
+sp_work_exp.clear();
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -257,7 +257,7 @@ binding.imgSearch.setOnClickListener(new View.OnClickListener() {
         resultCall.enqueue(new Callback<interestedSkillResponse>() {
             @Override
             public void onResponse(Call<interestedSkillResponse> call, Response<interestedSkillResponse> response) {
-                sp_city_name_list.clear();
+                sp_stream_list.clear();
                 if (response.isSuccessful()) {
 
                     // binding.progressInfo.setVisibility(View.GONE);
@@ -312,5 +312,14 @@ binding.imgSearch.setOnClickListener(new View.OnClickListener() {
                 //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getCityList();
+        getExperience();
+        getJobSkill();
     }
 }

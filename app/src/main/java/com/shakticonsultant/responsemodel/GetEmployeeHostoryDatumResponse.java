@@ -73,10 +73,32 @@ private String third_stream;
 @SerializedName("city")
 @Expose
 private String city;
+@SerializedName("current_state_name")
+@Expose
+private String current_state_name;
+@SerializedName("current_city_name")
+@Expose
+private String current_city_name;
 
 @SerializedName("state")
 @Expose
 private String state;
+
+    public String getCurrent_state_name() {
+        return current_state_name;
+    }
+
+    public void setCurrent_state_name(String current_state_name) {
+        this.current_state_name = current_state_name;
+    }
+
+    public String getCurrent_city_name() {
+        return current_city_name;
+    }
+
+    public void setCurrent_city_name(String current_city_name) {
+        this.current_city_name = current_city_name;
+    }
 
     public String getCity() {
         return city;

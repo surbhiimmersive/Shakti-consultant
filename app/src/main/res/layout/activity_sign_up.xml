@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_medium"
-                android:text="First Name"
+                android:text="Name"
                 android:textColor="@color/text_color"
                 android:textSize="16sp" />
 
@@ -54,7 +54,6 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
                 android:background="@drawable/custom_edittext_bg"
                 android:fontFamily="@font/poppins_regular"

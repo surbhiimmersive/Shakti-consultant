@@ -1,16 +1,23 @@
 package com.shakticonsultant;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -47,6 +54,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
     List<AnnualDatumResponse> annualList=new ArrayList<>();
     ArrayList<String> sp_annual_income=new ArrayList<>();
     String strAnnual,strAnnual2;
+    String state_id;
     String strstream,strstream1="",strstream2="";
     ArrayList<String> sp_stream_list=new ArrayList<>();
     List<InterestedSkillDatumResponse> streamList=new ArrayList<>();
@@ -62,6 +70,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
     String Cityid,Interested_id;
     ActiivtyGetEmployeeHostoryBinding binding;
     ApiInterface apiInterface;
+    Spinner spSkill;
     int year,month,day;
     ArrayAdapter<String> adpstream;
     ConnectionDetector cd;
@@ -83,6 +92,110 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
             getCatgoryId();
 
             getEmployeeHistoryData();
+
+            binding.edtState.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetEmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCityApi(strStateid);
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select State");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstate = (String) spSkill.getSelectedItem();
+                            binding.edtState.setText(strstate);
+                            binding.edtCity.setText("Select City");
+
+                            strStateid = statelist.get(i).getId();
+                            getCityApi(strStateid);
+                            adspinnerStatep.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adspinnerStatep = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_state_name_list);
+                    spSkill.setAdapter(adspinnerStatep);
+                    adspinnerStatep.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strstate.equals("Select State")){
+
+                            Toast.makeText(GetEmployeeHistoryActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+            binding.edtCity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetEmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select City");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            strcity=(String)spSkill.getSelectedItem();
+                            Cityid = cityList.get(i).getId();
+                            binding.edtCity.setText(strcity);
+                            adp1.notifyDataSetChanged();
+                            // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    adp1 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_city_name_list);
+                    spSkill.setAdapter(adp1);
+                    adp1.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strcity.equals("Select City")){
+
+                            Toast.makeText(GetEmployeeHistoryActivity.this, "Please select city.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+
             binding.someEdit10.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -110,7 +223,178 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                 }
             });
 
+            binding.strStream.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetEmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
 
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                     spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCatgoryId();
+
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstream = (String) spSkill.getSelectedItem();
+                            binding.strStream.setText(strstream);
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adpstream = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                    spSkill.setAdapter(adpstream);
+                    adpstream.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strstream.equals("Select skill")){
+
+                            Toast.makeText(GetEmployeeHistoryActivity.this, "Please select skill.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+    binding.strStream1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetEmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                     spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCatgoryId();
+
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstream1 = (String) spSkill.getSelectedItem();
+                            binding.strStream1.setText(strstream1);
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adpstream = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                    spSkill.setAdapter(adpstream);
+                    adpstream.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+                        dialog.dismiss();
+
+                    });
+
+
+                }
+            });
+   binding.strStream2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetEmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                     spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCatgoryId();
+
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstream2 = (String) spSkill.getSelectedItem();
+                            binding.strStream2.setText(strstream2);
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adpstream = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                    spSkill.setAdapter(adpstream);
+                    adpstream.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+
+                        dialog.dismiss();
+
+                    });
+
+
+                }
+            });
+ binding.strStream3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetEmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                     spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCatgoryId();
+
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstream3 = (String) spSkill.getSelectedItem();
+                            binding.strStream3.setText(strstream3);
+
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adpstream = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                    spSkill.setAdapter(adpstream);
+                    adpstream.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+                        dialog.dismiss();
+
+                    });
+
+
+                }
+            });
 
             binding.someEdit19.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -325,7 +609,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("user_id",userid);
+        map.put("user_id",AppPrefrences.getUserid(GetEmployeeHistoryActivity.this));
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         Call<UserCategoryResponse> resultCall = apiInterface.calluserCategorySkill(map);
@@ -337,6 +621,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     //binding.progressAbout.setVisibility(View.GONE);
                     if (response.body().isSuccess() == true) {
+
                         // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
                         getJobSkill(response.body().getData().getCategory_id());
 
@@ -373,7 +658,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
         resultCall.enqueue(new Callback<interestedSkillResponse>() {
             @Override
             public void onResponse(Call<interestedSkillResponse> call, Response<interestedSkillResponse> response) {
-               // sp_stream_list.clear();
+                sp_stream_list.clear();
                 if (response.isSuccessful()) {
 
                     // binding.progressInfo.setVisibility(View.GONE);
@@ -386,22 +671,24 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
 
                                 sp_stream_list.add(streamList.get(i).getTitle());
 
-
-                                binding.spStream.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+/*
+                                spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                                        strstream = (String) binding.spStream.getSelectedItem();
+                                        strstream = (String) spSkill.getSelectedItem();
+                                        binding.strStream1.setText(strstream);
+
 
                                     }
 
                                     @Override
                                     public void onNothingSelected(AdapterView<?> adapterView) {
-
+                                        dialog.dismiss();
                                     }
-                                });
+                                });*/
 
-                                binding.spStream1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                /*binding.spStream1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -442,12 +729,12 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
 
                                     }
                                 });
-
-                                adpstream = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
-                                binding.spStream.setAdapter(adpstream);
+*/
+                           /*     adpstream = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                                spSkill.setAdapter(adpstream);
                                 adpstream.notifyDataSetChanged();
-
-
+*/
+/*
                                 ArrayAdapter<String> adpstream1 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
                                 binding.spStream1.setAdapter(adpstream1);
                                 adpstream1.notifyDataSetChanged();
@@ -459,7 +746,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
 
                                 ArrayAdapter<String> adpstream3 = new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
                                 binding.spStream3.setAdapter(adpstream3);
-                                adpstream3.notifyDataSetChanged();
+                                adpstream3.notifyDataSetChanged();*/
                             }
 
                         }
@@ -501,7 +788,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
         resultCall.enqueue(new Callback<AnnualResponse>() {
             @Override
             public void onResponse(Call<AnnualResponse> call, Response<AnnualResponse> response) {
-
+                sp_annual_income.clear();
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -602,7 +889,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
         resultCall.enqueue(new Callback<StateResponse>() {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
-
+sp_state_name_list.clear();
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
 
@@ -688,7 +975,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                         cityList=response.body().getData();
 
                         if(cityList.size()>0){
-                            binding.spCity.setVisibility(View.VISIBLE);
+                           // binding.spCity.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<cityList.size();i++){
 
@@ -781,11 +1068,8 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                       /*  startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
 */
-                        AppPrefrences.setUserid(GetEmployeeHistoryActivity.this,userid);
+finish();
 
-                        Intent i=new Intent(GetEmployeeHistoryActivity.this,MainActivity.class);
-                        i.putExtra("userid",userid);
-                        startActivity(i);
                     }  else {
                         Utils.showFailureDialog(GetEmployeeHistoryActivity.this, response.body().getMessage());
 
@@ -824,6 +1108,12 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     binding.progressemployee.setVisibility(View.GONE);
                     if (response.body().isSuccess() == true) {
+                         state_id= response.body().getData().getState();
+
+                        strstream=response.body().getData().getCurrent_stream();
+                        strstream1=response.body().getData().getFirst_stream();
+                        strstream2=response.body().getData().getSecond_stream();
+                        strstream3=response.body().getData().getThird_stream();
                         Log.e("User ID", response.body().getData().getId());
                         // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
                         /*String content = response.body().getData().getContent();
@@ -842,19 +1132,25 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                         binding.someEdit20.setText(response.body().getData().getFirst_date_of_reliving());
                         binding.someEdit23.setText(response.body().getData().getSecond_date_of_reliving());
                         binding.someEdit26.setText(response.body().getData().getThird_date_of_reliving());
-                        binding.someEdit20.setText(response.body().getData().getFirst_date_of_reliving());
-                        binding.someEdit23.setText(response.body().getData().getSecond_date_of_reliving());
-                        binding.someEdit26.setText(response.body().getData().getThird_date_of_reliving());
 
                      //   Toast.makeText(GetEmployeeHistoryActivity.this, ""+response.body().getData().getCurrent_stream(), Toast.LENGTH_SHORT).show();
 
+
                         binding.spAnnual.setSelection(sp_annual_income.indexOf(response.body().getData().getCurrent_annual_salary()));
                         binding.spAnnual2.setSelection(sp_annual_income.indexOf(response.body().getData().getFirst_annual_salary()));
-                        binding.spStream.setSelection(sp_stream_list.indexOf(response.body().getData().getCurrent_stream()));
-                        binding.spStream1.setSelection(sp_stream_list.indexOf(response.body().getData().getFirst_stream()));
-                        binding.spStream2.setSelection(sp_stream_list.indexOf(response.body().getData().getSecond_stream()));
-                        binding.spStream3.setSelection(sp_stream_list.indexOf(response.body().getData().getThird_stream()));
+                        binding.spEmployeeStream.setSelection(sp_stream_list.indexOf(strstream));
+                     /*   binding.spStream1.setSelection(sp_stream_list.indexOf(strstream1));
+                        binding.spStream2.setSelection(sp_stream_list.indexOf(strstream2));
+                        binding.spStream3.setSelection(sp_stream_list.indexOf(strstream3));*/
+                        binding.spState.setSelection(sp_state_name_list.indexOf(response.body().getData().getState()));
+getCityApi(state_id);
 
+binding.strStream.setText(response.body().getData().getCurrent_stream());
+binding.strStream2.setText(response.body().getData().getFirst_stream());
+binding.strStream1.setText(response.body().getData().getSecond_stream());
+binding.strStream3.setText(response.body().getData().getThird_stream());
+binding.edtState.setText(response.body().getData().getCurrent_state_name());
+binding.edtCity.setText(response.body().getData().getCurrent_city_name());
 
                     } else {
                         //Utils.showFailureDialog(GetEmployeeHistoryActivity.this, response.body().getMessage());
@@ -873,6 +1169,29 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        getAnnualSalary();
+        getStateListApi();
+       getCatgoryId();
 
+        getEmployeeHistoryData();
+        getCityApi(state_id);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getAnnualSalary();
+        getStateListApi();
+       getCatgoryId();
+
+        getEmployeeHistoryData();
+        getCityApi(state_id);
+
+    }
 }

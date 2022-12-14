@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivityAcademicDetailsBinding;
+import com.shakticonsultant.databinding.ActivityUpdateAcademicBinding;
 import com.shakticonsultant.responsemodel.BoardDatumResponse;
 import com.shakticonsultant.responsemodel.BoardResponse;
 import com.shakticonsultant.responsemodel.CommonResponse;
@@ -37,7 +38,7 @@ import retrofit2.Response;
 
 public class GetAcademicDetailsActivity extends AppCompatActivity {
 
-    ActivityAcademicDetailsBinding binding;
+    ActivityUpdateAcademicBinding binding;
  ApiInterface apiInterface;
     List<BoardDatumResponse> boardList=new ArrayList<>();
     List<EducationDatumResponse> graduationList=new ArrayList<>();
@@ -55,7 +56,7 @@ ConnectionDetector cd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAcademicDetailsBinding.inflate(getLayoutInflater());
+        binding = ActivityUpdateAcademicBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
        userid=getIntent().getStringExtra("userid");
@@ -85,6 +86,8 @@ ConnectionDetector cd;
 
                 }
             });
+
+
 
             binding.spYear2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -555,7 +558,6 @@ ConnectionDetector cd;
                         binding.spYear4.setSelection(Arrays.asList(year).indexOf(response.body().getData().getPassed_year_postgraduation()));
 
 
-
                     /*    ArrayAdapter<String> currentadp=new ArrayAdapter<String>(GetAcademicDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_board_list);
                         currentadp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         binding.spBoard1.setAdapter(currentadp);
@@ -584,5 +586,25 @@ ConnectionDetector cd;
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        getBoardListApi();
+
+        getEducationApi();
+        getPostEducationApi();
+        getAcademicdata();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getBoardListApi();
+
+        getEducationApi();
+        getPostEducationApi();
+        getAcademicdata();
+    }
 }
