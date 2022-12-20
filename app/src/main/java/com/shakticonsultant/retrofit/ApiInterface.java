@@ -224,6 +224,11 @@ public interface ApiInterface {
 
    @GET("testimonial")
    Call<TestimonialResponse> callTestimonialApi();
+ @GET("privacy")
+   Call<AboutResponse> callPrivacyPolicy();
+
+ @GET("terms")
+   Call<AboutResponse> callTermsCondition();
 
    @GET("workExperience")
    Call<WorkExpResponse> callWorkExperience();

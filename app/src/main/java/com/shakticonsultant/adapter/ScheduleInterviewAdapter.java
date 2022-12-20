@@ -3,6 +3,7 @@ package com.shakticonsultant.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class ScheduleInterviewAdapter extends RecyclerView.Adapter<ScheduleInter
 
 
         viewHolder.tvTitle.setText(list.get(position).getTitle());
-        viewHolder.tvTime.setText(list.get(position).getSchedule_time());
+        viewHolder.tvTime.setText("Time: "+list.get(position).getSchedule_time());
         viewHolder.tvday.setText(list.get(position).getSchedule_day());
         String currentdate = list.get(position).getSchedule_date();
         String[] separated = currentdate.split("-");
@@ -69,7 +70,10 @@ public class ScheduleInterviewAdapter extends RecyclerView.Adapter<ScheduleInter
             @Override
             public void onClick(View view) {
 
-
+            /*    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(position).getGoogle_meet_link()));
+                context.startActivity(intent);
+*/
+                context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://"+list.get(position).getGoogle_meet_link())));
 
             }
         });

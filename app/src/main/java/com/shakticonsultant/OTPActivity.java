@@ -41,7 +41,7 @@ String userid;
 String otp;
 ConnectionDetector cd;
 TextView txtResend;
-String strConcat;
+String strConcat,name,mobile;
     String stredt1,stredt2,stredt3,stredt4;
 
     @Override
@@ -55,6 +55,8 @@ String strConcat;
        ShowHideKeyboard.showKeyboard(binding.otpView);
 
 userid=getIntent().getStringExtra("userid");
+        name=getIntent().getStringExtra("name");
+        mobile=getIntent().getStringExtra("mobile");
         binding.edt1.addTextChangedListener(this);
         binding.edt2.addTextChangedListener(this);
         binding.edt3.addTextChangedListener(this);
@@ -84,9 +86,16 @@ binding.txtResend.setOnClickListener(new View.OnClickListener() {
 
         {
             // Utils.showFailureDialog(OtpVerificationActivity.this, "Please enter OTP");
-            Snackbar.make(findViewById(android.R.id.content), "The otp field is required.", Snackbar.LENGTH_LONG)
+           /* Snackbar.make(findViewById(android.R.id.content), "The otp is required.", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
-                    .show();
+                    .show();*/
+
+            Snackbar snackbar = Snackbar.make(binding.getRoot(), "The otp is required.", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null);
+            View sbView = snackbar.getView();
+            sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+            snackbar.show();
         } else {
             resendOtpApi();
         }
@@ -123,9 +132,17 @@ if(binding.otpView.getOtp().equals("")){
 
                 {
                     // Utils.showFailureDialog(OtpVerificationActivity.this, "Please enter OTP");
-                    Snackbar.make(findViewById(android.R.id.content), "The otp field is required.", Snackbar.LENGTH_LONG)
+                  /*  Snackbar.make(findViewById(android.R.id.content), "The otp is required.", Snackbar.LENGTH_LONG)
                             .setActionTextColor(Color.RED)
-                            .show();
+                            .show();*/
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The otp is required.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
+
+
                 } else {
                     OtpApi();
                 }
@@ -174,6 +191,8 @@ if(binding.otpView.getOtp().equals("")){
                       //  startActivity(new Intent(OTPActivity.this, PersonalInfoActivity.class));                    }  else {
 Intent i=new Intent(OTPActivity.this,PersonalInfoActivity.class);
 i.putExtra("userid",userid);
+i.putExtra("name",name);
+i.putExtra("mobile",mobile);
 startActivity(i);
 finish();
                         overridePendingTransition(R.anim.slide_in_right,
@@ -188,9 +207,16 @@ finish();
                 }else{
 
                     binding.progressBar3.setVisibility(View.GONE);
-                    Snackbar.make(findViewById(android.R.id.content), "The valid otp is required.", Snackbar.LENGTH_LONG)
+                  /*  Snackbar.make(findViewById(android.R.id.content), "The valid otp is required.", Snackbar.LENGTH_LONG)
                             .setActionTextColor(Color.RED)
-                            .show();
+                            .show();*/
+
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The valid otp is required.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
                  //  Utils.showFailureDialog(OTPActivity.this,"OTP not match.");
                 }
             }

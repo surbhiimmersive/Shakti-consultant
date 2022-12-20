@@ -12,6 +12,10 @@ public class LoginDatum implements Serializable
 @Expose
 private String id;
 
+@SerializedName("experience")
+@Expose
+private String experience;
+
 @SerializedName("name")
 @Expose
 private String name;
@@ -140,5 +144,13 @@ private String category_id;
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
     }
 }

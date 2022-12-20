@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.shakticonsultant.Interface.FevInterface;
 import com.shakticonsultant.JobDescriptionActivity;
 import com.shakticonsultant.R;
 import com.shakticonsultant.responsemodel.FavouriteResponse;
@@ -29,22 +30,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShortListAdapter extends RecyclerView.Adapter<ShortListAdapter.ViewHolder> {
+public class ShortListAdapter<fevInterface> extends RecyclerView.Adapter<ShortListAdapter.ViewHolder> {
 
     List<JobShortListDatumResponse> list;
     Context context;
-
+FevInterface fevInterface;
     public ShortListAdapter(Context context) {
 
         this.context = context;
         this.list = list;
+        this.fevInterface = fevInterface;
     }
 
-    public ShortListAdapter(Context context, List<JobShortListDatumResponse> list) {
+    public ShortListAdapter(Context context, List<JobShortListDatumResponse> list,FevInterface fevInterface) {
 
         this.context = context;
         this.list = list;
+
     }
+    //this.fevInterface = fevInterface;
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -167,6 +171,9 @@ context.startActivity(i);
                     if (response.body().isSuccess()==true) {
                         if(response.body().getFavorite()==1) {
                             viewHolder.imageView19.setBackground(context.getDrawable(R.drawable.ic_like_c));
+
+
+
                         }else{
 
                             viewHolder.imageView19.setBackground(context.getDrawable(R.drawable.black_like));

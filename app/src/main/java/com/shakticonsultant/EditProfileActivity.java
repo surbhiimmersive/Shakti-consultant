@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -86,6 +87,8 @@ binding.edtMobile.setText(mobile);
         Picasso.get()
                 .load(ApiClient.Photourl+img)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .resize(400,300)
+                .centerCrop(Gravity.TOP)
                 .into(binding.imageView6);
 
         binding.imageView6.setOnClickListener(new View.OnClickListener() {
@@ -96,6 +99,14 @@ binding.edtMobile.setText(mobile);
                 pick(view);
             }
         });
+        /*binding.imgEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                pick(view);
+            }
+        });*/
         binding.imgArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -262,9 +273,9 @@ finish();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                binding.imageView6.setVisibility(View.VISIBLE);
                 binding.imageView6.setImageBitmap(bitmap);
 
+                binding.imgEdit.setVisibility(View.VISIBLE);
 
             }
 
@@ -274,4 +285,4 @@ finish();
     }
 
 
-    }
+}

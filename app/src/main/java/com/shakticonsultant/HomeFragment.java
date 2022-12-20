@@ -334,7 +334,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                  //  binding.progressBarcategory.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -350,7 +350,7 @@ public class HomeFragment extends Fragment {
 
 
                     } else {
-                        binding.progressBarcategory.setVisibility(View.GONE);
+                     //   binding.progressBarcategory.setVisibility(View.GONE);
                        // binding.lEmpty.setVisibility(View.VISIBLE);
                       //  binding.recycLatestJob.setVisibility(View.GONE);
 
@@ -396,7 +396,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                  //  binding.progressBarcategory.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -412,7 +412,7 @@ public class HomeFragment extends Fragment {
 
 
                     } else {
-                        binding.progressBarcategory.setVisibility(View.GONE);
+                      //  binding.progressBarcategory.setVisibility(View.GONE);
                        // binding.lEmpty.setVisibility(View.VISIBLE);
                        // binding.recycLatestJob.setVisibility(View.GONE);
 
@@ -420,7 +420,7 @@ public class HomeFragment extends Fragment {
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                  //  binding.progressBarcategory.setVisibility(View.GONE);
                     //binding.lEmpty.setVisibility(View.VISIBLE);
                     //binding.recycLatestJob.setVisibility(View.GONE);
 

@@ -322,4 +322,14 @@ sp_work_exp.clear();
         getExperience();
         getJobSkill();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getExperience();
+        getJobSkill();
+        getCityList();
+
+    }
 }

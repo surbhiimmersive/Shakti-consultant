@@ -306,4 +306,19 @@ sp_work_exp.clear();
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getCityList();
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCityList();
+
+
+    }
 }

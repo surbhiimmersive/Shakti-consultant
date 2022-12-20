@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Shakti Consultant</string>
 
     <string name="first_org">1<sup>st</sup> PREVIOUS ORGANISATION</string>
@@ -12,7 +13,7 @@
         <item>MS</item>
         <item>MRS</item>
     </string-array>
- <string-array name="month">
+    <string-array name="month">
         <item>Select Month</item>
         <item>January</item>
         <item>February</item>
@@ -63,7 +64,6 @@
         <item>1992</item>
         <item>1990</item>
     </string-array>
-
 
 
     <string-array name="test1">
@@ -151,4 +151,14 @@
     <string name="employee_history">• Physics Teacher, August 2022 – Present\n• Carroll County Public School, Clermont, FL\n• Planned and provided appropriate learning experiences for the students. \n• Supervised students in a variety of school-related facilities.\n• Monitored and evaluated the student outcomes and guided further.\n• Communicated and interacted effectively with students, parents and staff.\n• Provided an atmosphere and environment conducive to development of children.\n• Ensured to develop, select, and modify instructional plans and materials effectively to meet the student’s needs and abilities.\n\n\n\n• Physics Teacher, May 2000 – July 2021\n•  AAkash institute Indore\n• Encouraged the students to be actively engaged in the learning process. \n• Collaborated with peers to enhance the instructional environment.\n• Established and maintained cooperative working relationships.\n• Assumed responsibility to meet course and school-wide performance goals.\n• Ensured to maintain and improve professional competence.</string>
     <string name="employee_history1">• Physics Teacher, August 2022 – Present\n• Carroll County Public School, Clermont, FL\n• Planned and provided appropriate learning experiences for the students.\n• Supervised students in a variety of school-related facilities.\n• Monitored and evaluated the student outcomes and guided further.\n• Communicated and interacted effectively with students, parents and staff.\n• Provided an atmosphere and environment conducive to development of children.\n• Ensured to develop, select, and modify instructional plans and materials effectively to meet the student’s needs and abilities.\n\n\n\n• Physics Teacher, May 2000 – July 2021\n• AAkash institute Indore\n• Encouraged the students to be actively engaged in the learning process.\n• Collaborated with peers to enhance the instructional environment.\n• Established and maintained cooperative working relationships. Assumed responsibility to meet course and school-wide performance goals.\n• Ensured to maintain and improve professional competence.</string>
     <string name="declaration"><b>Declaration:</b>\nI agree to all terms and condition. I certify that all statements &amp; information above are complete &amp; correct to the best of my knowledge and belief.</string>
+    <string name="title_activity_payment_integration">PaymentIntegrationActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_payment">PaymentActivity</string>
 </resources>

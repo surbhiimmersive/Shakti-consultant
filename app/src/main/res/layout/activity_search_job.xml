@@ -80,37 +80,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView15">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_medium"
-                android:text="City"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/spinner11"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="5dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView24"
-                app:strokeColor="#E4E4E4"
-                app:strokeWidth="1dp">
-
-                <Spinner
-                    android:id="@+id/spCity"
-                    style="@style/spinner_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:entries="@array/test3" />
-
-            </com.google.android.material.card.MaterialCardView>
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -151,7 +120,8 @@
                         android:layout_height="50dp"
                         android:hint="Min Salary"
                         android:backgroundTint="@android:color/transparent"
-
+                        android:inputType="number"
+                        android:maxLength="8"
                         android:singleLine="true"
                         android:textSize="14sp"
                         android:clickable="true"
@@ -196,6 +166,8 @@
                         android:singleLine="true"
                         android:backgroundTint="@android:color/transparent"
                         android:textSize="14sp"
+                        android:inputType="number"
+                        android:maxLength="8"
                         android:clickable="true"
                         android:focusable="true"
                         android:layout_marginStart="5dp"
@@ -203,6 +175,40 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="City"
+                android:layout_marginTop="15dp"
+
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/spinner11"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView24"
+                app:strokeColor="#E4E4E4"
+                app:strokeWidth="1dp">
+
+                <Spinner
+                    android:id="@+id/spCity"
+                    style="@style/spinner_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:spinnerMode="dialog"
+                    android:entries="@array/test3" />
+
+            </com.google.android.material.card.MaterialCardView>
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -231,6 +237,8 @@
                     style="@style/spinner_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:spinnerMode="dialog"
+
                     android:entries="@array/test17" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -262,6 +270,8 @@
                     style="@style/spinner_style"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:spinnerMode="dialog"
+
                     android:entries="@array/test18" />
 
             </com.google.android.material.card.MaterialCardView>

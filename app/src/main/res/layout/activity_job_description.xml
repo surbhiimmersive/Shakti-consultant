@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/share_via"
+            android:id="@+id/imgShare"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="25dp"
@@ -39,9 +39,9 @@
             android:layout_marginEnd="10dp"
             android:visibility="gone"
             android:src="@drawable/favourite_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/share_via"
-            app:layout_constraintEnd_toStartOf="@+id/share_via"
-            app:layout_constraintTop_toTopOf="@+id/share_via" />
+            app:layout_constraintBottom_toBottomOf="@+id/imgShare"
+            app:layout_constraintEnd_toStartOf="@+id/imgShare"
+            app:layout_constraintTop_toTopOf="@+id/imgShare" />
 
         <TextView
             android:id="@+id/textView49"
@@ -196,7 +196,7 @@ android:visibility="gone"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/money_coloured" />
+                    android:src="@drawable/calender_icon" />
 
                 <TextView
                     android:id="@+id/tvExperience"
@@ -241,7 +241,7 @@ android:visibility="gone"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/money_coloured" />
+                    android:src="@drawable/job_location" />
 
                 <TextView
                     android:id="@+id/tvLocation"

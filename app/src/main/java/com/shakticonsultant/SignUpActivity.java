@@ -53,6 +53,18 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
             }
         });
+ binding.textView4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this, TermsCondition.class));
+            }
+        });
+binding.textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this, PrivacyPolicyActivity.class));
+            }
+        });
 
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                             .show();
                 } else if (binding.edtName.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The name field is required.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The name is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -73,7 +85,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }  else if (binding.edtMobile.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The mobile field is required", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The mobile is required", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -91,7 +103,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }else if (binding.edtEmail.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The email field is required.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The email is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -111,22 +123,42 @@ public class SignUpActivity extends AppCompatActivity {
                 }*/
                 else if (binding.edtPassword.getText().toString().trim().equals("")) {
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password field is required.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
 
-                } else if (binding.edtRePassword.getText().toString().trim().equals("")) {
+                }
 
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The re password field is required.", Snackbar.LENGTH_LONG)
+                else  if (binding.edtPassword.getText().toString().length() < 8) {
+
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Password minimum contain 8 character.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
+                }
+                else if (binding.edtRePassword.getText().toString().trim().equals("")) {
+
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "The re password is required.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
 
+                }
+                else  if (binding.edtRePassword.getText().toString().length() < 8) {
+
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Re Password minimum contain 8 character.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
                 }
                 else if(!(binding.edtPassword.getText().toString().equals(binding.edtRePassword.getText().toString()))){
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Password and re password should be same", Snackbar.LENGTH_LONG)
@@ -185,12 +217,14 @@ public class SignUpActivity extends AppCompatActivity {
 
                         Intent i=new Intent(SignUpActivity.this,OTPActivity.class);
                         i.putExtra("userid",response.body().getData().getId());
+                        i.putExtra("name",response.body().getData().getName());
+                        i.putExtra("mobile",response.body().getData().getMobile());
                         startActivity(i);
                         finish();
                         overridePendingTransition(R.anim.slide_in_right,
                                 R.anim.slide_out_left);
                     }  else {
-                        Utils.showFailureDialog(SignUpActivity.this, "Please try sometime later.");
+                        Utils.showFailureDialog(SignUpActivity.this, response.body().getMessage());
 
 
                     }

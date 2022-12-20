@@ -135,10 +135,11 @@ String strGender;
     ArrayAdapter<String> adaStream;
     ArrayAdapter<String> adpCategory;
     ArrayAdapter<String> adp1;
-    String str_are_you_work="NO",working_organization_name="";
+    String str_are_you_work="NO";
     String str_first_job_month="",str_first_job_year="";
     String Cityid;
     String fullpath = null;
+   String working_organization_name="NA";
     private static final int BUFFER_SIZE = 1024 * 2;
     private static final String IMAGE_DIRECTORY = "/demonuts_upload_gallery";
 ConnectionDetector cd;
@@ -686,6 +687,7 @@ binding.edtSkill.setText("Select skill");
                     binding.button2.setTextColor(getResources().getColor(R.color.main_text_color));
 
                     str_are_you_work = "No";
+                    binding.textView19.setVisibility(View.VISIBLE);
 
                     binding.recyclerOrganization.setVisibility(View.GONE);
                 }
@@ -694,6 +696,8 @@ binding.edtSkill.setText("Select skill");
             binding.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    binding.textView19.setVisibility(View.GONE);
+
                     binding.button.setTextColor(getResources().getColor(R.color.main_text_color));
                     binding.button2.setTextColor(getResources().getColor(R.color.black));
                /* Intent i=new Intent(PersonalInfoActivity.this,OrganizationDailog.class);
@@ -1010,7 +1014,7 @@ binding.edtSkill.setText("Select skill");
           //  Toast.makeText(this, "Name"+message, Toast.LENGTH_SHORT).show();
 
             if(working_organization_name.equals("no")){
-                working_organization_name="";
+                working_organization_name="NA";
                 binding.recyclerOrganization.setVisibility(View.GONE);
             }else {
                 binding.recyclerOrganization.setVisibility(View.VISIBLE);
@@ -1048,9 +1052,13 @@ binding.edtSkill.setText("Select skill");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                binding.imageView7.setVisibility(View.VISIBLE);
+               /* binding.imageView7.setVisibility(View.VISIBLE);
                 binding.imageView8.setVisibility(View.GONE);
                 binding.imageView7.setImageBitmap(bitmap);
+*/
+
+                binding.imageView6.setImageBitmap(bitmap);
+                binding.imgEdit.setVisibility(View.VISIBLE);
 
 
             }
@@ -1597,7 +1605,7 @@ binding.edtSkill.setText("Select skill");
                         Picasso.get()
                                 .load(ApiClient.Photourl+response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
-                                .into(binding.imageView8);
+                                .into(binding.imageView6);
 
                         getJobSkill(response.body().getData().getCategory_id());
                         binding.edtName.setText(response.body().getData().getName());

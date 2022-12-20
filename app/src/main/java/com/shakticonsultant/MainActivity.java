@@ -65,7 +65,7 @@ String userid;
 
 
         userid = getIntent().getStringExtra("userid");
-       // Toast.makeText(this, ""+AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
         /* Navigation Drawer */
         binding.navView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
 
@@ -185,7 +185,7 @@ String userid;
 
 
         else if (item.getItemId() == R.id.drawer_reset_password){
-            startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
+            startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
         }
@@ -373,6 +373,8 @@ map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
                         Picasso.get()
                                 .load(ApiClient.Photourl+response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                . resize(400,300)
+                                .centerCrop(Gravity.TOP)
                                 .into(imageView14);
 
 
@@ -393,5 +395,18 @@ map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
                // Utils.showFailureDialog(AboutUsActivity.this, "Something went wrong!");
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getprofiledata();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getprofiledata();
     }
 }

@@ -246,7 +246,8 @@
                         android:layout_height="40dp"
                         android:hint="Min Salary"
                         android:backgroundTint="@android:color/transparent"
-
+android:inputType="number"
+                        android:maxLength="8"
                         android:singleLine="true"
                         android:textSize="14sp"
                         android:clickable="true"
@@ -289,7 +290,8 @@
                         android:layout_height="40dp"
                         android:hint="Max Salary"
                         android:backgroundTint="@android:color/transparent"
-
+                        android:inputType="number"
+                        android:maxLength="8"
                         android:singleLine="true"
                         android:textSize="14sp"
                         android:clickable="true"
@@ -442,6 +444,8 @@
                         style="@style/spinner_style"
                         android:layout_width="match_parent"
                         android:layout_height="33dp"
+                        android:spinnerMode="dialog"
+
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:entries="@array/test15" />

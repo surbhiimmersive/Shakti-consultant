@@ -22,9 +22,8 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.shakticonsultant.ContactUsActivity;
 import com.shakticonsultant.MainActivity;
+import com.shakticonsultant.PaymentIntegration;
 import com.shakticonsultant.R;
 import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.PackageDatumResponse;
@@ -94,7 +93,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
             showDateDialog();
 
         }else {
-
+context.startActivity(new Intent( context, PaymentIntegration.class));
 
         }
     }
@@ -175,6 +174,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
 
                         }
                     }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
             //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
             datePickerDialog.show();
@@ -200,6 +200,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
                             strdate2=dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                         }
                     }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
             //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
             datePickerDialog.show();
@@ -210,10 +211,10 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
 
             if(strdate1.equals("")){
 
-                Toast.makeText(context, "Please select preferred date1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Please Select Valid  Date", Toast.LENGTH_SHORT).show();
             }else if(strdate2.equals("")){
 
-                Toast.makeText(context, "Please select preferred date2", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Please Select Valid  Date ", Toast.LENGTH_SHORT).show();
             }else {
 
                 getApplyJob(strdate1, strdate2,dialog);

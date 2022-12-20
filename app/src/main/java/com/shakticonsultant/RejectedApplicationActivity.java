@@ -47,7 +47,7 @@ cd=new ConnectionDetector(RejectedApplicationActivity.this);
     public void getRejectedJobList() {
         binding.progressrejected.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        map.put("user_id", "4");
+        map.put("user_id", AppPrefrences.getUserid(RejectedApplicationActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
