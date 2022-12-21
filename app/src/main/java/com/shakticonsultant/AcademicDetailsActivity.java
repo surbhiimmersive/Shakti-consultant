@@ -26,7 +26,6 @@ import com.shakticonsultant.responsemodel.EducationResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
-import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -494,7 +493,6 @@ binding.progressacadeic.setVisibility(View.GONE);
 
 
                         if(experience.equals("Fresher")){
-                            AppPrefrences.setUserid(AcademicDetailsActivity.this,userid);
                             Intent i = new Intent(AcademicDetailsActivity.this, MainActivity.class);
                             i.putExtra("userid", userid);
                             startActivity(i);

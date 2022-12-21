@@ -7,9 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.shakticonsultant.Interface.FevInterface;
+<<<<<<< HEAD
 import com.shakticonsultant.adapter.ShortListAdapter;
 import com.shakticonsultant.databinding.ActivityJobsShortListedBinding;
 import com.shakticonsultant.responsemodel.FavouriteResponse;
+=======
+import com.shakticonsultant.adapter.AppliedJobListAdapter;
+import com.shakticonsultant.adapter.ShortListAdapter;
+import com.shakticonsultant.databinding.ActivityJobsShortListedBinding;
+import com.shakticonsultant.responsemodel.FavouriteResponse;
+import com.shakticonsultant.responsemodel.JobAppliedListResponse;
+>>>>>>> github/main
 import com.shakticonsultant.responsemodel.ShortListResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
@@ -72,9 +80,14 @@ public class JobsShortListedActivity extends AppCompatActivity {
                         binding.recyclerView4.setLayoutManager(linearLayoutManager);
                         ShortListAdapter adapter=new ShortListAdapter(JobsShortListedActivity.this, response.body().getData(), new FevInterface() {
                             @Override
+<<<<<<< HEAD
                             public void getFavResponse(Response<FavouriteResponse> respnse) {
 
                                 getShortListApi();
+=======
+                            public void getFavResponse(FavouriteResponse respnse) {
+
+>>>>>>> github/main
 
                             }
                         });
