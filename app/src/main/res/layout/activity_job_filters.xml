@@ -26,6 +26,7 @@
         android:id="@+id/imageView16"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:visibility="gone"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
         android:src="@drawable/alarm_img"
@@ -246,7 +247,8 @@
                         android:layout_height="40dp"
                         android:hint="Min Salary"
                         android:backgroundTint="@android:color/transparent"
-
+android:inputType="number"
+                        android:maxLength="8"
                         android:singleLine="true"
                         android:textSize="14sp"
                         android:clickable="true"
@@ -289,7 +291,8 @@
                         android:layout_height="40dp"
                         android:hint="Max Salary"
                         android:backgroundTint="@android:color/transparent"
-
+                        android:inputType="number"
+                        android:maxLength="8"
                         android:singleLine="true"
                         android:textSize="14sp"
                         android:clickable="true"
@@ -412,7 +415,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/spinner11"
-                android:layout_width="180dp"
+                android:layout_width="300dp"
                 android:layout_height="46dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginTop="50dp"
@@ -442,6 +445,8 @@
                         style="@style/spinner_style"
                         android:layout_width="match_parent"
                         android:layout_height="33dp"
+                        android:spinnerMode="dialog"
+
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="5dp"
                         android:entries="@array/test15" />

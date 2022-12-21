@@ -10,11 +10,15 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.opengl.Visibility;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
@@ -65,7 +69,14 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
         } else {
 
             binding.textView50.setText(skill_name);
+binding.imgShare.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
 
+        share(screenShot(binding.getRoot()));
+
+    }
+});
 
             getJobDetailApi();
             datePickerDialog = new DatePickerDialog(
@@ -109,12 +120,7 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
                         R.anim.slide_out_right);
             });
 
-            binding.shareVia.setOnClickListener(v -> {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, "Share this app.");
-                startActivity(Intent.createChooser(intent, "Share using"));
-            });
+
 
         }
     }
@@ -403,4 +409,25 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
             }
         });
     }
+
+    private Bitmap screenShot(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    private void share(Bitmap bitmap){
+        String pathofBmp=
+                MediaStore.Images.Media.insertImage(getContentResolver(),
+                        bitmap,"title", null);
+        Uri uri = Uri.parse(pathofBmp);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Star App");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(shareIntent, "hello hello"));
+    }
+
 }

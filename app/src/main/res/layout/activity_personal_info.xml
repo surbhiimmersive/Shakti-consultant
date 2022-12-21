@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+       <!-- <ImageView
             android:id="@+id/imageView8"
             android:layout_width="170dp"
             android:layout_height="170dp"
@@ -54,7 +54,43 @@ android:visibility="gone"
             android:layout_marginBottom="5sp"
             app:layout_constraintBottom_toTopOf="@+id/spinner"
             app:layout_constraintTop_toBottomOf="@+id/textView11" />
+-->
 
+
+        <RelativeLayout
+            android:id="@+id/rl_profile"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView11"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="140dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_profile"
+                android:onClick="pick"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/imgEdit"
+                android:background="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="pick"
+                android:layout_alignEnd="@+id/imageView6"
+                android:layout_alignRight="@+id/imageView6"
+                android:layout_alignBottom="@+id/imageView6"
+                android:layout_marginEnd="-5dp"
+                android:layout_marginRight="-5dp"
+                android:padding="1dp"
+                android:src="@drawable/edit_p"
+                android:visibility="invisible" />
+        </RelativeLayout>
         <androidx.cardview.widget.CardView
             android:id="@+id/spinner"
             android:layout_width="0dp"
@@ -68,7 +104,7 @@ android:visibility="gone"
 
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7"
+            app:layout_constraintTop_toBottomOf="@+id/rl_profile"
             >
         <Spinner
             android:id="@+id/spprefix"
@@ -105,7 +141,7 @@ android:visibility="gone"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7">
+            app:layout_constraintTop_toBottomOf="@+id/rl_profile">
 
             <Spinner
                 android:id="@+id/spGender"
@@ -123,11 +159,12 @@ android:visibility="gone"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
-
+            android:imeOptions="actionDone"
             android:singleLine="true"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Full Name"
+            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
 
             android:inputType="text"
             android:outlineProvider="paddedBounds"
@@ -147,9 +184,10 @@ android:visibility="gone"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="30dp"
+       android:imeOptions="actionDone"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Birthdate"
+            android:hint="DOB"
        android:keepScreenOn="false"
        android:focusable="false"
        android:keyboardNavigationCluster="false"
@@ -271,9 +309,32 @@ android:visibility="gone"
                 android:id="@+id/spState"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:visibility="gone"
                 style="@style/spinner_style"
                 android:entries="@array/test2"
                 />
+            <EditText
+                android:id="@+id/edtState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Select State"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:imeOptions="actionDone"
+                android:fontFamily="@font/poppins_regular"
+                android:editable="false"
+                android:clickable="true"
+                android:focusable="false"
+                android:outlineProvider="paddedBounds"
+                android:paddingStart="10dp"
+                android:textColor="@color/input_text_color"
+                android:textColorHint="@color/hint_color_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
         </androidx.cardview.widget.CardView>
 
@@ -297,9 +358,31 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             style="@style/spinner_style"
-
+android:visibility="gone"
             android:entries="@array/test3"
             />
+            <EditText
+                android:id="@+id/edtCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="Select City"
+                android:inputType="text"
+                android:layout_gravity="center"
+                android:imeOptions="actionDone"
+                android:fontFamily="@font/poppins_regular"
+                android:editable="false"
+                android:clickable="true"
+                android:focusable="false"
+                android:outlineProvider="paddedBounds"
+                android:paddingStart="10dp"
+                android:textColor="@color/input_text_color"
+                android:textColorHint="@color/hint_color_1"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
         </androidx.cardview.widget.CardView>
 
@@ -314,6 +397,7 @@ android:visibility="gone"
             android:fontFamily="@font/poppins_regular"
             android:hint="Mobile Number"
             android:inputType="phone"
+            android:imeOptions="actionDone"
             android:maxLength="10"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -335,6 +419,7 @@ android:visibility="gone"
             android:fontFamily="@font/poppins_regular"
             android:hint="Alternate Number"
             android:inputType="phone"
+            android:imeOptions="actionDone"
             android:maxLength="10"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -377,6 +462,7 @@ android:visibility="gone"
             android:layout_marginEnd="30dp"
             android:onClick="pickdoc"
             android:singleLine="true"
+            android:imeOptions="actionDone"
             android:gravity="left|center"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
@@ -406,6 +492,7 @@ android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Upload ID proof"
+            android:imeOptions="actionDone"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
 
@@ -426,6 +513,9 @@ android:visibility="gone"
             android:layout_height="52dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
+            android:textIsSelectable="true"
+            android:imeOptions="actionDone"
+
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
@@ -433,8 +523,7 @@ android:visibility="gone"
             android:outlineProvider="paddedBounds"
 
             android:paddingStart="10dp"
-            android:focusable="false"
-            android:enabled="false"
+
             android:singleLine="true"
             android:textColor="@color/input_text_color"
             android:textColorHint="@color/hint_color_1"
@@ -621,6 +710,7 @@ android:visibility="gone"
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
             android:orientation="horizontal"
             android:weightSum="2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -634,6 +724,7 @@ android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
+
                 android:orientation="horizontal"
                 android:weightSum="2"
                 >
@@ -683,6 +774,8 @@ android:visibility="gone"
             android:hint="Organization Name"
             android:visibility="gone"
             android:inputType="text"
+            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+
             android:singleLine="true"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -757,6 +850,8 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
+                android:spinnerMode="dialog"
+
                 android:entries="@array/month"
               />
 
@@ -790,6 +885,8 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
+                android:spinnerMode="dialog"
+
                 android:entries="@array/year"
                />
 
@@ -863,7 +960,7 @@ android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Are you working with these groups in your career ?"
+                android:text="Are you working with these groups in your career?"
                 android:textAlignment="center"
                 android:textColor="@color/main_text_color"
                 android:textSize="12sp"
@@ -925,6 +1022,7 @@ android:visibility="gone"
                 android:text="Organisation are not selected yet."
                 android:textColor="@color/main_text_color"
                 android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -943,13 +1041,38 @@ android:visibility="gone"
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/lspace"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+android:layout_marginTop="10dp"
+            android:background="@color/main_text_color"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+            android:layout_height="30dp"></LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+
+            android:background="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/lspace"
+            android:layout_height="120dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+android:layout_gravity="center"
+                android:background="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+                android:layout_height="150dp">
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnPersonalSubmit"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="140dp"
             android:layout_height="42dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10sp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/buttonbordershadow"
             android:fontFamily="@font/inter_semi_bold"
             android:text="Submit"
@@ -958,9 +1081,10 @@ android:visibility="gone"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+            app:layout_constraintStart_toStartOf="parent"></androidx.appcompat.widget.AppCompatButton>
 
+            </LinearLayout>
+        </LinearLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constrainRecycler"
             android:layout_width="match_parent"
@@ -973,7 +1097,7 @@ android:visibility="gone"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
-            android:paddingBottom="20dp"
+            android:paddingBottom="40dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

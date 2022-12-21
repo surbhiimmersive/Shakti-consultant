@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:spinnerMode="dialog"
                 android:entries="@array/year"
                 />
 
@@ -117,13 +117,13 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="15dp"
             android:singleLine="true"
-            android:maxLength="3"
+            android:maxLength="5"
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="CGPA/Percentage"
 
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -197,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:spinnerMode="dialog"
                 android:entries="@array/year"
                 />
 
@@ -214,8 +214,8 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="CGPA/Percentage"
             android:singleLine="true"
-            android:maxLength="3"
-            android:inputType="number"
+            android:maxLength="5"
+            android:inputType="numberDecimal"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -275,8 +275,10 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Specilization"
+            android:hint="Specialization"
             android:inputType="text"
+            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -304,7 +306,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:spinnerMode="dialog"
                 android:entries="@array/year"
                 />
 
@@ -320,7 +322,8 @@
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="CGPA/Percentage"
-            android:inputType="number"
+            android:maxLength="5"
+            android:inputType="numberDecimal"
             android:singleLine="true"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -403,8 +406,10 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
-            android:hint="Specilization"
+            android:hint="Specialization"
             android:inputType="text"
+            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -433,7 +438,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:spinnerMode="dialog"
                 android:entries="@array/year"
                 />
 
@@ -451,8 +456,8 @@
             android:hint="CGPA/Percentage"
             android:singleLine="true"
 
-            android:maxLength="3"
-            android:inputType="number"
+            android:maxLength="5"
+            android:inputType="numberDecimal"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"

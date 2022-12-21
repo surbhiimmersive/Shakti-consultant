@@ -168,7 +168,7 @@
                 android:textColor="@color/text_color"
                 android:textSize="16sp" />
 
-            <EditText
+        <!--    <EditText
                 android:id="@+id/edtRePassword"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
@@ -186,16 +186,50 @@
                 android:textColor="@color/input_text_color"
                 android:textColorHint="@color/hint_color"
                 android:elegantTextHeight="true"
-                android:textSize="14sp" />
-<!--
+                android:textSize="14sp" />-->
 
-            <ProgressBar
-                android:id="@+id/progressBar2"
-                style="?android:attr/progressBarStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputLayout_repassword"
                 android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="wrap_content" />
--->
+                android:layout_height="52dp"
+                android:layout_marginTop="5dp"
+                app:boxStrokeWidth="0dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                app:boxStrokeWidthFocused="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:hintEnabled="false"
+                android:elegantTextHeight="true"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView1"
+                app:passwordToggleEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtRePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/custom_edittext_bg"
+                    android:fontFamily="@font/poppins_medium"
+                    android:hint="* * * * * * * *"
+                    android:paddingTop="12dp"
+                    android:maxLength="8"
+                    android:outlineProvider="paddedBounds"
+                    android:inputType="textPassword"
+                    android:elegantTextHeight="true"
+                    app:hintTextColor="@color/hint_color"
+                    android:textColor="@color/input_text_color"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--
+
+                        <ProgressBar
+                            android:id="@+id/progressBar2"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="match_parent"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content" />
+            -->
 
 
             <ProgressBar

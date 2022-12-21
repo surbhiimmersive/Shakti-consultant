@@ -3,6 +3,7 @@ package com.shakticonsultant;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -199,7 +200,13 @@ binding.btnEmployeeHistory.setOnClickListener(new View.OnClickListener() {
                         Picasso.get()
                                 .load(ApiClient.Photourl+ response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
+                                .resize(300,200)
+                                .centerCrop(Gravity.TOP)
+                              //  .fit()
                                 .into(binding.imageView14);
+
+
+
                     } else {
                         // Utils.showFailureDialog(AboutUsActivity.this, response.body().getMessage());
 

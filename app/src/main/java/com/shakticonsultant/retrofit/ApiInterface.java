@@ -21,6 +21,7 @@ import com.shakticonsultant.responsemodel.JobDetailResponse;
 import com.shakticonsultant.responsemodel.JobSkillResponse;
 import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.responsemodel.LoginResponse;
+import com.shakticonsultant.responsemodel.NotificationResponse;
 import com.shakticonsultant.responsemodel.OrganizationResponse;
 import com.shakticonsultant.responsemodel.OurClientResponse;
 import com.shakticonsultant.responsemodel.PackageResponse;
@@ -185,6 +186,10 @@ public interface ApiInterface {
    @FormUrlEncoded
    Call<ShortListResponse>callShortListApi(@FieldMap Map<String, String> params);
 
+   @POST("notificationList")
+   @FormUrlEncoded
+   Call<NotificationResponse>callNotificationList(@FieldMap Map<String, String> params);
+
  @POST("getPersonalDetails")
    @FormUrlEncoded
    Call<GetPersonalInformationResponse>callgetPersonalInformation(@FieldMap Map<String, String> params);
@@ -224,6 +229,11 @@ public interface ApiInterface {
 
    @GET("testimonial")
    Call<TestimonialResponse> callTestimonialApi();
+ @GET("privacy")
+   Call<AboutResponse> callPrivacyPolicy();
+
+ @GET("terms")
+   Call<AboutResponse> callTermsCondition();
 
    @GET("workExperience")
    Call<WorkExpResponse> callWorkExperience();

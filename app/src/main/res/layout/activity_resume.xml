@@ -126,7 +126,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/constraintprofile"
                 android:paddingBottom="10dp">
 
@@ -470,7 +470,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
                             android:layout_marginBottom="5sp"
-                            android:text="@string/education_1"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
                         <TextView
@@ -480,7 +480,7 @@
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
                             android:layout_marginBottom="5sp"
-                            android:text="@string/education_1"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
 
@@ -493,7 +493,7 @@
 
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
-                            android:text="@string/education_2"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
 
@@ -506,7 +506,7 @@
 
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
-                            android:text="@string/education_3"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
 
@@ -519,7 +519,7 @@
 
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
-                            android:text="@string/education_2"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
 
@@ -532,7 +532,7 @@
 
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
-                            android:text="@string/education_3"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
  <TextView
@@ -544,7 +544,7 @@
 
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
-                            android:text="@string/education_2"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
 
@@ -557,7 +557,7 @@
 
                             android:fontFamily="@font/poppins_regular"
                             android:lineSpacingExtra="4sp"
-                            android:text="@string/education_3"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="10sp" />
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "245736312377",
+    "project_id": "shakticonsultant-7a5ca",
+    "storage_bucket": "shakticonsultant-7a5ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245736312377:android:19d2c3b7661baca89787e8",
+        "android_client_info": {
+          "package_name": "com.shakticonsultant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245736312377-hdln3ttht2fp7d3co8nt1gel05tocpnv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXRsOYgkeD-WwqFuQv-ILfvN7RoZHgdtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245736312377-hdln3ttht2fp7d3co8nt1gel05tocpnv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -26,6 +26,7 @@ import com.shakticonsultant.responsemodel.EducationResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -53,6 +54,7 @@ public class AcademicDetailsActivity extends AppCompatActivity {
     String strgraduation="";
     String strpostgraduation="";
     String userid;
+    String experience;
     String stryear1="",stryear2="",stryear3="",stryear4="";
 ConnectionDetector cd;
     @Override
@@ -62,6 +64,7 @@ ConnectionDetector cd;
         setContentView(binding.getRoot());
 
        userid=getIntent().getStringExtra("userid");
+        experience=getIntent().getStringExtra("experience");
        // Toast.makeText(this, "userid"+userid, Toast.LENGTH_SHORT).show();
 
         cd = new ConnectionDetector(AcademicDetailsActivity.this);
@@ -144,7 +147,7 @@ ConnectionDetector cd;
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
-                } else if (stryear1.equals("Select Year")) {
+                }else if (stryear1.equals("Select Year")) {
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Xth year", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
@@ -399,7 +402,7 @@ binding.progressacadeic.setVisibility(View.GONE);
         resultCall.enqueue(new Callback<EducationResponse>() {
             @Override
             public void onResponse(Call<EducationResponse> call, Response<EducationResponse> response) {
-                sp_graduation_list.clear();
+                sp_postgraduation_list.clear();
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -489,12 +492,24 @@ binding.progressacadeic.setVisibility(View.GONE);
                     // binding.progressBar2.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
-                        Intent i=new Intent(AcademicDetailsActivity.this,EmployeeHistoryActivity.class);
-                        i.putExtra("userid",userid);
-                        startActivity(i);
-                        finish();
-                        overridePendingTransition(R.anim.slide_in_right,
-                                R.anim.slide_out_left);
+
+                        if(experience.equals("Fresher")){
+                            AppPrefrences.setUserid(AcademicDetailsActivity.this,userid);
+                            Intent i = new Intent(AcademicDetailsActivity.this, MainActivity.class);
+                            i.putExtra("userid", userid);
+                            startActivity(i);
+                            finish();
+                            overridePendingTransition(R.anim.slide_in_right,
+                                    R.anim.slide_out_left);
+
+                        }else {
+                            Intent i = new Intent(AcademicDetailsActivity.this, EmployeeHistoryActivity.class);
+                            i.putExtra("userid", userid);
+                            startActivity(i);
+                            finish();
+                            overridePendingTransition(R.anim.slide_in_right,
+                                    R.anim.slide_out_left);
+                        }
                     }  else {
                         Utils.showFailureDialog(AcademicDetailsActivity.this, response.body().getMessage());
 
@@ -519,5 +534,24 @@ binding.progressacadeic.setVisibility(View.GONE);
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        getBoardListApi();
+
+        getEducationApi();
+        getPostEducationApi();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getBoardListApi();
+
+        getEducationApi();
+        getPostEducationApi();
+
+    }
 }

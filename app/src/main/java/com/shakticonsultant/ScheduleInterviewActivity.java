@@ -73,7 +73,7 @@ ConnectionDetector cd;
             });
 binding.btnUpcoming.setOnClickListener(v -> {
     setButtonSelected(binding.btnUpcoming, binding.btnToday);
-    getScheduleInterviewList("1");
+    getScheduleInterviewList("2");
 
 
 });
@@ -128,7 +128,7 @@ binding.btnUpcoming.setOnClickListener(v -> {
                         binding.progressBarpackage.setVisibility(View.GONE);
                         binding.tvEmpty.setVisibility(View.VISIBLE);
                         binding.imgEmpty.setVisibility(View.VISIBLE);
-                        binding.recyclerpackage.setVisibility(View.GONE);
+                       // binding.recyclerpackage.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");

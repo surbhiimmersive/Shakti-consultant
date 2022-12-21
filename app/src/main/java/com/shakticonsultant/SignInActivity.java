@@ -1,5 +1,6 @@
 package com.shakticonsultant;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivitySignInBinding;
 import com.shakticonsultant.responsemodel.LoginResponse;
@@ -26,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignInActivity extends AppCompatActivity {
-
+    String  firebaseToken;
     ActivitySignInBinding binding;
     ApiInterface apiInterface;
     ConnectionDetector cd;
@@ -44,6 +47,8 @@ public class SignInActivity extends AppCompatActivity {
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 cd=new ConnectionDetector(SignInActivity.this);
+
+
         binding.tvForgotPassword.setOnClickListener(v -> {
             startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class));
         });
@@ -60,9 +65,9 @@ cd=new ConnectionDetector(SignInActivity.this);
                         .show();
             }
             else
-            if (binding.edtEmail.getText().toString().trim().equals("") || !binding.edtEmail.getText().toString().trim().matches(emailPattern)) {
+            if (binding.edtEmail.getText().toString().equals("") || !binding.edtEmail.getText().toString().matches(emailPattern)) {
 
-                Snackbar snackbar = Snackbar.make(binding.getRoot(), "The valid email field is required.", Snackbar.LENGTH_LONG)
+                Snackbar snackbar = Snackbar.make(binding.getRoot(), "The valid email is required.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -70,10 +75,11 @@ cd=new ConnectionDetector(SignInActivity.this);
                 snackbar.show();
 
             }
+
  else
     if(binding.edtPassword.getText().toString().trim().equals("")) {
 
-        Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password field is required.", Snackbar.LENGTH_LONG)
+        Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password is required.", Snackbar.LENGTH_LONG)
                 .setAction("Action", null);
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -100,6 +106,7 @@ cd=new ConnectionDetector(SignInActivity.this);
 
         map.put("email", binding.edtEmail.getText().toString().trim());
         map.put("password", binding.edtPassword.getText().toString().trim());
+        map.put("fcm_token", AppPrefrences.getUserToken(SignInActivity.this));
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -117,9 +124,13 @@ cd=new ConnectionDetector(SignInActivity.this);
 String personal=response.body().getData().getPersonal();
 String acedemic=response.body().getData().getAcademic();
 String employee=response.body().getData().getEmployee();
+String experience=response.body().getData().getExperience();
                         if(personal.equals("0") && acedemic.equals("0") && employee.equals("0") ) {
                             Intent i = new Intent(SignInActivity.this, PersonalInfoActivity.class);
                             i.putExtra("userid",response.body().getData().getId());
+                            i.putExtra("name",response.body().getData().getName());
+                            i.putExtra("mobile",response.body().getData().getMobile());
+
                             startActivity(i);
                             finish();
                             overridePendingTransition(R.anim.slide_in_right,
@@ -129,6 +140,7 @@ String employee=response.body().getData().getEmployee();
 
                                 Intent i = new Intent(SignInActivity.this, AcademicDetailsActivity.class);
                             i.putExtra("userid",response.body().getData().getId());
+                            i.putExtra("experience",response.body().getData().getExperience());
 
                             startActivity(i);
                                 finish();
@@ -137,16 +149,41 @@ String employee=response.body().getData().getEmployee();
                                     R.anim.slide_out_left);
 
 
-                        }else if(employee.equals("0") ){
+                        }
 
-                            Intent i = new Intent(SignInActivity.this, EmployeeHistoryActivity.class);
-                            i.putExtra("userid",response.body().getData().getId());
+                        else if(employee.equals("0") ){
 
-                            startActivity(i);
-                            finish();
-                            overridePendingTransition(R.anim.slide_in_right,
-                                    R.anim.slide_out_left);
 
+                             if(experience.equals("Fresher")){
+
+                                 AppPrefrences.setUserid(SignInActivity.this,response.body().getData().getId());
+
+                                 AppPrefrences.setLogin_status(SignInActivity.this,true);
+                                 AppPrefrences.setLocation(SignInActivity.this,response.body().getData().getLocation());
+                                 AppPrefrences.setName(SignInActivity.this,response.body().getData().getName());
+                                 AppPrefrences.setMobile(SignInActivity.this,response.body().getData().getMobile());
+                                 AppPrefrences.setMail(SignInActivity.this,response.body().getData().getEmail());
+                                 AppPrefrences.setProfileImg(SignInActivity.this,response.body().getData().getProfile_img());
+                                 AppPrefrences.setSkillId(SignInActivity.this,response.body().getData().getSkill_id());
+                                 AppPrefrences.setCategoryId(SignInActivity.this,response.body().getData().getCategory_id());
+
+                                 Intent i = new Intent(SignInActivity.this, MainActivity.class);
+                                 i.putExtra("userid",response.body().getData().getId());
+
+                                 startActivity(i);
+                                 finish();
+                                 overridePendingTransition(R.anim.slide_in_right,
+                                         R.anim.slide_out_left);
+                            }else {
+
+                                 Intent i = new Intent(SignInActivity.this, EmployeeHistoryActivity.class);
+                                 i.putExtra("userid", response.body().getData().getId());
+
+                                 startActivity(i);
+                                 finish();
+                                 overridePendingTransition(R.anim.slide_in_right,
+                                         R.anim.slide_out_left);
+                             }
                         }else{
                             AppPrefrences.setUserid(SignInActivity.this,response.body().getData().getId());
 

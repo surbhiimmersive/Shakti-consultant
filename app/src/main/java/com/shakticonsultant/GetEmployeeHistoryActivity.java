@@ -217,6 +217,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
 
                                 }
                             }, year, month, day);
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
                     //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
@@ -418,7 +419,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                                 }
                             }, year, month, day);
 
-                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                     datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });binding.someEdit20.setOnClickListener(new View.OnClickListener() {
@@ -443,7 +444,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                                 }
                             }, year, month, day);
 
-                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -469,7 +470,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                                 }
                             }, year, month, day);
 
-                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                      datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -495,7 +496,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                                 }
                             }, year, month, day);
 
-                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                       datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });binding.someEdit25.setOnClickListener(new View.OnClickListener() {
@@ -520,7 +521,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                                 }
                             }, year, month, day);
 
-                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                       datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -546,7 +547,7 @@ public class GetEmployeeHistoryActivity extends AppCompatActivity {
                                 }
                             }, year, month, day);
 
-                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                       datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -904,7 +905,7 @@ sp_state_name_list.clear();
                                 sp_state_name_list.add(statelist.get(i).getState_name());
                                 // spinner_state_list.add(model);
 
-                                binding.spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                             /*   binding.spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -925,12 +926,12 @@ sp_state_name_list.clear();
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
-                                });
+                                });*/
                             }
 
-                            adspinnerStatep=new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_state_name_list);
+                        /*    adspinnerStatep=new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_state_name_list);
                             binding.spState.setAdapter(adspinnerStatep);
-                            adspinnerStatep.notifyDataSetChanged();
+                            adspinnerStatep.notifyDataSetChanged();*/
                         }
 
 
@@ -981,7 +982,7 @@ sp_state_name_list.clear();
 
                                 sp_city_name_list.add(cityList.get(i).getCity_name());
 
-                                binding.spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                               /* binding.spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         strcity=(String)binding.spCity.getSelectedItem();
@@ -997,7 +998,7 @@ sp_state_name_list.clear();
                                 adp1=new ArrayAdapter<String>(GetEmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
                                 binding.spCity.setAdapter(adp1);
                                 adp1.notifyDataSetChanged();
-
+*/
                             }
 
 

@@ -303,4 +303,13 @@ binding.textView88.setText(response.body().getData().getPhone());
         ResumeActivity.this.startActivity(Intent.createChooser(shareIntent, "hello hello"));
     }
 
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_left,
+                R.anim.slide_out_right);
+
+    }
 }

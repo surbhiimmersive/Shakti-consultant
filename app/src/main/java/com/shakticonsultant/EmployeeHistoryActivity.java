@@ -1,8 +1,10 @@
 package com.shakticonsultant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +13,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivityEmployeeHistoryBinding;
@@ -64,6 +69,7 @@ public class EmployeeHistoryActivity extends AppCompatActivity {
    ApiInterface apiInterface;
    int year,month,day;
    ConnectionDetector cd;
+   Spinner spSkill;
    String strstream3,currentdatejoining,firstdatejoining,first_Relivingdate,second_joiningdate,second_Relivingdate,third_joing,third_reliving;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +86,110 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
             getAnnualSalary();
             getStateListApi();
             getCatgoryId();
+
+            binding.edtState.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(EmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCityApi(strStateid);
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select State");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstate = (String) spSkill.getSelectedItem();
+                            binding.edtState.setText(strstate);
+                            binding.edtCity.setText("Select City");
+
+                            strStateid = statelist.get(i).getId();
+                            getCityApi(strStateid);
+                            adspinnerStatep.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adspinnerStatep = new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_state_name_list);
+                    spSkill.setAdapter(adspinnerStatep);
+                    adspinnerStatep.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strstate.equals("Select State")){
+
+                            Toast.makeText(EmployeeHistoryActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+            binding.edtCity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(EmployeeHistoryActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select City");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            strcity=(String)spSkill.getSelectedItem();
+                            Cityid = cityList.get(i).getId();
+                            binding.edtCity.setText(strcity);
+                            adp1.notifyDataSetChanged();
+                            // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    adp1 = new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_city_name_list);
+                    spSkill.setAdapter(adp1);
+                    adp1.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strcity.equals("Select City")){
+
+                            Toast.makeText(EmployeeHistoryActivity.this, "Please select city.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+
             binding.someEdit10.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -101,6 +211,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
 
                                 }
                             }, year, month, day);
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
                     //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
@@ -131,7 +242,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });binding.someEdit20.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +267,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -182,7 +293,7 @@ binding.someEdit22.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -208,7 +319,7 @@ binding.someEdit23.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });binding.someEdit25.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +344,7 @@ binding.someEdit23.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -259,7 +370,7 @@ binding.someEdit26.setOnClickListener(new View.OnClickListener() {
                                 }
                             }, year, month, day);
 
-                 //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -493,7 +604,7 @@ getJobSkill(response.body().getData().getCategory_id());
         resultCall.enqueue(new Callback<AnnualResponse>() {
             @Override
             public void onResponse(Call<AnnualResponse> call, Response<AnnualResponse> response) {
-
+sp_annual_income.clear();
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -609,7 +720,7 @@ getJobSkill(response.body().getData().getCategory_id());
                                 sp_state_name_list.add(statelist.get(i).getState_name());
                                 // spinner_state_list.add(model);
 
-                                binding.spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                               /* binding.spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -630,7 +741,7 @@ getJobSkill(response.body().getData().getCategory_id());
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
-                                });
+                                });*/
                             }
 
                             adspinnerStatep=new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_state_name_list);
@@ -680,13 +791,13 @@ getJobSkill(response.body().getData().getCategory_id());
                         cityList=response.body().getData();
 
                         if(cityList.size()>0){
-                            binding.spCity.setVisibility(View.VISIBLE);
+                           // binding.spCity.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<cityList.size();i++){
 
                                 sp_city_name_list.add(cityList.get(i).getCity_name());
 
-                                binding.spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                /*binding.spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         strcity=(String)binding.spCity.getSelectedItem();
@@ -698,7 +809,7 @@ getJobSkill(response.body().getData().getCategory_id());
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
-                                });
+                                });*/
                                 adp1=new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
                                 binding.spCity.setAdapter(adp1);
                                 adp1.notifyDataSetChanged();
@@ -712,7 +823,7 @@ getJobSkill(response.body().getData().getCategory_id());
                         // binding.progressInfo.setVisibility(View.GONE);
                         //   Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
                         // Utils.showFailureDialog(PersonalInfoActivity.this, "No Data Found");
-                        binding.spCity.setVisibility(View.GONE);
+                       // binding.spCity.setVisibility(View.GONE);
                         sp_city_name_list.add("Select City");
                         adp1=new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
                         binding.spCity.setAdapter(adp1);
@@ -739,8 +850,8 @@ getJobSkill(response.body().getData().getCategory_id());
 
         map.put("user_id", userid);
         map.put("current_organisation", binding.someEdit17.getText().toString().trim());
-        map.put("current_city", strcity);
-        map.put("current_state", strstate);
+        map.put("current_city", Cityid);
+        map.put("current_state", strStateid);
         map.put("current_date_of_joining", binding.someEdit10.getText().toString().trim());
         map.put("current_annual_salary", strAnnual);
         map.put("current_stream", strstream);
@@ -802,5 +913,21 @@ getJobSkill(response.body().getData().getCategory_id());
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        getAnnualSalary();
+        getStateListApi();
+        getCatgoryId();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getAnnualSalary();
+        getStateListApi();
+        getCatgoryId();
+    }
 }

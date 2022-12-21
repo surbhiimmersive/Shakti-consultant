@@ -1,83 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NotificationActivity">
+    tools:context=".SpecificFacultyJobActivity">
 
-    <ImageView
-        android:id="@+id/img_back_arrow"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/ic_baseline_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="20dp">
+
+        <ImageView
+            android:id="@+id/image_back_arrow"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/ic_baseline_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/image_view_filter"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="25dp"
+            android:visibility="invisible"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView23"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:visibility="gone"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/specific_faculty_job_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView47" />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NOTIFICATION"
+            android:textAllCaps="true"
+            android:textColor="@color/main_text_color"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/image_back_arrow"
+            app:layout_constraintEnd_toStartOf="@+id/image_view_filter"
+            app:layout_constraintStart_toEndOf="@+id/image_back_arrow"
+            app:layout_constraintTop_toTopOf="@+id/image_back_arrow" />
+
+        <ProgressBar
+            android:id="@+id/progressBarSkillWise"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/loading_img"
+            app:layout_constraintBottom_toBottomOf="@id/imageView23"
+            app:layout_constraintHorizontal_bias="0.561"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="50sp"
+            android:visibility="gone"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.5" />
 
 
-    <TextView
-        android:id="@+id/textView49"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/roboto"
-        android:text="NOTIFICATION"
-        android:textAllCaps="true"
-        android:textColor="@color/main_text_color"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerJobSkillWiseList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:visibility="gone"
+            android:layout_marginEnd="30sp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView23" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/re_noti"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
-    <include
-        android:id="@+id/inc_1"
-        layout="@layout/recycler_item_notification_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/re_noti" />
+        <TextView
+            android:id="@+id/tvEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="No Record Found"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            app:flow_horizontalBias="3.0"
+            android:visibility="gone"
+            app:flow_verticalBias="1"
+            app:layout_constraintTop_toBottomOf="@+id/imgEmpty"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="9dp"></TextView>
 
-    <include
-        android:id="@+id/inc_2"
-        layout="@layout/recycler_item_notification_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inc_1" />
+        <ImageView
+            android:id="@+id/imgEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="104dp"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:src="@drawable/box"
+            app:flow_horizontalBias="3.0"
+            app:flow_verticalBias="3"
+            app:layout_constraintTop_toBottomOf="@+id/textView47"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="-16dp"></ImageView>
 
-    <include
-        android:id="@+id/inc_3"
-        layout="@layout/recycler_item_notification_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inc_2" />
-    <include
-        android:id="@+id/inc_4"
-        layout="@layout/recycler_item_notification_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inc_3" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

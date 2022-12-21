@@ -1,6 +1,7 @@
 package com.shakticonsultant;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.PathUtils;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -10,6 +11,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -28,6 +30,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -111,11 +115,12 @@ String strGender;
     Uri selected_id_proof_uri;
     String part_image;
     String uploadedFileName_id_proof="";
-    String strbirthdate;
+    String strbirthdate="";
     String strStateid;
     String strSubject="";
     String strStream="",strDivision="";
     String strAnnual="";
+    String mobile;
     String MobilePattern = "[0-9]{10}";
 
     // Permissions for accessing the storage
@@ -134,13 +139,15 @@ String strGender;
     ArrayAdapter<String> adaStream;
     ArrayAdapter<String> adpCategory;
     ArrayAdapter<String> adp1;
-    String str_are_you_work="NO",working_organization_name="";
+    String str_are_you_work="NO",working_organization_name="NA";
     String str_first_job_month="",str_first_job_year="";
     String Cityid;
+    Spinner spSkill;
     String fullpath = null;
     private static final int BUFFER_SIZE = 1024 * 2;
     private static final String IMAGE_DIRECTORY = "/demonuts_upload_gallery";
 ConnectionDetector cd;
+String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -183,8 +190,115 @@ ConnectionDetector cd;
                 }
             }
             userid = getIntent().getStringExtra("userid");
+            name = getIntent().getStringExtra("name");
+            mobile = getIntent().getStringExtra("mobile");
 
+
+
+binding.edtName.setText(name);
+binding.edtMobile.setText(mobile);
             // set up the RecyclerView
+            binding.edtState.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(PersonalInfoActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    getCityApi(strStateid);
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select State");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strstate = (String) spSkill.getSelectedItem();
+                            binding.edtState.setText(strstate);
+                            binding.edtCity.setText("Select City");
+
+                            strStateid = statelist.get(i).getId();
+                            getCityApi(strStateid);
+                            adspinnerStatep.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    adspinnerStatep = new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_state_name_list);
+                    spSkill.setAdapter(adspinnerStatep);
+                    adspinnerStatep.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strstate.equals("Select State")){
+
+                            Toast.makeText(PersonalInfoActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
+
+            binding.edtCity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(PersonalInfoActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select City");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            strcity=(String)spSkill.getSelectedItem();
+                            Cityid = cityList.get(i).getId();
+                            binding.edtCity.setText(strcity);
+                            adp1.notifyDataSetChanged();
+                            // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
+                        }
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    adp1 = new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_city_name_list);
+                    spSkill.setAdapter(adp1);
+                    adp1.notifyDataSetChanged();
+
+
+                    btnok.setOnClickListener(v -> {
+
+                        if(strcity.equals("Select City")){
+
+                            Toast.makeText(PersonalInfoActivity.this, "Please select city.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            dialog.dismiss();
+                        }
+
+                    });
+
+
+                }
+            });
 
             binding.spprefix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -297,7 +411,7 @@ ConnectionDetector cd;
 
                         snackbar.show();
 
-                    } else if (binding.edtName.equals("")) {
+                    } else if (binding.edtName.getText().toString().trim().equals("")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please Enter full name", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -305,15 +419,15 @@ ConnectionDetector cd;
 
                         snackbar.show();
 
-                    } else if (binding.txtbday.equals("")) {
-                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select birthdate.", Snackbar.LENGTH_LONG)
+                    } else if (binding.txtbday.getText().toString().equals("")) {
+                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select DOB.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
                         sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                         snackbar.show();
 
-                    } else if (strstate.equals("Select State")) {
+                    } else if (binding.edtState.getText().toString().trim().equals("Select State")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select state.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -321,7 +435,7 @@ ConnectionDetector cd;
 
                         snackbar.show();
 
-                    } else if (strcity.equals("Select City")) {
+                    } else if (binding.edtCity.getText().toString().trim().equals("Select City")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select city.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -473,7 +587,7 @@ ConnectionDetector cd;
                     binding.button2.setTextColor(getResources().getColor(R.color.main_text_color));
 
                     str_are_you_work = "No";
-
+binding.textView19.setVisibility(View.VISIBLE);
                     binding.recyclerOrganization.setVisibility(View.GONE);
                 }
             });
@@ -485,6 +599,7 @@ ConnectionDetector cd;
                     binding.button2.setTextColor(getResources().getColor(R.color.black));
                /* Intent i=new Intent(PersonalInfoActivity.this,OrganizationDailog.class);
                 startActivity(i);*/
+                    binding.textView19.setVisibility(View.GONE);
                     str_are_you_work = "Yes";
                     Intent intent = new Intent(PersonalInfoActivity.this, OrganizationDailog.class);
                     startActivityForResult(intent, 2);
@@ -594,6 +709,7 @@ ConnectionDetector cd;
         resultCall.enqueue(new Callback<StateResponse>() {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
+                sp_state_name_list.clear();
 
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
@@ -680,8 +796,8 @@ ConnectionDetector cd;
                         cityList=response.body().getData();
 
                         if(cityList.size()>0){
-                            binding.spCity.setVisibility(View.VISIBLE);
-                            binding.spinner4.setVisibility(View.VISIBLE);
+                           // binding.spCity.setVisibility(View.VISIBLE);
+                          //  binding.spinner4.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<cityList.size();i++){
 
@@ -714,7 +830,7 @@ ConnectionDetector cd;
                         //   Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
                         // Utils.showFailureDialog(PersonalInfoActivity.this, "No Data Found");
                         binding.spCity.setVisibility(View.GONE);
-                        binding.spinner4.setVisibility(View.INVISIBLE);
+                      //  binding.spinner4.setVisibility(View.INVISIBLE);
 /*
                         sp_city_name_list.add("Select City");
                         adp1=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
@@ -728,7 +844,7 @@ ConnectionDetector cd;
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
                 // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
-                binding.spinner4.setVisibility(View.INVISIBLE);
+             //   binding.spinner4.setVisibility(View.INVISIBLE);
 
                 // binding.progressInfo.setVisibility(View.GONE);
                 //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
@@ -797,7 +913,7 @@ ConnectionDetector cd;
           //  Toast.makeText(this, "Name"+message, Toast.LENGTH_SHORT).show();
 
             if(working_organization_name.equals("no")){
-                working_organization_name="";
+                working_organization_name="NA";
                 binding.recyclerOrganization.setVisibility(View.GONE);
             }else {
                 binding.recyclerOrganization.setVisibility(View.VISIBLE);
@@ -835,9 +951,10 @@ ConnectionDetector cd;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                binding.imageView7.setVisibility(View.VISIBLE);
-                binding.imageView8.setVisibility(View.GONE);
-                binding.imageView7.setImageBitmap(bitmap);
+              //  binding.imageView7.setVisibility(View.VISIBLE);
+            //    binding.imageView8.setVisibility(View.VISIBLE);
+                binding.imageView6.setImageBitmap(bitmap);
+                binding.imgEdit.setVisibility(View.VISIBLE);
 
 
             }
@@ -850,7 +967,7 @@ ConnectionDetector cd;
 
                 File finalFile = new File(FileHelper.getRealPathFromURI(PersonalInfoActivity.this,uri));
                 resumepath= finalFile.getPath();
-                binding.txtdoc.setText(resumepath);
+                binding.txtdoc.setText(finalFile.getName());
                /* resumepath = myFile.getAbsolutePath();
                 String displayName = null;
 
@@ -895,10 +1012,13 @@ ConnectionDetector cd;
 
                     File finalFile = new File(PathUtil.getPath(PersonalInfoActivity.this, uri));
                     idprooffilePath= finalFile.getPath();
+
+                    binding.uploadProof.setText(finalFile.getName());
+
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
-                binding.uploadProof.setText(idprooffilePath);
+               // binding.uploadProof.setText(idprooffilePath);
 
             }
         }
@@ -1200,7 +1320,7 @@ ConnectionDetector cd;
             @Override
             public void onFailure(Call<interestedSkillResponse> call, Throwable t) {
                 // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
-                binding.spinner4.setVisibility(View.INVISIBLE);
+              //  binding.spinner4.setVisibility(View.INVISIBLE);
 
                 // binding.progressInfo.setVisibility(View.GONE);
                 //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
@@ -1310,7 +1430,10 @@ ConnectionDetector cd;
 
 
                     Intent i=new Intent(PersonalInfoActivity.this,AcademicDetailsActivity.class);
+                   // i.putExtra("experience",strfre_exp);
                     i.putExtra("userid",userid);
+                    i.putExtra("experience",strfre_exp);
+
                     startActivity(i);
 
                     overridePendingTransition(R.anim.slide_in_right,
@@ -1324,11 +1447,10 @@ ConnectionDetector cd;
                             .setActionTextColor(Color.RED)
                             .show();
 
-                    // Utils.showFailureDialog(MyProfileActivity.this, "Please try later");
 
                 }
             } else {
-               // Toast.makeText(PersonalInfoActivity.this, "ERROR" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PersonalInfoActivity.this, "ERROR" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
                 //
             }
@@ -1340,10 +1462,20 @@ ConnectionDetector cd;
             // pd_loading.setVisibility(View.GONE);
             binding.progresspersonal.setVisibility(View.GONE);
 
-           // Toast.makeText(PersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(PersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
         }
     });
 }
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        getStateListApi();
+        getAnnualSalary();
+
+    }
+
 }

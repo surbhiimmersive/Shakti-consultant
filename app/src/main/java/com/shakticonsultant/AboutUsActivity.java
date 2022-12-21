@@ -37,7 +37,7 @@ public class AboutUsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.imgBackArrow.setOnClickListener(v -> {
-            onBackPressed();
+            super.onBackPressed();
             overridePendingTransition(R.anim.slide_in_left,
                     R.anim.slide_out_right);
         });

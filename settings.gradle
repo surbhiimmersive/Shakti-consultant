@@ -12,7 +12,13 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven
+                {
+                    url 'https://maven.cashfree.com/release'
+                }
     }
 }
 rootProject.name = "Shakti Consultant"
 include ':app'
+include ':cashfreeSDK'
+include ':google-pay-client-api-1.0.0'

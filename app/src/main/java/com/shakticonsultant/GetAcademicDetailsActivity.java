@@ -357,12 +357,12 @@ ConnectionDetector cd;
 
                                     }
                                 });
-                                ArrayAdapter<String> adp=new ArrayAdapter<String>(GetAcademicDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_graduation_list);
-                                binding.spGraduation.setAdapter(adp);
-                                adp.notifyDataSetChanged();
+
 
                             }
-
+                            ArrayAdapter<String> adp=new ArrayAdapter<String>(GetAcademicDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_graduation_list);
+                            binding.spGraduation.setAdapter(adp);
+                            adp.notifyDataSetChanged();
 
                         }
 

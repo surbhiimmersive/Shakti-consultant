@@ -165,7 +165,7 @@ getCityList();
         resultCall.enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-
+city_name_list.clear();
                 if (response.isSuccessful()) {
                      binding.progressBar.setVisibility(View.GONE);
                     // lemprtNotification.setVisibility(View.GONE);
@@ -306,4 +306,19 @@ sp_work_exp.clear();
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getCityList();
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCityList();
+
+
+    }
 }

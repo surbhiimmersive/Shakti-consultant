@@ -1,12 +1,19 @@
 package com.shakticonsultant;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.shakticonsultant.databinding.ActivitySplashBinding;
 import com.shakticonsultant.utils.AppPrefrences;
 
@@ -17,7 +24,11 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
+        firebasetoken();
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -43,5 +54,33 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 2000);
 
+    }
+
+
+    public void firebasetoken() {
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.e("token", token);
+                        // Log and toast
+                        String msg = token;
+                        //Log.e("Shikhamsg", msg);
+                        AppPrefrences.setUserToken(SplashActivity.this,msg);
+                        //Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                        // Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        //AppPrefrences.setUserToken(MainActivity.this,msg);
+
+                    }
+                });
     }
 }

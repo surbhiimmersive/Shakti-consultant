@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.os.Bundle;
 import android.view.View;
 
-import com.shakticonsultant.adapter.AppliedJobListAdapter;
+import com.shakticonsultant.Interface.FevInterface;
 import com.shakticonsultant.adapter.ShortListAdapter;
 import com.shakticonsultant.databinding.ActivityJobsShortListedBinding;
-import com.shakticonsultant.responsemodel.JobAppliedListResponse;
+import com.shakticonsultant.responsemodel.FavouriteResponse;
 import com.shakticonsultant.responsemodel.ShortListResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
@@ -70,7 +70,14 @@ public class JobsShortListedActivity extends AppCompatActivity {
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(JobsShortListedActivity.this);
                         binding.recyclerView4.setLayoutManager(linearLayoutManager);
-                        ShortListAdapter adapter=new ShortListAdapter(JobsShortListedActivity.this,response.body().getData());
+                        ShortListAdapter adapter=new ShortListAdapter(JobsShortListedActivity.this, response.body().getData(), new FevInterface() {
+                            @Override
+                            public void getFavResponse(Response<FavouriteResponse> respnse) {
+
+                                getShortListApi();
+
+                            }
+                        });
                         binding.recyclerView4.setAdapter(adapter);
                         binding.recyclerView4.getAdapter().notifyDataSetChanged();
 
