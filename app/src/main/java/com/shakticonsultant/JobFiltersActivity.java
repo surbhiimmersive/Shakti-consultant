@@ -10,8 +10,10 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivityJobFiltersBinding;
 import com.shakticonsultant.responsemodel.AnnualDatumResponse;
 import com.shakticonsultant.responsemodel.AnnualResponse;
@@ -34,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class JobFiltersActivity extends AppCompatActivity implements View.OnClickListener {
-String data;
+String data="";
    ActivityJobFiltersBinding binding;
    private MaterialCardView previousCard;
     List<WorkExpDatumResponse> workExpList=new ArrayList<>();
@@ -42,7 +44,9 @@ String data;
     String strworkexp="";
     SparseBooleanArray sparseBooleanArray ;
     List<String>city_name_list=new ArrayList<>();
-    String strExperienceId;
+    String strExperienceId="";
+    String strMinSalary="";
+    String strMaxSalary="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,20 +57,82 @@ String data;
         binding.cardviewSalary.setOnClickListener(this);
         binding.cardviewCities.setOnClickListener(this);
         binding.cardviewExperience.setOnClickListener(this);
+        binding.spMinSalary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                strMinSalary = (String) binding.spMinSalary.getSelectedItem();
+                strMinSalary = strMinSalary.replace("LPA", "");
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        binding.spMaxSalary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                strMaxSalary = (String) binding.spMaxSalary.getSelectedItem();
+                strMaxSalary = strMaxSalary.replace("LPA", "");
+
+               // Toast.makeText(JobFiltersActivity.this, ""+strMaxSalary, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         binding.btnApply.setOnClickListener(v -> {
+
+            if(!(binding.edtMinSalary.getText().toString().trim().equals("")) && !(binding.edtMaxSalary.getText().toString().trim().equals(""))) {
+                double min = Double.parseDouble(binding.edtMinSalary.getText().toString());
+                double max = Double.parseDouble(binding.edtMaxSalary.getText().toString());
+                if (min > max) {
+
+                    Snackbar.make(findViewById(android.R.id.content), "The minimum salary is not greater than maximum salary. ", Snackbar.LENGTH_LONG)
+                            .setActionTextColor(Color.RED)
+                            .show();
+                }else{
+
+                    Intent intent=new Intent();
+                    intent.putExtra("city",data);
+                    intent.putExtra("experience",strExperienceId);
+                    intent.putExtra("min_salary",strMinSalary);
+                    intent.putExtra("max_salary",strMaxSalary);
+                    setResult(2,intent);
+                    finish();//finishing activity
+                }
+            }
+
             Intent intent=new Intent();
             intent.putExtra("city",data);
             intent.putExtra("experience",strExperienceId);
-            intent.putExtra("min_salary",binding.edtMinSalary.getText().toString().trim());
-            intent.putExtra("max_salary",binding.edtMaxSalary.getText().toString().trim());
+            intent.putExtra("min_salary",strMinSalary);
+            intent.putExtra("max_salary",strMaxSalary);
+            setResult(2,intent);
+            finish();//finishing activity
+
+
+        });
+
+        binding.imgfilterback.setOnClickListener(v -> {
+            Intent intent=new Intent();
+            intent.putExtra("city",data);
+            intent.putExtra("experience",strExperienceId);
+            intent.putExtra("min_salary",strMinSalary);
+            intent.putExtra("max_salary",strMaxSalary);
             setResult(2,intent);
             finish();//finishing activity
 
 
 
         });
-  binding.imgSearch.setOnClickListener(v -> {
+ /* binding.imgSearch.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), SearchJobActivity.class));
         });
 
@@ -75,7 +141,7 @@ String data;
             overridePendingTransition(R.anim.slide_in_left,
                     R.anim.slide_out_right);
         });
-
+*/
 
     }
 
@@ -100,7 +166,7 @@ String data;
             binding.citiesView.setVisibility(View.GONE);
             binding.experienceView.setVisibility(View.GONE);
 
-            binding.imgSearch.setVisibility(View.VISIBLE);
+           // binding.imgSearch.setVisibility(View.VISIBLE);
 
             if (v.getId() != previousCard.getId()){
                 setCardViewUnSelected(previousCard);
@@ -118,7 +184,7 @@ String data;
             binding.citiesView.setVisibility(View.VISIBLE);
             binding.experienceView.setVisibility(View.GONE);
 
-            binding.imgSearch.setVisibility(View.GONE);
+           // binding.imgSearch.setVisibility(View.GONE);
 getCityList();
 
             if (v.getId() != previousCard.getId()){
@@ -138,7 +204,7 @@ getCityList();
             binding.citiesView.setVisibility(View.GONE);
             binding.experienceView.setVisibility(View.VISIBLE);
 
-            binding.imgSearch.setVisibility(View.VISIBLE);
+        //    binding.imgSearch.setVisibility(View.VISIBLE);
             getExperience();
             if (v.getId() != previousCard.getId()){
                 setCardViewUnSelected(previousCard);
@@ -320,5 +386,18 @@ sp_work_exp.clear();
         getCityList();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+       // super.onBackPressed();
+
+        Intent intent=new Intent();
+        intent.putExtra("city",data);
+        intent.putExtra("experience",strExperienceId);
+        intent.putExtra("min_salary",strMinSalary);
+        intent.putExtra("max_salary",strMaxSalary);
+        setResult(2,intent);
+        finish();//finishing activity
     }
 }

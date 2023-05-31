@@ -60,6 +60,14 @@ ConnectionDetector cd;
             experience = getIntent().getStringExtra("experience");
             min_salary = getIntent().getStringExtra("min_salary");
             max_salary = getIntent().getStringExtra("max_salary");
+
+
+            Log.e("SKILLID",skill_id);
+            Log.e("skill_name",skill_name);
+            Log.e("city",city);
+            Log.e("min_salary",min_salary);
+            Log.e("max_salary",max_salary);
+
             binding.textView47.setText(skill_name);
 
 Log.e("DATA",skill_id);
@@ -77,7 +85,7 @@ Log.e("max_salary",max_salary);
             getJobFilterData();
 
             binding.imageViewFilter.setOnClickListener(v -> {
-                Intent intent = new Intent(NewJobSearchListActivity.this, JobFiltersActivity.class);
+                Intent intent = new Intent(NewJobSearchListActivity.this, SearchJobFilterActivity.class);
                 startActivityForResult(intent, 2);
             });
 
@@ -86,11 +94,13 @@ Log.e("max_salary",max_salary);
     public void getJobFilterData() {
         binding.progressBarSkillWise.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
+
+
         map.put("location", city);
         map.put("min_salary",min_salary);
         map.put("max_salary", max_salary);
         map.put("experience", experience);
-        map.put("skill_id", "1");
+        map.put("skill_id", skill_id);
         map.put("user_id", AppPrefrences.getUserid(NewJobSearchListActivity.this));
 
 
@@ -126,7 +136,12 @@ Log.e("max_salary",max_salary);
                        binding.imgEmpty.setVisibility(View.VISIBLE);
                         binding.imageView23.setVisibility(View.GONE);
                         binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
+                        Snackbar snackbar = Snackbar.make(binding.getRoot(), response.body().getMessage(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null);
+                        View sbView = snackbar.getView();
+                        sbView.setBackgroundColor(getColor(R.color.purple_200));
 
+                        snackbar.show();
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
@@ -137,7 +152,12 @@ Log.e("max_salary",max_salary);
                     binding.imageView23.setVisibility(View.GONE);
                     binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
 
+                 /*   Snackbar snackbar = Snackbar.make(binding.getRoot(), response.body().getMessage(), Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
 
+                    snackbar.show();*/
                 }
             }
 
@@ -148,9 +168,32 @@ Log.e("max_salary",max_salary);
                 //    pd_loading.setVisibility(View.GONE);
                 binding.progressBarSkillWise.setVisibility(View.GONE);
 
-              //  Utils.showFailureDialog(NewJobSearchListActivity.this, "Something went wrong!");
+
+                //  Utils.showFailureDialog(NewJobSearchListActivity.this, "Something went wrong!");
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode==2)
+        {
+            try{
+                city = data.getStringExtra("city");
+                experience = data.getStringExtra("experience");
+                min_salary = data.getStringExtra("min_salary");
+                max_salary = data.getStringExtra("max_salary");
+                skill_id = data.getStringExtra("skill_id");
+                skill_name = data.getStringExtra("skill_name");
+                //Toast.makeText(this, "Name"+experience, Toast.LENGTH_SHORT).show();
+
+                getJobFilterData();
+            }
+            catch (Exception e){}
+        }
+
+
+
+    }
 }

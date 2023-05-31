@@ -26,17 +26,14 @@ public class ApiClient extends Application {
 
     private static Retrofit retrofit = null;
 
-public static String Baseurl="https://shakticonsultant.manageprojects.in/api/";
-public static String Photourl="https://shakticonsultant.manageprojects.in/";
+    public static String Photourl = "https://superadmin.shakticonsultant.com/";
+
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
     public static Retrofit getClient() {
-
-
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -54,7 +51,7 @@ public static String Photourl="https://shakticonsultant.manageprojects.in/";
                 })
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://shakticonsultant.manageprojects.in/api/")
+                .baseUrl("https://superadmin.shakticonsultant.com/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

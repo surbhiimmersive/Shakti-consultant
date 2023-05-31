@@ -9,6 +9,7 @@
         android:id="@+id/constraintLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:background="@drawable/package_postpaid_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -62,16 +63,19 @@
             app:layout_constraintTop_toBottomOf="@+id/view6"
             app:srcCompat="@drawable/date_img" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <EditText
             android:id="@+id/btn_select_date_1"
             android:layout_width="0dp"
             android:layout_height="33dp"
+            android:gravity="center"
+            android:editable="false"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10sp"
-            android:background="@drawable/buttonbordershadow"
+            android:background="@drawable/custom_about_us_bg"
             android:fontFamily="@font/poppins_semi_bold"
-            android:text="Date 1"
+            android:hint="Date 1"
+            android:textColorHint="@color/white"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/view7"
@@ -88,16 +92,20 @@
             app:layout_constraintTop_toBottomOf="@+id/view6"
             app:srcCompat="@drawable/date_img" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <EditText
             android:id="@+id/btn_select_date_2"
             android:layout_width="0dp"
             android:layout_height="33dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:editable="false"
             android:layout_marginEnd="20sp"
-            android:background="@drawable/buttonbordershadow"
+            android:background="@drawable/custom_about_us_bg"
             android:fontFamily="@font/poppins_semi_bold"
-            android:text="Date 2"
+            android:hint="Date 2"
+            android:textColorHint="@color/white"
+
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

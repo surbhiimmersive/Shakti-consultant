@@ -21,6 +21,7 @@ import com.shakticonsultant.databinding.FragmentFAQBinding;
 import com.shakticonsultant.responsemodel.FaqsResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -85,6 +86,7 @@ ConnectionDetector cd;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentFAQBinding.inflate(getLayoutInflater());
+        AppPrefrences.setCLose(getActivity(),false);
 
         /*binding.layoutFaq1.setOnClickListener(v -> {
             changeFAQView(binding.layoutFaq1, binding.faq1Question, binding.faq1Answer, binding.faq1Arrow);

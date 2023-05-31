@@ -29,6 +29,18 @@ public class PackageDatumResponse implements Serializable
 @SerializedName("no_of_jobs")
     @Expose
     private String no_of_jobs;
+@SerializedName("package_balance")
+    @Expose
+    private String package_balance;
+
+
+    public String getPackage_balance() {
+        return package_balance;
+    }
+
+    public void setPackage_balance(String package_balance) {
+        this.package_balance = package_balance;
+    }
 
     public String getNo_of_jobs() {
         return no_of_jobs;

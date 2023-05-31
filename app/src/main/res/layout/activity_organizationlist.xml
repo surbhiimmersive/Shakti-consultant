@@ -51,13 +51,13 @@
                                     android:orientation="horizontal"
                                     android:layout_gravity="center"
                                     android:gravity="center"
-                                    android:layout_height="50sp">
+                                    android:layout_height="60dp">
 
                                         <androidx.appcompat.widget.AppCompatButton
                                             android:id="@+id/button3"
                                             style="?android:attr/borderlessButtonStyle"
                                             android:layout_width="100sp"
-                                            android:layout_height="30dp"
+                                            android:layout_height="40dp"
 
                                             android:layout_marginTop="10dp"
                                             android:layout_marginEnd="5dp"
@@ -74,7 +74,7 @@
                                             android:id="@+id/button4"
                                             style="?android:attr/borderlessButtonStyle"
                                             android:layout_width="100sp"
-                                            android:layout_height="30dp"
+                                            android:layout_height="40dp"
                                             android:layout_marginStart="5dp"
                                             android:layout_marginTop="10dp"
                                             android:background="@drawable/custom_edittext_bg"
@@ -92,7 +92,7 @@
                                     android:id="@+id/textView21"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="15dp"
+                                    android:layout_marginTop="20dp"
                                     android:fontFamily="@font/poppins_regular"
                                     android:text="Select the organisations that you worked in your career."
                                     android:textAlignment="center"
@@ -145,6 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:gravity="center"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical"
             >
 
@@ -160,6 +161,7 @@
                     android:background="@drawable/buttonbordershadow"
                     android:fontFamily="@font/poppins_regular"
                     android:text="Submit"
+                    android:layout_marginBottom="20dp"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="14sp"

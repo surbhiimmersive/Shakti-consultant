@@ -20,22 +20,22 @@
 
 
 
-<!--        <menu>-->
-<!--            <item android:id="@+id/drawer_jobs1"-->
-<!--                android:title="Jobs Applied On"-->
-<!--                android:icon="@drawable/nav_job_img"-->
-<!--                />-->
+        <!--        <menu>-->
+        <!--            <item android:id="@+id/drawer_jobs1"-->
+        <!--                android:title="Jobs Applied On"-->
+        <!--                android:icon="@drawable/nav_job_img"-->
+        <!--                />-->
 
-<!--            <item android:id="@+id/drawer_jobs2"-->
-<!--                android:title="Jobs Shortlisted"-->
-<!--                android:icon="@drawable/nav_job_img"-->
-<!--                />-->
+        <!--            <item android:id="@+id/drawer_jobs2"-->
+        <!--                android:title="Jobs Shortlisted"-->
+        <!--                android:icon="@drawable/nav_job_img"-->
+        <!--                />-->
 
-<!--            <item android:id="@+id/drawer_jobs3"-->
-<!--                android:title="Jobs Recommended"-->
-<!--                android:icon="@drawable/nav_job_img"-->
-<!--                />-->
-<!--        </menu>-->
+        <!--            <item android:id="@+id/drawer_jobs3"-->
+        <!--                android:title="Jobs Recommended"-->
+        <!--                android:icon="@drawable/nav_job_img"-->
+        <!--                />-->
+        <!--        </menu>-->
 
     </item>
 
@@ -43,23 +43,23 @@
         android:id="@+id/job_group"
         android:checkableBehavior="single"
         >
-                       <item android:id="@+id/drawer_jobs1"
-                        android:title="Jobs Applied On"
-                        android:icon="@drawable/job_applied"
-                        android:visible="false"
-                        />
+        <item android:id="@+id/drawer_jobs1"
+            android:title="Jobs Applied On"
+            android:icon="@drawable/job_applied"
+            android:visible="false"
+            />
 
-                    <item android:id="@+id/drawer_jobs2"
-                        android:title="Jobs Shortlisted"
-                        android:icon="@drawable/job_shortlisted"
-                        android:visible="false"
-                        />
+        <item android:id="@+id/drawer_jobs2"
+            android:title="Jobs Shortlisted"
+            android:icon="@drawable/job_shortlisted"
+            android:visible="false"
+            />
 
-                    <item android:id="@+id/drawer_jobs3"
-                        android:title="Jobs Recommended"
-                        android:icon="@drawable/job_recommended"
-                        android:visible="false"
-                        />
+        <item android:id="@+id/drawer_jobs3"
+            android:title="Jobs Recommended"
+            android:icon="@drawable/job_recommended"
+            android:visible="false"
+            />
     </group>
 
 
@@ -102,20 +102,20 @@
         android:icon="@drawable/nav_faq"
         />
 
-   <!-- <item android:id="@+id/drawer_chat_with_us"
-        android:title="Chat With Us"
-        android:icon="@drawable/nav_chat"
-        />
--->
+    <!-- <item android:id="@+id/drawer_chat_with_us"
+         android:title="Chat With Us"
+         android:icon="@drawable/nav_chat"
+         />
+ -->
     <item android:id="@+id/drawer_subscription_plans"
         android:title="Subscription Plans"
         android:icon="@drawable/nav_about"
         />
 
-  <!--  <item android:id="@+id/drawer_our_client"
-        android:title="Our Client"
-        android:icon="@drawable/nav_client"
-        />-->
+      <item android:id="@+id/drawerour_client"
+          android:title="Our Client"
+          android:icon="@drawable/nav_client"
+          />
 
     <item android:id="@+id/drawer_rate_us"
         android:title="Rate Us"

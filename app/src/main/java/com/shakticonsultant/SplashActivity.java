@@ -2,6 +2,7 @@ package com.shakticonsultant;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         FirebaseApp.initializeApp(this);
         firebasetoken();
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
@@ -70,7 +72,7 @@ public class SplashActivity extends AppCompatActivity {
 
                         // Get new FCM registration token
                         String token = task.getResult();
-                        Log.e("token", token);
+                        Log.e("SHIKHA TOKEN", token);
                         // Log and toast
                         String msg = token;
                         //Log.e("Shikhamsg", msg);

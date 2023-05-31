@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -71,6 +72,8 @@ ConnectionDetector cd;
                     .show();
         }else {
             skill_id = getIntent().getStringExtra("skill_id");
+
+AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
             skill_name = getIntent().getStringExtra("skill_name");
             binding.textView47.setText(skill_name);
             binding.imageBackArrow.setOnClickListener(v -> {
@@ -79,7 +82,7 @@ ConnectionDetector cd;
             getJobSkillWiseList();
 
             binding.imageViewFilter.setOnClickListener(v -> {
-                Intent intent = new Intent(SpecificFacultyJobActivity.this, JobFiltersActivity.class);
+                Intent intent = new Intent(SpecificFacultyJobActivity.this, SearchJobFilterActivity.class);
                 startActivityForResult(intent, 2);
             });
 
@@ -142,7 +145,13 @@ ConnectionDetector cd;
     */
 
     public void getJobSkillWiseList() {
-          binding.progressBarSkillWise.setVisibility(View.VISIBLE);
+          //binding.progressBarSkillWise.setVisibility(View.VISIBLE);
+
+
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
         Map<String, String> map = new HashMap<>();
         map.put("skill_id", skill_id);
         map.put("user_id", AppPrefrences.getUserid(SpecificFacultyJobActivity.this));
@@ -157,8 +166,8 @@ ConnectionDetector cd;
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarSkillWise.setVisibility(View.GONE);
-
+                 //   binding.progressBarSkillWise.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
                         binding.tvEmpty.setVisibility(View.GONE);
@@ -175,7 +184,9 @@ ConnectionDetector cd;
 
 
                     } else {
-                        binding.progressBarSkillWise.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                        // binding.progressBarSkillWise.setVisibility(View.GONE);
                         binding.tvEmpty.setVisibility(View.VISIBLE);
                         binding.imgEmpty.setVisibility(View.VISIBLE);
                         binding.imageView23.setVisibility(View.GONE);
@@ -185,7 +196,9 @@ ConnectionDetector cd;
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
-                    binding.progressBarSkillWise.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                    //  binding.progressBarSkillWise.setVisibility(View.GONE);
                     binding.tvEmpty.setVisibility(View.VISIBLE);
                     binding.imgEmpty.setVisibility(View.VISIBLE);
                     binding.imageView23.setVisibility(View.GONE);
@@ -197,10 +210,11 @@ ConnectionDetector cd;
 
             @Override
             public void onFailure(Call<JobSkillWiseListResponse> call, Throwable t) {
+                progress_spinner.dismiss();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressBarSkillWise.setVisibility(View.GONE);
+               // binding.progressBarSkillWise.setVisibility(View.GONE);
 
             //    Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");
             }
@@ -228,7 +242,11 @@ ConnectionDetector cd;
     }
 
     public void getJobFilterData() {
-        binding.progressBarSkillWise.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        //  binding.progressBarSkillWise.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("location", city);
         map.put("min_salary",min_salary);
@@ -246,7 +264,8 @@ ConnectionDetector cd;
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarSkillWise.setVisibility(View.GONE);
+                 //   binding.progressBarSkillWise.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -264,21 +283,30 @@ ConnectionDetector cd;
 
 
                     } else {
-                        binding.progressBarSkillWise.setVisibility(View.GONE);
+                      //  binding.progressBarSkillWise.setVisibility(View.GONE);
                         binding.tvEmpty.setVisibility(View.VISIBLE);
                        binding.imgEmpty.setVisibility(View.VISIBLE);
                         binding.imageView23.setVisibility(View.GONE);
                         binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
+                       // Utils.showFailureDialog(SpecificFacultyJobActivity.this, response.body().getMessage());
+                        Snackbar snackbar = Snackbar.make(binding.getRoot(), response.body().getMessage(), Snackbar.LENGTH_LONG)
+                                .setAction("Action", null);
+                        View sbView = snackbar.getView();
+                        sbView.setBackgroundColor(getColor(R.color.purple_200));
 
+                        snackbar.show();
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
-                    binding.progressBarSkillWise.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                    //  binding.progressBarSkillWise.setVisibility(View.GONE);
                     binding.tvEmpty.setVisibility(View.VISIBLE);
                     binding.imgEmpty.setVisibility(View.VISIBLE);
                     binding.imageView23.setVisibility(View.GONE);
                     binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
+                  //  Utils.showFailureDialog(SpecificFacultyJobActivity.this, response.body().getMessage());
 
 
                 }
@@ -286,12 +314,14 @@ ConnectionDetector cd;
 
             @Override
             public void onFailure(Call<JobSkillWiseListResponse> call, Throwable t) {
+                progress_spinner.dismiss();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressBarSkillWise.setVisibility(View.GONE);
+               // binding.progressBarSkillWise.setVisibility(View.GONE);
+                Utils.showFailureDialog(SpecificFacultyJobActivity.this, t.getMessage());
 
-                Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");
+                // Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");
             }
         });
     }

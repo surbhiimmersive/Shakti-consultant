@@ -3,21 +3,22 @@ package com.shakticonsultant;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
 import com.shakticonsultant.Interface.FevInterface;
-<<<<<<< HEAD
+
+import com.shakticonsultant.adapter.JobSkillListAdapter;
+import com.shakticonsultant.adapter.JobSkillWiseListAdapter;
 import com.shakticonsultant.adapter.ShortListAdapter;
 import com.shakticonsultant.databinding.ActivityJobsShortListedBinding;
 import com.shakticonsultant.responsemodel.FavouriteResponse;
-=======
 import com.shakticonsultant.adapter.AppliedJobListAdapter;
 import com.shakticonsultant.adapter.ShortListAdapter;
 import com.shakticonsultant.databinding.ActivityJobsShortListedBinding;
 import com.shakticonsultant.responsemodel.FavouriteResponse;
 import com.shakticonsultant.responsemodel.JobAppliedListResponse;
->>>>>>> github/main
 import com.shakticonsultant.responsemodel.ShortListResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
@@ -53,7 +54,11 @@ public class JobsShortListedActivity extends AppCompatActivity {
 
 
     public void getShortListApi() {
-        binding.progressBarcategory.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        //  binding.progressBarcategory.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("user_id", AppPrefrences.getUserid(JobsShortListedActivity.this));
 
@@ -67,7 +72,8 @@ public class JobsShortListedActivity extends AppCompatActivity {
             public void onResponse(Call<ShortListResponse> call, Response<ShortListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+                 //   binding.progressBarcategory.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -80,24 +86,21 @@ public class JobsShortListedActivity extends AppCompatActivity {
                         binding.recyclerView4.setLayoutManager(linearLayoutManager);
                         ShortListAdapter adapter=new ShortListAdapter(JobsShortListedActivity.this, response.body().getData(), new FevInterface() {
                             @Override
-<<<<<<< HEAD
                             public void getFavResponse(Response<FavouriteResponse> respnse) {
-
                                 getShortListApi();
-=======
-                            public void getFavResponse(FavouriteResponse respnse) {
-
->>>>>>> github/main
-
                             }
                         });
+
+
                         binding.recyclerView4.setAdapter(adapter);
                         binding.recyclerView4.getAdapter().notifyDataSetChanged();
 
 
 
-                    } else {
-                        binding.progressBarcategory.setVisibility(View.GONE);
+                        } else {
+                        progress_spinner.dismiss();
+
+                        // binding.progressBarcategory.setVisibility(View.GONE);
                         binding.imageView23.setVisibility(View.GONE);
                         binding.recyclerView4.setVisibility(View.GONE);
                       //  binding.btnApply.setVisibility(View.GONE);
@@ -113,7 +116,9 @@ public class JobsShortListedActivity extends AppCompatActivity {
                     binding.imageView23.setVisibility(View.GONE);
                     binding.recyclerView4.setVisibility(View.GONE);
                     binding.lEmpty.setVisibility(View.VISIBLE);
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                    // binding.progressBarcategory.setVisibility(View.GONE);
 
                 }
             }
@@ -127,7 +132,8 @@ public class JobsShortListedActivity extends AppCompatActivity {
                 binding.recyclerView4.setVisibility(View.GONE);
                 binding.lEmpty.setVisibility(View.VISIBLE);
               //  binding.btnApply.setVisibility(View.GONE);
-                binding.progressBarcategory.setVisibility(View.GONE);
+              //  binding.progressBarcategory.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
                 Utils.showFailureDialog(JobsShortListedActivity.this, "Please try again sometime later..");
             }

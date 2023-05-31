@@ -4,6 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -48,12 +52,20 @@ public class ImageViewPagerAdapter extends PagerAdapter {
         ImageView imageView=new ImageView(context);
        /* imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         imageView.setImageResource(imageList[position]);*/
+        imageView.setRotation(360);
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+
+       /* Animation animSlide = AnimationUtils.loadAnimation(context,
+                R.anim.slide_in_right);
+
+// Start the animation like this
+        imageView.startAnimation(animSlide);*/
         Picasso.get()
                 .load(ApiClient.Photourl+advertisingDatum.get(position).getImage())
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(imageView);
         container.addView(imageView,0);
+
         return imageView;
     }
 

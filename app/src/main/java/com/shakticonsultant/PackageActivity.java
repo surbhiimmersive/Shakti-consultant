@@ -20,6 +20,7 @@ import com.shakticonsultant.responsemodel.PackageDatumResponse;
 import com.shakticonsultant.responsemodel.PackageResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -53,17 +54,19 @@ ConnectionDetector cd;
         else {
 
             getPackageListApi();
-            datePickerDialog = new DatePickerDialog(
+           /* datePickerDialog = new DatePickerDialog(
                     PackageActivity.this, this, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONDAY),
                     Calendar.getInstance().get(Calendar.DATE));
-
+*/
             binding.imgBackArrow.setOnClickListener(v -> {
                 onBackPressed();
                 overridePendingTransition(R.anim.slide_in_left,
                         R.anim.slide_out_right);
             });
             binding.btnUpgradePackage.setOnClickListener(v -> {
-                showDateDialog();
+                //showDateDialog();
+
+                getPackageListApi();
             });
         }
     }
@@ -125,21 +128,26 @@ ConnectionDetector cd;
 
 
     public void getPackageListApi() {
-          binding.progressBarpackage.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        // binding.progressBarpackage.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
+         map.put("user_id", AppPrefrences.getUserid(PackageActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<PackageResponse> resultCall = apiInterface.callPackageList();
+        Call<PackageResponse> resultCall = apiInterface.callPackageList(map);
 
         resultCall.enqueue(new Callback<PackageResponse>() {
             @Override
             public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarpackage.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+                  //  binding.progressBarpackage.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
@@ -150,7 +158,8 @@ ConnectionDetector cd;
                         binding.recyclerpackage.getAdapter().notifyDataSetChanged();
 
                     } else {
-                        binding.progressBarpackage.setVisibility(View.GONE);
+                        //binding.progressBarpackage.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
@@ -160,7 +169,8 @@ ConnectionDetector cd;
 
             @Override
             public void onFailure(Call<PackageResponse> call, Throwable t) {
-                binding.progressBarpackage.setVisibility(View.GONE);
+                //binding.progressBarpackage.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);

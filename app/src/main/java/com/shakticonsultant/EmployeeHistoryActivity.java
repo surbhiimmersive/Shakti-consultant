@@ -3,8 +3,10 @@ package com.shakticonsultant;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -52,7 +54,7 @@ public class EmployeeHistoryActivity extends AppCompatActivity {
     List<AnnualDatumResponse> annualList=new ArrayList<>();
     ArrayList<String> sp_annual_income=new ArrayList<>();
     String strAnnual,strAnnual2;
-    String strstream,strstream1="",strstream2="";
+    String strstream="",strstream1="",strstream2="";
     ArrayList<String> sp_stream_list=new ArrayList<>();
     List<InterestedSkillDatumResponse> streamList=new ArrayList<>();
     List<StateDatumResponse> statelist=new ArrayList<>();
@@ -70,7 +72,7 @@ public class EmployeeHistoryActivity extends AppCompatActivity {
    int year,month,day;
    ConnectionDetector cd;
    Spinner spSkill;
-   String strstream3,currentdatejoining,firstdatejoining,first_Relivingdate,second_joiningdate,second_Relivingdate,third_joing,third_reliving;
+   String strstream3="",currentdatejoining,firstdatejoining,first_Relivingdate,second_joiningdate,second_Relivingdate,third_joing,third_reliving;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +112,9 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
                             binding.edtCity.setText("Select City");
 
                             strStateid = statelist.get(i).getId();
+
+                            binding.spinnerCity.setVisibility(View.VISIBLE);
+
                             getCityApi(strStateid);
                             adspinnerStatep.notifyDataSetChanged();
                         }
@@ -128,9 +133,12 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
                     btnok.setOnClickListener(v -> {
 
                         if(strstate.equals("Select State")){
+                            binding.spinnerCity.setVisibility(View.GONE);
 
-                            Toast.makeText(EmployeeHistoryActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
+                          // Toast.makeText(EmployeeHistoryActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
                         }else {
+                            binding.spinnerCity.setVisibility(View.VISIBLE);
+
                             dialog.dismiss();
                         }
 
@@ -178,7 +186,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
 
                         if(strcity.equals("Select City")){
 
-                            Toast.makeText(EmployeeHistoryActivity.this, "Please select city.", Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(EmployeeHistoryActivity.this, "Please select city.", Toast.LENGTH_SHORT).show();
                         }else {
                             dialog.dismiss();
                         }
@@ -200,7 +208,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
                     day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this, R.style.DatePickerTheme,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -211,9 +219,9 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
 
                                 }
                             }, year, month, day);
-                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                   // datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
-                    //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
                     datePickerDialog.show();
                 }
             });
@@ -230,7 +238,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
                     day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this, R.style.DatePickerTheme,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -255,7 +263,7 @@ cd=new ConnectionDetector(EmployeeHistoryActivity.this);
                     day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this, R.style.DatePickerTheme,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -281,7 +289,7 @@ binding.someEdit22.setOnClickListener(new View.OnClickListener() {
                     day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this, R.style.DatePickerTheme,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -307,7 +315,7 @@ binding.someEdit23.setOnClickListener(new View.OnClickListener() {
                     day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this, R.style.DatePickerTheme,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -332,7 +340,7 @@ binding.someEdit23.setOnClickListener(new View.OnClickListener() {
                     day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this, R.style.DatePickerTheme,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -358,7 +366,7 @@ binding.someEdit26.setOnClickListener(new View.OnClickListener() {
                     day = c.get(Calendar.DAY_OF_MONTH);
 
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(EmployeeHistoryActivity.this, R.style.DatePickerTheme,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
@@ -378,6 +386,7 @@ binding.someEdit26.setOnClickListener(new View.OnClickListener() {
 
             binding.btnUpdate.setOnClickListener(v -> {
 
+
 if(binding.someEdit17.getText().toString().trim().equals("")){
     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter current organization name", Snackbar.LENGTH_LONG)
             .setAction("Action", null);
@@ -386,33 +395,42 @@ if(binding.someEdit17.getText().toString().trim().equals("")){
 
     snackbar.show();
 
-}else
-if(strstate.equals("Select State")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select state", Snackbar.LENGTH_LONG)
+}else if(binding.someEdit10.getText().toString().trim().equals("")){
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter current date of joining", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
+
+                }
+
+else if (strstate.equals("Select State")) {
+    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select state.", Snackbar.LENGTH_LONG)
             .setAction("Action", null);
     View sbView = snackbar.getView();
     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
     snackbar.show();
 
-}else if(strcity.equals("Select City")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select city", Snackbar.LENGTH_LONG)
+} else if (strcity.equals("Select City")) {
+    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select city.", Snackbar.LENGTH_LONG)
+            .setAction("Action", null);
+    View sbView = snackbar.getView();
+    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+    snackbar.show();
+}
+else if(strAnnual.equals("Select Salary")){
+    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select salary", Snackbar.LENGTH_LONG)
             .setAction("Action", null);
     View sbView = snackbar.getView();
     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
     snackbar.show();
 
-}else if(strAnnual.equals("Select Annual")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select annual salary", Snackbar.LENGTH_LONG)
-            .setAction("Action", null);
-    View sbView = snackbar.getView();
-    sbView.setBackgroundColor(getColor(R.color.purple_200));
-
-    snackbar.show();
-
-}else if(strstream.equals("Select Stream")){
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Stream", Snackbar.LENGTH_LONG)
+}else if(strstream.equals("")){
+    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select skill", Snackbar.LENGTH_LONG)
             .setAction("Action", null);
     View sbView = snackbar.getView();
     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -612,10 +630,10 @@ sp_annual_income.clear();
                         annualList=response.body().getData();
 
                         if(annualList.size()>0){
-                            sp_annual_income.add("Select Annual");
+                            sp_annual_income.add("Select Salary");
                             for(int i=0;i<annualList.size();i++){
 
-                                sp_annual_income.add(annualList.get(i).getSalary());
+                                sp_annual_income.add(annualList.get(i).getSalary()+ " LPA");
                                 // spinner_state_list.add(model);
 
 
@@ -705,10 +723,11 @@ sp_annual_income.clear();
         resultCall.enqueue(new Callback<StateResponse>() {
             @Override
             public void onResponse(Call<StateResponse> call, Response<StateResponse> response) {
+                sp_state_name_list.clear();
 
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
-                    sp_state_name_list.clear();
+
 
                     if (response.body().isSuccess()==true) {
                         statelist=response.body().getData();
@@ -720,7 +739,7 @@ sp_annual_income.clear();
                                 sp_state_name_list.add(statelist.get(i).getState_name());
                                 // spinner_state_list.add(model);
 
-                               /* binding.spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                binding.spState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -731,7 +750,15 @@ sp_annual_income.clear();
 
                                         // Toast.makeText(PersonalInfoActivity.this, "state" + id, Toast.LENGTH_SHORT).show();
 
+                                        if(strstate.equals("Select State")){
+                                            binding.spinnerCity.setVisibility(View.GONE);
 
+                                            binding.spCity.setVisibility(View.GONE);
+                                        }else{
+                                            binding.spinnerCity.setVisibility(View.VISIBLE);
+                                            binding.spCity.setVisibility(View.VISIBLE);
+
+                                        }
                                         getCityApi(strStateid);
                                         adspinnerStatep.notifyDataSetChanged();
 
@@ -741,7 +768,7 @@ sp_annual_income.clear();
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
-                                });*/
+                                });
                             }
 
                             adspinnerStatep=new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_state_name_list);
@@ -768,6 +795,7 @@ sp_annual_income.clear();
         });
     }
 
+
     ///////---------------City Api-----------------
 
 
@@ -791,13 +819,14 @@ sp_annual_income.clear();
                         cityList=response.body().getData();
 
                         if(cityList.size()>0){
-                           // binding.spCity.setVisibility(View.VISIBLE);
+                            // binding.spCity.setVisibility(View.VISIBLE);
+                            //  binding.spinner4.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<cityList.size();i++){
 
                                 sp_city_name_list.add(cityList.get(i).getCity_name());
 
-                                /*binding.spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                binding.spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         strcity=(String)binding.spCity.getSelectedItem();
@@ -809,7 +838,7 @@ sp_annual_income.clear();
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
-                                });*/
+                                });
                                 adp1=new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
                                 binding.spCity.setAdapter(adp1);
                                 adp1.notifyDataSetChanged();
@@ -823,11 +852,13 @@ sp_annual_income.clear();
                         // binding.progressInfo.setVisibility(View.GONE);
                         //   Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
                         // Utils.showFailureDialog(PersonalInfoActivity.this, "No Data Found");
-                       // binding.spCity.setVisibility(View.GONE);
+                        binding.spCity.setVisibility(View.GONE);
+                        //  binding.spinner4.setVisibility(View.INVISIBLE);
+/*
                         sp_city_name_list.add("Select City");
-                        adp1=new ArrayAdapter<String>(EmployeeHistoryActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
+                        adp1=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
                         binding.spCity.setAdapter(adp1);
-                        adp1.notifyDataSetChanged();
+                        adp1.notifyDataSetChanged();*/
 
                     }
                 }
@@ -836,12 +867,14 @@ sp_annual_income.clear();
             @Override
             public void onFailure(Call<CityResponse> call, Throwable t) {
                 // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
+                //   binding.spinner4.setVisibility(View.INVISIBLE);
 
                 // binding.progressInfo.setVisibility(View.GONE);
                 //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
             }
         });
     }
+
 
     public void EmployeeHistoryApi() {
           binding.progressemployee.setVisibility(View.VISIBLE);
@@ -885,6 +918,7 @@ sp_annual_income.clear();
                         finish();
 */
                         AppPrefrences.setUserid(EmployeeHistoryActivity.this,userid);
+                        AppPrefrences.setExperience(EmployeeHistoryActivity.this,"EXPERIENCE");
 
                         Intent i=new Intent(EmployeeHistoryActivity.this,MainActivity.class);
                         i.putExtra("userid",userid);
@@ -930,4 +964,53 @@ sp_annual_income.clear();
         getStateListApi();
         getCatgoryId();
     }
+/*
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }*/
+
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(EmployeeHistoryActivity.this);
+
+        builder.setTitle(R.string.app_name);
+        builder.setIcon(R.drawable.shakti_consultant_logo);
+        builder.setMessage("Are you sure you want to exit?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                finishAffinity();
+                System.exit(0);
+
+                   /* int pid = android.os.Process.myPid();
+                    android.os.Process.killProcess(pid);
+                    finishAffinity();
+                    Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                    homeIntent.addCategory( Intent.CATEGORY_HOME );
+                    homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(homeIntent);
+
+                    finishAffinity();
+                    System.exit(0);
+*/
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 }

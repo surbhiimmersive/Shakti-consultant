@@ -2,7 +2,10 @@ package com.shakticonsultant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivityAcademicDetailsBinding;
+import com.shakticonsultant.responsemodel.AcademicCommonResponse;
 import com.shakticonsultant.responsemodel.AnnualDatumResponse;
 import com.shakticonsultant.responsemodel.AnnualResponse;
 import com.shakticonsultant.responsemodel.BoardDatumResponse;
@@ -26,6 +30,7 @@ import com.shakticonsultant.responsemodel.EducationResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -133,42 +138,46 @@ ConnectionDetector cd;
             binding.btnUpdate.setOnClickListener(v -> {
 
                 if (strBoard1.equals("Select Board")) {
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select board.", Snackbar.LENGTH_LONG)
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Xth Board", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
-                } else if (binding.edtXPercent.getText().toString().equals("")) {
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter Xth Percentage.", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null);
-                    View sbView = snackbar.getView();
-                    sbView.setBackgroundColor(getColor(R.color.purple_200));
-
-                    snackbar.show();
-                }else if (stryear1.equals("Select Year")) {
+                } else if (stryear1.equals("Select Year")) {
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Xth year", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
-                } else if (strBoard2.equals("Select Board")) {
+                }
+                else if (binding.edtXPercent.getText().toString().equals("")) {
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter Xth Percentage.", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                    snackbar.show();
+                }
+                else if (strBoard2.equals("Select Board")) {
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select XIIth board.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
-                } else if (binding.edtXIIPercent.getText().toString().equals("")) {
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter XIIth Percentage.", Snackbar.LENGTH_LONG)
+                }
+                else if (stryear2.equals("Select Year")) {
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select XIIth year", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                     snackbar.show();
-                } else if (stryear2.equals("Select Year")) {
-                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select XIIth year", Snackbar.LENGTH_LONG)
+                }
+                else if (binding.edtXIIPercent.getText().toString().equals("")) {
+                    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter XIIth Percentage.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(getColor(R.color.purple_200));
@@ -323,7 +332,11 @@ ConnectionDetector cd;
 
 
     public void getEducationApi() {
-          binding.progressacadeic.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        //    binding.progressacadeic.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("degree_type", "Graduation");
 
@@ -336,7 +349,8 @@ ConnectionDetector cd;
             public void onResponse(Call<EducationResponse> call, Response<EducationResponse> response) {
                 sp_graduation_list.clear();
                 if (response.isSuccessful()) {
-                     binding.progressacadeic.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+                     //binding.progressacadeic.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
                         graduationList=response.body().getData();
@@ -369,7 +383,9 @@ ConnectionDetector cd;
                         }
 
                     } else {
-binding.progressacadeic.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+//binding.progressacadeic.setVisibility(View.GONE);
                     }
                 }
             }
@@ -377,7 +393,8 @@ binding.progressacadeic.setVisibility(View.GONE);
             @Override
             public void onFailure(Call<EducationResponse> call, Throwable t) {
                 // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
-                binding.progressacadeic.setVisibility(View.GONE);
+             //   binding.progressacadeic.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
                 // binding.progressInfo.setVisibility(View.GONE);
                 //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
@@ -455,7 +472,10 @@ binding.progressacadeic.setVisibility(View.GONE);
 
 
     public void AcademicDetailApi() {
-        binding.progressacadeic.setVisibility(View.VISIBLE);
+       // binding.progressacadeic.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
 
         Map<String, String> map = new HashMap<>();
 
@@ -479,20 +499,25 @@ binding.progressacadeic.setVisibility(View.GONE);
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<CommonResponse> resultCall = apiInterface.callAcademyDetailApi(map);
+        Call<AcademicCommonResponse> resultCall = apiInterface.callAcademyDetailApi(map);
 
-        resultCall.enqueue(new Callback<CommonResponse>() {
+        resultCall.enqueue(new Callback<AcademicCommonResponse>() {
             @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+            public void onResponse(Call<AcademicCommonResponse> call, Response<AcademicCommonResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressacadeic.setVisibility(View.GONE);
-
+                   // binding.progressacadeic.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
                     // binding.progressBar2.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
 
                         if(experience.equals("Fresher")){
+
+                            AppPrefrences.setUserid(AcademicDetailsActivity.this,userid);
+                            AppPrefrences.setExperience(AcademicDetailsActivity.this,"Fresher");
+                            AppPrefrences.setSkillId(AcademicDetailsActivity.this,response.body().getSkill_id());
+
                             Intent i = new Intent(AcademicDetailsActivity.this, MainActivity.class);
                             i.putExtra("userid", userid);
                             startActivity(i);
@@ -501,6 +526,10 @@ binding.progressacadeic.setVisibility(View.GONE);
                                     R.anim.slide_out_left);
 
                         }else {
+
+                            AppPrefrences.setSkillId(AcademicDetailsActivity.this,response.body().getSkill_id());
+                            AppPrefrences.setUserid(AcademicDetailsActivity.this,userid);
+
                             Intent i = new Intent(AcademicDetailsActivity.this, EmployeeHistoryActivity.class);
                             i.putExtra("userid", userid);
                             startActivity(i);
@@ -509,13 +538,15 @@ binding.progressacadeic.setVisibility(View.GONE);
                                     R.anim.slide_out_left);
                         }
                     }  else {
-                        Utils.showFailureDialog(AcademicDetailsActivity.this, response.body().getMessage());
+                      //  Utils.showFailureDialog(AcademicDetailsActivity.this, response.body().getMessage());
 
+                        progress_spinner.dismiss();
 
                     }
                 }else{
-                    Utils.showFailureDialog(AcademicDetailsActivity.this,"Please try sometime later.");
-                     binding.progressacadeic.setVisibility(View.GONE);
+                   // Utils.showFailureDialog(AcademicDetailsActivity.this,"Please try sometime later.");
+                    // binding.progressacadeic.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
 
 
 
@@ -523,7 +554,7 @@ binding.progressacadeic.setVisibility(View.GONE);
             }
 
             @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
+            public void onFailure(Call<AcademicCommonResponse> call, Throwable t) {
                // binding.progressBar2.setVisibility(View.GONE);
                 binding.progressacadeic.setVisibility(View.GONE);
 
@@ -552,4 +583,52 @@ binding.progressacadeic.setVisibility(View.GONE);
         getPostEducationApi();
 
     }
+  /*  @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }*/
+
+    public void onBackPressed() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AcademicDetailsActivity.this);
+
+        builder.setTitle(R.string.app_name);
+        builder.setIcon(R.drawable.shakti_consultant_logo);
+        builder.setMessage("Are you sure you want to exit?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                finishAffinity();
+                System.exit(0);
+
+                   /* int pid = android.os.Process.myPid();
+                    android.os.Process.killProcess(pid);
+                    finishAffinity();
+                    Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                    homeIntent.addCategory( Intent.CATEGORY_HOME );
+                    homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(homeIntent);
+
+                    finishAffinity();
+                    System.exit(0);
+*/
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
 }

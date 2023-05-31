@@ -48,18 +48,30 @@ public class JobDetailDatumResponse implements Serializable
     private String document_required;
 @SerializedName("package_balance")
     @Expose
-    private int package_balance;
+    private String package_balance;
 
-    public int getPackage_balance() {
-        return package_balance;
+@SerializedName("applied_status")
+    @Expose
+    private int applied_status;
+
+    public int getApplied_status() {
+        return applied_status;
     }
 
-    public void setPackage_balance(int package_balance) {
-        this.package_balance = package_balance;
+    public void setApplied_status(int applied_status) {
+        this.applied_status = applied_status;
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getPackage_balance() {
+        return package_balance;
+    }
+
+    public void setPackage_balance(String package_balance) {
+        this.package_balance = package_balance;
     }
 
     public void setId(String id) {

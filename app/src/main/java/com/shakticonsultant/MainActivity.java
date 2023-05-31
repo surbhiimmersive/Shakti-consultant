@@ -52,14 +52,14 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    String name,email,mobile,img;
+    String name, email, mobile, img;
+    boolean homePressed = true, doubleBackToExitPressedOnce = false;
 
-  //  private AppBarConfiguration mAppBarConfiguration;
-String userid;
+    //  private AppBarConfiguration mAppBarConfiguration;
     NavHostFragment navHostFragment;
     NavController navController;
-    TextView tvname,tvemail,tvmobile,textView36;
-            ImageView imageView14;
+    TextView tvname, tvemail, tvmobile, textView36;
+    ImageView imageView14;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +68,9 @@ String userid;
         setContentView(binding.getRoot());
 
 
-        userid = getIntent().getStringExtra("userid");
-        AppPrefrences.setUserid(MainActivity.this,userid);
+        String userid = getIntent().getStringExtra("userid");
 
-     //   Toast.makeText(this, ""+AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(this, "" + AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
         /* Navigation Drawer */
         binding.navView.setNavigationItemSelectedListener(this::onOptionsItemSelected);
 
@@ -82,38 +81,53 @@ String userid;
         binding.navView.getMenu().getItem(6).setActionView(R.layout.action_layout_drawer);
 
 
-    //    NavigationViewKt wnavigationView= findViewById(R.id.nav_view);
+        //    NavigationViewKt wnavigationView= findViewById(R.id.nav_view);
 
 //        mAppBarConfiguration= new AppBarConfiguration.Builder(
 //                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
 //                .setDrawerLayout(drawer).build();
 
 
-     //   NavController navController= Navigation.findNavController(this, R.id.nav_host_fragment);
-      //  NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-    //    NavigationUI.setupWithNavController(binding.navView, navController);
+        //   NavController navController= Navigation.findNavController(this, R.id.nav_host_fragment);
+        //  NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        //    NavigationUI.setupWithNavController(binding.navView, navController);
 
         /* Bottom Nav */
         setUpNavigation();
 
         View headerView = binding.navView.inflateHeaderView(R.layout.drawer_header);
 
-         tvname=headerView.findViewById(R.id.textView33);
-         tvemail=headerView.findViewById(R.id.textView34);
-         tvmobile=headerView.findViewById(R.id.textView35);
-         imageView14=headerView.findViewById(R.id.imageView14);
-         textView36=headerView.findViewById(R.id.textView36);
+        tvname = headerView.findViewById(R.id.textView33);
+        tvemail = headerView.findViewById(R.id.textView34);
+        tvmobile = headerView.findViewById(R.id.textView35);
+        imageView14 = headerView.findViewById(R.id.imageView14);
+        textView36 = headerView.findViewById(R.id.textView36);
         getprofiledata();
 
         textView36.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent i=new Intent(MainActivity.this,EditProfileActivity.class);
-                i.putExtra("name",name);
-                i.putExtra("email",email);
-                i.putExtra("mobile",mobile);
-                i.putExtra("profile_img",img);
+                Intent i = new Intent(MainActivity.this, EditProfileActivity.class);
+                i.putExtra("name", name);
+                i.putExtra("email", email);
+                i.putExtra("mobile", mobile);
+                i.putExtra("profile_img", img);
+                startActivity(i);
+                overridePendingTransition(R.anim.slide_in_right,
+                        R.anim.slide_out_left);
+
+            }
+        });
+        imageView14.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(MainActivity.this, EditProfileActivity.class);
+                i.putExtra("name", name);
+                i.putExtra("email", email);
+                i.putExtra("mobile", mobile);
+                i.putExtra("profile_img", img);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right,
                         R.anim.slide_out_left);
@@ -123,40 +137,38 @@ String userid;
 
     }
 
-    public void setUpNavigation(){
-        navHostFragment = (NavHostFragment)getSupportFragmentManager()
+    public void setUpNavigation() {
+        navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
-        navController= ((NavHostFragment) getSupportFragmentManager()
+        navController = ((NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment)).getNavController();
 
-                NavigationUI.setupWithNavController(binding.bottomNavigationView,
+        NavigationUI.setupWithNavController(binding.bottomNavigationView,
                 navHostFragment.getNavController());
-   //     NavigationUI.setupWithNavController(binding.navView,navHostFragment.getNavController());
+        //     NavigationUI.setupWithNavController(binding.navView,navHostFragment.getNavController());
     }
 
-    public void setUpNavigationForDrawer(){
-        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager()
+    public void setUpNavigationForDrawer() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
         NavigationUI.setupWithNavController(binding.navView,
                 navHostFragment.getNavController());
     }
 
-    public void openDrawer(){
+    public void openDrawer() {
         DrawerLayout drawer = findViewById(R.id.navigation_drawer);
         drawer.openDrawer(GravityCompat.START);
     }
 
-    public void closeDrawer(){
+    public void closeDrawer() {
         DrawerLayout drawer = findViewById(R.id.navigation_drawer);
         drawer.closeDrawers();
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-
 
         /* Jobs  */
         LinearLayout actionLayout = (LinearLayout) binding.navView.getMenu().getItem(2).getActionView();
@@ -167,48 +179,38 @@ String userid;
         ImageView arrow_1 = actionLayout_1.findViewById(R.id.igv_arrow);
         Fragment selectedScreen;
 
-        if (item.getItemId() == R.id.drawer_about_us){
+        if (item.getItemId() == R.id.drawer_about_us) {
             startActivity(new Intent(getApplicationContext(), AboutUsActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
-        }
-        else if (item.getItemId() == R.id.drawer_home){
+        } else if (item.getItemId() == R.id.drawer_home) {
             navController.navigate(R.id.bottom_home);
             closeDrawer();
-        }
-        else if (item.getItemId() == R.id.drawer_invite_friends){
+        } else if (item.getItemId() == R.id.drawer_invite_friends) {
 
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("text/plain");
-            intent.putExtra(Intent.EXTRA_TEXT, "Share this app.");
+            intent.putExtra(Intent.EXTRA_TEXT, "Invite your friend to \n  https://play.google.com/store/apps/details?id=com.shakticonsultant&pli=1");
             startActivity(Intent.createChooser(intent, "Share using"));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
-          //  startActivity(new Intent(getApplicationContext(), HomeFragment.class));
-        }
-
-
-        else if (item.getItemId() == R.id.drawer_reset_password){
+            //  startActivity(new Intent(getApplicationContext(), HomeFragment.class));
+        } else if (item.getItemId() == R.id.drawer_reset_password) {
            /* startActivity(new Intent(getApplicationContext(), ResetPasswordActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);*/
 
-            AppPrefrences.setLogin_status(MainActivity.this,false);
-            Intent i = new Intent(MainActivity.this, SignInActivity.class);
-            startActivity(i);
-            finish();
+            startActivity(new Intent(getApplicationContext(), ResetActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
 
-        }
-        else if (item.getItemId() == R.id.drawer_contact_us){
+        } else if (item.getItemId() == R.id.drawer_contact_us) {
             startActivity(new Intent(getApplicationContext(), ContactUsActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
-        }
-        else if (item.getItemId() == R.id.drawer_rate_us){
+        } else if (item.getItemId() == R.id.drawer_rate_us) {
             //startActivity(new Intent(getApplicationContext(), RateUsActivity.class));
             //showRateDialog(MainActivity.this);
 
@@ -233,96 +235,82 @@ String userid;
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
         }*/
-        else if(item.getItemId() == R.id.drawer_faq){
+        else if (item.getItemId() == R.id.drawer_faq) {
             navController.navigate(R.id.bottom_faq);
             closeDrawer();
 
-        }
-
-        /*else if(item.getItemId() == R.id.drawer_our_client){
+        } else if (item.getItemId() == R.id.drawerour_client) {
             startActivity(new Intent(getApplicationContext(), OurClientActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
 
-        }*/
-        else if (item.getItemId() == R.id.drawer_jobs){
+        } else if (item.getItemId() == R.id.drawer_jobs) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     boolean b = !binding.navView.getMenu().findItem(R.id.drawer_jobs1).isVisible();
-                    if (b){
+                    if (b) {
                         arrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
-                    }
-                    else {
+                    } else {
                         arrow.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
                     }
                     binding.navView.getMenu().findItem(R.id.drawer_jobs1).setVisible(b);
                     binding.navView.getMenu().findItem(R.id.drawer_jobs2).setVisible(b);
-                    binding.navView.getMenu().findItem(R.id.drawer_jobs3).setVisible(b);
+                    binding.navView.getMenu().findItem(R.id.drawer_jobs3).setVisible(false);
                 }
             }, 50);
-        }
-        else if (item.getItemId() == R.id.drawer_job_app_status){
+        } else if (item.getItemId() == R.id.drawer_job_app_status) {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     boolean b = !binding.navView.getMenu().findItem(R.id.drawer_job_app_status1).isVisible();
-                    if (b){
+                    if (b) {
                         arrow_1.setImageResource(R.drawable.ic_baseline_keyboard_arrow_up_24);
-                    }
-                    else {
+                    } else {
                         arrow_1.setImageResource(R.drawable.ic_baseline_keyboard_arrow_down_24);
                     }
                     binding.navView.getMenu().findItem(R.id.drawer_job_app_status1).setVisible(b);
                     binding.navView.getMenu().findItem(R.id.drawer_job_app_status2).setVisible(b);
                 }
             }, 50);
-        }
-
-        else if (item.getItemId() == R.id.drawer_job_app_status1){
-                      startActivity(new Intent(getApplicationContext(), ScheduleInterviewActivity.class));
+        } else if (item.getItemId() == R.id.drawer_job_app_status1) {
+            startActivity(new Intent(getApplicationContext(), ScheduleInterviewActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
 
-        }  else if (item.getItemId() == R.id.drawer_job_app_status2){
-                      startActivity(new Intent(getApplicationContext(), RejectedApplicationActivity.class));
+        } else if (item.getItemId() == R.id.drawer_job_app_status2) {
+            startActivity(new Intent(getApplicationContext(), RejectedApplicationActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
-        }
-        else if (item.getItemId() == R.id.drawer_jobs1){
+        } else if (item.getItemId() == R.id.drawer_jobs1) {
             navController.navigate(R.id.bottom_jobs);
             closeDrawer();
-        }
-        else if (item.getItemId() == R.id.drawer_jobs2){
+        } else if (item.getItemId() == R.id.drawer_jobs2) {
             startActivity(new Intent(getApplicationContext(), JobsShortListedActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
 
         }
-        else if (item.getItemId() == R.id.drawer_jobs3){
-           startActivity(new Intent(getApplicationContext(), JobsRecommendedActivity.class));
+       /* else if (item.getItemId() == R.id.drawer_jobs3) {
+            startActivity(new Intent(getApplicationContext(), JobsRecommendedActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
 
-        }
-        else if (item.getItemId() == R.id.drawer_subscription_plans){
+        }*/
+
+        else if (item.getItemId() == R.id.drawer_subscription_plans) {
             startActivity(new Intent(getApplicationContext(), PackageActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
-        }
-        else if (item.getItemId() == R.id.drawer_resume_preview){
+        } else if (item.getItemId() == R.id.drawer_resume_preview) {
             startActivity(new Intent(getApplicationContext(), ResumeActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
-        }
- else if (item.getItemId() == R.id.drawer_testimonial){
+        } else if (item.getItemId() == R.id.drawer_testimonial) {
             startActivity(new Intent(getApplicationContext(), TestimonialActivity.class));
             overridePendingTransition(
                     R.anim.slide_in_right, R.anim.slide_out_left);
-        }
-
-
-        else if (item.getItemId() == R.id.drawer_logout){
+        } else if (item.getItemId() == R.id.drawer_logout) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
@@ -339,11 +327,13 @@ String userid;
                 android.os.Process.killProcess(pid);
                 finishAffinity();*/
 
-                    AppPrefrences.setLogin_status(MainActivity.this,false);
+                    AppPrefrences.setLogin_status(MainActivity.this, false);
                     Intent i = new Intent(MainActivity.this, SignInActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                            Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
                     finish();
-
 
 
                 }
@@ -375,12 +365,12 @@ String userid;
                 .commit();
     }
 
-    public void getprofiledata () {
-       // binding..setVisibility(View.VISIBLE);
+    public void getprofiledata() {
+        // binding..setVisibility(View.VISIBLE);
 
         Map<String, String> map = new HashMap<>();
 
-map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
+        map.put("user_id", AppPrefrences.getUserid(MainActivity.this));
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         Call<ProfileResponse> resultCall = apiInterface.callgetProfileApi(map);
@@ -390,20 +380,21 @@ map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
 
                 if (response.isSuccessful()) {
-                   // binding.progressAbout.setVisibility(View.GONE);
+                    // binding.progressAbout.setVisibility(View.GONE);
                     if (response.body().isSuccess() == true) {
 
 
-                        name=response.body().getData().getName();
-                        email=response.body().getData().getEmail();
-                        mobile=response.body().getData().getMobile();
-                        img=response.body().getData().getProfile_image();
+                        name = response.body().getData().getName();
+                        email = response.body().getData().getEmail();
+                        mobile = response.body().getData().getMobile();
+                        img = response.body().getData().getProfile_image();
                         // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
                         Picasso.get()
-                                .load(ApiClient.Photourl+response.body().getData().getProfile_image())
+                                .load(ApiClient.Photourl + response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
-                                . resize(400,300)
-                                .centerCrop(Gravity.TOP)
+                                /*   .resize(400, 300)
+                                   .centerCrop(Gravity.TOP)*/
+                                .fit()
                                 .into(imageView14);
 
 
@@ -411,7 +402,7 @@ map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
                         tvemail.setText(response.body().getData().getEmail());
                         tvmobile.setText(response.body().getData().getMobile());
                     } else {
-                       // Utils.showFailureDialog(AboutUsActivity.this, response.body().getMessage());
+                        // Utils.showFailureDialog(AboutUsActivity.this, response.body().getMessage());
 
 
                     }
@@ -420,8 +411,8 @@ map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-               // binding.progressAbout.setVisibility(View.GONE);
-               // Utils.showFailureDialog(AboutUsActivity.this, "Something went wrong!");
+                // binding.progressAbout.setVisibility(View.GONE);
+                // Utils.showFailureDialog(AboutUsActivity.this, "Something went wrong!");
             }
         });
     }
@@ -456,15 +447,110 @@ map.put("user_id",AppPrefrences.getUserid(MainActivity.this));
                             } catch (PackageManager.NameNotFoundException e) {
                                 e.printStackTrace();
                                 // should use browser
-                                link = "https://play.google.com/store/apps/details?id=";
+                                link = "https://play.google.com/store/apps/details?id=com.shakticonsultant&pli=1";
                             }
                             // starts external action
                             context.startActivity(new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse(link + context.getPackageName())));
+                                    Uri.parse(link + "com.onlinecompetition.ucmas")));
                         }
                     }
                 })
                 .setNegativeButton("CANCEL", null);
         builder.show();
     }
+
+
+   /* @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+        builder.setTitle(R.string.app_name);
+        builder.setIcon(R.drawable.shakti_consultant_logo);
+        builder.setMessage("Are you sure you want to exit?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+
+                       *//* System.exit(0);
+                        int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
+                finishAffinity();
+                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                homeIntent.addCategory( Intent.CATEGORY_HOME );
+                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(homeIntent);
+*//*
+                finishAffinity();
+                System.exit(0);
+
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }*/
+
+
+    public void onBackPressed() {
+        if (AppPrefrences.getCLose(MainActivity.this) == false) {
+            super.onBackPressed();
+        } else {
+            // super.onBackPressed();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+            builder.setTitle(R.string.app_name);
+            builder.setIcon(R.drawable.shakti_consultant_logo);
+            builder.setMessage("Are you sure you want to exit?");
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                    finishAffinity();
+                    System.exit(0);
+
+                   /* int pid = android.os.Process.myPid();
+                    android.os.Process.killProcess(pid);
+                    finishAffinity();
+                    Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                    homeIntent.addCategory( Intent.CATEGORY_HOME );
+                    homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(homeIntent);
+
+                    finishAffinity();
+                    System.exit(0);
+*/
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    dialog.dismiss();
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
+
 }

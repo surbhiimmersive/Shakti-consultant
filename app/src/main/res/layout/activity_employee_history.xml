@@ -20,6 +20,8 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Employee History"
+            android:textStyle="bold"
+
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -101,8 +103,8 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test3"
                 />
 
@@ -153,9 +155,9 @@ android:clickable="true"
                 android:id="@+id/spState"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:visibility="gone"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:visibility="visible"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test2"
                 />
             <EditText
@@ -165,6 +167,7 @@ android:clickable="true"
                 android:background="@android:color/transparent"
                 android:hint="Select State"
                 android:inputType="text"
+                android:visibility="gone"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins_regular"
                 android:editable="false"
@@ -188,6 +191,7 @@ android:clickable="true"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
+            android:visibility="gone"
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
@@ -200,8 +204,8 @@ android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:visibility="gone"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test3"
                 />
             <EditText
@@ -212,6 +216,7 @@ android:clickable="true"
                 android:hint="Select City"
                 android:inputType="text"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:fontFamily="@font/poppins_regular"
                 android:editable="false"
                 android:clickable="true"
@@ -245,7 +250,7 @@ android:clickable="true"
                 android:id="@+id/spAnnual"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:spinnerMode="dialog"
                 android:entries="@array/test12"
                 />
@@ -271,8 +276,8 @@ android:clickable="true"
                 android:id="@+id/spStream"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test5"
                 />
 
@@ -381,7 +386,7 @@ android:clickable="true"
                 android:id="@+id/spAnnual2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:spinnerMode="dialog"
                 android:entries="@array/test12"
                 />
@@ -406,8 +411,8 @@ android:clickable="true"
                 android:id="@+id/spStream1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:spinnerMode="dropdown"
-                style="@style/spinner_style"
+                android:spinnerMode="dialog"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:entries="@array/test5"
                 />
 
@@ -520,8 +525,8 @@ android:clickable="true"
                 android:id="@+id/spStream2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test5"
                 />
 
@@ -545,8 +550,8 @@ android:clickable="true"
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:spinnerMode="dropdown"
-                style="@style/spinner_style"
+                android:spinnerMode="dialog"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:entries="@array/test5"
                 />
 
@@ -663,8 +668,8 @@ android:visibility="gone"
                 android:id="@+id/spAnnual3"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
 
                 android:entries="@array/test5"
                 />
@@ -686,8 +691,8 @@ android:visibility="gone"
                 android:id="@+id/spStream3"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test5"
                 />
 
@@ -721,23 +726,22 @@ android:visibility="gone"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view" />
-
-
-
         <ProgressBar
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/progressemployee"
-            android:visibility="gone"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:indeterminateDrawable="@drawable/loading_img"
-
-            android:foregroundGravity="center"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="350dp"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/textView30"
-            ></ProgressBar>
+            app:layout_constraintVertical_bias="0.0" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

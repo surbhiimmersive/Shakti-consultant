@@ -49,6 +49,14 @@ ConnectionDetector cd;
         }else {
 
             getprofiledata();
+
+            if(AppPrefrences.getExperience(EditResumeActivity.this).equals("Fresher")){
+
+                binding.btnEmployeeHistory.setVisibility(View.GONE);
+            }else{
+                binding.btnEmployeeHistory.setVisibility(View.VISIBLE);
+
+            }
             //  getFaqList();
 
             binding.btnPersonalInfo.setOnClickListener(new View.OnClickListener() {

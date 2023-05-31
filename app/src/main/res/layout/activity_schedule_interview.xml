@@ -12,29 +12,48 @@
         android:paddingBottom="15dp"
         >
 
-        <ImageView
-            android:id="@+id/img_back_arrow"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:id="@+id/l1"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="1"
             android:layout_marginTop="25dp"
-            android:src="@drawable/ic_baseline_arrow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/img_back_arrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5sp"
+                android:layout_weight="0.9"
+                android:src="@drawable/ic_baseline_arrow"
+                />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SCHEDULED INTERVIEWS"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"
+
+                android:layout_weight="0.1"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10sp"
+                android:textAllCaps="true"
+                android:textColor="@color/main_text_color"
+                android:textSize="18sp"
+                />
 
 
-        <TextView
-            android:id="@+id/textView49"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:fontFamily="@font/roboto"
-            android:text="SCHEDULED INTERVIEWS"
-            android:textAllCaps="true"
-            android:textColor="@color/main_text_color"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline8"
@@ -61,7 +80,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView49" />
+            app:layout_constraintTop_toBottomOf="@+id/l1" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUpcoming"
@@ -78,7 +97,7 @@
             android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline8"
-            app:layout_constraintTop_toBottomOf="@+id/textView49" />
+            app:layout_constraintTop_toBottomOf="@+id/l1" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -98,7 +117,8 @@
             android:layout_height="wrap_content"
             android:indeterminateDrawable="@drawable/loading_img"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@id/btnUpcoming"
+
+            android:layout_marginTop="280dp"
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

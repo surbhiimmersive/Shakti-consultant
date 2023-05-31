@@ -9,6 +9,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -54,15 +57,30 @@ String strConcat,name,mobile;
         /* show keyboard */
        ShowHideKeyboard.showKeyboard(binding.otpView);
 
+
 userid=getIntent().getStringExtra("userid");
+
         name=getIntent().getStringExtra("name");
         mobile=getIntent().getStringExtra("mobile");
         binding.edt1.addTextChangedListener(this);
         binding.edt2.addTextChangedListener(this);
         binding.edt3.addTextChangedListener(this);
         binding.edt4.addTextChangedListener(this);
+        binding.edt1.requestFocus();
 
-binding.txtResend.setOnClickListener(new View.OnClickListener() {
+        binding.edt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(binding.edt1.getText().toString().trim().equals("")){
+
+                    binding.edt2.setCursorVisible(false);
+                    binding.edt3.setCursorVisible(false);
+                    binding.edt4.setCursorVisible(false);
+
+                }
+            }
+        });
+        binding.txtResend.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
 
@@ -201,7 +219,7 @@ finish();
                     }else{
                         binding.progressBar3.setVisibility(View.GONE);
 
-                        Utils.showFailureDialog(OTPActivity.this, response.body().getMessage());
+                       // Utils.showFailureDialog(OTPActivity.this, response.body().getMessage());
 
                     }
                 }else{
@@ -224,7 +242,7 @@ finish();
             @Override
             public void onFailure(Call<CommonResponse> call, Throwable t) {
                 binding.progressBar3.setVisibility(View.GONE);
-                Utils.showFailureDialog(OTPActivity.this, "Something went wrong!");
+              //  Utils.showFailureDialog(OTPActivity.this, "Something went wrong!");
             }
         });
     }
@@ -233,12 +251,12 @@ finish();
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("otp", strConcat);
+      //  map.put("otp", strConcat);
         map.put("user_id", userid);
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<CommonResponse> resultCall = apiInterface.callMatchOtpApi(map);
+        Call<CommonResponse> resultCall = apiInterface.callResendOTP(map);
 
         resultCall.enqueue(new Callback<CommonResponse>() {
             @Override
@@ -249,6 +267,11 @@ finish();
                     if (response.body().isSuccess()==true) {
 
                       //  startActivity(new Intent(OTPActivity.this, PersonalInfoActivity.class));                    }  else {
+                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "Resend Otp send successfully.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null);
+                        View sbView = snackbar.getView();
+                        sbView.setBackgroundColor(getColor(R.color.purple_200));
+                        snackbar.show();
 
 
                     }else{
@@ -271,6 +294,7 @@ finish();
     }
     @Override
     public void afterTextChanged(Editable editable) {if (editable.length() == 1) {
+
         if (binding.edt1.length() == 1) {
             binding.edt2.requestFocus();
         }

@@ -66,7 +66,11 @@ ConnectionDetector cd;
 
 
     public void getTestimonialListApi() {
-          binding.progressBarpackage.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        //    binding.progressBarpackage.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
 
@@ -80,7 +84,8 @@ ConnectionDetector cd;
             public void onResponse(Call<TestimonialResponse> call, Response<TestimonialResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarpackage.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+                  //  binding.progressBarpackage.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
@@ -91,7 +96,8 @@ ConnectionDetector cd;
                         binding.recyclerpackage.getAdapter().notifyDataSetChanged();
 
                     } else {
-                        binding.progressBarpackage.setVisibility(View.GONE);
+                       // binding.progressBarpackage.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
@@ -101,7 +107,8 @@ ConnectionDetector cd;
 
             @Override
             public void onFailure(Call<TestimonialResponse> call, Throwable t) {
-                binding.progressBarpackage.setVisibility(View.GONE);
+              //  binding.progressBarpackage.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);

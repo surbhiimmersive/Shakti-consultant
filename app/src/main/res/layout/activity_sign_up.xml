@@ -54,6 +54,8 @@
                 android:layout_height="52dp"
                 android:layout_marginTop="5dp"
                 android:singleLine="true"
+                android:maxLength="30"
+                android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
 
                 android:background="@drawable/custom_edittext_bg"
                 android:fontFamily="@font/poppins_regular"
@@ -83,9 +85,11 @@
                 android:outlineProvider="paddedBounds"
                 android:paddingStart="10dp"
                 android:maxLength="10"
+                android:digits="1234567890"
+
                 android:singleLine="true"
                 android:inputType="phone"
-                android:hint="+91 123456789"
+                android:hint="1234567890"
                 android:textColor="@color/input_text_color"
                 android:textColorHint="@color/hint_color"
                 android:textSize="14sp" />
@@ -111,6 +115,7 @@
                 android:outlineProvider="paddedBounds"
                 android:paddingStart="10dp"
                 android:singleLine="true"
+                android:inputType="textEmailAddress"
                 android:hint="John@gmail.com"
                 android:textColor="@color/input_text_color"
                 android:textColorHint="@color/hint_color"
@@ -148,7 +153,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:hint="* * * * * * * *"
                     android:paddingTop="12dp"
-                    android:maxLength="8"
+                    android:maxLength="15"
                     android:outlineProvider="paddedBounds"
                     android:inputType="textPassword"
                     android:elegantTextHeight="true"
@@ -164,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Re Enter Password"
+                android:text="Re-Password"
                 android:textColor="@color/text_color"
                 android:textSize="16sp" />
 
@@ -212,7 +217,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:hint="* * * * * * * *"
                     android:paddingTop="12dp"
-                    android:maxLength="8"
+                    android:maxLength="15"
                     android:outlineProvider="paddedBounds"
                     android:inputType="textPassword"
                     android:elegantTextHeight="true"
@@ -232,19 +237,7 @@
             -->
 
 
-            <ProgressBar
-                android:id="@+id/progressBar2"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminateDrawable="@drawable/loading_img"
-                app:layout_constraintBottom_toBottomOf="@id/edtEmail"
-                app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintRight_toRightOf="parent"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.8" />
+
 
             <!--            <EditText-->
 <!--                android:layout_width="match_parent"-->
@@ -381,6 +374,22 @@
 
 
 </FrameLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/loading_img"
+            android:layout_marginTop="350dp"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

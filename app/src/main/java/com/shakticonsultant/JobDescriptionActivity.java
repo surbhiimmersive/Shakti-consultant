@@ -1,5 +1,6 @@
 package com.shakticonsultant;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
@@ -7,8 +8,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,15 +22,19 @@ import android.net.Uri;
 import android.opengl.Visibility;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Html;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.adapter.JobSkillListAdapter;
 import com.shakticonsultant.adapter.JobSkillWiseListAdapter;
 import com.shakticonsultant.databinding.ActivityJobDescriptionBinding;
+import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.JobDetailResponse;
 import com.shakticonsultant.responsemodel.JobSkillResponse;
 import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
@@ -46,6 +53,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class JobDescriptionActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+    int year,month,day;
+    EditText date1,date2;
+    String strdate1="",strdate2="";
 
     ActivityJobDescriptionBinding binding;
     DatePickerDialog datePickerDialog;
@@ -59,6 +69,7 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
         binding = ActivityJobDescriptionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         job_id = getIntent().getStringExtra("job_id");
+   //     Toast.makeText(this, ""+job_id, Toast.LENGTH_SHORT).show();
         skill_name = getIntent().getStringExtra("skill_name");
         skill_id = getIntent().getStringExtra("skill_id");
 cd=new ConnectionDetector(JobDescriptionActivity.this);
@@ -72,8 +83,9 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
 binding.imgShare.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
+         share(getBitmapFromView(binding.nest, binding.nest.getChildAt(0).getHeight(), binding.nest.getChildAt(0).getWidth()));
 
-        share(screenShot(binding.getRoot()));
+       // share(screenShot());
 
     }
 });
@@ -144,10 +156,15 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
     }
 
     public void getJobDetailApi() {
-        binding.progressBardetail.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        //  binding.progressBardetail.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("job_id", job_id);
         map.put("user_id",AppPrefrences.getUserid(JobDescriptionActivity.this));
+        map.put("skill_id", AppPrefrences.getSkillId(JobDescriptionActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -159,7 +176,9 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
             public void onResponse(Call<JobDetailResponse> call, Response<JobDetailResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBardetail.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                    //   binding.progressBardetail.setVisibility(View.GONE);
                     binding.const1.setVisibility(View.VISIBLE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
@@ -172,17 +191,29 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
                         binding.recycleSkillList.getAdapter().notifyDataSetChanged();
 
 */
-binding.tvrange.setText(response.body().getData().get(0).getStarting_salary()+" "+response.body().getData().get(0).getPay_according());
+
+   binding.tvrange.setText(response.body().getData().get(0).getStarting_salary()+"-"+response.body().getData().get(0).getMaximum_salary()+" LPA");
 binding.tvExperience.setText(response.body().getData().get(0).getWork_experience());
 binding.tvLocation.setText(response.body().getData().get(0).getLocation());
 binding.textView51.setText(response.body().getData().get(0).getJob_description());
 binding.tvdocans.setText(response.body().getData().get(0).getDocument_required());
 binding.tvimportant.setText(response.body().getData().get(0).getImportant_instructions());
 
+if(response.body().getData().get(0).getApplied_status()==0){
 
+    binding.btnApply.setVisibility(View.VISIBLE);
+    binding.btnApplied.setVisibility(View.GONE);
+
+}else{
+    binding.btnApply.setVisibility(View.GONE);
+    binding.btnApplied.setVisibility(View.VISIBLE);
+
+
+}
                         binding.btnApply.setOnClickListener(v -> {
+                           // showSubscriptionDialog(response.body().getData().get(0).getId());
 
-                            if(response.body().getData().get(0).getPackage_balance()==0){
+                            if(response.body().getData().get(0).getPackage_balance().equals("0")){
                                 showSubscriptionDialog(response.body().getData().get(0).getId());
                             }else{
 
@@ -191,11 +222,11 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
 
                             }
 
-
                         });
                     } else {
-                        binding.progressBardetail.setVisibility(View.GONE);
-
+                     //   binding.progressBardetail.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+binding.const1.setVisibility(View.GONE);
                         //lemprtNotification.setVisibility(View.VISIBLE);
                          Utils.showFailureDialog(JobDescriptionActivity.this, "No Data Found");
                     }
@@ -207,7 +238,8 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressBardetail.setVisibility(View.GONE);
+              //  binding.progressBardetail.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
                 Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
             }
@@ -217,37 +249,180 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
     private void showDateDialog() {
         Dialog dialog = new Dialog(JobDescriptionActivity.this);
         dialog.setContentView(R.layout.dialog_select_interview_date);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
         dialog.show();
-
-        AppCompatButton date1 = dialog.findViewById(R.id.btn_select_date_1);
-        AppCompatButton date2 = dialog.findViewById(R.id.btn_select_date_2);
+        date1 = dialog.findViewById(R.id.btn_select_date_1);
+        date2 = dialog.findViewById(R.id.btn_select_date_2);
         AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
         AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
-
         date1.setOnClickListener(v -> {
+            final Calendar c = Calendar.getInstance();
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(JobDescriptionActivity.this, R.style.DatePickerTheme,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            date1.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            strdate1 = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+                        }
+                    }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+            //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
             datePickerDialog.show();
         });
 
         date2.setOnClickListener(v -> {
+            //datePickerDialog.show();
+
+            final Calendar c = Calendar.getInstance();
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(JobDescriptionActivity.this, R.style.DatePickerTheme,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            date2.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            strdate2 = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                        }
+                    }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+            //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
             datePickerDialog.show();
         });
 
         confirm.setOnClickListener(v -> {
-            dialog.dismiss();
-            showConfirmationDialog();
+
+
+            if (date1.getText().toString().trim().equals("")) {
+                Snackbar snackbar = Snackbar.make(v, "Please Select First Prefered Date.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                snackbar.show();
+                //   Toast.makeText(context, "Please Select First Prefered Date", Toast.LENGTH_SHORT).show();
+            } else if (date2.getText().toString().trim().equals("")) {
+                Snackbar snackbar = Snackbar.make(v, "Please Select Second Prefered Date.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                snackbar.show();
+                //  Toast.makeText(context, "Please Select Second Prefered Date ", Toast.LENGTH_SHORT).show();
+            } else if (date1.getText().toString().trim().equals(date2.getText().toString().trim())) {
+                Snackbar snackbar = Snackbar.make(v, "Please Select Different Dates.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                snackbar.show();
+                // Toast.makeText(context, "Please Select Different Dates", Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                getApplyJob(strdate1, strdate2, dialog);
+                // dialog.dismiss();
+            }
+            //showConfirmationDialog();
         });
 
         cancel.setOnClickListener(v -> {
             dialog.dismiss();
         });
+
     }
+
+        public void getApplyJob(String date1,String date2,Dialog dialog) {
+            //binding.progressContatc.setVisibility(View.VISIBLE);
+            Dialog progress_spinner;
+            progress_spinner = Utils.LoadingSpinner(this);
+            progress_spinner.show();
+
+            Map<String, String> map = new HashMap<>();
+            map.put("user_id", AppPrefrences.getUserid(JobDescriptionActivity.this));
+            map.put("job_id", job_id);
+            map.put("interview_date_1", date1);
+            map.put("interview_date_2", date2);
+
+
+            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+            Call<CommonResponse> resultCall = apiInterface.callApplyJob(map);
+
+            resultCall.enqueue(new Callback<CommonResponse>() {
+                @Override
+                public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+                    progress_spinner.dismiss();
+                    if (response.isSuccessful()) {
+                        //binding.progressContatc.setVisibility(View.GONE);
+                        dialog.dismiss();
+                        //  lemprtNotification.setVisibility(View.GONE);
+                        if (response.body().isSuccess()==true) {
+
+
+                            AlertDialog.Builder logoutDialog = new AlertDialog.Builder(JobDescriptionActivity.this,R.style.AlertDialogTheme)
+                                    .setTitle(R.string.app_name)
+                                    .setMessage("Your job has been applied successfully.")
+                                    .setCancelable(false)
+                                    .setIcon(R.drawable.shakti_consultant_logo)
+                                    .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            showConfirmationDialog();
+                                      /*  binding.edtEmail.setText("");
+                                        binding.edtName.setText("");
+                                        binding.edtText.setText("");*/
+                                        }
+                                    });
+                            logoutDialog.show();
+                        } else {
+                            //binding.progressContatc.setVisibility(View.GONE);
+                            progress_spinner.dismiss();
+
+                            //lemprtNotification.setVisibility(View.VISIBLE);
+                            Utils.showFailureDialog(JobDescriptionActivity.this, response.message());
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CommonResponse> call, Throwable t) {
+
+                    //  lemprtNotification.setVisibility(View.VISIBLE);
+                    //    pd_loading.setVisibility(View.GONE);
+                    // binding.progressContatc.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                    //Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
+                }
+            });
+        }
+
 
 
     private void showConfirmationDialog(){
         Dialog dialog = new Dialog(JobDescriptionActivity.this);
         dialog.setContentView(R.layout.dialog_interview_further_process);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+
         dialog.show();
 
         AppCompatButton ok = dialog.findViewById(R.id.btn_interview_ok);
@@ -255,10 +430,19 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
 
         ok.setOnClickListener(v -> {
             dialog.dismiss();
+
+            Intent i=new Intent(JobDescriptionActivity.this, MainActivity.class);
+            startActivity(i);
+         finish();
+
         });
 
         faq.setOnClickListener(v -> {
             dialog.dismiss();
+
+            Intent i=new Intent(JobDescriptionActivity.this, FAQActivity.class);
+            startActivity(i);
+            finish();
         });
 
     }
@@ -361,10 +545,16 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
 
 
     public void getSimilarJobList() {
-        binding.progressBardetail.setVisibility(View.VISIBLE);
+
+              Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        // binding.progressBardetail.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("skill_id", AppPrefrences.getSkillId(JobDescriptionActivity.this));
         map.put("user_id", AppPrefrences.getUserid(JobDescriptionActivity.this));
+        map.put("job_id", job_id);
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -376,8 +566,8 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBardetail.setVisibility(View.GONE);
-
+                  //  binding.progressBardetail.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
@@ -390,7 +580,8 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
 
 
                     } else {
-                        binding.progressBardetail.setVisibility(View.GONE);
+                      //  binding.progressBardetail.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
@@ -403,17 +594,20 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressBardetail.setVisibility(View.GONE);
+            //    binding.progressBardetail.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
-                Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
+               // Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
             }
         });
     }
 
-    private Bitmap screenShot(View view) {
-        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(),view.getHeight(), Bitmap.Config.ARGB_8888);
+    private Bitmap screenShot() {
+        View rootView = getWindow().getDecorView().findViewById(R.id.nest); //Here also I have taken ScrollView too.
+
+        Bitmap bitmap = Bitmap.createBitmap(rootView.getWidth() , rootView.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
+        rootView.draw(canvas);
         return bitmap;
     }
 
@@ -428,6 +622,17 @@ binding.tvimportant.setText(response.body().getData().get(0).getImportant_instru
         shareIntent.putExtra(Intent.EXTRA_TEXT, "");
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(shareIntent, "hello hello"));
+    }
+    private Bitmap getBitmapFromView(View view,int height,int width) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height,Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            bgDrawable.draw(canvas);
+        else
+            canvas.drawColor(Color.WHITE);
+        view.draw(canvas);
+        return bitmap;
     }
 
 }

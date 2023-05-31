@@ -2,6 +2,7 @@ package com.shakticonsultant.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,10 +18,13 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AlertDialog;
@@ -90,12 +94,24 @@ public class Utils {
 
     }
 
+    public static Dialog LoadingSpinner(Context mContext){
+        Dialog pd = new Dialog(mContext, android.R.style.Theme_Black);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.progressbar, null);
+        pd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        pd.setCancelable(false);
+        pd.getWindow().setBackgroundDrawableResource(in.akshit.horizontalcalendar.R.color.transparent);
+        pd.setContentView(view);
+        return pd;
+    }
     public static void showFailureDialog(Context mContext, String message) {
-        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(mContext)
+        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(mContext,R.style.AlertDialogTheme)
                 .setTitle(R.string.app_name)
                 .setMessage(message)
                 .setIcon(R.drawable.shakti_consultant_logo)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
+
+              //  .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }

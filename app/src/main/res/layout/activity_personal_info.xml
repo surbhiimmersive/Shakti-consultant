@@ -8,6 +8,7 @@
     tools:context=".PersonalInfoActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,6 +21,8 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="PERSONAL INFORMATION"
+            android:textStyle="bold"
+
             android:textAlignment="center"
             android:textColor="@color/main_text_color"
             android:textSize="16sp"
@@ -78,7 +81,6 @@ android:visibility="gone"
 
             <ImageView
                 android:id="@+id/imgEdit"
-                android:background="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="pick"
@@ -87,7 +89,8 @@ android:visibility="gone"
                 android:layout_alignBottom="@+id/imageView6"
                 android:layout_marginEnd="-5dp"
                 android:layout_marginRight="-5dp"
-                android:padding="1dp"
+                android:padding="5dp"
+                android:background="@drawable/round"
                 android:src="@drawable/edit_p"
                 android:visibility="invisible" />
         </RelativeLayout>
@@ -106,13 +109,25 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rl_profile"
             >
-        <Spinner
+       <!-- <Spinner
             android:id="@+id/spprefix"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:entries="@array/test"
             style="@style/spinner_style"
             android:spinnerMode="dropdown" />
+-->
+            <Spinner
+                android:id="@+id/spprefix"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:entries="@array/test"
+
+                />
 
         </androidx.cardview.widget.CardView>
 
@@ -143,14 +158,27 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/rl_profile">
 
-            <Spinner
+          <!--  <Spinner
                 android:id="@+id/spGender"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:entries="@array/test1"
                 style="@style/spinner_style"
                 app:layout_constraintEnd_toEndOf="parent" />
+-->
 
+            <Spinner
+                android:id="@+id/spGender"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                android:spinnerMode="dropdown"
+                android:entries="@array/test1"
+
+                />
         </androidx.cardview.widget.CardView>
         <EditText
             android:id="@+id/edtName"
@@ -165,7 +193,7 @@ android:visibility="gone"
             android:fontFamily="@font/poppins_regular"
             android:hint="Full Name"
             android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
-
+android:maxLength="30"
             android:inputType="text"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -305,13 +333,28 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtbday">
 
-            <Spinner
+            <!--<Spinner
                 android:id="@+id/spState"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 style="@style/spinner_style"
+                android:spinnerMode="dialog"
                 android:entries="@array/test2"
+                />-->
+
+            <Spinner
+                android:id="@+id/spState"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+
+                android:gravity="center"
+                android:spinnerMode="dialog"
+                android:entries="@array/test2"
+
                 />
             <EditText
                 android:id="@+id/edtState"
@@ -321,6 +364,7 @@ android:visibility="gone"
                 android:hint="Select State"
                 android:inputType="text"
                 android:layout_gravity="center"
+                android:visibility="gone"
                 android:imeOptions="actionDone"
                 android:fontFamily="@font/poppins_regular"
                 android:editable="false"
@@ -343,7 +387,8 @@ android:visibility="gone"
             android:id="@+id/spinner4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:visibility="visible"
+
+            android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
             android:layout_marginStart="30dp"
@@ -353,15 +398,33 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/spinner3">
 
-        <Spinner
+     <!--   <Spinner
             android:id="@+id/spCity"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             style="@style/spinner_style"
-android:visibility="gone"
+android:visibility="visible"
+            android:spinnerMode="dialog"
+
             android:entries="@array/test3"
-            />
+            />-->
+
+            <Spinner
+                android:id="@+id/spCity"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+
+
+                android:gravity="center"
+                android:spinnerMode="dialog"
+                android:entries="@array/test3"
+
+                />
             <EditText
+
                 android:id="@+id/edtCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -372,8 +435,9 @@ android:visibility="gone"
                 android:imeOptions="actionDone"
                 android:fontFamily="@font/poppins_regular"
                 android:editable="false"
-                android:clickable="true"
+                android:clickable="false"
                 android:focusable="false"
+                android:visibility="gone"
                 android:outlineProvider="paddedBounds"
                 android:paddingStart="10dp"
                 android:textColor="@color/input_text_color"
@@ -396,6 +460,8 @@ android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Mobile Number"
+            android:digits="1234567890"
+
             android:inputType="phone"
             android:imeOptions="actionDone"
             android:maxLength="10"
@@ -419,6 +485,8 @@ android:visibility="gone"
             android:fontFamily="@font/poppins_regular"
             android:hint="Alternate Number"
             android:inputType="phone"
+            android:digits="1234567890"
+
             android:imeOptions="actionDone"
             android:maxLength="10"
             android:outlineProvider="paddedBounds"
@@ -515,6 +583,7 @@ android:visibility="gone"
             android:layout_marginTop="15dp"
             android:textIsSelectable="true"
             android:imeOptions="actionDone"
+            android:digits="0,1,2,3,4,5,6,7,8,9,*,,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,_,-,./"
 
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
@@ -588,9 +657,11 @@ android:visibility="gone"
                 android:fontFamily="@font/poppins_regular"
                 android:layoutDirection="rtl"
                 android:padding="10dp"
+                android:checked="true"
+                android:buttonTint="@color/main_text_color"
                 android:text="Teaching"
                 android:textAlignment="textStart"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
 
             <RadioButton
                 android:id="@+id/radio_non_teaching"
@@ -598,6 +669,8 @@ android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginEnd="10dp"
+                android:buttonTint="@color/main_text_color"
+
                 android:layout_weight="1"
                 android:background="@drawable/custom_edittext_bg"
                 android:fontFamily="@font/poppins_regular"
@@ -605,7 +678,7 @@ android:visibility="gone"
                 android:padding="10dp"
                 android:text="Non-Teaching"
                 android:textAlignment="textStart"
-                android:textSize="12sp" />
+                android:textSize="13sp" />
 
             </RadioGroup>
 
@@ -626,15 +699,26 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout3">
 
-        <Spinner
+        <!--<Spinner
             android:id="@+id/spDivision"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             style="@style/spinner_style"
             android:spinnerMode="dialog"
             android:entries="@array/test4"
-            />
+            />-->
+            <Spinner
+                android:id="@+id/spDivision"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
 
+                android:spinnerMode="dialog"
+                android:entries="@array/test5"
+
+                />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -643,6 +727,7 @@ android:visibility="gone"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
+android:visibility="gone"
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
@@ -651,14 +736,27 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardDivision" >
 
-        <Spinner
+      <!--  <Spinner
             android:id="@+id/spStream"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             style="@style/spinner_style"
-            android:entries="@array/test5"
-            />
+            android:spinnerMode="dialog"
 
+            android:entries="@array/test5"
+            />-->
+            <Spinner
+                android:id="@+id/spStream"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:spinnerMode="dialog"
+
+                android:entries="@array/test5"
+
+              />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -681,8 +779,11 @@ android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
            style="@style/spinner_style"
+            android:spinnerMode="dialog"
+
             android:entries="@array/test6"
             />
+
 
         </androidx.cardview.widget.CardView>
 
@@ -735,6 +836,8 @@ android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginStart="10dp"
+                android:buttonTint="@color/main_text_color"
+
                 android:layout_weight="1"
                 android:background="@drawable/custom_edittext_bg"
                 android:fontFamily="@font/poppins_regular"
@@ -751,6 +854,8 @@ android:visibility="gone"
                 android:layout_gravity="start"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:buttonTint="@color/main_text_color"
+
                 android:background="@drawable/custom_edittext_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:layoutDirection="rtl"
@@ -772,6 +877,7 @@ android:visibility="gone"
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="Organization Name"
+
             android:visibility="gone"
             android:inputType="text"
             android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
@@ -808,7 +914,7 @@ android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_regular"
-                android:text="When is your first job?"
+                android:text="What is your total experience?"
                 android:textColor="@color/main_text_color"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -822,7 +928,7 @@ android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Please select Month and Year?"
+                android:text="Please select Year and Month?"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -845,7 +951,7 @@ android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17">
 
-            <Spinner
+           <!-- <Spinner
                 android:id="@+id/spfirst_job_month"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -854,7 +960,21 @@ android:visibility="gone"
 
                 android:entries="@array/month"
               />
+-->
 
+                <Spinner
+                    android:id="@+id/spfirstjobyear"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+
+                    android:gravity="center"
+                    android:spinnerMode="dialog"
+                    android:entries="@array/year"
+
+                    />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -880,7 +1000,7 @@ android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" >
 
-            <Spinner
+            <!--<Spinner
                 android:id="@+id/spfirstjobyear"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -888,7 +1008,21 @@ android:visibility="gone"
                 android:spinnerMode="dialog"
 
                 android:entries="@array/year"
-               />
+               />-->
+
+                <Spinner
+                    android:id="@+id/spfirst_job_month"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:visibility="visible"
+
+                    android:gravity="center"
+                    android:spinnerMode="dialog"
+                    android:entries="@array/month"
+
+                    />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -930,13 +1064,27 @@ android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayoutYear"
             >
-            <Spinner
+            <!--<Spinner
                 android:id="@+id/spAnnual"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 style="@style/spinner_style"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dialog" />
+-->
 
+            <Spinner
+                android:id="@+id/spAnnual"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:visibility="visible"
+
+                android:gravity="center"
+                android:spinnerMode="dialog"
+                android:entries="@array/test3"
+
+                />
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -1022,7 +1170,7 @@ android:visibility="gone"
                 android:text="Organisation are not selected yet."
                 android:textColor="@color/main_text_color"
                 android:textSize="14sp"
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

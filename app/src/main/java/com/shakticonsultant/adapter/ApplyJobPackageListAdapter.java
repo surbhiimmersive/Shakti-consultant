@@ -9,10 +9,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Html;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.shakticonsultant.AcademicDetailsActivity;
+import com.shakticonsultant.FAQActivity;
+import com.shakticonsultant.FAQFragment;
 import com.shakticonsultant.MainActivity;
 import com.shakticonsultant.PaymentInrigationNew;
 import com.shakticonsultant.PaymentIntegration;
@@ -48,6 +55,8 @@ public class ApplyJobPackageListAdapter extends RecyclerView.Adapter<ApplyJobPac
     Context context;
     DatePickerDialog datePickerDialog;
     int year,month,day;
+    EditText date1,date2;
+
     String job_id;
     String strdate1="",strdate2="";
 
@@ -89,14 +98,79 @@ public class ApplyJobPackageListAdapter extends RecyclerView.Adapter<ApplyJobPac
 viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        if(list.get(position).getPrice().equals("0")){
 
-            showDateDialog();
+        if(list.get(position).getId().equals("5")) {
 
-        }else {
-context.startActivity(new Intent( context, PaymentInrigationNew.class));
+            getSubscriptionApi(list.get(position).getId());
+        }else{
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+
+            builder.setTitle(R.string.app_name);
+            builder.setIcon(R.drawable.shakti_consultant_logo);
+            builder.setMessage("Are you sure you want to upgrade your package?");
+
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    context.startActivity(new Intent(context, PaymentInrigationNew.class));
+
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    dialog.dismiss();
+                }
+            });
+
+            android.app.AlertDialog alert = builder.create();
+            alert.show();
 
         }
+         /*   if (list.get(position).getPrice().equals("0")) {
+
+                showDateDialog();
+
+            } else {
+
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+
+                builder.setTitle(R.string.app_name);
+                builder.setIcon(R.drawable.shakti_consultant_logo);
+                builder.setMessage("are you sure you want to upgrade your package?");
+
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        context.startActivity(new Intent(context, PaymentInrigationNew.class));
+
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        dialog.dismiss();
+                    }
+                });
+
+                android.app.AlertDialog alert = builder.create();
+                alert.show();
+
+           // }
+
+        }*/
     }
 });
 
@@ -150,10 +224,10 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_select_interview_date);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
         dialog.show();
-
-        AppCompatButton date1 = dialog.findViewById(R.id.btn_select_date_1);
-        AppCompatButton date2 = dialog.findViewById(R.id.btn_select_date_2);
+         date1 = dialog.findViewById(R.id.btn_select_date_1);
+         date2 = dialog.findViewById(R.id.btn_select_date_2);
         AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
         AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
         date1.setOnClickListener(v -> {
@@ -163,7 +237,7 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
             day = c.get(Calendar.DAY_OF_MONTH);
 
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(context,R.style.DatePickerTheme,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
@@ -190,7 +264,7 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
             day = c.get(Calendar.DAY_OF_MONTH);
 
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(context,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(context,R.style.DatePickerTheme,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
@@ -210,13 +284,34 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
         confirm.setOnClickListener(v -> {
 
 
-            if(strdate1.equals("")){
+            if(date1.getText().toString().trim().equals("")){
+                Snackbar snackbar = Snackbar.make(v, "Please Select First Prefered Date.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(context.getColor(R.color.purple_200));
 
-                Toast.makeText(context, "Please Select Valid  Date", Toast.LENGTH_SHORT).show();
-            }else if(strdate2.equals("")){
+                snackbar.show();
+             //   Toast.makeText(context, "Please Select First Prefered Date", Toast.LENGTH_SHORT).show();
+            }else if(date2.getText().toString().trim().equals("")){
+                Snackbar snackbar = Snackbar.make(v, "Please Select Second Prefered Date.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(context.getColor(R.color.purple_200));
 
-                Toast.makeText(context, "Please Select Valid  Date ", Toast.LENGTH_SHORT).show();
-            }else {
+                snackbar.show();
+              //  Toast.makeText(context, "Please Select Second Prefered Date ", Toast.LENGTH_SHORT).show();
+            }
+            else if(date1.getText().toString().trim().equals(date2.getText().toString().trim())){
+                Snackbar snackbar = Snackbar.make(v, "Please Select Different Dates.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(context.getColor(R.color.purple_200));
+
+                snackbar.show();
+                // Toast.makeText(context, "Please Select Different Dates", Toast.LENGTH_SHORT).show();
+
+            }
+            else {
 
                 getApplyJob(strdate1, strdate2,dialog);
                // dialog.dismiss();
@@ -234,6 +329,8 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_interview_further_process);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+
         dialog.show();
 
         AppCompatButton ok = dialog.findViewById(R.id.btn_interview_ok);
@@ -250,6 +347,10 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
 
         faq.setOnClickListener(v -> {
             dialog.dismiss();
+
+            Intent i=new Intent(context, FAQActivity.class);
+            context.startActivity(i);
+            ((Activity)context).finish();
         });
 
     }
@@ -257,6 +358,9 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
 
     public void getApplyJob(String date1,String date2,Dialog dialog) {
         //binding.progressContatc.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(context);
+        progress_spinner.show();
 
         Map<String, String> map = new HashMap<>();
         map.put("user_id", AppPrefrences.getUserid(context));
@@ -278,11 +382,12 @@ context.startActivity(new Intent( context, PaymentInrigationNew.class));
 dialog.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
-                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context)
+                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context,R.style.AlertDialogTheme)
                                 .setTitle(R.string.app_name)
                                 .setMessage("Your job has been applied successfully.")
+                                .setCancelable(false)
                                 .setIcon(R.drawable.shakti_consultant_logo)
-                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         showConfirmationDialog();
@@ -294,9 +399,9 @@ dialog.dismiss();
                         logoutDialog.show();
                     } else {
                         //binding.progressContatc.setVisibility(View.GONE);
-
+                        progress_spinner.dismiss();
                         //lemprtNotification.setVisibility(View.VISIBLE);
-                         Utils.showFailureDialog(context, response.message());
+                      //   Utils.showFailureDialog(context, response.message());
                     }
                 }
             }
@@ -307,8 +412,61 @@ dialog.dismiss();
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
                // binding.progressContatc.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
-                Utils.showFailureDialog(context, "Something went wrong!");
+                //Utils.showFailureDialog(context, "Something went wrong!");
+            }
+        });
+    }
+    public void getSubscriptionApi(String packageid) {
+        //binding.progressContatc.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(context);
+        progress_spinner.show();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", AppPrefrences.getUserid(context));
+        map.put("package_id", packageid);
+        map.put("transaction_id", "Free");
+        map.put("payment_status", "success");
+
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<CommonResponse> resultCall = apiInterface.callSubscriptionApi(map);
+
+        resultCall.enqueue(new Callback<CommonResponse>() {
+            @Override
+            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+
+                if (response.isSuccessful()) {
+                    progress_spinner.dismiss();
+                    //binding.progressContatc.setVisibility(View.GONE);
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess()==true) {
+
+showDateDialog();
+
+
+                    } else {
+                        //binding.progressContatc.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        // Utils.showFailureDialog(context, response.message());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommonResponse> call, Throwable t) {
+
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+               // binding.progressContatc.setVisibility(View.GONE);
+                progress_spinner.dismiss();
+
+               // Utils.showFailureDialog(context, "Something went wrong!");
             }
         });
     }

@@ -5,14 +5,18 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shakticonsultant.EmployeeHistoryActivity;
 import com.shakticonsultant.JobDescriptionActivity;
+import com.shakticonsultant.PaymentInrigationNew;
 import com.shakticonsultant.R;
 import com.shakticonsultant.responsemodel.JobCategoryDatumResponse;
 import com.shakticonsultant.responsemodel.PackageDatumResponse;
@@ -75,12 +80,52 @@ public class PackageListAdapter extends RecyclerView.Adapter<PackageListAdapter.
 
 
         viewHolder.layout_diamond_package.setBackgroundColor(Color.parseColor(list.get(position).getBgcolor()));
+
+/*
+        viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(list.get(position).getPackage_balance().equals("0")){
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+
+                    builder.setTitle(R.string.app_name);
+                    builder.setIcon(R.drawable.shakti_consultant_logo);
+                    builder.setMessage("Please upgrade your package.");
+
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            context.startActivity(new Intent(context, PaymentInrigationNew.class));
+
+                        }
+                    });
+
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            // Do nothing
+                            dialog.dismiss();
+                        }
+                    });
+
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
+
+                }
+            }
+        });
+*/
         viewHolder.tvdetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context)
+                AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context,R.style.AlertDialogTheme)
                         .setTitle(R.string.app_name)
+
                         .setMessage("Details  \n" +
                                 "* Package valid for one year \n" +
                                 "* Live job application status \n" +
@@ -93,7 +138,7 @@ public class PackageListAdapter extends RecyclerView.Adapter<PackageListAdapter.
                                 "* Selfy resume, Online test and Interviews \n" +
                                 "* No Hidden charges or any other charges, Subscription will not applicable for job applied before subscription package")
                         .setIcon(R.drawable.shakti_consultant_logo)
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                             }
@@ -105,14 +150,41 @@ public class PackageListAdapter extends RecyclerView.Adapter<PackageListAdapter.
 viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
-        if(list.get(position).getPrice().equals("0")){
+        if(list.get(position).getId().equals("5")) {
 
-           // showDateDialog();
+            // getSubscriptionApi(list.get(position).getId());
+        }else{
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
 
-        }else {
+            builder.setTitle(R.string.app_name);
+            builder.setIcon(R.drawable.shakti_consultant_logo);
+            builder.setMessage("Are you sure you want to upgrade your package?");
 
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    context.startActivity(new Intent(context, PaymentInrigationNew.class));
+
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    dialog.dismiss();
+                }
+            });
+
+            android.app.AlertDialog alert = builder.create();
+            alert.show();
 
         }
+
     }
 });
 
@@ -133,11 +205,13 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         TextView tvHeading,tvTitle,tvPrice,tvSubscriptiondays,tvJobs,tvdetail;
         ImageView imgIcon;
         ConstraintLayout layout_diamond_package;
+        LinearLayout l1;
 
         public ViewHolder(View itemLayoutView) {
             super(itemLayoutView);
 
             tvHeading = (TextView) itemLayoutView.findViewById(R.id.textView53);
+            l1 = (LinearLayout) itemLayoutView.findViewById(R.id.linear);
             tvTitle = (TextView) itemLayoutView.findViewById(R.id.tvTitle);
             tvPrice = (TextView) itemLayoutView.findViewById(R.id.tvPrice);
             tvSubscriptiondays = (TextView) itemLayoutView.findViewById(R.id.tvSubscriptiondays);

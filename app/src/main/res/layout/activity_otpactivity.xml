@@ -61,26 +61,126 @@
         android:layout_gravity="center"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginBottom="15dp"
         android:orientation="horizontal"
         >
+       <!-- <EditText
+            android:id="@+id/edt1"
 
+            android:singleLine="true"
+            android:maxLength="1"
+            android:layout_margin="5sp"
+
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:textSize="25dp"
+            android:textColor="#605A65"
+            android:textCursorDrawable="@android:color/holo_red_dark"
+            android:background="@drawable/custom_edittext_bg"            android:fontFamily="@font/poppins_regular"
+            android:outlineProvider="paddedBounds"
+            android:paddingStart="10dp"
+            android:hint=""
+            android:inputType="number"
+            android:textColorHint="@color/hint_color"
+           />-->
         <EditText
             android:id="@+id/edt1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:singleLine="true"
+            android:maxLength="1"
+            android:layout_gravity="center"
+
+            android:inputType="number"
+            android:layout_margin="5dp"
+android:gravity="center"
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:outlineProvider="paddedBounds"
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color"
+            android:textSize="18dp" />
+        <EditText
+            android:id="@+id/edt2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:inputType="number"
+            android:layout_margin="5dp"
+            android:singleLine="true"
+            android:maxLength="1"
+            android:layout_gravity="center"
+
+            android:digits="0123456789"
+            android:gravity="center"
+
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:outlineProvider="paddedBounds"
+            android:hint=""
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color"
+            android:textSize="18dp" />
+        <EditText
+            android:id="@+id/edt3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:inputType="number"
+            android:layout_margin="5dp"
+            android:singleLine="true"
+            android:maxLength="1"
+            android:layout_gravity="center"
+
+            android:digits="0123456789"
+            android:gravity="center"
+
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:outlineProvider="paddedBounds"
+            android:hint=""
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color"
+            android:textSize="18dp" />
+        <EditText
+            android:id="@+id/edt4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:inputType="number"
+            android:layout_margin="5dp"
+            android:singleLine="true"
+            android:maxLength="1"
+            android:layout_gravity="center"
+
+            android:digits="0123456789"
+            android:gravity="center"
+
+            android:background="@drawable/custom_edittext_bg"
+            android:fontFamily="@font/poppins_regular"
+            android:outlineProvider="paddedBounds"
+            android:hint=""
+            android:textColor="@color/input_text_color"
+            android:textColorHint="@color/hint_color"
+            android:textSize="18dp" />
+
+      <!--  <EditText
+            android:id="@+id/edt11"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center"
             android:layout_margin="5sp"
             android:gravity="center"
             android:background="@drawable/custom_edittext_bg"
-
+            android:textIsSelectable="true"
+android:longClickable="false"
+android:cursorVisible="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:inputType="number"
             android:maxLength="1"
             android:textColor="#605A65"
-            android:textCursorDrawable="@android:color/black"
+            android:textCursorDrawable="@android:color/holo_red_dark"
 
             android:textSize="25dp"></EditText>
         <EditText
@@ -92,8 +192,10 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="#605A65"
-            android:textCursorDrawable="@android:color/black"
+            android:textCursorDrawable="@android:color/holo_red_dark"
             android:background="@drawable/custom_edittext_bg"
+            android:textIsSelectable="false"
+            android:longClickable="false"
 
             android:textSize="25dp"
 
@@ -109,7 +211,9 @@
             android:background="@drawable/custom_edittext_bg"
             android:textSize="25dp"
             android:textColor="#605A65"
-            android:textCursorDrawable="@android:color/black"
+            android:textCursorDrawable="@android:color/holo_red_dark"
+            android:textIsSelectable="false"
+            android:longClickable="false"
 
             android:layout_gravity="center"
             android:gravity="center"
@@ -124,12 +228,14 @@
             android:inputType="number"
             android:textSize="25dp"
             android:textColor="#605A65"
-            android:textCursorDrawable="@android:color/black"
+            android:textCursorDrawable="@android:color/holo_red_dark"
             android:background="@drawable/custom_edittext_bg"
+            android:textIsSelectable="false"
+            android:longClickable="false"
 
             android:layout_gravity="center"
             android:gravity="center"
-            ></EditText>
+            ></EditText>-->
     </LinearLayout>
 
 

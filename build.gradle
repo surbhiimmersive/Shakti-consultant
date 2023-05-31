@@ -12,6 +12,7 @@ buildscript {
         jcenter()
         google()
     }
+
 }
 plugins {
     id 'com.android.application' version '7.2.1' apply false

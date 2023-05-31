@@ -11,24 +11,76 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp">
 
-        <ImageView
-            android:id="@+id/image_back_arrow"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/ic_baseline_arrow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/image_view_filter"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="30dp"
-            android:src="@drawable/slider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<LinearLayout
+    android:id="@+id/l1"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.4"
+            android:layout_marginTop="10dp"
+android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
+
+            android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/image_back_arrow"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+
+        android:src="@drawable/ic_baseline_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Physics Faculty Jobsdsdsdsdsdsdsddsds"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:layout_weight="0.2"
+android:singleLine="true"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/main_text_color"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_back_arrow"
+        app:layout_constraintEnd_toStartOf="@+id/image_view_filter"
+        app:layout_constraintStart_toEndOf="@+id/image_back_arrow"
+        app:layout_constraintTop_toTopOf="@+id/image_back_arrow" />
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_weight="0.4"
+android:layout_gravity="right"
+       android:gravity="right"
+       android:layout_height="wrap_content">
+       <ImageView
+           android:id="@+id/image_view_filter"
+           android:layout_width="25dp"
+           android:layout_height="25dp"
+           android:layout_marginTop="25dp"
+           android:visibility="visible"
+           android:layout_marginEnd="30dp"
+           android:src="@drawable/slider"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintTop_toTopOf="parent" />
+
+
+   </LinearLayout>
+
+
+</LinearLayout>
+
 
         <ImageView
             android:id="@+id/imageView23"
@@ -40,35 +92,24 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView47" />
+            app:layout_constraintTop_toBottomOf="@+id/l1" />
 
-        <TextView
-            android:id="@+id/textView47"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Physics Faculty Jobs"
-            android:textAllCaps="true"
-            android:textColor="@color/main_text_color"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/image_back_arrow"
-            app:layout_constraintEnd_toStartOf="@+id/image_view_filter"
-            app:layout_constraintStart_toEndOf="@+id/image_back_arrow"
-            app:layout_constraintTop_toTopOf="@+id/image_back_arrow" />
 
         <ProgressBar
             android:id="@+id/progressBarSkillWise"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="270dp"
             android:indeterminateDrawable="@drawable/loading_img"
-            app:layout_constraintBottom_toBottomOf="@id/imageView23"
-            app:layout_constraintHorizontal_bias="0.561"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="50sp"
             android:visibility="gone"
+
+            app:layout_constraintBottom_toBottomOf="@id/imageView23"
+            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.5" />
+            app:layout_constraintVertical_bias="0.0" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -111,7 +152,7 @@ android:visibility="gone"
             android:src="@drawable/box"
             app:flow_horizontalBias="3.0"
             app:flow_verticalBias="3"
-            app:layout_constraintTop_toBottomOf="@+id/textView47"
+            app:layout_constraintTop_toBottomOf="@+id/l1"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="-16dp"></ImageView>
 

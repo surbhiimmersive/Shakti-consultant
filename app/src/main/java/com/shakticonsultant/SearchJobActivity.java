@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivitySearchJobBinding;
 import com.shakticonsultant.responsemodel.CityDatumResponse;
 import com.shakticonsultant.responsemodel.CityResponse;
@@ -40,64 +41,108 @@ public class SearchJobActivity extends AppCompatActivity {
     String strworkexp="";
     SparseBooleanArray sparseBooleanArray ;
     List<String>city_name_list=new ArrayList<>();
-    String strExperienceId;
+    String strExperienceId="";
     String strcity,Cityid;
     String strStream,strSkillId;
     List<InterestedSkillDatumResponse> streamList=new ArrayList<>();
     ArrayAdapter<String> adaStream;
     ArrayList<String> sp_stream_list=new ArrayList<>();
-
+    String strMinSalary="";
+    String strMaxSalary="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySearchJobBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 //        binding.imgSearchJob.setOnClickListener(v -> {
 //            startActivity(new Intent(getApplicationContext(), JobDescriptionActivity.class));
 //        });
 getExperience();
         getJobSkill();
         getCityList();
+        binding.spMinSalary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                strMinSalary = (String) binding.spMinSalary.getSelectedItem();
+                strMinSalary = strMinSalary.replace("LPA", "");
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        binding.spMaxSalary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                strMaxSalary = (String) binding.spMaxSalary.getSelectedItem();
+                strMaxSalary = strMaxSalary.replace("LPA", "");
+
+                // Toast.makeText(JobFiltersActivity.this, ""+strMaxSalary, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         binding.appCompatButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                binding.edtMaxSalary.setText("");
-                binding.edtMinSalary.setText("");
+                binding.spMinSalary.setSelection(0);
+                binding.spMaxSalary.setSelection(0);
                 getJobSkill();
                 getCityList();
                 getExperience();
+
+
             }
         });
+
+
 binding.imgSearch.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
 
- if(strworkexp.equals("")){
-     strExperienceId="";
 
+
+        /*    if(strMinSalary.equals("Min Salary")){
+                strMinSalary="";
+
+            }else  if(strSkillId.equals("0")){
+
+            strSkillId="";
+            strStream="Job List";
+        }
+            else if(Cityid.equals("0")){
+                Cityid="";
+
+            }
+           else if(strMaxSalary.equals("Max Salary")){
+                strMaxSalary="";
+
+            }
+           else if(strworkexp.equals("")){
+                strExperienceId="";
+
+            }else {*/
+
+                Intent intent = new Intent(SearchJobActivity.this, NewJobSearchListActivity.class);
+                intent.putExtra("city", Cityid);
+                intent.putExtra("experience", strExperienceId);
+                intent.putExtra("min_salary", strMinSalary);
+                intent.putExtra("max_salary", strMaxSalary);
+                intent.putExtra("skill_id", strSkillId);
+                intent.putExtra("skill_name", strStream);
+                startActivity(intent);
+            //}
 }
- else if(strcity.equals("Select City")){
-    strcity="";
 
-}else if(strSkillId.equals("0")){
-
-    strSkillId="";
-    strStream="Job List";
-}else {
-
-    Intent intent = new Intent(SearchJobActivity.this, NewJobSearchListActivity.class);
-    intent.putExtra("city", strcity);
-    intent.putExtra("experience", strExperienceId);
-    intent.putExtra("min_salary", binding.edtMinSalary.getText().toString().trim());
-    intent.putExtra("max_salary", binding.edtMaxSalary.getText().toString().trim());
-    intent.putExtra("skill_id", strSkillId);
-    intent.putExtra("skill_name", strStream);
-    startActivity(intent);
-}
-    }
 });
         binding.imgBackArrow.setOnClickListener(v -> {
             onBackPressed();
@@ -327,6 +372,8 @@ sp_work_exp.clear();
     protected void onResume() {
         super.onResume();
 
+        binding.spMinSalary.setSelection(0);
+        binding.spMaxSalary.setSelection(0);
    /*     getExperience();
         getJobSkill();
         getCityList();*/

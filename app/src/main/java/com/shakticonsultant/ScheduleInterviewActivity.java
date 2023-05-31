@@ -96,7 +96,11 @@ binding.btnUpcoming.setOnClickListener(v -> {
 
 
     public void getScheduleInterviewList(String type) {
-          binding.progressBarpackage.setVisibility(View.VISIBLE);
+          //binding.progressBarpackage.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
         Map<String, String> map = new HashMap<>();
          map.put("user_id", AppPrefrences.getUserid(ScheduleInterviewActivity.this));
          map.put("type", type);
@@ -111,7 +115,8 @@ binding.btnUpcoming.setOnClickListener(v -> {
             public void onResponse(Call<ScheduleInterviewResponse> call, Response<ScheduleInterviewResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarpackage.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+                   // binding.progressBarpackage.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
                         binding.tvEmpty.setVisibility(View.GONE);
@@ -125,7 +130,9 @@ binding.btnUpcoming.setOnClickListener(v -> {
                         binding.recyclerpackage.getAdapter().notifyDataSetChanged();
 
                     } else {
-                        binding.progressBarpackage.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                        // binding.progressBarpackage.setVisibility(View.GONE);
                         binding.tvEmpty.setVisibility(View.VISIBLE);
                         binding.imgEmpty.setVisibility(View.VISIBLE);
                        // binding.recyclerpackage.setVisibility(View.GONE);
@@ -134,7 +141,9 @@ binding.btnUpcoming.setOnClickListener(v -> {
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
-                    binding.progressBarpackage.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                   // binding.progressBarpackage.setVisibility(View.GONE);
                     binding.tvEmpty.setVisibility(View.VISIBLE);
                     binding.imgEmpty.setVisibility(View.VISIBLE);
                     binding.recyclerpackage.setVisibility(View.GONE);
@@ -144,13 +153,15 @@ binding.btnUpcoming.setOnClickListener(v -> {
 
             @Override
             public void onFailure(Call<ScheduleInterviewResponse> call, Throwable t) {
-                binding.progressBarpackage.setVisibility(View.GONE);
+                progress_spinner.dismiss();
+
+                //  binding.progressBarpackage.setVisibility(View.GONE);
                 binding.tvEmpty.setVisibility(View.VISIBLE);
                 binding.imgEmpty.setVisibility(View.VISIBLE);
                 binding.recyclerpackage.setVisibility(View.GONE);
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                Utils.showFailureDialog(ScheduleInterviewActivity.this, "Something went wrong!");
+              //  Utils.showFailureDialog(ScheduleInterviewActivity.this, "Something went wrong!");
             }
         });
     }

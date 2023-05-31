@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
@@ -66,6 +69,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,8 +89,8 @@ String uploadedFileName="";
     ActivityUpdatePersonalInfoBinding binding;
     DatePickerDialog datePickerDialog;
     ApiInterface apiInterface;
-    String strCategoryId;
-    String strSkillId;
+    String strCategoryId="0";
+    String strSkillId="0";
     Spinner spSkill;
     String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
@@ -118,6 +122,7 @@ String strGender;
     String strStream="",strDivision="";
     String strAnnual="";
     String MobilePattern = "[0-9]{10}";
+    Calendar minAdultAge,userAge;
 
     // Permissions for accessing the storage
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -156,6 +161,7 @@ ConnectionDetector cd;
         } else {
             getStateListApi();
             getAnnualSalary();
+            getInterenstedFiledAPi("1");
             getPersonalInformation();
             if (checkStoragePermission()) {
             } else {
@@ -166,11 +172,11 @@ ConnectionDetector cd;
                     this,
                     new String[]{
                             Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.MANAGE_EXTERNAL_STORAGE
+
                     },
                     1
             );
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+          /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
 
                     // If you don't have access, launch a new activity to show the user the system's dialog
@@ -182,7 +188,7 @@ ConnectionDetector cd;
                     intent.setData(uri);
                     startActivity(intent);
                 }
-            }
+            }*/
             userid = AppPrefrences.getUserid(GetPersonalInfoActivity.this);
 
             // set up the RecyclerView
@@ -213,6 +219,8 @@ ConnectionDetector cd;
 
                     AppCompatButton btnok = dialog.findViewById(R.id.btnok);
                     spSkill = dialog.findViewById(R.id.spEmployeeStream);
+                    binding.spinner4.setVisibility(View.VISIBLE);
+
                     getCityApi(strStateid);
 
                     TextView textView57 = dialog.findViewById(R.id.textView57);
@@ -244,9 +252,12 @@ ConnectionDetector cd;
                     btnok.setOnClickListener(v -> {
 
                         if(strstate.equals("Select State")){
+                            binding.spinner4.setVisibility(View.GONE);
 
                             Toast.makeText(GetPersonalInfoActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
                         }else {
+                            binding.spinner4.setVisibility(View.VISIBLE);
+
                             dialog.dismiss();
                         }
 
@@ -310,6 +321,7 @@ ConnectionDetector cd;
                 public void onClick(View view) {
                     Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
                     dialog.setContentView(R.layout.skill_selection);
+                    dialog.setCancelable(false);
                     dialog.show();
 
 
@@ -325,9 +337,16 @@ ConnectionDetector cd;
                             strDivision = (String) spSkill.getSelectedItem();
                             strCategoryId = designationList.get(i).getId();
                             binding.edtCategory.setText(strDivision);
+                           /* if(strDivision.equals("Select Category")){
+                                Snackbar.make(findViewById(android.R.id.content), "Please select category", Snackbar.LENGTH_LONG)
+                                        .setActionTextColor(Color.RED)
+                                        .show();
+                              //  Toast.makeText(GetPersonalInfoActivity.this, "Please select Category", Toast.LENGTH_SHORT).show();
+                            }*/
+
 binding.edtSkill.setText("Select skill");
+getJobSkill(strCategoryId);
                             adpCategory.notifyDataSetChanged();
-                            getJobSkill(strCategoryId);
 
 
                         }
@@ -339,14 +358,20 @@ binding.edtSkill.setText("Select skill");
                     });
                     adpCategory = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_division_list);
                     spSkill.setAdapter(adpCategory);
+
                     adpCategory.notifyDataSetChanged();
 
 
                     btnok.setOnClickListener(v -> {
 
-                        if(strDivision.equals("Select category")){
+                        if(strDivision.equals("Select Category")){
+                            Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select category.", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null);
+                            View sbView = snackbar.getView();
+                            sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-                            Toast.makeText(GetPersonalInfoActivity.this, "Please select category.", Toast.LENGTH_SHORT).show();
+                            snackbar.show();
+                           // Toast.makeText(GetPersonalInfoActivity.this, "Please select category.", Toast.LENGTH_SHORT).show();
                         }else {
                             dialog.dismiss();
                         }
@@ -362,6 +387,7 @@ binding.edtSkill.setText("Select skill");
                 public void onClick(View view) {
                     Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
                     dialog.setContentView(R.layout.skill_selection);
+                    dialog.setCancelable(false);
                     dialog.show();
 
 
@@ -398,8 +424,13 @@ binding.edtSkill.setText("Select skill");
                     btnok.setOnClickListener(v -> {
 
                         if(strStream.equals("Select skill")){
+                            Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Skill.", Snackbar.LENGTH_LONG)
+                                    .setAction("Action", null);
+                            View sbView = snackbar.getView();
+                            sbView.setBackgroundColor(getColor(R.color.purple_200));
 
-                            Toast.makeText(GetPersonalInfoActivity.this, "Please select skill.", Toast.LENGTH_SHORT).show();
+                            snackbar.show();
+                           // Toast.makeText(GetPersonalInfoActivity.this, "Please select skill.", Toast.LENGTH_SHORT).show();
                         }else {
                             dialog.dismiss();
                         }
@@ -524,7 +555,9 @@ binding.edtSkill.setText("Select skill");
 
                         snackbar.show();
 
-                    } else if (strstate.equals("Select State")) {
+                    }
+
+  else if (strstate.equals("Select State")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select state.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -596,14 +629,7 @@ binding.edtSkill.setText("Select skill");
                     else if (binding.radioExperienced.isChecked()) {
 
 
-                        if (binding.edtOrganizationName.getText().toString().trim().equals("")) {
-                            Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter organization name.", Snackbar.LENGTH_LONG)
-                                    .setAction("Action", null);
-                            View sbView = snackbar.getView();
-                            sbView.setBackgroundColor(getColor(R.color.purple_200));
-
-                            snackbar.show();
-                        } else if (str_first_job_month.equals("Select Month")) {
+                       if (str_first_job_month.equals("Select Month")) {
 
                             Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select first job month.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null);
@@ -656,20 +682,40 @@ binding.edtSkill.setText("Select skill");
                     month = c.get(Calendar.MONTH);
                     day = c.get(Calendar.DAY_OF_MONTH);
 
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(GetPersonalInfoActivity.this,              R.style.DatePickerTheme,
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(GetPersonalInfoActivity.this,
                             new DatePickerDialog.OnDateSetListener() {
 
                                 @Override
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
-                                    strbirthdate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-                                    binding.txtbday.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
+                                    userAge = new GregorianCalendar(year,month,day);
+                                    minAdultAge = new GregorianCalendar();
+                                    minAdultAge.add(Calendar.YEAR, -18);
+                                    /*if (minAdultAge.before(userAge)) {
+
+                                        Toast.makeText(PersonalInfoActivity.this, "Select 18 year date", Toast.LENGTH_SHORT).show();
+                                    }else {*/
+                                   // strbirthdate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + (year);
+                                    strbirthdate = year + "-" + (monthOfYear + 1) + "-" + (dayOfMonth);
+
+                                    binding.txtbday.setText(strbirthdate);
                                 }
-                            }, year, month, day);
+                            }, year-18, month, day);
 
-                    datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+                    c.set(year-18, month, day);//Year,Mounth -1,Day
+                    datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000 * 60 * 60 * 24 * 365.25 * 14));
+                    // datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 31556926000L);
+
+/*
+                    long value=c.getTimeInMillis();
+                   datePickerDialog.getDatePicker().setMaxDate(value);*/
+                    // datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 31556926000L);
+                    //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000 * 60 * 60 * 24 * 365.25 * 14));
+
                     datePickerDialog.show();
                 }
             });
@@ -684,10 +730,13 @@ binding.edtSkill.setText("Select skill");
                 public void onClick(View view) {
                     binding.button.setTextColor(getResources().getColor(R.color.black));
                     binding.button2.setTextColor(getResources().getColor(R.color.main_text_color));
+                    binding.button2.setBackground(getResources().getDrawable(R.drawable.custom_item_bg));
+                    binding.button.setBackground(getResources().getDrawable(R.drawable.custom_edittext_bg));
 
+                    binding.button2.setTextSize(15);
+                    working_organization_name = "NA";
                     str_are_you_work = "No";
-                    binding.textView19.setVisibility(View.VISIBLE);
-
+                    binding.textView19.setVisibility(View.GONE);
                     binding.recyclerOrganization.setVisibility(View.GONE);
                 }
             });
@@ -695,18 +744,23 @@ binding.edtSkill.setText("Select skill");
             binding.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    binding.textView19.setVisibility(View.GONE);
-
                     binding.button.setTextColor(getResources().getColor(R.color.main_text_color));
+                    binding.button.setBackground(getResources().getDrawable(R.drawable.custom_item_bg));
+                    binding.button2.setBackground(getResources().getDrawable(R.drawable.custom_edittext_bg));
+
+                    binding.button.setTextSize(15);
                     binding.button2.setTextColor(getResources().getColor(R.color.black));
                /* Intent i=new Intent(PersonalInfoActivity.this,OrganizationDailog.class);
                 startActivity(i);*/
+                    binding.textView19.setVisibility(View.GONE);
                     str_are_you_work = "Yes";
                     Intent intent = new Intent(GetPersonalInfoActivity.this, OrganizationDailog.class);
+                    intent.putExtra("working_organization_name",working_organization_name);
                     startActivityForResult(intent, 2);
 
                 }
             });
+
 
 
             binding.button3.setOnClickListener(new View.OnClickListener() {
@@ -737,8 +791,8 @@ binding.edtSkill.setText("Select skill");
                         binding.radioNonTeaching.setTextColor(getResources().getColor(R.color.black));
 
                         binding.cardDivision.setVisibility(View.VISIBLE);
-                        binding.cardStream.setVisibility(View.VISIBLE);
                         binding.cardSubject.setVisibility(View.GONE);
+                        binding.cardStream.setVisibility(View.VISIBLE);
                         strSubject="";
                         getInterenstedFiledAPi("1");
                     }
@@ -749,7 +803,6 @@ binding.edtSkill.setText("Select skill");
 
                         binding.cardDivision.setVisibility(View.VISIBLE);
                         binding.cardStream.setVisibility(View.VISIBLE);
-                        binding.cardSubject.setVisibility(View.GONE);
                         getInterenstedFiledAPi("2");
                         strSubject="";
 
@@ -787,7 +840,7 @@ binding.edtSkill.setText("Select skill");
                         strfre_exp = "Experience";
                         binding.radioExperienced.setTextColor(getResources().getColor(R.color.main_text_color));
                         binding.radioFresher.setTextColor(getResources().getColor(R.color.black));
-                        binding.edtOrganizationName.setVisibility(View.VISIBLE);
+                        binding.edtOrganizationName.setVisibility(View.GONE);
                         binding.cardAnnual.setVisibility(View.VISIBLE);
                         binding.constraintLayoutYear.setVisibility(View.VISIBLE);
                         binding.constraintLayout3.setVisibility(View.VISIBLE);
@@ -971,16 +1024,36 @@ binding.edtSkill.setText("Select skill");
     // Method for starting the activity for selecting image from phone storage
     public void pick(View view) {
         verifyStoragePermissions(GetPersonalInfoActivity.this);
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+      /*  Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_IMAGE_REQUEST);*/
+
+        if (Build.VERSION.SDK_INT <19){
+            Intent intent = new Intent();
+            intent.setType("image/jpeg");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.app_name)),PICK_IMAGE_REQUEST);
+        } else {
+            Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, PICK_IMAGE_REQUEST);
+        }
     }
 
     public void pickIdProof(View view) {
         verifyStoragePermissions(GetPersonalInfoActivity.this);
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+       /* Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_doc_id_proof_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_doc_id_proof_REQUEST);*/
+
+        if (Build.VERSION.SDK_INT <19){
+            Intent intent = new Intent();
+            intent.setType("image/jpeg");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.app_name)),PICK_doc_id_proof_REQUEST);
+        } else {
+            Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, PICK_doc_id_proof_REQUEST);
+        }
     }
 
     public void pickdoc(View view) {
@@ -1000,7 +1073,6 @@ binding.edtSkill.setText("Select skill");
                     Toast.LENGTH_SHORT).show();
         }
     }
-
     // Method to get the absolute path of the selected image from its URI
     @SuppressLint("ResourceType")
     @Override
@@ -1071,33 +1143,7 @@ binding.edtSkill.setText("Select skill");
                 File finalFile = new File(FileHelper.getRealPathFromURI(GetPersonalInfoActivity.this,uri));
                 resumepath= finalFile.getPath();
                 binding.txtdoc.setText(resumepath);
-               /* resumepath = myFile.getAbsolutePath();
-                String displayName = null;
 
-
-                if (uriString.startsWith("content://")) {
-                    Cursor cursor = null;
-                    try {
-                        cursor = this.getContentResolver().query(uri, null, null, null, null);
-                        if (cursor != null && cursor.moveToFirst()) {
-                            displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                            Log.d("nameeeee>>>>  ", resumepath + "/" + displayName);
-                            fullpath=resumepath + "/" + displayName;
-                            binding.txtdoc.setText(fullpath);
-                        }
-                    } finally {
-                        cursor.close();
-                    }
-                } else if (uriString.startsWith("file://")) {
-                    displayName = myFile.getName();
-                    Log.d("nameeeee>>>>  ", displayName);
-
-                    fullpath=resumepath + "/" + displayName;
-
-                    binding.txtdoc.setText(fullpath);
-
-                }
-*/
 
             }
             }
@@ -1150,7 +1196,7 @@ binding.edtSkill.setText("Select skill");
                             sp_annual_income.add("Select Annual");
                             for(int i=0;i<annualList.size();i++){
 
-                                sp_annual_income.add(annualList.get(i).getSalary());
+                                sp_annual_income.add(annualList.get(i).getSalary() +" LPA");
                                 // spinner_state_list.add(model);
 
                                 binding.spAnnual.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -1195,90 +1241,6 @@ binding.edtSkill.setText("Select skill");
     }
 
 
-    //////--------Interrested Filed-----------------------
-
-/*
-
-    public void getInterenstedFiledAPi(String strfiled) {
-        //  binding.progressInfo.setVisibility(View.VISIBLE);
-        Map<String, String> map = new HashMap<>();
-        map.put("interest_type", strfiled);
-
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
-
-        Call<IntrestedFieldResponse> resultCall = apiInterface.callInterestedFiledApi(map);
-
-        resultCall.enqueue(new Callback<IntrestedFieldResponse>() {
-            @Override
-            public void onResponse(Call<IntrestedFieldResponse> call, Response<IntrestedFieldResponse> response) {
-
-                if (response.isSuccessful()) {
-                    sp_stream_list.clear();
-                    sp_division_list.clear();
-                    sp_subject_list.clear();
-                    // binding.progressInfo.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
-
-                        streamList=response.body().getStream();
-                        subjectList=response.body().getSubject();
-                        designationList=response.body().getDesignation();
-
-                        if(streamList.size()>0){
-                            sp_stream_list.add("Select Stream");
-
-                            for(int i=0;i<streamList.size();i++){
-
-                                sp_stream_list.add(streamList.get(i).getName());
-                            }
-
-                            ArrayAdapter<String> adp=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_stream_list);
-                            binding.spStream.setAdapter(adp);
-                        }
-                        if(subjectList.size()>0){
-                            sp_subject_list.add("Select Subject");
-
-                            for(int i=0;i<subjectList.size();i++){
-
-                                sp_subject_list.add(subjectList.get(i).getName());
-                            }
-
-                            ArrayAdapter<String> adp=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_subject_list);
-                            binding.spSubject.setAdapter(adp);
-                        }
-
-                        if(designationList.size()>0){
-                            sp_division_list.add("Select Division");
-
-                            for(int i=0;i<designationList.size();i++){
-
-                                sp_division_list.add(designationList.get(i).getName());
-                            }
-
-                            ArrayAdapter<String> adp=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_division_list);
-                            binding.spDivision.setAdapter(adp);
-                        }
-
-
-
-                    } else {
-                        // binding.progressInfo.setVisibility(View.GONE);
-
-                        // Utils.showFailureDialog(PersonalInfoActivity.this, "No Data Found");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<IntrestedFieldResponse> call, Throwable t) {
-
-                //   binding.progressInfo.setVisibility(View.GONE);
-                //  Utils.showFailureDialog(PersonalInfoActivity.this, t.toString());
-            }
-        });
-    }
-*/
-
-
     public void getInterenstedFiledAPi(String strfiled) {
         //  binding.progressInfo.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
@@ -1291,9 +1253,9 @@ binding.edtSkill.setText("Select skill");
         resultCall.enqueue(new Callback<InterestedCategoryResponse>() {
             @Override
             public void onResponse(Call<InterestedCategoryResponse> call, Response<InterestedCategoryResponse> response) {
-
+                sp_division_list.clear();
                 if (response.isSuccessful()) {
-                    sp_division_list.clear();
+                  
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
 
@@ -1302,7 +1264,7 @@ binding.edtSkill.setText("Select skill");
 
 
                         if(designationList.size()>0){
-                          //  sp_division_list.add("Select Category");
+                            //  sp_division_list.add("Select Category");
 
                             for(int i=0;i<designationList.size();i++) {
 
@@ -1312,13 +1274,25 @@ binding.edtSkill.setText("Select skill");
                                 binding.spDivision.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        try {
 
-                                        strDivision = (String) binding.spDivision.getSelectedItem();
-                                        strCategoryId = designationList.get(i).getId();
 
-                                        adpCategory.notifyDataSetChanged();
-                                        getJobSkill(strCategoryId);
+                                            strDivision = designationList.get(i).getTitle();
 
+                                            if(strDivision.equals("Select Category")){
+                                                binding.cardStream.setVisibility(View.GONE);
+
+                                            }else{
+                                                binding.cardStream.setVisibility(View.VISIBLE);
+                                                strCategoryId = designationList.get(i).getId();
+
+                                                adpCategory.notifyDataSetChanged();
+                                                getJobSkill(strCategoryId);
+                                            }
+
+                                        }catch (Exception e){
+                                            e.printStackTrace();
+                                        }
                                     }
 
                                     @Override
@@ -1327,10 +1301,10 @@ binding.edtSkill.setText("Select skill");
                                     }
                                 });
                             }
-                            adpCategory=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_division_list);
+                          /*  adpCategory=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_division_list);
                             binding.spDivision.setAdapter(adpCategory);
-
-                            adpCategory.notifyDataSetChanged();
+*/
+                            //  adpCategory.notifyDataSetChanged();
 
                         }
 
@@ -1374,10 +1348,10 @@ binding.edtSkill.setText("Select skill");
                         streamList=response.body().getData();
 
                         if(streamList.size()>0){
-                          //  sp_stream_list.add("Select Skill");
+                            //  sp_stream_list.add("Select Skill");
 
-                          //  binding.spStream.setVisibility(View.VISIBLE);
-                          //  binding.spinner4.setVisibility(View.VISIBLE);
+                            binding.spStream.setVisibility(View.GONE);
+                            //  binding.spinner4.setVisibility(View.VISIBLE);
 
                             for(int i=0;i<streamList.size();i++){
 
@@ -1386,19 +1360,23 @@ binding.edtSkill.setText("Select skill");
                                 binding.spStream.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                        strStream=(String)binding.spStream.getSelectedItem();
-                                        strSkillId= streamList.get(i).getId();
-                                        adaStream.notifyDataSetChanged();
-                                        // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
+                                        try {
+                                            strStream = streamList.get(i).getTitle();
+                                            strSkillId = streamList.get(i).getId();
+                                            adaStream.notifyDataSetChanged();
+                                            // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
+                                        }catch (Exception e){
+
+                                        }
                                     }
                                     @Override
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
                                 });
-                             adaStream=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_stream_list);
-                               // binding.spStream.setAdapter(adaStream);
-                                adaStream.notifyDataSetChanged();
+                                adaStream=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_stream_list);
+                                binding.spStream.setAdapter(adaStream);
+                                //  adaStream.notifyDataSetChanged();
 
                             }
 
@@ -1407,12 +1385,8 @@ binding.edtSkill.setText("Select skill");
 
                     } else {
 
-                        binding.spinner4.setVisibility(View.INVISIBLE);
-/*
-                        sp_city_name_list.add("Select City");
-                        adp1=new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
-                        binding.spCity.setAdapter(adp1);
-                        adp1.notifyDataSetChanged();*/
+                        binding.spStream.setVisibility(View.GONE);
+
 
                     }
                 }
@@ -1421,18 +1395,17 @@ binding.edtSkill.setText("Select skill");
             @Override
             public void onFailure(Call<interestedSkillResponse> call, Throwable t) {
                 // Toast.makeText(PersonalInfoActivity.this, "no data", Toast.LENGTH_SHORT).show();
-                binding.spinner4.setVisibility(View.INVISIBLE);
+                //  binding.spinner4.setVisibility(View.INVISIBLE);
 
                 // binding.progressInfo.setVisibility(View.GONE);
-                //  Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
+                //    Utils.showFailureDialog(PersonalInfoActivity.this, "Something went wrong!");
             }
         });
     }
 
     private boolean checkStoragePermission() {
         return (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED );
@@ -1444,7 +1417,6 @@ binding.edtSkill.setText("Select skill");
                 List<String> permssions = new ArrayList<>();
                 permssions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
                 permssions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                permssions.add(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
                 permssions.add(Manifest.permission.CAMERA);
                 return permssions;
             }
@@ -1454,8 +1426,11 @@ binding.edtSkill.setText("Select skill");
     }
 
     public void PersonalDetailApi() {
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
 
-        binding.progresspersonal.setVisibility(View.VISIBLE);
+     //   binding.progresspersonal.setVisibility(View.VISIBLE);
       if(strDivision.equals("Select Division")){
 
        strDivision="";
@@ -1503,6 +1478,7 @@ binding.edtSkill.setText("Select skill");
     map.put("organization_name", Utils.getRequestBodyParameter(binding.edtOrganizationName.getText().toString().trim()));
     map.put("alternate_mobile", Utils.getRequestBodyParameter(binding.someEdit6.getText().toString().trim()));
 
+          map.put("name", Utils.getRequestBodyParameter(binding.edtName.getText().toString().trim()));
 
     map.put("first_job_month", Utils.getRequestBodyParameter(str_first_job_month));
     map.put("first_job_year", Utils.getRequestBodyParameter(str_first_job_year));
@@ -1526,15 +1502,33 @@ binding.edtSkill.setText("Select skill");
         @Override
         public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
             if (response.isSuccessful()) {
-                binding.progresspersonal.setVisibility(View.GONE);
+                //binding.progresspersonal.setVisibility(View.GONE);
+                progress_spinner.dismiss();
                 if (response.body().isSuccess() == true) {
 
+                    AlertDialog.Builder logoutDialog = new AlertDialog.Builder(GetPersonalInfoActivity.this,R.style.AlertDialogTheme)
+                            .setTitle(R.string.app_name)
 
-                finish();
+                            .setMessage("Your Profile has been update successfully.")
+                            .setIcon(R.drawable.shakti_consultant_logo)
+                            .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    AppPrefrences.setExperience(GetPersonalInfoActivity.this,strfre_exp);
+
+                                    finish();
+
+
+                                }
+                            });
+                    logoutDialog.show();
+
+                //finish();
 
                 } else {
                     //   pd_loading.setVisibility(View.GONE);
-                    binding.progresspersonal.setVisibility(View.GONE);
+                   // binding.progresspersonal.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
 
                     Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(), Snackbar.LENGTH_LONG)
                             .setActionTextColor(Color.RED)
@@ -1554,7 +1548,8 @@ binding.edtSkill.setText("Select skill");
         @Override
         public void onFailure(Call<CommonResponse> call, Throwable t) {
             // pd_loading.setVisibility(View.GONE);
-            binding.progresspersonal.setVisibility(View.GONE);
+           // binding.progresspersonal.setVisibility(View.GONE);
+            progress_spinner.dismiss();
 
             Toast.makeText(GetPersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -1566,7 +1561,10 @@ binding.edtSkill.setText("Select skill");
 
 
     public void getPersonalInformation () {
-        binding.progresspersonal.setVisibility(View.VISIBLE);
+       // binding.progresspersonal.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
 
         Map<String, String> map = new HashMap<>();
 
@@ -1580,7 +1578,8 @@ binding.edtSkill.setText("Select skill");
             public void onResponse(Call<GetPersonalInformationResponse> call, Response<GetPersonalInformationResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progresspersonal.setVisibility(View.GONE);
+                 //   binding.progresspersonal.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
                     if (response.body().isSuccess() == true) {
                         Log.e("User ID", response.body().getData().getId());
 
@@ -1589,7 +1588,9 @@ binding.edtSkill.setText("Select skill");
                         binding.progressemployee.setText(content);
                         //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
                    */
-                        strbirthdate=response.body().getData().getDate_of_birth();
+                    //    strbirthdate=response.body().getData().getDate_of_birth();
+
+                       // Log.e("BDAY",strbirthdate);
                         strGender=response.body().getData().getGender();
                         strprefix=response.body().getData().getName_prefix();
                         strStateid=response.body().getData().getState_id();
@@ -1600,14 +1601,49 @@ binding.edtSkill.setText("Select skill");
                         strCategoryId=response.body().getData().getCategory_id();
                         Cityid=response.body().getData().getCity_id();
                         strSkillId=response.body().getData().getSkill_id();
-                       // working_organization_name=response.body().getData().getWorked_organization();
+                        strAnnual=response.body().getData().getAnnual_salary();
+                        str_first_job_month=response.body().getData().getFirst_job_month();
+                        str_first_job_year=response.body().getData().getFirst_job_year();
+                        strbirthdate=response.body().getData().getDate_of_birth();
+                        String Worrkingname=response.body().getData().getWorking_organization();
+
+                        try {
+                            if (Worrkingname.equals("NA") || Worrkingname.equals(null)) {
+
+                                working_organization_name = "";
+                                binding.button.setTextColor(getResources().getColor(R.color.black));
+                                binding.button2.setTextColor(getResources().getColor(R.color.main_text_color));
+                                binding.button2.setBackground(getResources().getDrawable(R.drawable.custom_item_bg));
+                                binding.button.setBackground(getResources().getDrawable(R.drawable.custom_edittext_bg));
+
+                            } else {
+                                binding.button.setTextColor(getResources().getColor(R.color.main_text_color));
+                                binding.button.setBackground(getResources().getDrawable(R.drawable.custom_item_bg));
+                                binding.button2.setBackground(getResources().getDrawable(R.drawable.custom_edittext_bg));
+
+                                binding.button.setTextSize(15);
+                                binding.button2.setTextColor(getResources().getColor(R.color.black));
+
+                                working_organization_name = Worrkingname;
+                                int numberOfColumns = 2;
+                                ArrayList<String> myList = new ArrayList<String>(Arrays.asList(working_organization_name.split("#")));
+
+                                binding.recyclerOrganization.setLayoutManager(new GridLayoutManager(GetPersonalInfoActivity.this, numberOfColumns));
+                                OrganizationAdapter adapter = new OrganizationAdapter(GetPersonalInfoActivity.this, myList);
+
+                                binding.recyclerOrganization.setAdapter(adapter);
+                            }
+                        }catch (Exception e){
+
+
+                        }
+                        // working_organization_name=response.body().getData().getWorked_organization();
                         Picasso.get()
                                 .load(ApiClient.Photourl+response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
 
                                 .into(binding.imageView6);
-
-                        getJobSkill(response.body().getData().getCategory_id());
+                       // getJobSkill(response.body().getData().getCategory_id());
                         binding.edtName.setText(response.body().getData().getName());
                         binding.txtbday.setText(response.body().getData().getDate_of_birth());
                         binding.edtMobile.setText(response.body().getData().getPhone());
@@ -1631,9 +1667,11 @@ binding.edtSkill.setText("Select skill");
                         if(response.body().getData().getInterested_field().equals("1")){
 
                             binding.radioTeaching.setChecked(true);
+                            getInterenstedFiledAPi("1");
                         }else{
 
                             binding.radioNonTeaching.setChecked(true);
+                            getInterenstedFiledAPi("2");
 
                         }
 
@@ -1645,17 +1683,28 @@ binding.edtSkill.setText("Select skill");
                             binding.radioExperienced.setChecked(true);
 
                         }
+
+
                         String[] nameprefix = getResources().getStringArray(R.array.test);
                         binding.spprefix.setSelection(Arrays.asList(nameprefix).indexOf(response.body().getData().getName_prefix()));
 
                         String[] gender = getResources().getStringArray(R.array.test1);
                         binding.spGender.setSelection(Arrays.asList(gender).indexOf(response.body().getData().getGender()));
 
+   String[] firstmonth = getResources().getStringArray(R.array.month);
+                        binding.spfirstJobMonth.setSelection(Arrays.asList(firstmonth).indexOf(response.body().getData().getFirst_job_month()));
+
+   String[] firstyear = getResources().getStringArray(R.array.year);
+                        binding.spfirstjobyear.setSelection(Arrays.asList(firstyear).indexOf(response.body().getData().getFirst_job_year()));
+
+                        binding.spAnnual.setSelection(sp_annual_income.indexOf(response.body().getData().getAnnual_salary()));
+
 
 
                     } else {
                         Utils.showFailureDialog(GetPersonalInfoActivity.this, response.body().getMessage());
 
+                        progress_spinner.dismiss();
 
                     }
                 }
@@ -1663,7 +1712,9 @@ binding.edtSkill.setText("Select skill");
 
             @Override
             public void onFailure(Call<GetPersonalInformationResponse> call, Throwable t) {
-                binding.progresspersonal.setVisibility(View.GONE);
+             //   binding.progresspersonal.setVisibility(View.GONE);
+                progress_spinner.dismiss();
+
                 Utils.showFailureDialog(GetPersonalInfoActivity.this, "Something went wrong!");
             }
         });

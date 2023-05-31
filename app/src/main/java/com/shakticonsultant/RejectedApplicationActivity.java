@@ -3,12 +3,16 @@ package com.shakticonsultant;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.shakticonsultant.adapter.AppliedJobListAdapter;
+import com.shakticonsultant.adapter.RejectedJobListAdapter;
 import com.shakticonsultant.databinding.ActivityRejectedApplicationBinding;
 import com.shakticonsultant.responsemodel.JobAppliedListResponse;
+import com.shakticonsultant.responsemodel.JobRejectedListResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.AppPrefrences;
@@ -45,22 +49,26 @@ cd=new ConnectionDetector(RejectedApplicationActivity.this);
 
 
     public void getRejectedJobList() {
-        binding.progressrejected.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+      //  Toast.makeText(this, ""+AppPrefrences.getUserid(RejectedApplicationActivity.this), Toast.LENGTH_SHORT).show();
+        //binding.progressrejected.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("user_id", AppPrefrences.getUserid(RejectedApplicationActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<JobAppliedListResponse> resultCall = apiInterface.callRejectedJobList(map);
+        Call<JobRejectedListResponse> resultCall = apiInterface.callRejectedJobList(map);
 
-        resultCall.enqueue(new Callback<JobAppliedListResponse>() {
+        resultCall.enqueue(new Callback<JobRejectedListResponse>() {
             @Override
-            public void onResponse(Call<JobAppliedListResponse> call, Response<JobAppliedListResponse> response) {
+            public void onResponse(Call<JobRejectedListResponse> call, Response<JobRejectedListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressrejected.setVisibility(View.GONE);
-
+                   // binding.progressrejected.setVisibility(View.GONE);
+progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
                         binding.lEmpty.setVisibility(View.GONE);
@@ -70,14 +78,15 @@ cd=new ConnectionDetector(RejectedApplicationActivity.this);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(RejectedApplicationActivity.this);
                         binding.recyclerView9.setLayoutManager(linearLayoutManager);
-                        AppliedJobListAdapter adapter=new AppliedJobListAdapter(RejectedApplicationActivity.this,response.body().getData());
+                        RejectedJobListAdapter adapter=new RejectedJobListAdapter(RejectedApplicationActivity.this,response.body().getData());
                         binding.recyclerView9.setAdapter(adapter);
                         binding.recyclerView9.getAdapter().notifyDataSetChanged();
 
 
 
                     } else {
-                        binding.progressrejected.setVisibility(View.GONE);
+                     //   binding.progressrejected.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
 
                         binding.lEmpty.setVisibility(View.VISIBLE);
                         binding.imageView23.setVisibility(View.GONE);
@@ -87,7 +96,8 @@ cd=new ConnectionDetector(RejectedApplicationActivity.this);
                     }
                 }else{
 
-                    binding.progressrejected.setVisibility(View.GONE);
+                 //   binding.progressrejected.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
 
                     binding.lEmpty.setVisibility(View.VISIBLE);
                     binding.imageView23.setVisibility(View.GONE);
@@ -96,13 +106,14 @@ cd=new ConnectionDetector(RejectedApplicationActivity.this);
             }
 
             @Override
-            public void onFailure(Call<JobAppliedListResponse> call, Throwable t) {
+            public void onFailure(Call<JobRejectedListResponse> call, Throwable t) {
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressrejected.setVisibility(View.GONE);
+               // binding.progressrejected.setVisibility(View.GONE);
                 binding.lEmpty.setVisibility(View.VISIBLE);
 
+                progress_spinner.dismiss();
 
                 Utils.showFailureDialog(RejectedApplicationActivity.this, "Please try again sometime later..");
             }

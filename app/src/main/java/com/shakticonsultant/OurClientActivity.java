@@ -83,6 +83,9 @@ ConnectionDetector cd;
 
 
     public void getSliderApi() {
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
 
         // pd_loading.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
@@ -98,15 +101,10 @@ ConnectionDetector cd;
 
                 if (response.isSuccessful()) {
                     //  pd_loading.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
                     if (response.body().isSuccess()==true) {
                         sliderDatumResponses = response.body().getData();
                         if (sliderDatumResponses != null && sliderDatumResponses.size() > 0) {
-                            /*for (int i = 0; i < sliderDatumResponses.size(); i++) {
-                                AdModel bean = new AdModel();
-                                bean.setImage(advertisingDatum.get(i).getImage());
-
-                                arrayList.add(bean);
-                            }*/
 
                             OurClientAdapter pagerAdapter = new OurClientAdapter(OurClientActivity.this, sliderDatumResponses);
                             viewPager.setAdapter(pagerAdapter);
@@ -118,6 +116,8 @@ ConnectionDetector cd;
 
 
                         } else {
+                            progress_spinner.dismiss();
+
                             // Utils.showFailureDialog(getActivity(), "Please search valid keyword");
                         }
                     }
@@ -129,6 +129,8 @@ ConnectionDetector cd;
 
             public void onFailure(Call<OurClientResponse> call, Throwable t) {
                 // pd_loading.setVisibility(View.GONE);
+                progress_spinner.dismiss();
+
                 // Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });

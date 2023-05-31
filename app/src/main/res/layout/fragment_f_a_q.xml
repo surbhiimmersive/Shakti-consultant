@@ -30,6 +30,8 @@
         android:layout_marginTop="25dp"
         android:fontFamily="@font/roboto"
         android:text="FAQ"
+        android:textStyle="bold"
+
         android:textAllCaps="true"
         android:textColor="@color/main_text_color"
         android:textSize="18sp"
@@ -98,7 +100,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.5" />
+            app:layout_constraintVertical_bias="0.8" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

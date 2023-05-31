@@ -91,6 +91,7 @@ ConnectionDetector cd;
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(getLayoutInflater());
 
+        AppPrefrences.setCLose(getActivity(),false);
 
         cd=new ConnectionDetector(getActivity());
 
@@ -103,10 +104,34 @@ ConnectionDetector cd;
 
 getprofiledata();
             //  getFaqList();
+
+            if(AppPrefrences.getExperience(getActivity()).equals("Fresher")){
+
+                binding.btnEmployeeHistory.setVisibility(View.GONE);
+            }else{
+                binding.btnEmployeeHistory.setVisibility(View.VISIBLE);
+
+            }
             binding.imgBackArrow.setOnClickListener(v -> {
                 getActivity().onBackPressed();
                 getActivity().overridePendingTransition(R.anim.slide_in_left,
                         R.anim.slide_out_right);
+            });
+
+            binding.imageView14.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent i = new Intent(getActivity(), EditProfileActivity.class);
+                    i.putExtra("name", name);
+                    i.putExtra("email", email);
+                    i.putExtra("mobile", mobile);
+                    i.putExtra("profile_img", img);
+                    startActivity(i);
+                    getActivity().overridePendingTransition(R.anim.slide_in_right,
+                            R.anim.slide_out_left);
+
+                }
             });
 binding.btnPersonalInfo.setOnClickListener(new View.OnClickListener() {
     @Override
@@ -200,9 +225,9 @@ binding.btnEmployeeHistory.setOnClickListener(new View.OnClickListener() {
                         Picasso.get()
                                 .load(ApiClient.Photourl+ response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
-                                .resize(300,200)
-                                .centerCrop(Gravity.TOP)
-                              //  .fit()
+                              /*  .resize(300,200)
+                                .centerCrop(Gravity.TOP)*/
+                                .fit()
                                 .into(binding.imageView14);
 
 
@@ -228,5 +253,13 @@ binding.btnEmployeeHistory.setOnClickListener(new View.OnClickListener() {
         super.onResume();
 
         getprofiledata();
+
+        if(AppPrefrences.getExperience(getActivity()).equals("Fresher")){
+
+            binding.btnEmployeeHistory.setVisibility(View.GONE);
+        }else{
+            binding.btnEmployeeHistory.setVisibility(View.VISIBLE);
+
+        }
     }
 }

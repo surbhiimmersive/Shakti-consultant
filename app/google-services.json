@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "245736312377-uv3drgsv1qq3m3d9fp1n27kl9d3rbnoh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shakticonsultant",
+            "certificate_hash": "8603e03b5581656f6deb707e84bd6f33517c9f55"
+          }
+        },
+        {
           "client_id": "245736312377-hdln3ttht2fp7d3co8nt1gel05tocpnv.apps.googleusercontent.com",
           "client_type": 3
         }

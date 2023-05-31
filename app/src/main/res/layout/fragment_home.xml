@@ -8,68 +8,117 @@
     android:paddingBottom="20dp"
     tools:context=".HomeFragment">
 
+<LinearLayout
+    android:id="@+id/l1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="10"
+    tools:ignore="MissingConstraints">
 
-    <ImageView
-        android:id="@+id/openDrawer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/ic_baseline_format_list_bulleted_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="3"
 
-    <ImageView
-        android:id="@+id/imageView16"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="30dp"
-        android:src="@drawable/alarm_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content">
 
+        <ImageView
 
-    <ImageView
-        android:id="@+id/image_view_search"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/search_img"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
-        app:layout_constraintEnd_toStartOf="@+id/imageView16"
-        app:layout_constraintTop_toTopOf="@+id/imageView16" />
+            android:id="@+id/openDrawer"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_baseline_format_list_bulleted_24"
+            />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView37"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:fontFamily="@font/roboto"
-        android:text="Select Subject"
+        android:textAllCaps="true"
+        android:layout_weight="1"
+        android:layout_marginLeft="35sp"
+        android:text="Dashboard"
         android:textColor="@color/main_text_color"
-        android:textSize="18sp"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/image_view_search"
         app:layout_constraintStart_toEndOf="@+id/openDrawer"
         app:layout_constraintTop_toTopOf="parent" />
 
 
+
+    <ImageView
+        android:id="@+id/image_view_search"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+android:layout_weight="3"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/custom_ripple"
+
+        android:src="@drawable/search"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+        app:layout_constraintEnd_toStartOf="@+id/imageView16"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/custom_ripple"
+            android:src="@drawable/bell"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="@color/green_50"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/l1"
+        android:layout_height="0.5dp"></View>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37">
+        app:layout_constraintTop_toBottomOf="@+id/l1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/tvhide"
             android:layout_width="match_parent"
+            android:visibility="gone"
             android:layout_height="wrap_content">
             <RelativeLayout
                 android:id="@+id/rl_img_slider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 app:layout_constraintTop_toTopOf="parent"
                 >
 
@@ -78,31 +127,31 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginLeft="5sp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="5sp"
                     android:layout_marginBottom="10sp"
-                   ></androidx.viewpager.widget.ViewPager>
+                    ></androidx.viewpager.widget.ViewPager>
 
                 <!--                <com.denzcoskun.imageslider.ImageSlider-->
-<!--                    android:id="@+id/image_slider"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="170dp"-->
-<!--                    app:iss_auto_cycle="true"-->
-<!--                    app:iss_period="1000"-->
-<!--                    app:iss_delay="0"/>-->
+                <!--                    android:id="@+id/image_slider"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="170dp"-->
+                <!--                    app:iss_auto_cycle="true"-->
+                <!--                    app:iss_period="1000"-->
+                <!--                    app:iss_delay="0"/>-->
 
 
-<!--            <ImageView-->
-<!--                android:layout_toRightOf="@+id/imageView18"-->
-<!--                android:id="@+id/imageView19"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="170dp"-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:src="@drawable/slider_img"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintHorizontal_bias="0.5"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+                <!--            <ImageView-->
+                <!--                android:layout_toRightOf="@+id/imageView18"-->
+                <!--                android:id="@+id/imageView19"-->
+                <!--                android:layout_width="wrap_content"-->
+                <!--                android:layout_height="170dp"-->
+                <!--                android:layout_marginTop="15dp"-->
+                <!--                android:src="@drawable/slider_img"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintHorizontal_bias="0.5"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toTopOf="parent" />-->
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -128,19 +177,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <ProgressBar
-                android:id="@+id/progressBarcategory"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:indeterminateDrawable="@drawable/loading_img"
-                app:layout_constraintBottom_toBottomOf="@id/dotsRecyclerView"
-                app:layout_constraintHorizontal_bias="0.523"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline8"
@@ -192,6 +228,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -201,42 +239,56 @@
                 tools:itemCount="5"
                 tools:listitem="@layout/item_latest_job_layout" />
 
-<!--
-            <LinearLayout
-                android:id="@+id/lEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/btn_all_job"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp"
-                android:visibility="gone"
-                android:gravity="center"
-                >
+            <!--
+                        <LinearLayout
+                            android:id="@+id/lEmpty"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/btn_all_job"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="20dp"
+                            android:visibility="gone"
+                            android:gravity="center"
+                            >
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:padding="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/box"
-                    ></ImageView>
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="120dp"
+                                android:padding="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/box"
+                                ></ImageView>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="No Record Found"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_margin="5dp"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    ></TextView>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="No Record Found"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_margin="5dp"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                ></TextView>
 
 
-            </LinearLayout>-->
+                        </LinearLayout>-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+    <ProgressBar
+        android:id="@+id/progressBarcategory"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:visibility="gone"
+        android:indeterminateDrawable="@drawable/loading_img"
+        app:layout_constraintHorizontal_bias="3"
+        app:flow_verticalBias="2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
+        app:layout_constraintVertical_bias="1.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

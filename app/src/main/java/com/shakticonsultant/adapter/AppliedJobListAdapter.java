@@ -53,7 +53,7 @@ public class AppliedJobListAdapter extends RecyclerView.Adapter<AppliedJobListAd
 
 
         viewHolder.tvTitle.setText(list.get(position).getTitle());
-        viewHolder.tvPackage.setText(list.get(position).getStarting_salary()+" "+list.get(position).getPay_according());
+        viewHolder.tvPackage.setText(list.get(position).getStarting_salary()+"-"+list.get(position).getMaximum_salary()+" LPA");
         viewHolder.tvLocation.setText(list.get(position).getLocation());
         viewHolder.tvYear.setText(list.get(position).getWork_experience());
         viewHolder.txtDate.setText("Applied Date- "+list.get(position).getApplied_date());

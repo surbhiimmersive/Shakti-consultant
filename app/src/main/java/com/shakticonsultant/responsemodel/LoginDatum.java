@@ -5,58 +5,62 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class LoginDatum implements Serializable
-{
+public class LoginDatum implements Serializable {
 
-@SerializedName("id")
-@Expose
-private String id;
+    @SerializedName("id")
+    @Expose
+    private String id;
 
-@SerializedName("experience")
-@Expose
-private String experience;
+    @SerializedName("experience")
+    @Expose
+    private String experience;
 
-@SerializedName("name")
-@Expose
-private String name;
+    @SerializedName("name")
+    @Expose
+    private String name;
 
-@SerializedName("mobile")
-@Expose
-private String mobile;
-
-
-@SerializedName("personal")
-@Expose
-private String personal;
+    @SerializedName("mobile")
+    @Expose
+    private String mobile;
 
 
-@SerializedName("academic")
-@Expose
-private String academic;
+    @SerializedName("personal")
+    @Expose
+    private String personal;
 
 
-@SerializedName("employee")
-@Expose
-private String employee;
-@SerializedName("email")
-@Expose
-private String email;
+    @SerializedName("academic")
+    @Expose
+    private String academic;
 
 
-@SerializedName("location")
-@Expose
-private String location;
+    @SerializedName("otp_verify")
+    @Expose
+    private String otp_verify;
 
-@SerializedName("profile_img")
-@Expose
-private String profile_img;
-@SerializedName("skill_id")
-@Expose
-private String skill_id;
 
-@SerializedName("category_id")
-@Expose
-private String category_id;
+    @SerializedName("employee")
+    @Expose
+    private String employee;
+    @SerializedName("email")
+    @Expose
+    private String email;
+
+
+    @SerializedName("location")
+    @Expose
+    private String location;
+
+    @SerializedName("profile_img")
+    @Expose
+    private String profile_img;
+    @SerializedName("skill_id")
+    @Expose
+    private String skill_id;
+
+    @SerializedName("category_id")
+    @Expose
+    private String category_id;
 
     public String getCategory_id() {
         return category_id;
@@ -152,5 +156,13 @@ private String category_id;
 
     public void setExperience(String experience) {
         this.experience = experience;
+    }
+
+    public String getOtp_verify() {
+        return otp_verify;
+    }
+
+    public void setOtp_verify(String otp_verify) {
+        this.otp_verify = otp_verify;
     }
 }

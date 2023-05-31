@@ -11,9 +11,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission
-        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
@@ -44,6 +43,9 @@
             android:name=".ResumeActivity"
             android:exported="false" />
         <activity
+            android:name=".AppliedJobActivity"
+            android:exported="false" />
+        <activity
             android:name=".PaymentIntegration"
             android:exported="false" />
         <activity
@@ -65,10 +67,20 @@
         <activity
             android:name=".NotificationActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+
+            >
+            <intent-filter>
+                <action android:name="sendrequest" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>>
         <activity
             android:name=".ContactUsActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+
             android:screenOrientation="portrait" />
         <activity
             android:name=".ScheduleInterviewActivity"
@@ -132,6 +144,11 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".SearchJobActivity"
+            android:exported="false"
+
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SearchJobFilterActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize"
 
@@ -219,6 +236,17 @@
             android:name=".SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".SignInActivityResetPassword"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ResetActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"

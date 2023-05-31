@@ -1,10 +1,14 @@
 package com.shakticonsultant;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +35,7 @@ import retrofit2.Response;
 
 public class JobsListActivity extends AppCompatActivity {
 
-    ActivityJobsListBinding binding;
+ActivityJobsListBinding binding;
 String category_id;
 String category_name;
 ConnectionDetector cd;
@@ -47,15 +51,41 @@ ConnectionDetector cd;
                     .setActionTextColor(Color.RED)
                     .show();
         } else {
+
+            binding.imageView16.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    startActivity(new Intent(JobsListActivity.this, NotificationActivity.class));
+
+                }
+            });
             category_id = getIntent().getStringExtra("category_id");
             category_name = getIntent().getStringExtra("category_name");
             binding.textView45.setText(category_name);
+
+            binding.imgBack.setOnClickListener(v -> {
+                onBackPressed();
+                overridePendingTransition(R.anim.slide_in_left,
+                        R.anim.slide_out_right);
+            });
+
+
+
      /*   binding.include.getRoot().setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), SpecificFacultyJobActivity.class));
         });*/
             getJobSkillList();
         }
+binding.imageView16.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
 
+        startActivity(new Intent(JobsListActivity.this, NotificationActivity.class));
+
+    }
+});
     }
 
     @Override
@@ -68,7 +98,14 @@ ConnectionDetector cd;
     }
 
     public void getJobSkillList() {
-        binding.progressBarSkill.setVisibility(View.VISIBLE);
+
+
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+
+        //   binding.progressBarSkill.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
          map.put("category_id", category_id);
 
@@ -82,11 +119,11 @@ ConnectionDetector cd;
             public void onResponse(Call<JobSkillResponse> call, Response<JobSkillResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarSkill.setVisibility(View.GONE);
+                   // binding.progressBarSkill.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
-
+                        progress_spinner.dismiss();
                         binding.lEmpty.setVisibility(View.GONE);
                         binding.recycleSkillList.setVisibility(View.VISIBLE);
 
@@ -99,16 +136,19 @@ ConnectionDetector cd;
 
 
                     } else {
-                        binding.progressBarSkill.setVisibility(View.GONE);
+                       // binding.progressBarSkill.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
-                    binding.progressBarSkill.setVisibility(View.GONE);
+                 //   binding.progressBarSkill.setVisibility(View.GONE);
 
 binding.lEmpty.setVisibility(View.VISIBLE);
 binding.recycleSkillList.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
                 }
             }
 
@@ -117,7 +157,8 @@ binding.recycleSkillList.setVisibility(View.GONE);
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressBarSkill.setVisibility(View.GONE);
+                //binding.progressBarSkill.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
                 binding.lEmpty.setVisibility(View.VISIBLE);
                 binding.recycleSkillList.setVisibility(View.GONE);

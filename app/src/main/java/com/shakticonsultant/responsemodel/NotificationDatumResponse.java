@@ -14,6 +14,10 @@ public class NotificationDatumResponse implements Serializable
  @SerializedName("message")
     @Expose
     private String message;
+
+ @SerializedName("type")
+    @Expose
+    private String type;
 @SerializedName("date_time")
     @Expose
     private String date_time;
@@ -28,6 +32,14 @@ public class NotificationDatumResponse implements Serializable
 
     public String getMessage() {
         return message;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setMessage(String message) {

@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+android:background="@color/white"
         android:paddingBottom="15dp">
 
         <TextView
@@ -21,6 +21,7 @@
             android:background="@color/white"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
+            android:textStyle="bold"
             android:text="Shakti Consultant"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -198,10 +199,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
+                        android:autoLink="web"
                         android:fontFamily="@font/poppins_regular"
                         android:text="hr@shakticonsultant.com"
-                        android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textColor="@color/main_text_color"
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -219,6 +221,8 @@
                     <ImageView
                         android:layout_width="12dp"
                         android:layout_height="12dp"
+                        android:layout_marginBottom="3dp"
+
                         android:layout_gravity="center_vertical"
                         app:srcCompat="@drawable/mail" />
 
@@ -227,9 +231,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
+                        android:layout_gravity="left|center"
+                        android:gravity="center|left"
+                        android:linksClickable="true"
+                        android:autoLink="web"
                         android:fontFamily="@font/poppins_regular"
                         android:text="shakticonsultant@gmail.com"
-                        android:textColor="@color/black"
+                        android:textColor="@color/main_text_color"
                         android:textSize="10sp" />
 
                 </LinearLayout>
@@ -256,6 +264,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
+                        android:linksClickable="true"
+                        android:layout_gravity="left|center"
+                        android:gravity="center|left"
+                        android:autoLink="web"
                         android:fontFamily="@font/poppins_regular"
                         android:text="www.shakticonsultant.in"
                         android:textColor="@color/black"
@@ -290,6 +302,7 @@
                         android:layout_marginTop="15dp"
                         android:fontFamily="@font/roboto"
                         android:text="Jon"
+                        android:gravity="center_horizontal"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -324,91 +337,113 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView86"
                         app:srcCompat="@drawable/demo_user" />
+<LinearLayout
+    android:id="@+id/lheading"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/custom_view_bg"
+android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="10dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/imageView46"
+    tools:ignore="MissingConstraints">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="left|center_horizontal"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="3dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageView47"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:layout_gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/mail" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/custom_view_bg"
-                        android:paddingStart="5dp"
-                        android:paddingTop="15dp"
-                        android:paddingEnd="5dp"
-                        android:paddingBottom="15dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView46">
+        <TextView
+            android:id="@+id/textView87"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="kasjaksajsajskasajsasasasasasasasasasasas"
+            android:textColor="@color/main_text_color"
+            android:textSize="9sp"
+          />
 
-                        <ImageView
-                            android:id="@+id/imageView47"
-                            android:layout_width="11dp"
-                            android:layout_height="11dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/mail" />
 
-                        <TextView
-                            android:id="@+id/textView87"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Jon@gmail.com"
-                            android:textColor="@color/main_text_color"
-                            android:textSize="9sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView47"
-                            app:layout_constraintStart_toEndOf="@+id/imageView47"
-                            app:layout_constraintTop_toTopOf="@+id/imageView47" />
 
-                        <ImageView
-                            android:id="@+id/imageView48"
-                            android:layout_width="11dp"
-                            android:layout_height="11dp"
-                            android:layout_marginTop="3dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView87"
-                            app:srcCompat="@drawable/call" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="3dp"
+        android:gravity="left|center_horizontal"
+        android:layout_gravity="left|center_horizontal"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageView48"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView87"
+        app:srcCompat="@drawable/call" />
 
-                        <TextView
-                            android:id="@+id/textView88"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="+91 1234567890"
-                            android:textColor="@color/main_text_color"
-                            android:textSize="9sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView48"
-                            app:layout_constraintStart_toEndOf="@+id/imageView48"
-                            app:layout_constraintTop_toTopOf="@+id/imageView48" />
+    <TextView
+        android:id="@+id/textView88"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="+91 1234567890"
+        android:textColor="@color/main_text_color"
+        android:textSize="9sp"
+       />
 
-                        <ImageView
-                            android:id="@+id/imageView49"
-                            android:layout_width="11dp"
-                            android:layout_height="11dp"
-                            android:layout_marginTop="3dp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView88"
-                            app:srcCompat="@drawable/map_marker" />
 
-                        <TextView
-                            android:id="@+id/textView89"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:text="Indore - 452009"
-                            android:textColor="@color/main_text_color"
-                            android:textSize="9sp"
-                            app:layout_constraintBottom_toBottomOf="@+id/imageView49"
-                            app:layout_constraintStart_toEndOf="@+id/imageView49"
-                            app:layout_constraintTop_toTopOf="@+id/imageView49" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>   <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="3dp"
+    android:gravity="left|center_horizontal"
+    android:layout_gravity="left|center_horizontal"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageView49"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+android:visibility="visible"
+android:layout_marginTop="2sp"
+        app:srcCompat="@drawable/map_marker" />
 
+    <TextView
+        android:id="@+id/textView89"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:drawableLeft="@drawable/custom_edittext_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Indore - 452009"
+        android:textColor="@color/main_text_color"
+        android:textSize="9sp"
+        />
+
+
+</LinearLayout>
+
+
+
+</LinearLayout>
                     <View
                         android:id="@+id/view10"
                         android:layout_width="0dp"
@@ -421,7 +456,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout11" />
+                        app:layout_constraintTop_toBottomOf="@+id/lheading" />
 
                     <TextView
                         android:id="@+id/textView90"
@@ -462,6 +497,17 @@
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/view11">
+
+                        <TextView
+                            android:id="@+id/textView00"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:lineSpacingExtra="4sp"
+                            android:layout_marginBottom="5sp"
+                            android:text="Hii"
+                            android:textColor="@color/white"
+                            android:textSize="10sp" />
 
                         <TextView
                             android:id="@+id/textView94"
@@ -789,18 +835,6 @@
 
 
 
-                <ProgressBar
-                    android:id="@+id/progressResume"
-                    style="?android:attr/progressBarStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminateDrawable="@drawable/loading_img"
-                    android:visibility="gone"
-                    app:layout_constraintHorizontal_bias="0.523"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="1.5" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -854,6 +888,19 @@
             app:layout_constraintTop_toBottomOf="@+id/materialCardView8" />
 
 
+        <ProgressBar
+            android:id="@+id/progressResume"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/loading_img"
+            android:visibility="gone"
+            android:layout_marginTop="280dp"
+            app:layout_constraintHorizontal_bias="0.523"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.5" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

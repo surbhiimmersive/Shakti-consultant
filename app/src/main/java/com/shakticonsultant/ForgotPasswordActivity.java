@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivityForgotPasswordBinding;
+import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.ForgotResponse;
 import com.shakticonsultant.responsemodel.SignupResponse;
 import com.shakticonsultant.retrofit.ApiClient;
@@ -140,6 +141,5 @@ startActivity(i);
             }
         });
     }
-
 
 }

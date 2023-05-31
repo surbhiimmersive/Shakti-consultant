@@ -21,6 +21,8 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Update Academic Details"
+            android:textStyle="bold"
+
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="20sp"
@@ -64,7 +66,9 @@
                 android:id="@+id/spBoard1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
+
                 android:entries="@array/test9"
                 />
 
@@ -100,9 +104,9 @@
                 android:id="@+id/spYear1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:spinnerMode="dialog"
-                android:entries="@array/year"
+                android:entries="@array/yearsofmonth"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -122,8 +126,7 @@
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="CGPA/Percentage"
-
-            android:inputType="numberDecimal"
+android:digits="0123456789.%"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -171,8 +174,8 @@
                 android:id="@+id/spBoard2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:spinnerMode="dropdown"
-                style="@style/spinner_style"
+                android:spinnerMode="dialog"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:entries="@array/test9"
                 />
 
@@ -196,9 +199,9 @@
                 android:id="@+id/spYear2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:spinnerMode="dialog"
-                android:entries="@array/year"
+                android:entries="@array/yearsofmonth"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -215,7 +218,8 @@
             android:hint="CGPA/Percentage"
             android:singleLine="true"
             android:maxLength="5"
-            android:inputType="numberDecimal"
+            android:digits="0123456789.%"
+
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -259,8 +263,8 @@
                 android:id="@+id/spPostGraduation"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test10"
                 />
 
@@ -305,9 +309,9 @@
                 android:id="@+id/spYear4"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:spinnerMode="dialog"
-                android:entries="@array/year"
+                android:entries="@array/yearsofmonth"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -323,7 +327,7 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="CGPA/Percentage"
             android:maxLength="5"
-            android:inputType="numberDecimal"
+            android:digits="0123456789.%"
             android:singleLine="true"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
@@ -345,6 +349,8 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="University/College Name"
             android:inputType="text"
+            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -390,8 +396,8 @@
                 android:id="@+id/spGraduation"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
-                android:spinnerMode="dropdown"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:spinnerMode="dialog"
                 android:entries="@array/test10"
                 />
 
@@ -437,9 +443,9 @@
                 android:id="@+id/spyear3"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                style="@style/spinner_style"
+                android:backgroundTint="@android:color/holo_red_dark"
                 android:spinnerMode="dialog"
-                android:entries="@array/year"
+                android:entries="@array/yearsofmonth"
                 />
 
         </androidx.cardview.widget.CardView>
@@ -457,7 +463,7 @@
             android:singleLine="true"
 
             android:maxLength="5"
-            android:inputType="numberDecimal"
+            android:digits="0123456789.%"
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -478,6 +484,8 @@
             android:fontFamily="@font/poppins_regular"
             android:hint="University/College Name"
             android:inputType="text"
+            android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
             android:textColor="@color/input_text_color"
@@ -516,20 +524,21 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view" />
-
         <ProgressBar
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/progressacadeic"
-            android:visibility="gone"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:indeterminateDrawable="@drawable/loading_img"
-            android:foregroundGravity="center"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="350dp"
+            android:visibility="gone"
+            app:layout_constraintHorizontal_bias="0.526"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/constrainRecycler"
-            ></ProgressBar>
+            app:layout_constraintVertical_bias="0.0" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

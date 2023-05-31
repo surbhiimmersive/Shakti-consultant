@@ -3,17 +3,24 @@ package com.shakticonsultant;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -30,6 +37,7 @@ import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.FileHelper;
 import com.shakticonsultant.utils.PathUtil;
+import com.shakticonsultant.utils.PermissionManager;
 import com.shakticonsultant.utils.Utils;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
@@ -40,6 +48,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MediaType;
@@ -56,7 +65,7 @@ public class EditProfileActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     ConnectionDetector cd;
     String name,email,mobile,img;
-
+    PermissionManager permission;
     private static final int PICK_IMAGE_REQUEST = 9544;
 
     //   String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -70,10 +79,34 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityUpdateProfileBinding.inflate(getLayoutInflater());
+      //  binding = ActivityUpdateProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         cd = new ConnectionDetector(EditProfileActivity.this);
+        if (checkStoragePermission()) {
+        } else {
+            requestPermissions();
+        }
 
+        ActivityCompat.requestPermissions(
+                this,
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                },
+                1
+        );
+     /*   if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Environment.isExternalStorageManager()) {
+
+                // If you don't have access, launch a new activity to show the user the system's dialog
+                // to allow access to the external storage
+            } else {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", this.getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
+            }
+        }*/
 name=getIntent().getStringExtra("name");
 email=getIntent().getStringExtra("email");
 mobile=getIntent().getStringExtra("mobile");
@@ -87,8 +120,9 @@ binding.edtMobile.setText(mobile);
         Picasso.get()
                 .load(ApiClient.Photourl+img)
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
-                .resize(400,300)
-                .centerCrop(Gravity.TOP)
+                .fit()
+               /* .resize(400,300)
+                .centerCrop(Gravity.TOP)*/
                 .into(binding.imageView6);
 
         binding.imageView6.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +133,8 @@ binding.edtMobile.setText(mobile);
                 pick(view);
             }
         });
+
+
         /*binding.imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,7 +175,19 @@ onBackPressed();
 
                     snackbar.show();
 
-                }  else if (binding.edtMobile.getText().toString().trim().equals("")) {
+                }  else
+                    if (binding.edtName.getText().toString().trim().toString().length()<3) {
+
+                        Snackbar snackbar = Snackbar.make(binding.getRoot(), "The name must be minimum 3 character limit.", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null);
+                        View sbView = snackbar.getView();
+                        sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                        snackbar.show();
+
+                    }
+
+                    else if (binding.edtMobile.getText().toString().trim().equals("")) {
 
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "The mobile field is required", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
@@ -185,12 +233,26 @@ onBackPressed();
     }
     public void pick(View view) {
         verifyStoragePermissions(EditProfileActivity.this);
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+       /* Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_IMAGE_REQUEST);*/
+
+
+        if (Build.VERSION.SDK_INT <19){
+            Intent intent = new Intent();
+            intent.setType("image/jpeg");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.app_name)),PICK_IMAGE_REQUEST);
+        } else {
+            Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            startActivityForResult(i, PICK_IMAGE_REQUEST);
+        }
     }
     public void getUpdateProfile() {
-        binding.progressBar2.setVisibility(View.VISIBLE);
+     //   binding.progressBar2.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
 
         Map<String, RequestBody> map = new HashMap<>();
 
@@ -216,20 +278,37 @@ onBackPressed();
                 @Override
                 public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
                     if (response.isSuccessful()) {
-                        binding.progressBar2.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+                       // binding.progressBar2.setVisibility(View.GONE);
                         if (response.body().isSuccess() == true) {
 
+                            AlertDialog.Builder logoutDialog = new AlertDialog.Builder(EditProfileActivity.this,R.style.AlertDialogTheme)
+                                    .setTitle(R.string.app_name)
 
-finish();
+                                    .setMessage("Your Profile has been update successfully.")
+                                            .setIcon(R.drawable.shakti_consultant_logo)
+                                    .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
 
+                                            finish();
+
+
+                                        }
+                                    });
+                            logoutDialog.show();
 
                         } else {
+                            progress_spinner.dismiss();
+
                             //   pd_loading.setVisibility(View.GONE);
-                            binding.progressBar2.setVisibility(View.GONE);
+                            //binding.progressBar2.setVisibility(View.GONE);
 
                         }
                     } else {
-                        binding.progressBar2.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                       // binding.progressBar2.setVisibility(View.GONE);
 
                         //
                     }
@@ -239,7 +318,7 @@ finish();
                 @Override
                 public void onFailure(Call<CommonResponse> call, Throwable t) {
                     // pd_loading.setVisibility(View.GONE);
-                    binding.progressBar2.setVisibility(View.GONE);
+                  //  binding.progressBar2.setVisibility(View.GONE);
 
                     Toast.makeText(EditProfileActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -263,6 +342,9 @@ finish();
 
                     File finalFile = new File(PathUtil.getPath(EditProfileActivity.this, uri));
                     profilefilepath= finalFile.getAbsolutePath();
+
+
+
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
@@ -283,6 +365,26 @@ finish();
 
 
     }
+    private boolean checkStoragePermission() {
+        return (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED );
+    }
+    private void requestPermissions() {
+        permission = new PermissionManager() {
+            @Override
+            public List<String> setPermission() {
+                List<String> permssions = new ArrayList<>();
+                permssions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+                permssions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                permssions.add(Manifest.permission.CAMERA);
+                return permssions;
+            }
+        };
 
+        permission.checkAndRequestPermissions((Activity) EditProfileActivity.this);
+    }
 
 }

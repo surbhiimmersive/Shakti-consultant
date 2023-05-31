@@ -2,6 +2,7 @@ package com.shakticonsultant;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -55,7 +56,10 @@ public class AboutUsActivity extends AppCompatActivity {
 
     }
         public void AboutApiCall () {
-            binding.progressAbout.setVisibility(View.VISIBLE);
+         //   binding.progressAbout.setVisibility(View.VISIBLE);
+            Dialog progress_spinner;
+            progress_spinner = Utils.LoadingSpinner(AboutUsActivity.this);
+            progress_spinner.show();
 
             Map<String, String> map = new HashMap<>();
 
@@ -69,7 +73,8 @@ public class AboutUsActivity extends AppCompatActivity {
                 public void onResponse(Call<AboutResponse> call, Response<AboutResponse> response) {
 
                     if (response.isSuccessful()) {
-                        binding.progressAbout.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+                      //  binding.progressAbout.setVisibility(View.GONE);
                         if (response.body().isSuccess() == true) {
                             Log.e("User ID", response.body().getData().getId());
                             // Utils.showFailureDialog(SignInActivity.this, response.body().getMessage());
@@ -77,7 +82,9 @@ public class AboutUsActivity extends AppCompatActivity {
                             binding.textView63.setText(content);
                             //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
                         } else {
-                            Utils.showFailureDialog(AboutUsActivity.this, response.body().getMessage());
+                            progress_spinner.dismiss();
+
+                            //Utils.showFailureDialog(AboutUsActivity.this, response.body().getMessage());
 
 
                         }
@@ -86,8 +93,10 @@ public class AboutUsActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<AboutResponse> call, Throwable t) {
-                    binding.progressAbout.setVisibility(View.GONE);
-                    Utils.showFailureDialog(AboutUsActivity.this, "Something went wrong!");
+                   // binding.progressAbout.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                    // Utils.showFailureDialog(AboutUsActivity.this, "Something went wrong!");
                 }
             });
         }

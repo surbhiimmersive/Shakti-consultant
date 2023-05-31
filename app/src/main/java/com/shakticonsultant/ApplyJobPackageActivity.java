@@ -19,6 +19,7 @@ import com.shakticonsultant.databinding.ActivityPackageBinding;
 import com.shakticonsultant.responsemodel.PackageResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
+import com.shakticonsultant.utils.AppPrefrences;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
@@ -63,7 +64,8 @@ String job_id;
                         R.anim.slide_out_right);
             });
             binding.btnUpgradePackage.setOnClickListener(v -> {
-                showDateDialog();
+               // showDateDialog();
+                getPackageListApi();
             });
         }
     }
@@ -127,12 +129,12 @@ String job_id;
     public void getPackageListApi() {
           binding.progressBarpackage.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
+        map.put("user_id", AppPrefrences.getUserid(ApplyJobPackageActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<PackageResponse> resultCall = apiInterface.callPackageList();
+        Call<PackageResponse> resultCall = apiInterface.callPackageList(map);
 
         resultCall.enqueue(new Callback<PackageResponse>() {
             @Override
@@ -164,8 +166,9 @@ String job_id;
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                Utils.showFailureDialog(ApplyJobPackageActivity.this, "Something went wrong!");
+              //  Utils.showFailureDialog(ApplyJobPackageActivity.this, "Something went wrong!");
             }
         });
     }
+
 }

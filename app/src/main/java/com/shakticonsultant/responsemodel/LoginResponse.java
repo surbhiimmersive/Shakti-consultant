@@ -24,10 +24,6 @@ private String message;
         this.success = success;
     }
 
-    @SerializedName("data")
-    @Expose
-    private LoginDatum data;
-
     public String getMessage() {
         return message;
     }
@@ -35,6 +31,10 @@ private String message;
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @SerializedName("data")
+    @Expose
+    private LoginDatum data;
 
     public LoginDatum getData() {
         return data;

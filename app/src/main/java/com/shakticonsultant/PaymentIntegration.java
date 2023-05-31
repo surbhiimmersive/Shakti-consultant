@@ -1,48 +1,5 @@
 package com.shakticonsultant;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.DatePicker;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
-import com.google.android.material.snackbar.Snackbar;
-import com.shakticonsultant.adapter.PackageListAdapter;
-import com.shakticonsultant.databinding.ActivityPackageBinding;
-import com.shakticonsultant.responsemodel.PackageResponse;
-import com.shakticonsultant.retrofit.ApiClient;
-import com.shakticonsultant.retrofit.ApiInterface;
-import com.shakticonsultant.utils.ConnectionDetector;
-import com.shakticonsultant.utils.Utils;
-
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import com.cashfree.pg.CFPaymentService;
-import com.cashfree.pg.ui.gpay.GooglePayStatusListener;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.cashfree.pg.CFPaymentService.PARAM_APP_ID;
 import static com.cashfree.pg.CFPaymentService.PARAM_BANK_CODE;
 import static com.cashfree.pg.CFPaymentService.PARAM_CARD_CVV;
@@ -61,6 +18,19 @@ import static com.cashfree.pg.CFPaymentService.PARAM_PAYMENT_OPTION;
 import static com.cashfree.pg.CFPaymentService.PARAM_UPI_VPA;
 import static com.cashfree.pg.CFPaymentService.PARAM_WALLET_CODE;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.cashfree.pg.CFPaymentService;
+import com.cashfree.pg.ui.gpay.GooglePayStatusListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PaymentIntegration extends AppCompatActivity{
 

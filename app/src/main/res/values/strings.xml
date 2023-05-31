@@ -15,22 +15,47 @@
     </string-array>
     <string-array name="month">
         <item>Select Month</item>
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>September</item>
-        <item>November</item>
-        <item>December</item>
+        <item>1 Month</item>
+        <item>2 Month</item>
+        <item>3 Month</item>
+        <item>4 Month</item>
+        <item>5 Month</item>
+        <item>6 Month</item>
+        <item>7 Month</item>
+        <item>8 Month</item>
+        <item>9 Month</item>
+        <item>10 Month</item>
+        <item>11 Month</item>
+        <item>12 Month</item>
     </string-array>
     <string-array name="year">
         <item>Select Year</item>
+        <item>1 Year</item>
+        <item>2 Year</item>
+        <item>3 Year</item>
+        <item>4 Year</item>
+        <item>5 Year</item>
+        <item>6 Year</item>
+        <item>7 Year</item>
+        <item>8 Year</item>
+        <item>9 Year</item>
+        <item>10 Year</item>
+        <item>11 Year</item>
+        <item>12 Year</item>
+        <item>13 Year</item>
+        <item>14 Year</item>
+        <item>15 Year</item>
+        <item>16 Year</item>
+        <item>17 Year</item>
+        <item>18 Year</item>
+        <item>19 Year</item>
+        <item>20 Year</item>
+
+
+    </string-array>
+    <string-array name="yearsofmonth">
+        <item>Select Year</item>
+        <item>2023</item>
         <item>2022</item>
         <item>2021</item>
         <item>2020</item>
@@ -57,12 +82,7 @@
         <item>1999</item>
         <item>1998</item>
         <item>1997</item>
-        <item>1996</item>
-        <item>1995</item>
-        <item>1994</item>
-        <item>1993</item>
-        <item>1992</item>
-        <item>1990</item>
+
     </string-array>
 
 
@@ -128,12 +148,61 @@
         <item>Experience</item>
     </string-array>
 
+    <string-array name="minsalary">
+        <item>Min Salary</item>
+        <item>1 LPA</item>
+        <item>2 LPA</item>
+        <item>3 LPA</item>
+        <item>4 LPA</item>
+        <item>5 LPA</item>
+        <item>6 LPA</item>
+        <item>7 LPA</item>
+        <item>8 LPA</item>
+        <item>9 LPA</item>
+        <item>10 LPA</item>
+        <item>11 LPA</item>
+        <item>12 LPA</item>
+        <item>13 LPA</item>
+        <item>14 LPA</item>
+        <item>15 LPA</item>
+        <item>16 LPA</item>
+        <item>17 LPA</item>
+        <item>18 LPA</item>
+        <item>19 LPA</item>
+        <item>20 LPA</item>
+    </string-array>
+
+    <string-array name="maxsalary">
+        <item>Max Salary</item>
+        <item>1 LPA</item>
+        <item>2 LPA</item>
+        <item>3 LPA</item>
+        <item>4 LPA</item>
+        <item>5 LPA</item>
+        <item>6 LPA</item>
+        <item>7 LPA</item>
+        <item>8 LPA</item>
+        <item>9 LPA</item>
+        <item>10 LPA</item>
+        <item>11 LPA</item>
+        <item>12 LPA</item>
+        <item>13 LPA</item>
+        <item>14 LPA</item>
+        <item>15 LPA</item>
+        <item>16 LPA</item>
+        <item>17 LPA</item>
+        <item>18 LPA</item>
+        <item>19 LPA</item>
+        <item>20 LPA</item>
+
+    </string-array>
+
     <string-array name="test16">
         <item>Mumbai</item>
     </string-array>
 
     <string-array name="test17">
-        <item>Physics Faculty</item>
+        <item>Select Skill</item>
     </string-array>
 
     <string-array name="test18">

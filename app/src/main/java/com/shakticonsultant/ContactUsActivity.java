@@ -3,6 +3,7 @@ package com.shakticonsultant;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
@@ -27,9 +28,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ContactUsActivity extends AppCompatActivity {
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
     ActivityContactUsBinding binding;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 ConnectionDetector cd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,17 +78,17 @@ if(binding.edtName.getText().toString().trim().equals("")){
     snackbar.show();
 
 
-}else if(!binding.edtText.getText().toString().matches(emailPattern)) {
-
-    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter text.", Snackbar.LENGTH_LONG)
+}
+else if(binding.edtText.getText().toString().trim().equals("")){
+    Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter message.", Snackbar.LENGTH_LONG)
             .setAction("Action", null);
     View sbView = snackbar.getView();
     sbView.setBackgroundColor(getColor(R.color.purple_200));
 
     snackbar.show();
 
-
-}else {
+}
+else {
 
     getContactUsApi();
 }
@@ -118,11 +119,12 @@ if(binding.edtName.getText().toString().trim().equals("")){
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
-                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(ContactUsActivity.this)
+                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(ContactUsActivity.this,R.style.AlertDialogTheme)
                                 .setTitle(R.string.app_name)
+
                                 .setMessage("Contact request send successfully!")
                                 .setIcon(R.drawable.shakti_consultant_logo)
-                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
@@ -132,11 +134,13 @@ if(binding.edtName.getText().toString().trim().equals("")){
                                     }
                                 });
                         logoutDialog.show();
+
+
                     } else {
                         binding.progressContatc.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
-                        // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
+                       //  Utils.showFailureDialog(ContactUsActivity.this, response.body().getMessage());
                     }
                 }
             }

@@ -22,50 +22,137 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@drawable/custom_edittext_bg"    tools:ignore="MissingConstraints">
+<RelativeLayout
+    android:id="@+id/ltext"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
+
 
     <ImageView
-        android:id="@+id/imageView19"
         android:layout_width="28dp"
         android:layout_height="25dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="3dp"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="10dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toStartOf="@+id/textView44"
+android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
-
-        app:layout_constraintTop_toTopOf="@+id/textView44"
-      />
+        app:layout_constraintTop_toTopOf="@+id/textView44" />
 
     <TextView
         android:id="@+id/textView44"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1.1"
+        android:gravity="center"
+        android:layout_marginRight="5sp"
+        android:layout_marginHorizontal="5sp"
+android:layout_centerHorizontal="true"
+        android:text="akjska kakskaksas aksjasjkjaskjjjjsa hjhsja ksdsdksdks"
         android:fontFamily="@font/poppins_regular"
-        android:text=""
         android:textColor="@color/main_text_color"
         android:textSize="16sp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
+</RelativeLayout>
+<LinearLayout
+    android:id="@+id/ltext1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toBottomOf="@+id/ltext"
+    android:orientation="horizontal"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="30dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:weightSum="1"
+    app:layout_constraintStart_toStartOf="parent"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_weight="0.5"
+
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView44"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    />
 
-
+</LinearLayout>
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/materialCardView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
+        android:layout_weight="0.5"
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView44">
+        app:layout_constraintStart_toStartOf="@+id/guideline9"
+        app:layout_constraintTop_toBottomOf="@+id/ltext1">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/money_img" />
+
+            <TextView
+                android:id="@+id/tvPackage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/instruction_color"
+                android:textSize="13dp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+<!--
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
             android:padding="5dp">
 
             <ImageView
@@ -88,6 +175,10 @@
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
+-->
+
+
+</LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
@@ -105,19 +196,21 @@
         android:id="@+id/materialCardView1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="10dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+        app:layout_constraintTop_toBottomOf="@+id/ltext1">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="horizontal"
             android:padding="5dp">
 
@@ -136,7 +229,7 @@
                 android:layout_marginStart="2dp"
                 android:text=""
                 android:textColor="@color/instruction_color"
-                android:textSize="14sp" />
+                android:textSize="13dp" />
 
         </LinearLayout>
 
@@ -154,7 +247,7 @@
         app:cardElevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+        app:layout_constraintTop_toBottomOf="@+id/ltext1">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -166,7 +259,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
                 android:src="@drawable/address_img" />
 
             <TextView
@@ -178,8 +271,9 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:text=""
+
                 android:textColor="@color/instruction_color"
-                android:textSize="14sp" />
+                android:textSize="13dp" />
 
         </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.shakticonsultant;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -46,7 +47,7 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-
+boolean homeclose=true;
     private List<SliderDatumResponse> sliderDatumResponses = new ArrayList<>();
 
     ImageSlider image_slider;
@@ -114,7 +115,7 @@ public class HomeFragment extends Fragment {
 
         getLatestJob();
         setDots(0);
-
+AppPrefrences.setCLose(getActivity(),true);
 
         binding.openDrawer.setOnClickListener(v -> {
             ((MainActivity) getActivity()).openDrawer();
@@ -180,7 +181,13 @@ public class HomeFragment extends Fragment {
     }
 
     public void getJobCategory() {
-      binding.progressBarcategory.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(getActivity());
+        progress_spinner.show();
+
+
+        // binding.progressBarcategory.setVisibility(View.VISIBLE);
+      binding.tvhide.setVisibility(View.GONE);
         Map<String, String> map = new HashMap<>();
        // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
 
@@ -194,7 +201,9 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<JobCategoryResponse> call, Response<JobCategoryResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+                  //  binding.progressBarcategory.setVisibility(View.GONE);
+                    binding.tvhide.setVisibility(View.VISIBLE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -206,7 +215,10 @@ public class HomeFragment extends Fragment {
                         binding.recyclerJobCategory.getAdapter().notifyDataSetChanged();
 
                     } else {
-                        binding.progressBarcategory.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                        // binding.progressBarcategory.setVisibility(View.GONE);
+                        binding.tvhide.setVisibility(View.VISIBLE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
@@ -216,11 +228,14 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<JobCategoryResponse> call, Throwable t) {
-                binding.progressBarcategory.setVisibility(View.GONE);
+                progress_spinner.dismiss();
+
+                //binding.progressBarcategory.setVisibility(View.GONE);
+                binding.tvhide.setVisibility(View.VISIBLE);
 
               //  lemprtNotification.setVisibility(View.VISIBLE);
             //    pd_loading.setVisibility(View.GONE);
-                Utils.showFailureDialog(getActivity(), "Something went wrong!");
+             //   Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });
     }
@@ -254,9 +269,10 @@ public class HomeFragment extends Fragment {
 
                             ImageViewPagerAdapter pagerAdapter = new ImageViewPagerAdapter(getActivity(), sliderDatumResponses);
                             viewPager.setAdapter(pagerAdapter);
+                            viewPager.setPageTransformer(true, new ZoomOutPageTransformer());
 
                             Timer timer = new Timer();
-                            timer.scheduleAtFixedRate(new SliderTimer(), 3000, 5000);
+                            timer.scheduleAtFixedRate(new SliderTimer(), 2000, 4000);
 
                             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                                 @Override
@@ -319,9 +335,14 @@ public class HomeFragment extends Fragment {
 
 
     public void getLatestJob() {
-        binding.progressBarcategory.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(getActivity());
+        progress_spinner.show();
+
+        // binding.progressBarcategory.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-        map.put("location", AppPrefrences.getLocation(getActivity()));
+      //  map.put("location", AppPrefrences.getLocation(getActivity()));
+        map.put("location", "7");
         map.put("user_id", AppPrefrences.getUserid(getActivity()));
 
 
@@ -335,7 +356,8 @@ public class HomeFragment extends Fragment {
 
                 if (response.isSuccessful()) {
                   //  binding.progressBarcategory.setVisibility(View.GONE);
-
+                  //  binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
                       //  binding.recycLatestJob.setVisibility(View.VISIBLE);
@@ -358,6 +380,9 @@ public class HomeFragment extends Fragment {
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
+                    progress_spinner.dismiss();
+
+                    //  binding.progressBarcategory.setVisibility(View.GONE);
 
                    // binding.progressBarcategory.setVisibility(View.GONE);
                   //  binding.lEmpty.setVisibility(View.VISIBLE);
@@ -368,6 +393,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<JobSkillWiseListResponse> call, Throwable t) {
+              //  binding.progressBarcategory.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
@@ -380,7 +407,10 @@ public class HomeFragment extends Fragment {
         });
     }
     public void getAllJob() {
-        binding.progressBarcategory.setVisibility(View.VISIBLE);
+      // binding.progressBarcategory.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(getActivity());
+        progress_spinner.show();
 
         Map<String, String> map = new HashMap<>();
         //map.put("location", "7");
@@ -389,14 +419,15 @@ public class HomeFragment extends Fragment {
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<JobSkillWiseListResponse> resultCall = apiInterface.callAllJobs();
+        Call<JobSkillWiseListResponse> resultCall = apiInterface.callAllJobs(map);
 
         resultCall.enqueue(new Callback<JobSkillWiseListResponse>() {
             @Override
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                  //  binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+                    //binding.progressBarcategory.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
@@ -412,7 +443,9 @@ public class HomeFragment extends Fragment {
 
 
                     } else {
-                      //  binding.progressBarcategory.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                        // binding.progressBarcategory.setVisibility(View.GONE);
                        // binding.lEmpty.setVisibility(View.VISIBLE);
                        // binding.recycLatestJob.setVisibility(View.GONE);
 
@@ -420,7 +453,9 @@ public class HomeFragment extends Fragment {
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
                 }else{
-                  //  binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
+
+                    // binding.progressBarcategory.setVisibility(View.GONE);
                     //binding.lEmpty.setVisibility(View.VISIBLE);
                     //binding.recycLatestJob.setVisibility(View.GONE);
 
@@ -433,12 +468,14 @@ public class HomeFragment extends Fragment {
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-                binding.progressBarcategory.setVisibility(View.GONE);
+              //  binding.progressBarcategory.setVisibility(View.GONE);
                // binding.lEmpty.setVisibility(View.VISIBLE);
+                progress_spinner.dismiss();
 
-                Utils.showFailureDialog(getActivity(), "Something went wrong!");
+               // Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });
     }
+
 
 }

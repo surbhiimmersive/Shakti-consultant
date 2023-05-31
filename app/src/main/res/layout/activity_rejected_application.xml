@@ -6,15 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".RejectedApplicationActivity">
 
-    <ImageView
-        android:id="@+id/img_back_arrow"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
 
+    <LinearLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1"
         android:layout_marginTop="25dp"
-        android:src="@drawable/ic_baseline_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="5sp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/img_back_arrow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5sp"
+            android:layout_weight="0.9"
+            android:src="@drawable/ic_baseline_arrow"
+            />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rejected Application"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold"
+
+            android:layout_weight="0.1"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10sp"
+            android:textAllCaps="true"
+            android:textColor="@color/main_text_color"
+            android:textSize="18sp"
+            />
+
+
+    </LinearLayout>
+
 
     <ImageView
         android:id="@+id/filters"
@@ -39,20 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView47" />
-
-    <TextView
-        android:id="@+id/textView47"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rejected Application"
-        android:textAllCaps="true"
-        android:textColor="@color/main_text_color"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/img_back_arrow"
-        app:layout_constraintEnd_toStartOf="@+id/filters"
-        app:layout_constraintStart_toEndOf="@+id/img_back_arrow"
-        app:layout_constraintTop_toTopOf="@+id/img_back_arrow" />
+        app:layout_constraintTop_toBottomOf="@+id/l1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView9"
@@ -83,7 +103,7 @@
         android:id="@+id/lEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/textView47"
+        android:layout_below="@+id/l1"
         android:orientation="vertical"
         android:layout_marginBottom="20dp"
         android:visibility="gone"

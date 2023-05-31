@@ -1,5 +1,6 @@
 package com.shakticonsultant;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -82,6 +83,9 @@ public class AppliedJobsFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentAppliedJobsBinding.inflate(getLayoutInflater());
 
+
+        AppPrefrences.setCLose(getActivity(),false);
+
         binding.filters.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), JobFiltersActivity.class));
         });
@@ -99,7 +103,11 @@ public class AppliedJobsFragment extends Fragment {
 
 
     public void getAppliedJob() {
-        binding.progressBarcategory.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(getActivity());
+        progress_spinner.show();
+
+        // binding.progressBarcategory.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("user_id", AppPrefrences.getUserid(getActivity()));
 
@@ -113,10 +121,11 @@ public class AppliedJobsFragment extends Fragment {
             public void onResponse(Call<JobAppliedListResponse> call, Response<JobAppliedListResponse> response) {
 
                 if (response.isSuccessful()) {
-                    binding.progressBarcategory.setVisibility(View.GONE);
-
+                   // binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()==true) {
+
                         binding.imageView23.setVisibility(View.VISIBLE);
                         binding.recyclerAppliedJob.setVisibility(View.VISIBLE);
                         binding.lEmpty.setVisibility(View.GONE);
@@ -130,7 +139,9 @@ public class AppliedJobsFragment extends Fragment {
 
 
                     } else {
-                        binding.progressBarcategory.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                        // binding.progressBarcategory.setVisibility(View.GONE);
                         binding.imageView23.setVisibility(View.GONE);
                         binding.recyclerAppliedJob.setVisibility(View.GONE);
                         binding.lEmpty.setVisibility(View.VISIBLE);
@@ -143,7 +154,8 @@ public class AppliedJobsFragment extends Fragment {
                     binding.imageView23.setVisibility(View.GONE);
                     binding.recyclerAppliedJob.setVisibility(View.GONE);
                     binding.lEmpty.setVisibility(View.VISIBLE);
-                    binding.progressBarcategory.setVisibility(View.GONE);
+                    //binding.progressBarcategory.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
 
                 }
             }
@@ -156,9 +168,10 @@ public class AppliedJobsFragment extends Fragment {
                 binding.imageView23.setVisibility(View.GONE);
                 binding.recyclerAppliedJob.setVisibility(View.GONE);
                 binding.lEmpty.setVisibility(View.VISIBLE);
-                binding.progressBarcategory.setVisibility(View.GONE);
+             //   binding.progressBarcategory.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
-                Utils.showFailureDialog(getActivity(), "Please try again sometime later..");
+               // Utils.showFailureDialog(getActivity(), "Please try again sometime later..");
             }
         });
     }

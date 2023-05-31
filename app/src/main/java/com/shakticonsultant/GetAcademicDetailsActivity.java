@@ -1,5 +1,6 @@
 package com.shakticonsultant;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,12 +8,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.shakticonsultant.databinding.ActivityAcademicDetailsBinding;
 import com.shakticonsultant.databinding.ActivityUpdateAcademicBinding;
+import com.shakticonsultant.responsemodel.AcademicCommonResponse;
 import com.shakticonsultant.responsemodel.BoardDatumResponse;
 import com.shakticonsultant.responsemodel.BoardResponse;
 import com.shakticonsultant.responsemodel.CommonResponse;
@@ -51,6 +57,7 @@ public class GetAcademicDetailsActivity extends AppCompatActivity {
     String strgraduation="";
     String strpostgraduation="";
     String userid;
+    Spinner spSkill;
     String stryear1="",stryear2="",stryear3="",stryear4="";
 ConnectionDetector cd;
     @Override
@@ -87,6 +94,186 @@ ConnectionDetector cd;
                 }
             });
 
+            binding.edtXBoard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetAcademicDetailsActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select Board");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strBoard1 = (String) spSkill.getSelectedItem();
+                         //  String  strCategoryId = boardList.get(i).getId();
+                            binding.edtXBoard.setText(strBoard1);
+                           // adp.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ArrayAdapter<String> adp=new ArrayAdapter<String>(GetAcademicDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_board_list);
+                    spSkill.setAdapter(adp);
+                    adp.notifyDataSetChanged();
+
+                    btnok.setOnClickListener(v -> {
+
+
+                            dialog.dismiss();
+
+
+                    });
+
+
+                }
+            });
+   binding.edtXIIBoard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetAcademicDetailsActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select Board");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strBoard2 = (String) spSkill.getSelectedItem();
+                         //  String  strCategoryId = boardList.get(i).getId();
+                            binding.edtXIIBoard.setText(strBoard2);
+                           // adp.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ArrayAdapter<String> adp=new ArrayAdapter<String>(GetAcademicDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_board_list);
+                    spSkill.setAdapter(adp);
+                    adp.notifyDataSetChanged();
+
+                    btnok.setOnClickListener(v -> {
+
+
+                            dialog.dismiss();
+
+
+                    });
+
+
+                }
+            }); binding.edtGraduation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetAcademicDetailsActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select Graduation");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strgraduation = (String) spSkill.getSelectedItem();
+                         //  String  strCategoryId = boardList.get(i).getId();
+                            binding.edtGraduation.setText(strgraduation);
+                           // adp.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ArrayAdapter<String> adp=new ArrayAdapter<String>(GetAcademicDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_graduation_list);
+                    spSkill.setAdapter(adp);
+                    adp.notifyDataSetChanged();
+
+                    btnok.setOnClickListener(v -> {
+
+
+                            dialog.dismiss();
+
+
+                    });
+
+
+                }
+            });
+
+binding.edtPostGraduation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Dialog dialog = new Dialog(GetAcademicDetailsActivity.this);
+                    dialog.setContentView(R.layout.skill_selection);
+                    dialog.show();
+
+
+                    AppCompatButton btnok = dialog.findViewById(R.id.btnok);
+                    spSkill = dialog.findViewById(R.id.spEmployeeStream);
+
+
+                    TextView textView57 = dialog.findViewById(R.id.textView57);
+                    textView57.setText("Select Post Graduation");
+                    spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                            strpostgraduation = (String) spSkill.getSelectedItem();
+                         //  String  strCategoryId = boardList.get(i).getId();
+                            binding.edtPostGraduation.setText(strpostgraduation);
+                           // adp.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    ArrayAdapter<String> adp=new ArrayAdapter<String>(GetAcademicDetailsActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_postgraduation_list);
+                    spSkill.setAdapter(adp);
+                    adp.notifyDataSetChanged();
+
+                    btnok.setOnClickListener(v -> {
+
+
+                            dialog.dismiss();
+
+
+                    });
+
+
+                }
+            });
 
 
             binding.spYear2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -476,11 +663,11 @@ ConnectionDetector cd;
 
         apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-        Call<CommonResponse> resultCall = apiInterface.callAcademyDetailApi(map);
+        Call<AcademicCommonResponse> resultCall = apiInterface.callAcademyDetailApi(map);
 
-        resultCall.enqueue(new Callback<CommonResponse>() {
+        resultCall.enqueue(new Callback<AcademicCommonResponse>() {
             @Override
-            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+            public void onResponse(Call<AcademicCommonResponse> call, Response<AcademicCommonResponse> response) {
 
                 if (response.isSuccessful()) {
                     binding.progressacadeic.setVisibility(View.GONE);
@@ -491,7 +678,7 @@ ConnectionDetector cd;
 
                         finish();
                     }  else {
-                        Utils.showFailureDialog(GetAcademicDetailsActivity.this, response.body().getMessage());
+                       // Utils.showFailureDialog(GetAcademicDetailsActivity.this, response.body().getMessage());
 
 
                     }
@@ -505,7 +692,7 @@ ConnectionDetector cd;
             }
 
             @Override
-            public void onFailure(Call<CommonResponse> call, Throwable t) {
+            public void onFailure(Call<AcademicCommonResponse> call, Throwable t) {
                // binding.progressBar2.setVisibility(View.GONE);
                 binding.progressacadeic.setVisibility(View.GONE);
 
@@ -537,6 +724,16 @@ ConnectionDetector cd;
                         //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
                    */
 
+                        strBoard1=response.body().getData().getBoard_X();
+                        strBoard2=response.body().getData().getBoard_XII();
+                        strgraduation=response.body().getData().getDegree_graduation();
+                        strpostgraduation=response.body().getData().getDegree_postgraduation();
+                        binding.edtXBoard.setText(response.body().getData().getBoard_X());
+                        binding.edtXIIBoard.setText(response.body().getData().getBoard_XII());
+                        binding.edtGraduation.setText(response.body().getData().getDegree_graduation());
+                        binding.edtGraduation.setText(response.body().getData().getDegree_graduation());
+                        binding.edtPostGraduation.setText(response.body().getData().getDegree_postgraduation());
+
                         binding.edtXPercent.setText(response.body().getData().getPercentage_X());
                         binding.edtXIIPercent.setText(response.body().getData().getPercentage_XII());
                         binding.edtGraduationPercentage.setText(response.body().getData().getPercentage_graduation());
@@ -551,7 +748,7 @@ ConnectionDetector cd;
                         binding.spGraduation.setSelection(sp_graduation_list.indexOf(response.body().getData().getDegree_graduation()));
                         binding.spPostGraduation.setSelection(sp_postgraduation_list.indexOf(response.body().getData().getDegree_postgraduation()));
 
-                        String[] year = getResources().getStringArray(R.array.year);
+                        String[] year = getResources().getStringArray(R.array.yearsofmonth);
                         binding.spYear1.setSelection(Arrays.asList(year).indexOf(response.body().getData().getPassed_year_X()));
                         binding.spYear2.setSelection(Arrays.asList(year).indexOf(response.body().getData().getPassed_year_XII()));
                         binding.spyear3.setSelection(Arrays.asList(year).indexOf(response.body().getData().getPassed_year_graduation()));

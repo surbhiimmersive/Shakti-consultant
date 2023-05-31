@@ -31,6 +31,8 @@
         android:layout_marginTop="25dp"
         android:fontFamily="@font/roboto"
         android:text="CONTACT US"
+        android:textStyle="bold"
+
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -99,6 +101,8 @@
                     android:background="@drawable/custom_edittext_bg"
                     android:fontFamily="@font/poppins_regular"
                     android:hint="John"
+                    android:maxLength="30"
+                    android:digits=" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
                     android:paddingStart="10dp"
                     android:textColor="@color/text_color"
                     android:textColorHint="@color/hint_color"
@@ -138,11 +142,13 @@
                 <EditText
                     android:id="@+id/edtText"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="160dp"
                     android:background="@drawable/custom_edittext_bg"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="start"
                     android:hint="Text"
+
+                    android:maxLength="200"
                     android:paddingStart="10dp"
                     android:paddingTop="10dp"
                     android:textColor="@color/text_color"

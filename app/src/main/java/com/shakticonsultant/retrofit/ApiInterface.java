@@ -1,5 +1,7 @@
 package com.shakticonsultant.retrofit;
+
 import com.shakticonsultant.responsemodel.AboutResponse;
+import com.shakticonsultant.responsemodel.AcademicCommonResponse;
 import com.shakticonsultant.responsemodel.AnnualResponse;
 import com.shakticonsultant.responsemodel.BoardResponse;
 import com.shakticonsultant.responsemodel.ChangePasswordResponse;
@@ -18,6 +20,7 @@ import com.shakticonsultant.responsemodel.JobAppliedListResponse;
 import com.shakticonsultant.responsemodel.JobCategoryResponse;
 import com.shakticonsultant.responsemodel.JobDetailDatumResponse;
 import com.shakticonsultant.responsemodel.JobDetailResponse;
+import com.shakticonsultant.responsemodel.JobRejectedListResponse;
 import com.shakticonsultant.responsemodel.JobSkillResponse;
 import com.shakticonsultant.responsemodel.JobSkillWiseListResponse;
 import com.shakticonsultant.responsemodel.LoginResponse;
@@ -55,197 +58,216 @@ public interface ApiInterface {
 
     @POST("login")
     @FormUrlEncoded
-    Call<LoginResponse>callSignInApi(@FieldMap Map<String, String> params);
+    Call<LoginResponse> callSignInApi(@FieldMap Map<String, String> params);
 
-   @POST("register")
-   @FormUrlEncoded
-   Call<SignupResponse>callSignUpApi(@FieldMap Map<String, String> params);
+    @POST("register")
+    @FormUrlEncoded
+    Call<SignupResponse> callSignUpApi(@FieldMap Map<String, String> params);
 
-   @POST("academicDetails")
-   @FormUrlEncoded
-   Call<CommonResponse>callAcademyDetailApi(@FieldMap Map<String, String> params);
+    @POST("academicDetails")
+    @FormUrlEncoded
+    Call<AcademicCommonResponse> callAcademyDetailApi(@FieldMap Map<String, String> params);
 
-   @POST("forgotPassword")
-   @FormUrlEncoded
-   Call<ForgotResponse>callForgotpasswordApi(@FieldMap Map<String, String> params);
+    @POST("forgotPassword")
+    @FormUrlEncoded
+    Call<ForgotResponse> callForgotpasswordApi(@FieldMap Map<String, String> params);
 
-   @POST("matchOTP")
-   @FormUrlEncoded
-   Call<CommonResponse>callMatchOtpApi(@FieldMap Map<String, String> params);
+    @POST("resetPassword")
+    @FormUrlEncoded
+    Call<CommonResponse> callResetPassword(@FieldMap Map<String, String> params);
 
-   @POST("changePassword")
-   @FormUrlEncoded
-   Call<ChangePasswordResponse>callChangePassword(@FieldMap Map<String, String> params);
+    @POST("matchOTP")
+    @FormUrlEncoded
+    Call<CommonResponse> callMatchOtpApi(@FieldMap Map<String, String> params);
+
+    @POST("resendOTP")
+    @FormUrlEncoded
+    Call<CommonResponse> callResendOTP(@FieldMap Map<String, String> params);
+
+    @POST("changePassword")
+    @FormUrlEncoded
+    Call<ChangePasswordResponse> callChangePassword(@FieldMap Map<String, String> params);
 
 
-   @POST("personalInformation")
-   @FormUrlEncoded
-   Call<CommonResponse>callPersonalInfoApi(@FieldMap Map<String, String> params);
+    @POST("personalInformation")
+    @FormUrlEncoded
+    Call<CommonResponse> callPersonalInfoApi(@FieldMap Map<String, String> params);
 
    /*@GET("stateList")
    @FormUrlEncoded
    Call<StateResponse>callStateListApi(@FieldMap Map<String, String> params);
 */
 
-   @POST("personalInformation")
-   @Multipart
-   Call<CommonResponse> callPersonalInformation(@PartMap Map<String, RequestBody> params,@Part MultipartBody.Part resume_doc,@Part MultipartBody.Part id_proof,@Part MultipartBody.Part profile);
+    @POST("personalInformation")
+    @Multipart
+    Call<CommonResponse> callPersonalInformation(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part resume_doc, @Part MultipartBody.Part id_proof, @Part MultipartBody.Part profile);
 
 
-   @GET("stateList")
-   Call<StateResponse> callStateListApi();
+    @GET("stateList")
+    Call<StateResponse> callStateListApi();
 
-   @GET("boardList")
-   Call<BoardResponse> callBoardListApi();
+    @GET("boardList")
+    Call<BoardResponse> callBoardListApi();
 
-   @GET("annualSalary")
-   Call<AnnualResponse> callAnnualSalary();
+    @GET("annualSalary")
+    Call<AnnualResponse> callAnnualSalary();
 
-   @GET("organizationList")
-   Call<OrganizationResponse> callOrganizationList();
+    @GET("organizationList")
+    Call<OrganizationResponse> callOrganizationList();
 
-   @GET("jobCategory")
-   Call<JobCategoryResponse> callJobCategory();
+    @GET("jobCategory")
+    Call<JobCategoryResponse> callJobCategory();
 
-   @GET("packageList")
+  /* @GET("packageList")
    Call<PackageResponse> callPackageList();
+*/
 
-   @GET("faqList")
-   Call<FaqsResponse> callFaqsList();
+    @POST("packageList")
+    @FormUrlEncoded
+    Call<PackageResponse> callPackageList(@FieldMap Map<String, String> params);
 
-
-   @POST("cityList")
-   @FormUrlEncoded
-   Call<CityResponse>callCityListApi(@FieldMap Map<String, String> params);
-
-   @POST("jobSkill")
-   @FormUrlEncoded
-   Call<JobSkillResponse>callJobSkillList(@FieldMap Map<String, String> params);
-
-   @POST("jobSkillWiseList")
-   @FormUrlEncoded
-   Call<JobSkillWiseListResponse>callJobSkillWiseList(@FieldMap Map<String, String> params);
-
-   @POST("jobDetails")
-   @FormUrlEncoded
-   Call<JobDetailResponse>callJobDetail(@FieldMap Map<String, String> params);
-
-   @POST("interviewSchedules")
-   @FormUrlEncoded
-   Call<ScheduleInterviewResponse>callInterviewSchedule(@FieldMap Map<String, String> params);
-
-   @POST("educationList")
-   @FormUrlEncoded
-   Call<EducationResponse>callEducationList(@FieldMap Map<String, String> params);
-
-   @POST("interestedFields")
-   @FormUrlEncoded
-   Call<IntrestedFieldResponse>callInterestedFiledApi(@FieldMap Map<String, String> params);
-
-   @POST("interestedJobCategory")
-   @FormUrlEncoded
-   Call<InterestedCategoryResponse>callInterestedFiledCategory(@FieldMap Map<String, String> params);
- @POST("interestedJobSkill")
-   @FormUrlEncoded
-   Call<interestedSkillResponse>callIntererstedSKill(@FieldMap Map<String, String> params);
-
-   @POST("userInterestedField")
-   @FormUrlEncoded
-   Call<IntrestedFieldResponse>calluserIdInterestedFiled(@FieldMap Map<String, String> params);
-
-   @POST("employeeHistory")
-   @FormUrlEncoded
-   Call<CommonResponse>callEmployeeHistory(@FieldMap Map<String, String> params);
-
-   @POST("slider")
-   @FormUrlEncoded
-   Call<SliderResponse>callSliderApi(@FieldMap Map<String, String> params);
-
-   @POST("latestJob")
-   @FormUrlEncoded
-   Call<JobSkillWiseListResponse>callLatestJob(@FieldMap Map<String, String> params);
-
-   @POST("appliedJobsList")
-   @FormUrlEncoded
-   Call<JobAppliedListResponse>callAppliedJob(@FieldMap Map<String, String> params);
-
-   @POST("contactUs")
-   @FormUrlEncoded
-   Call<CommonResponse>callContactusApi(@FieldMap Map<String, String> params);
-
-   @POST("applyJob")
-   @FormUrlEncoded
-   Call<CommonResponse>callApplyJob(@FieldMap Map<String, String> params);
+    @GET("faqList")
+    Call<FaqsResponse> callFaqsList();
 
 
-   @POST("rejectedJobsList")
-   @FormUrlEncoded
-   Call<JobAppliedListResponse>callRejectedJobList(@FieldMap Map<String, String> params);
+    @POST("cityList")
+    @FormUrlEncoded
+    Call<CityResponse> callCityListApi(@FieldMap Map<String, String> params);
 
-   @POST("jobshortList")
-   @FormUrlEncoded
-   Call<ShortListResponse>callShortListApi(@FieldMap Map<String, String> params);
+    @POST("jobSkill")
+    @FormUrlEncoded
+    Call<JobSkillResponse> callJobSkillList(@FieldMap Map<String, String> params);
 
-   @POST("notificationList")
-   @FormUrlEncoded
-   Call<NotificationResponse>callNotificationList(@FieldMap Map<String, String> params);
+    @POST("jobSkillWiseList")
+    @FormUrlEncoded
+    Call<JobSkillWiseListResponse> callJobSkillWiseList(@FieldMap Map<String, String> params);
 
- @POST("getPersonalDetails")
-   @FormUrlEncoded
-   Call<GetPersonalInformationResponse>callgetPersonalInformation(@FieldMap Map<String, String> params);
+    @POST("jobDetails")
+    @FormUrlEncoded
+    Call<JobDetailResponse> callJobDetail(@FieldMap Map<String, String> params);
 
- @POST("getAcademicDetails")
-   @FormUrlEncoded
-   Call<GetAcademicDetailResponse>callGetAcademicDetails(@FieldMap Map<String, String> params);
+    @POST("interviewSchedules")
+    @FormUrlEncoded
+    Call<ScheduleInterviewResponse> callInterviewSchedule(@FieldMap Map<String, String> params);
 
- @POST("getEmployeeHistory")
-   @FormUrlEncoded
-   Call<GetEmployeeHistoryResponse>callGetEmployeeHistory(@FieldMap Map<String, String> params);
+    @POST("educationList")
+    @FormUrlEncoded
+    Call<EducationResponse> callEducationList(@FieldMap Map<String, String> params);
 
- @POST("jobFilter")
-   @FormUrlEncoded
-   Call<JobSkillWiseListResponse>callFilterApi(@FieldMap Map<String, String> params);
+    @POST("interestedFields")
+    @FormUrlEncoded
+    Call<IntrestedFieldResponse> callInterestedFiledApi(@FieldMap Map<String, String> params);
 
- @POST("shortlistStatus")
-   @FormUrlEncoded
-   Call<FavouriteResponse>callFavouriteApi(@FieldMap Map<String, String> params);
+    @POST("interestedJobCategory")
+    @FormUrlEncoded
+    Call<InterestedCategoryResponse> callInterestedFiledCategory(@FieldMap Map<String, String> params);
 
- @POST("getProfile")
-   @FormUrlEncoded
-   Call<ProfileResponse>callgetProfileApi(@FieldMap Map<String, String> params);
+    @POST("interestedJobSkill")
+    @FormUrlEncoded
+    Call<interestedSkillResponse> callIntererstedSKill(@FieldMap Map<String, String> params);
 
- @POST("userCategorySkill")
-   @FormUrlEncoded
-   Call<UserCategoryResponse>calluserCategorySkill(@FieldMap Map<String, String> params);
+    @POST("subscribe")
+    @FormUrlEncoded
+    Call<CommonResponse> callSubscriptionApi(@FieldMap Map<String, String> params);
 
+    @POST("userInterestedField")
+    @FormUrlEncoded
+    Call<IntrestedFieldResponse> calluserIdInterestedFiled(@FieldMap Map<String, String> params);
+
+    @POST("employeeHistory")
+    @FormUrlEncoded
+    Call<CommonResponse> callEmployeeHistory(@FieldMap Map<String, String> params);
+
+    @POST("slider")
+    @FormUrlEncoded
+    Call<SliderResponse> callSliderApi(@FieldMap Map<String, String> params);
+
+    @POST("latestJob")
+    @FormUrlEncoded
+    Call<JobSkillWiseListResponse> callLatestJob(@FieldMap Map<String, String> params);
+
+    @POST("appliedJobsList")
+    @FormUrlEncoded
+    Call<JobAppliedListResponse> callAppliedJob(@FieldMap Map<String, String> params);
+
+    @POST("contactUs")
+    @FormUrlEncoded
+    Call<CommonResponse> callContactusApi(@FieldMap Map<String, String> params);
+
+    @POST("applyJob")
+    @FormUrlEncoded
+    Call<CommonResponse> callApplyJob(@FieldMap Map<String, String> params);
+
+
+    @POST("rejectedJobsList")
+    @FormUrlEncoded
+    Call<JobRejectedListResponse> callRejectedJobList(@FieldMap Map<String, String> params);
+
+    @POST("jobshortList")
+    @FormUrlEncoded
+    Call<ShortListResponse> callShortListApi(@FieldMap Map<String, String> params);
+
+    @POST("notificationList")
+    @FormUrlEncoded
+    Call<NotificationResponse> callNotificationList(@FieldMap Map<String, String> params);
+
+    @POST("getPersonalDetails")
+    @FormUrlEncoded
+    Call<GetPersonalInformationResponse> callgetPersonalInformation(@FieldMap Map<String, String> params);
+
+    @POST("getAcademicDetails")
+    @FormUrlEncoded
+    Call<GetAcademicDetailResponse> callGetAcademicDetails(@FieldMap Map<String, String> params);
+
+    @POST("getEmployeeHistory")
+    @FormUrlEncoded
+    Call<GetEmployeeHistoryResponse> callGetEmployeeHistory(@FieldMap Map<String, String> params);
+
+    @POST("jobFilter")
+    @FormUrlEncoded
+    Call<JobSkillWiseListResponse> callFilterApi(@FieldMap Map<String, String> params);
+
+    @POST("shortlistStatus")
+    @FormUrlEncoded
+    Call<FavouriteResponse> callFavouriteApi(@FieldMap Map<String, String> params);
+
+    @POST("getProfile")
+    @FormUrlEncoded
+    Call<ProfileResponse> callgetProfileApi(@FieldMap Map<String, String> params);
+
+    @POST("userCategorySkill")
+    @FormUrlEncoded
+    Call<UserCategoryResponse> calluserCategorySkill(@FieldMap Map<String, String> params);
 
 
     @POST("profileUpdate")
     @Multipart
-    Call<CommonResponse> callUpdateProfile(@PartMap Map<String, RequestBody> params,@Part MultipartBody.Part id_proof);
+    Call<CommonResponse> callUpdateProfile(@PartMap Map<String, RequestBody> params, @Part MultipartBody.Part id_proof);
 
-    @GET("allJobs")
-   Call<JobSkillWiseListResponse> callAllJobs();
+    @POST("allJobs")
+    @FormUrlEncoded
+    Call<JobSkillWiseListResponse> callAllJobs(@FieldMap Map<String, String> params);
 
-   @GET("testimonial")
-   Call<TestimonialResponse> callTestimonialApi();
- @GET("privacy")
-   Call<AboutResponse> callPrivacyPolicy();
+    @GET("testimonial")
+    Call<TestimonialResponse> callTestimonialApi();
 
- @GET("terms")
-   Call<AboutResponse> callTermsCondition();
+    @GET("privacy")
+    Call<AboutResponse> callPrivacyPolicy();
 
-   @GET("workExperience")
-   Call<WorkExpResponse> callWorkExperience();
+    @GET("terms")
+    Call<AboutResponse> callTermsCondition();
 
-   @GET("allCityList")
-   Call<CityResponse> callAllCityList();
+    @GET("workExperience")
+    Call<WorkExpResponse> callWorkExperience();
 
-   @GET("about")
-   Call<AboutResponse> callAboutUsApi();
+    @GET("allCityList")
+    Call<CityResponse> callAllCityList();
 
-   @GET("ourClient")
-   Call<OurClientResponse> callOurClient();
+    @GET("about")
+    Call<AboutResponse> callAboutUsApi();
+
+    @GET("ourClient")
+    Call<OurClientResponse> callOurClient();
 
 
 }
