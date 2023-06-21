@@ -47,16 +47,16 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-boolean homeclose=true;
+    boolean homeclose = true;
     private List<SliderDatumResponse> sliderDatumResponses = new ArrayList<>();
 
     ImageSlider image_slider;
     private ImageViewPagerAdapter adapter;
-   private ViewPagerAdapter viewPagerAdapter;
-   private  DotsAdapter dotsAdapter;
-   private  RecyclerView dotsRecyclerView;
-   private ViewPager viewPager;
-    private int[] imageList = new int[] {R.drawable.slider_img,R.drawable.slider_img};
+    private ViewPagerAdapter viewPagerAdapter;
+    private DotsAdapter dotsAdapter;
+    private RecyclerView dotsRecyclerView;
+    private ViewPager viewPager;
+    private int[] imageList = new int[]{R.drawable.slider_img, R.drawable.slider_img};
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -106,8 +106,8 @@ boolean homeclose=true;
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
 
 
-        dotsRecyclerView= binding.dotsRecyclerView;
-        viewPager= binding.viewpager;
+        dotsRecyclerView = binding.dotsRecyclerView;
+        viewPager = binding.viewpager;
        /*  adapter=new ImageViewPagerAdapter(getContext(),);
         viewPager.setAdapter(adapter);*/
         getJobCategory();
@@ -115,12 +115,11 @@ boolean homeclose=true;
 
         getLatestJob();
         setDots(0);
-AppPrefrences.setCLose(getActivity(),true);
+        AppPrefrences.setCLose(getActivity(), true);
 
         binding.openDrawer.setOnClickListener(v -> {
             ((MainActivity) getActivity()).openDrawer();
         });
-
 
 
         // for testing
@@ -144,21 +143,16 @@ AppPrefrences.setCLose(getActivity(),true);
 
 
         binding.btnAllJob.setOnClickListener(v -> {
-           setButtonSelected(binding.btnAllJob, binding.btnLatestJob);
-
-
+            setButtonSelected(binding.btnAllJob, binding.btnLatestJob);
             getAllJob();
 
         });
-
 
         binding.btnLatestJob.setOnClickListener(v -> {
             setButtonSelected(binding.btnLatestJob, binding.btnAllJob);
             getLatestJob();
 
-            });
-
-
+        });
         return binding.getRoot();
     }
 
@@ -172,7 +166,7 @@ AppPrefrences.setCLose(getActivity(),true);
     }
 
 
-    private void setButtonSelected(AppCompatButton buttonToSelect, AppCompatButton buttonToDeselect){
+    private void setButtonSelected(AppCompatButton buttonToSelect, AppCompatButton buttonToDeselect) {
         buttonToSelect.setBackgroundResource(R.drawable.custom_button_bg);
         buttonToSelect.setTextColor(Color.parseColor("#FFFFFF"));
 
@@ -187,9 +181,9 @@ AppPrefrences.setCLose(getActivity(),true);
 
 
         // binding.progressBarcategory.setVisibility(View.VISIBLE);
-      binding.tvhide.setVisibility(View.GONE);
+        binding.tvhide.setVisibility(View.GONE);
         Map<String, String> map = new HashMap<>();
-       // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
+        // map.put("user_id", AppPrefrences.getUserID(NotificationActivity.this));
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -202,15 +196,15 @@ AppPrefrences.setCLose(getActivity(),true);
 
                 if (response.isSuccessful()) {
                     progress_spinner.dismiss();
-                  //  binding.progressBarcategory.setVisibility(View.GONE);
+                    //  binding.progressBarcategory.setVisibility(View.GONE);
                     binding.tvhide.setVisibility(View.VISIBLE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.recyclerJobCategory.setLayoutManager(linearLayoutManager);
-                        JobCategoryAdapter adapter=new JobCategoryAdapter(getActivity(),response.body().getData());
+                        JobCategoryAdapter adapter = new JobCategoryAdapter(getActivity(), response.body().getData());
                         binding.recyclerJobCategory.setAdapter(adapter);
                         binding.recyclerJobCategory.getAdapter().notifyDataSetChanged();
 
@@ -233,9 +227,9 @@ AppPrefrences.setCLose(getActivity(),true);
                 //binding.progressBarcategory.setVisibility(View.GONE);
                 binding.tvhide.setVisibility(View.VISIBLE);
 
-              //  lemprtNotification.setVisibility(View.VISIBLE);
-            //    pd_loading.setVisibility(View.GONE);
-             //   Utils.showFailureDialog(getActivity(), "Something went wrong!");
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+                //   Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });
     }
@@ -257,7 +251,7 @@ AppPrefrences.setCLose(getActivity(),true);
 
                 if (response.isSuccessful()) {
                     //  pd_loading.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
                         sliderDatumResponses = response.body().getData();
                         if (sliderDatumResponses != null && sliderDatumResponses.size() > 0) {
                             /*for (int i = 0; i < sliderDatumResponses.size(); i++) {
@@ -341,7 +335,7 @@ AppPrefrences.setCLose(getActivity(),true);
 
         // binding.progressBarcategory.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-      //  map.put("location", AppPrefrences.getLocation(getActivity()));
+        //  map.put("location", AppPrefrences.getLocation(getActivity()));
         map.put("location", "7");
         map.put("user_id", AppPrefrences.getUserid(getActivity()));
 
@@ -355,37 +349,36 @@ AppPrefrences.setCLose(getActivity(),true);
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                  //  binding.progressBarcategory.setVisibility(View.GONE);
-                  //  binding.progressBarcategory.setVisibility(View.GONE);
+                    //  binding.progressBarcategory.setVisibility(View.GONE);
+                    //  binding.progressBarcategory.setVisibility(View.GONE);
                     progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
-                      //  binding.recycLatestJob.setVisibility(View.VISIBLE);
-                     //   binding.lEmpty.setVisibility(View.GONE);
+                    if (response.body().isSuccess() == true) {
+                        //  binding.recycLatestJob.setVisibility(View.VISIBLE);
+                        //   binding.lEmpty.setVisibility(View.GONE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.recycLatestJob.setLayoutManager(linearLayoutManager);
-                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(getActivity(),response.body().getData());
+                        JobSkillWiseListAdapter adapter = new JobSkillWiseListAdapter(getActivity(), response.body().getData());
                         binding.recycLatestJob.setAdapter(adapter);
                         binding.recycLatestJob.getAdapter().notifyDataSetChanged();
 
 
-
                     } else {
-                     //   binding.progressBarcategory.setVisibility(View.GONE);
-                       // binding.lEmpty.setVisibility(View.VISIBLE);
-                      //  binding.recycLatestJob.setVisibility(View.GONE);
+                        //   binding.progressBarcategory.setVisibility(View.GONE);
+                        // binding.lEmpty.setVisibility(View.VISIBLE);
+                        //  binding.recycLatestJob.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
-                }else{
+                } else {
                     progress_spinner.dismiss();
 
                     //  binding.progressBarcategory.setVisibility(View.GONE);
 
-                   // binding.progressBarcategory.setVisibility(View.GONE);
-                  //  binding.lEmpty.setVisibility(View.VISIBLE);
+                    // binding.progressBarcategory.setVisibility(View.GONE);
+                    //  binding.lEmpty.setVisibility(View.VISIBLE);
                     //binding.recycLatestJob.setVisibility(View.GONE);
 
                 }
@@ -393,21 +386,22 @@ AppPrefrences.setCLose(getActivity(),true);
 
             @Override
             public void onFailure(Call<JobSkillWiseListResponse> call, Throwable t) {
-              //  binding.progressBarcategory.setVisibility(View.GONE);
+                //  binding.progressBarcategory.setVisibility(View.GONE);
                 progress_spinner.dismiss();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-              //  binding.progressBarcategory.setVisibility(View.GONE);
-             //  // binding.lEmpty.setVisibility(View.VISIBLE);
-              //  binding.recycLatestJob.setVisibility(View.GONE);
+                //  binding.progressBarcategory.setVisibility(View.GONE);
+                //  // binding.lEmpty.setVisibility(View.VISIBLE);
+                //  binding.recycLatestJob.setVisibility(View.GONE);
 
                 //Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });
     }
+
     public void getAllJob() {
-      // binding.progressBarcategory.setVisibility(View.VISIBLE);
+        // binding.progressBarcategory.setVisibility(View.VISIBLE);
         Dialog progress_spinner;
         progress_spinner = Utils.LoadingSpinner(getActivity());
         progress_spinner.show();
@@ -430,29 +424,28 @@ AppPrefrences.setCLose(getActivity(),true);
                     //binding.progressBarcategory.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
-                       // binding.lEmpty.setVisibility(View.GONE);
-                       // binding.recycLatestJob.setVisibility(View.VISIBLE);
+                    if (response.body().isSuccess() == true) {
+                        // binding.lEmpty.setVisibility(View.GONE);
+                        // binding.recycLatestJob.setVisibility(View.VISIBLE);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                         binding.recycLatestJob.setLayoutManager(linearLayoutManager);
-                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(getActivity(),response.body().getData());
+                        JobSkillWiseListAdapter adapter = new JobSkillWiseListAdapter(getActivity(), response.body().getData());
                         binding.recycLatestJob.setAdapter(adapter);
                         binding.recycLatestJob.getAdapter().notifyDataSetChanged();
-
 
 
                     } else {
                         progress_spinner.dismiss();
 
                         // binding.progressBarcategory.setVisibility(View.GONE);
-                       // binding.lEmpty.setVisibility(View.VISIBLE);
-                       // binding.recycLatestJob.setVisibility(View.GONE);
+                        // binding.lEmpty.setVisibility(View.VISIBLE);
+                        // binding.recycLatestJob.setVisibility(View.GONE);
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
-                }else{
+                } else {
                     progress_spinner.dismiss();
 
                     // binding.progressBarcategory.setVisibility(View.GONE);
@@ -468,11 +461,11 @@ AppPrefrences.setCLose(getActivity(),true);
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-              //  binding.progressBarcategory.setVisibility(View.GONE);
-               // binding.lEmpty.setVisibility(View.VISIBLE);
+                //  binding.progressBarcategory.setVisibility(View.GONE);
+                // binding.lEmpty.setVisibility(View.VISIBLE);
                 progress_spinner.dismiss();
 
-               // Utils.showFailureDialog(getActivity(), "Something went wrong!");
+                // Utils.showFailureDialog(getActivity(), "Something went wrong!");
             }
         });
     }

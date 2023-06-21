@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.text.Html;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
@@ -26,12 +24,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.shakticonsultant.AcademicDetailsActivity;
+
 import com.shakticonsultant.FAQActivity;
-import com.shakticonsultant.FAQFragment;
 import com.shakticonsultant.MainActivity;
+import com.shakticonsultant.PackageActivity;
 import com.shakticonsultant.PaymentInrigationNew;
-import com.shakticonsultant.PaymentIntegration;
 import com.shakticonsultant.R;
 import com.shakticonsultant.responsemodel.CommonResponse;
 import com.shakticonsultant.responsemodel.PackageDatumResponse;
@@ -54,29 +51,19 @@ public class ApplyJobPackageListAdapter extends RecyclerView.Adapter<ApplyJobPac
     List<PackageDatumResponse> list;
     Context context;
     DatePickerDialog datePickerDialog;
-    int year,month,day;
-    EditText date1,date2;
-
+    int year, month, day;
+    EditText date1, date2;
     String job_id;
-    String strdate1="",strdate2="";
+    String strdate1 = "", strdate2 = "";
 
-    public ApplyJobPackageListAdapter(Context context) {
-
+    public ApplyJobPackageListAdapter(Context context, List<PackageDatumResponse> list, String job_id) {
         this.context = context;
         this.list = list;
+        this.job_id = job_id;
     }
 
-    public ApplyJobPackageListAdapter(Context context, List<PackageDatumResponse> list,String job_id) {
-
-        this.context = context;
-        this.list = list;
-        this.job_id=job_id;
-    }
-
-    // Create new views (invoked by the layout manager)
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent,
-                                         int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_package_list, null);
@@ -88,51 +75,44 @@ public class ApplyJobPackageListAdapter extends RecyclerView.Adapter<ApplyJobPac
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
 
-
         viewHolder.tvTitle.setText(list.get(position).getTitle());
         viewHolder.tvHeading.setText(list.get(position).getHeading());
         viewHolder.tvPrice.setText(list.get(position).getPrice());
         viewHolder.tvJobs.setText(list.get(position).getNo_of_jobs());
         viewHolder.tvSubscriptiondays.setText(list.get(position).getSubscription_days());
         viewHolder.layout_diamond_package.setBackgroundColor(Color.parseColor(list.get(position).getBgcolor()));
-viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
 
-        if(list.get(position).getId().equals("5")) {
+        viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-            getSubscriptionApi(list.get(position).getId());
-        }else{
-            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+                if (list.get(position).getId() == 5) {
+                    getSubscriptionApi(list.get(position).getId());
+                } else {
+                    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
 
-            builder.setTitle(R.string.app_name);
-            builder.setIcon(R.drawable.shakti_consultant_logo);
-            builder.setMessage("Are you sure you want to upgrade your package?");
+                    builder.setTitle(R.string.app_name);
+                    builder.setIcon(R.drawable.shakti_consultant_logo);
+                    builder.setMessage("Are you sure you want to upgrade your package?");
 
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            context.startActivity(new Intent(context, PackageActivity.class));
+                        }
+                    });
 
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Do nothing
+                            dialog.dismiss();
+                        }
+                    });
 
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                    context.startActivity(new Intent(context, PaymentInrigationNew.class));
-
+                    android.app.AlertDialog alert = builder.create();
+                    alert.show();
                 }
-            });
-
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                    // Do nothing
-                    dialog.dismiss();
-                }
-            });
-
-            android.app.AlertDialog alert = builder.create();
-            alert.show();
-
-        }
          /*   if (list.get(position).getPrice().equals("0")) {
 
                 showDateDialog();
@@ -171,10 +151,10 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
            // }
 
         }*/
-    }
-});
+            }
+        });
 
-      //  viewHolder.tvDate.setText(list.get(position).getIcon());
+        //  viewHolder.tvDate.setText(list.get(position).getIcon());
 
       /*  Picasso.get()
                 .load(ApiClient.Baseurl +list.get(position).getIcon())
@@ -182,13 +162,12 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
                 .centerCrop()
                 .into(viewHolder.imgIcon);
 */
-
     }
 
     // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvHeading,tvTitle,tvPrice,tvSubscriptiondays,tvJobs;
+        TextView tvHeading, tvTitle, tvPrice, tvSubscriptiondays, tvJobs;
         ImageView imgIcon;
         ConstraintLayout layout_diamond_package;
 
@@ -203,8 +182,6 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
             layout_diamond_package = (ConstraintLayout) itemLayoutView.findViewById(R.id.layout_diamond_package);
 
         }
-
-
     }
 
     // Return the size of your itemsData (invoked by the layout manager)
@@ -213,10 +190,9 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         return list.size();
     }
 
-    public  void clear(){
+    public void clear() {
         int size = list.size();
         list.clear();
-
         notifyItemRangeRemoved(0, size);
     }
 
@@ -226,8 +202,8 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
         dialog.show();
-         date1 = dialog.findViewById(R.id.btn_select_date_1);
-         date2 = dialog.findViewById(R.id.btn_select_date_2);
+        date1 = dialog.findViewById(R.id.btn_select_date_1);
+        date2 = dialog.findViewById(R.id.btn_select_date_2);
         AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
         AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
         date1.setOnClickListener(v -> {
@@ -236,17 +212,15 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
             month = c.get(Calendar.MONTH);
             day = c.get(Calendar.DAY_OF_MONTH);
 
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(context,R.style.DatePickerTheme,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(context, R.style.DatePickerTheme,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
                         public void onDateSet(DatePicker view, int year,
                                               int monthOfYear, int dayOfMonth) {
-                          //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                             date1.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                            strdate1=dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
-
+                            strdate1 = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                         }
                     }, year, month, day);
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -264,7 +238,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
             day = c.get(Calendar.DAY_OF_MONTH);
 
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(context,R.style.DatePickerTheme,
+            DatePickerDialog datePickerDialog = new DatePickerDialog(context, R.style.DatePickerTheme,
                     new DatePickerDialog.OnDateSetListener() {
 
                         @Override
@@ -272,7 +246,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
                                               int monthOfYear, int dayOfMonth) {
                             //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                             date2.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-                            strdate2=dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            strdate2 = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                         }
                     }, year, month, day);
             datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -282,26 +256,23 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         });
 
         confirm.setOnClickListener(v -> {
-
-
-            if(date1.getText().toString().trim().equals("")){
+            if (date1.getText().toString().trim().equals("")) {
                 Snackbar snackbar = Snackbar.make(v, "Please Select First Prefered Date.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(context.getColor(R.color.purple_200));
 
                 snackbar.show();
-             //   Toast.makeText(context, "Please Select First Prefered Date", Toast.LENGTH_SHORT).show();
-            }else if(date2.getText().toString().trim().equals("")){
+                //   Toast.makeText(context, "Please Select First Prefered Date", Toast.LENGTH_SHORT).show();
+            } else if (date2.getText().toString().trim().equals("")) {
                 Snackbar snackbar = Snackbar.make(v, "Please Select Second Prefered Date.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
                 View sbView = snackbar.getView();
                 sbView.setBackgroundColor(context.getColor(R.color.purple_200));
 
                 snackbar.show();
-              //  Toast.makeText(context, "Please Select Second Prefered Date ", Toast.LENGTH_SHORT).show();
-            }
-            else if(date1.getText().toString().trim().equals(date2.getText().toString().trim())){
+                //  Toast.makeText(context, "Please Select Second Prefered Date ", Toast.LENGTH_SHORT).show();
+            } else if (date1.getText().toString().trim().equals(date2.getText().toString().trim())) {
                 Snackbar snackbar = Snackbar.make(v, "Please Select Different Dates.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
                 View sbView = snackbar.getView();
@@ -309,12 +280,9 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
 
                 snackbar.show();
                 // Toast.makeText(context, "Please Select Different Dates", Toast.LENGTH_SHORT).show();
-
-            }
-            else {
-
-                getApplyJob(strdate1, strdate2,dialog);
-               // dialog.dismiss();
+            } else {
+                getApplyJob(strdate1, strdate2, dialog);
+                // dialog.dismiss();
             }
             //showConfirmationDialog();
         });
@@ -324,8 +292,7 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         });
     }
 
-
-    private void showConfirmationDialog(){
+    private void showConfirmationDialog() {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_interview_further_process);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -339,24 +306,23 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         ok.setOnClickListener(v -> {
             dialog.dismiss();
 
-            Intent i=new Intent(context, MainActivity.class);
+            Intent i = new Intent(context, MainActivity.class);
             context.startActivity(i);
-            ((Activity)context).finish();
+            ((Activity) context).finish();
 
         });
 
         faq.setOnClickListener(v -> {
             dialog.dismiss();
 
-            Intent i=new Intent(context, FAQActivity.class);
+            Intent i = new Intent(context, FAQActivity.class);
             context.startActivity(i);
-            ((Activity)context).finish();
+            ((Activity) context).finish();
         });
 
     }
 
-
-    public void getApplyJob(String date1,String date2,Dialog dialog) {
+    public void getApplyJob(String date1, String date2, Dialog dialog) {
         //binding.progressContatc.setVisibility(View.VISIBLE);
         Dialog progress_spinner;
         progress_spinner = Utils.LoadingSpinner(context);
@@ -368,7 +334,6 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
         map.put("interview_date_1", date1);
         map.put("interview_date_2", date2);
 
-
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         Call<CommonResponse> resultCall = apiInterface.callApplyJob(map);
@@ -379,10 +344,10 @@ viewHolder.layout_diamond_package.setOnClickListener(new View.OnClickListener() 
 
                 if (response.isSuccessful()) {
                     //binding.progressContatc.setVisibility(View.GONE);
-dialog.dismiss();
+                    dialog.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
-                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context,R.style.AlertDialogTheme)
+                    if (response.body().isSuccess() == true) {
+                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context, R.style.AlertDialogTheme)
                                 .setTitle(R.string.app_name)
                                 .setMessage("Your job has been applied successfully.")
                                 .setCancelable(false)
@@ -401,7 +366,7 @@ dialog.dismiss();
                         //binding.progressContatc.setVisibility(View.GONE);
                         progress_spinner.dismiss();
                         //lemprtNotification.setVisibility(View.VISIBLE);
-                      //   Utils.showFailureDialog(context, response.message());
+                        //   Utils.showFailureDialog(context, response.message());
                     }
                 }
             }
@@ -411,14 +376,15 @@ dialog.dismiss();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-               // binding.progressContatc.setVisibility(View.GONE);
+                // binding.progressContatc.setVisibility(View.GONE);
                 progress_spinner.dismiss();
 
                 //Utils.showFailureDialog(context, "Something went wrong!");
             }
         });
     }
-    public void getSubscriptionApi(String packageid) {
+
+    public void getSubscriptionApi(int packageid) {
         //binding.progressContatc.setVisibility(View.VISIBLE);
         Dialog progress_spinner;
         progress_spinner = Utils.LoadingSpinner(context);
@@ -426,10 +392,9 @@ dialog.dismiss();
 
         Map<String, String> map = new HashMap<>();
         map.put("user_id", AppPrefrences.getUserid(context));
-        map.put("package_id", packageid);
+        map.put("package_id", "" + packageid);
         map.put("transaction_id", "Free");
         map.put("payment_status", "success");
-
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -443,9 +408,9 @@ dialog.dismiss();
                     progress_spinner.dismiss();
                     //binding.progressContatc.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
-showDateDialog();
+                        showDateDialog();
 
 
                     } else {
@@ -463,10 +428,10 @@ showDateDialog();
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-               // binding.progressContatc.setVisibility(View.GONE);
+                // binding.progressContatc.setVisibility(View.GONE);
                 progress_spinner.dismiss();
 
-               // Utils.showFailureDialog(context, "Something went wrong!");
+                // Utils.showFailureDialog(context, "Something went wrong!");
             }
         });
     }

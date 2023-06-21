@@ -35,24 +35,23 @@ public class ApplyJobPackageActivity extends AppCompatActivity implements DatePi
 
     ActivityPackageBinding binding;
     DatePickerDialog datePickerDialog;
-ConnectionDetector cd;
-String job_id;
+    ConnectionDetector cd;
+    String job_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPackageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        cd=new ConnectionDetector(ApplyJobPackageActivity.this);
+        cd = new ConnectionDetector(ApplyJobPackageActivity.this);
 
-        job_id=getIntent().getStringExtra("job_id");
+        job_id = getIntent().getStringExtra("job_id");
         if (!cd.isConnectingToInternet()) {
             Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
                     .show();
-        }
-        else {
-
+        } else {
             getPackageListApi();
             datePickerDialog = new DatePickerDialog(
                     ApplyJobPackageActivity.this, this, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONDAY),
@@ -64,7 +63,7 @@ String job_id;
                         R.anim.slide_out_right);
             });
             binding.btnUpgradePackage.setOnClickListener(v -> {
-               // showDateDialog();
+                // showDateDialog();
                 getPackageListApi();
             });
         }
@@ -101,7 +100,7 @@ String job_id;
     }
 
 
-    private void showConfirmationDialog(){
+    private void showConfirmationDialog() {
         Dialog dialog = new Dialog(ApplyJobPackageActivity.this);
         dialog.setContentView(R.layout.dialog_interview_further_process);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -117,17 +116,14 @@ String job_id;
         faq.setOnClickListener(v -> {
             dialog.dismiss();
         });
-
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
     }
 
-
     public void getPackageListApi() {
-          binding.progressBarpackage.setVisibility(View.VISIBLE);
+        binding.progressBarpackage.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("user_id", AppPrefrences.getUserid(ApplyJobPackageActivity.this));
 
@@ -143,11 +139,11 @@ String job_id;
                 if (response.isSuccessful()) {
                     binding.progressBarpackage.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ApplyJobPackageActivity.this);
                         binding.recyclerpackage.setLayoutManager(linearLayoutManager);
-                        ApplyJobPackageListAdapter adapter=new ApplyJobPackageListAdapter(ApplyJobPackageActivity.this,response.body().getData(),job_id);
+                        ApplyJobPackageListAdapter adapter = new ApplyJobPackageListAdapter(ApplyJobPackageActivity.this, response.body().getData(), job_id);
                         binding.recyclerpackage.setAdapter(adapter);
                         binding.recyclerpackage.getAdapter().notifyDataSetChanged();
 
@@ -166,7 +162,7 @@ String job_id;
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-              //  Utils.showFailureDialog(ApplyJobPackageActivity.this, "Something went wrong!");
+                //  Utils.showFailureDialog(ApplyJobPackageActivity.this, "Something went wrong!");
             }
         });
     }

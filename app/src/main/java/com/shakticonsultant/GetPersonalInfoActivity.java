@@ -81,48 +81,48 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GetPersonalInfoActivity extends AppCompatActivity   {
-    int year,month,day;
+public class GetPersonalInfoActivity extends AppCompatActivity {
+    int year, month, day;
     RecyclerView recyclerOrganization;
-String uploadedFileName="";
+    String uploadedFileName = "";
     PermissionManager permission;
     ActivityUpdatePersonalInfoBinding binding;
     DatePickerDialog datePickerDialog;
     ApiInterface apiInterface;
-    String strCategoryId="0";
-    String strSkillId="0";
+    String strCategoryId = "0";
+    String strSkillId = "0";
     Spinner spSkill;
     String[] PERMISSIONS = {Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
     Uri selectedResume;
-    ArrayList<SpinnerModel> spinner_state_list=new ArrayList<>();
-    ArrayList<String> sp_state_name_list=new ArrayList<>();
-    ArrayList<String> sp_annual_income=new ArrayList<>();
-    ArrayList<String> sp_city_name_list=new ArrayList<>();
-    ArrayList<String> sp_stream_list=new ArrayList<>();
-    ArrayList<String> sp_subject_list=new ArrayList<>();
-    ArrayList<String> sp_division_list=new ArrayList<>();
+    ArrayList<SpinnerModel> spinner_state_list = new ArrayList<>();
+    ArrayList<String> sp_state_name_list = new ArrayList<>();
+    ArrayList<String> sp_annual_income = new ArrayList<>();
+    ArrayList<String> sp_city_name_list = new ArrayList<>();
+    ArrayList<String> sp_stream_list = new ArrayList<>();
+    ArrayList<String> sp_subject_list = new ArrayList<>();
+    ArrayList<String> sp_division_list = new ArrayList<>();
     private static final int PICK_IMAGE_REQUEST = 9544;
     private static final int PICK_doc_REQUEST = 9545;
     private static final int PICK_doc_id_proof_REQUEST = 9546;
-String userid,strInterested_id;
-String strprefix,strstate,strcity;
+    String userid, strInterested_id;
+    String strprefix, strstate, strcity;
     String profilefilepath = null;
     String idprooffilePath = null;
     String resumepath = null;
-String strGender;
+    String strGender;
     Uri selectedImage;
-    String strfre_exp="";
+    String strfre_exp = "";
     Uri selected_id_proof_uri;
     String part_image;
-    String uploadedFileName_id_proof="";
+    String uploadedFileName_id_proof = "";
     String strbirthdate;
     String strStateid;
-    String strSubject="";
-    String strStream="",strDivision="";
-    String strAnnual="";
+    String strSubject = "";
+    String strStream = "", strDivision = "";
+    String strAnnual = "";
     String MobilePattern = "[0-9]{10}";
-    Calendar minAdultAge,userAge;
+    Calendar minAdultAge, userAge;
 
     // Permissions for accessing the storage
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -130,23 +130,24 @@ String strGender;
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
-    List<StateDatumResponse> statelist=new ArrayList<>();
-    List<AnnualDatumResponse> annualList=new ArrayList<>();
-    List<InterestedSkillDatumResponse> streamList=new ArrayList<>();
-    List<InterestedFiledDatumResponse> subjectList=new ArrayList<>();
-    List<InterestedCategoryDatumResponse> designationList=new ArrayList<>();
-    List<CityDatumResponse> cityList=new ArrayList<>();
+    List<StateDatumResponse> statelist = new ArrayList<>();
+    List<AnnualDatumResponse> annualList = new ArrayList<>();
+    List<InterestedSkillDatumResponse> streamList = new ArrayList<>();
+    List<InterestedFiledDatumResponse> subjectList = new ArrayList<>();
+    List<InterestedCategoryDatumResponse> designationList = new ArrayList<>();
+    List<CityDatumResponse> cityList = new ArrayList<>();
     ArrayAdapter<String> adspinnerStatep;
     ArrayAdapter<String> adaStream;
     ArrayAdapter<String> adpCategory;
     ArrayAdapter<String> adp1;
-    String str_are_you_work="NO",working_organization_name="";
-    String str_first_job_month="",str_first_job_year="";
+    String str_are_you_work = "NO", working_organization_name = "";
+    String str_first_job_month = "", str_first_job_year = "";
     String Cityid;
     String fullpath = null;
     private static final int BUFFER_SIZE = 1024 * 2;
     private static final String IMAGE_DIRECTORY = "/demonuts_upload_gallery";
-ConnectionDetector cd;
+    ConnectionDetector cd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,7 +209,6 @@ ConnectionDetector cd;
             });
 
 
-
             binding.edtState.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -251,11 +251,11 @@ ConnectionDetector cd;
 
                     btnok.setOnClickListener(v -> {
 
-                        if(strstate.equals("Select State")){
+                        if (strstate.equals("Select State")) {
                             binding.spinner4.setVisibility(View.GONE);
 
                             Toast.makeText(GetPersonalInfoActivity.this, "Please select state.", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             binding.spinner4.setVisibility(View.VISIBLE);
 
                             dialog.dismiss();
@@ -284,12 +284,13 @@ ConnectionDetector cd;
                     spSkill.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            strcity=(String)spSkill.getSelectedItem();
+                            strcity = (String) spSkill.getSelectedItem();
                             Cityid = cityList.get(i).getId();
                             binding.edtCity.setText(strcity);
                             adp1.notifyDataSetChanged();
                             // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
                         }
+
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -303,10 +304,10 @@ ConnectionDetector cd;
 
                     btnok.setOnClickListener(v -> {
 
-                        if(strcity.equals("Select City")){
+                        if (strcity.equals("Select City")) {
 
                             Toast.makeText(GetPersonalInfoActivity.this, "Please select city.", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             dialog.dismiss();
                         }
 
@@ -344,8 +345,8 @@ ConnectionDetector cd;
                               //  Toast.makeText(GetPersonalInfoActivity.this, "Please select Category", Toast.LENGTH_SHORT).show();
                             }*/
 
-binding.edtSkill.setText("Select skill");
-getJobSkill(strCategoryId);
+                            binding.edtSkill.setText("Select skill");
+                            getJobSkill(strCategoryId);
                             adpCategory.notifyDataSetChanged();
 
 
@@ -364,15 +365,15 @@ getJobSkill(strCategoryId);
 
                     btnok.setOnClickListener(v -> {
 
-                        if(strDivision.equals("Select Category")){
+                        if (strDivision.equals("Select Category")) {
                             Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select category.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null);
                             View sbView = snackbar.getView();
                             sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                             snackbar.show();
-                           // Toast.makeText(GetPersonalInfoActivity.this, "Please select category.", Toast.LENGTH_SHORT).show();
-                        }else {
+                            // Toast.makeText(GetPersonalInfoActivity.this, "Please select category.", Toast.LENGTH_SHORT).show();
+                        } else {
                             dialog.dismiss();
                         }
 
@@ -408,7 +409,6 @@ getJobSkill(strCategoryId);
                             adaStream.notifyDataSetChanged();
 
 
-
                         }
 
                         @Override
@@ -423,15 +423,15 @@ getJobSkill(strCategoryId);
 
                     btnok.setOnClickListener(v -> {
 
-                        if(strStream.equals("Select skill")){
+                        if (strStream.equals("Select skill")) {
                             Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select Skill.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null);
                             View sbView = snackbar.getView();
                             sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                             snackbar.show();
-                           // Toast.makeText(GetPersonalInfoActivity.this, "Please select skill.", Toast.LENGTH_SHORT).show();
-                        }else {
+                            // Toast.makeText(GetPersonalInfoActivity.this, "Please select skill.", Toast.LENGTH_SHORT).show();
+                        } else {
                             dialog.dismiss();
                         }
 
@@ -523,7 +523,7 @@ getJobSkill(strCategoryId);
                         snackbar.show();
 
                     }*/
-  if (strprefix.equals("Prefix")) {
+                    if (strprefix.equals("Prefix")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select prefix.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -555,9 +555,7 @@ getJobSkill(strCategoryId);
 
                         snackbar.show();
 
-                    }
-
-  else if (strstate.equals("Select State")) {
+                    } else if (strstate.equals("Select State")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select state.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -579,9 +577,7 @@ getJobSkill(strCategoryId);
                         sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                         snackbar.show();
-                    }
-
-                    else if(!binding.edtMobile.getText().toString().matches(MobilePattern)) {
+                    } else if (!binding.edtMobile.getText().toString().matches(MobilePattern)) {
 
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter valid 10 digit phone number.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
@@ -607,7 +603,7 @@ getJobSkill(strCategoryId);
                         snackbar.show();
                     }
                     */
-                    else if (strCategoryId=="0") {
+                    else if (strCategoryId == "0") {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select category.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -615,7 +611,7 @@ getJobSkill(strCategoryId);
 
                         snackbar.show();
 
-                    }else if (strSkillId=="0") {
+                    } else if (strSkillId == "0") {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select skill.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -623,13 +619,10 @@ getJobSkill(strCategoryId);
 
                         snackbar.show();
 
-                    }
+                    } else if (binding.radioExperienced.isChecked()) {
 
 
-                    else if (binding.radioExperienced.isChecked()) {
-
-
-                       if (str_first_job_month.equals("Select Month")) {
+                        if (str_first_job_month.equals("Select Month")) {
 
                             Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select first job month.", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null);
@@ -682,7 +675,7 @@ getJobSkill(strCategoryId);
                     month = c.get(Calendar.MONTH);
                     day = c.get(Calendar.DAY_OF_MONTH);
 
-                    DatePickerDialog datePickerDialog = new DatePickerDialog(GetPersonalInfoActivity.this,              R.style.DatePickerTheme,
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(GetPersonalInfoActivity.this, R.style.DatePickerTheme,
 
                             new DatePickerDialog.OnDateSetListener() {
 
@@ -690,21 +683,21 @@ getJobSkill(strCategoryId);
                                 public void onDateSet(DatePicker view, int year,
                                                       int monthOfYear, int dayOfMonth) {
 
-                                    userAge = new GregorianCalendar(year,month,day);
+                                    userAge = new GregorianCalendar(year, month, day);
                                     minAdultAge = new GregorianCalendar();
                                     minAdultAge.add(Calendar.YEAR, -18);
                                     /*if (minAdultAge.before(userAge)) {
 
                                         Toast.makeText(PersonalInfoActivity.this, "Select 18 year date", Toast.LENGTH_SHORT).show();
                                     }else {*/
-                                   // strbirthdate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + (year);
+                                    // strbirthdate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + (year);
                                     strbirthdate = year + "-" + (monthOfYear + 1) + "-" + (dayOfMonth);
 
                                     binding.txtbday.setText(strbirthdate);
                                 }
-                            }, year-18, month, day);
+                            }, year - 18, month, day);
 
-                    c.set(year-18, month, day);//Year,Mounth -1,Day
+                    c.set(year - 18, month, day);//Year,Mounth -1,Day
                     datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
 
                     //   datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis() - 1000 * 60 * 60 * 24 * 365.25 * 14));
@@ -755,12 +748,11 @@ getJobSkill(strCategoryId);
                     binding.textView19.setVisibility(View.GONE);
                     str_are_you_work = "Yes";
                     Intent intent = new Intent(GetPersonalInfoActivity.this, OrganizationDailog.class);
-                    intent.putExtra("working_organization_name",working_organization_name);
+                    intent.putExtra("working_organization_name", working_organization_name);
                     startActivityForResult(intent, 2);
 
                 }
             });
-
 
 
             binding.button3.setOnClickListener(new View.OnClickListener() {
@@ -793,7 +785,7 @@ getJobSkill(strCategoryId);
                         binding.cardDivision.setVisibility(View.VISIBLE);
                         binding.cardSubject.setVisibility(View.GONE);
                         binding.cardStream.setVisibility(View.VISIBLE);
-                        strSubject="";
+                        strSubject = "";
                         getInterenstedFiledAPi("1");
                     }
 
@@ -804,7 +796,7 @@ getJobSkill(strCategoryId);
                         binding.cardDivision.setVisibility(View.VISIBLE);
                         binding.cardStream.setVisibility(View.VISIBLE);
                         getInterenstedFiledAPi("2");
-                        strSubject="";
+                        strSubject = "";
 
                         strInterested_id = "2";
 
@@ -852,6 +844,7 @@ getJobSkill(strCategoryId);
         }
 
     }
+
     public void getStateListApi() {
         // binding.progressInfo.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
@@ -868,12 +861,12 @@ getJobSkill(strCategoryId);
                     // binding.progressInfo.setVisibility(View.GONE);
 
 
-                    if (response.body().isSuccess()==true) {
-                        statelist=response.body().getData();
+                    if (response.body().isSuccess() == true) {
+                        statelist = response.body().getData();
 
-                        if(statelist.size()>0){
+                        if (statelist.size() > 0) {
                             // sp_state_name_list.add("Select State");
-                            for(int i=0;i<statelist.size();i++){
+                            for (int i = 0; i < statelist.size(); i++) {
 
                                 sp_state_name_list.add(statelist.get(i).getState_name());
                                 // spinner_state_list.add(model);
@@ -882,12 +875,12 @@ getJobSkill(strCategoryId);
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                                        strstate=(String)binding.spState.getSelectedItem();
+                                        strstate = (String) binding.spState.getSelectedItem();
 
                                         // SpinnerModel model=(SpinnerModel) spinner_state_list.get(i);
                                         strStateid = statelist.get(i).getId();
 
-                                       // Toast.makeText(PersonalInfoActivity.this, "state" + id, Toast.LENGTH_SHORT).show();
+                                        // Toast.makeText(PersonalInfoActivity.this, "state" + id, Toast.LENGTH_SHORT).show();
 
 
                                         getCityApi(strStateid);
@@ -895,6 +888,7 @@ getJobSkill(strCategoryId);
 
 
                                     }
+
                                     @Override
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -902,12 +896,10 @@ getJobSkill(strCategoryId);
                                 });
                             }
 
-                            adspinnerStatep=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_state_name_list);
+                            adspinnerStatep = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_state_name_list);
                             binding.spState.setAdapter(adspinnerStatep);
                             adspinnerStatep.notifyDataSetChanged();
                         }
-
-
 
 
                     } else {
@@ -941,35 +933,36 @@ getJobSkill(strCategoryId);
         resultCall.enqueue(new Callback<CityResponse>() {
             @Override
             public void onResponse(Call<CityResponse> call, Response<CityResponse> response) {
-               sp_city_name_list.clear();
+                sp_city_name_list.clear();
                 if (response.isSuccessful()) {
 
                     // binding.progressInfo.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
-                        cityList=response.body().getData();
+                    if (response.body().isSuccess() == true) {
+                        cityList = response.body().getData();
 
-                        if(cityList.size()>0){
-                           // binding.spCity.setVisibility(View.VISIBLE);
+                        if (cityList.size() > 0) {
+                            // binding.spCity.setVisibility(View.VISIBLE);
                             binding.spinner4.setVisibility(View.VISIBLE);
 
-                            for(int i=0;i<cityList.size();i++){
+                            for (int i = 0; i < cityList.size(); i++) {
 
                                 sp_city_name_list.add(cityList.get(i).getCity_name());
 
                                 binding.spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                      strcity=(String)binding.spCity.getSelectedItem();
-                                         Cityid = cityList.get(i).getId();
+                                        strcity = (String) binding.spCity.getSelectedItem();
+                                        Cityid = cityList.get(i).getId();
                                         adp1.notifyDataSetChanged();
                                         // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
                                     }
+
                                     @Override
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
                                 });
-                                adp1=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_city_name_list);
+                                adp1 = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_city_name_list);
                                 binding.spCity.setAdapter(adp1);
                                 adp1.notifyDataSetChanged();
 
@@ -1028,13 +1021,13 @@ getJobSkill(strCategoryId);
         intent.setType("image/*");
         startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_IMAGE_REQUEST);*/
 
-        if (Build.VERSION.SDK_INT <19){
+        if (Build.VERSION.SDK_INT < 19) {
             Intent intent = new Intent();
             intent.setType("image/jpeg");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.app_name)),PICK_IMAGE_REQUEST);
+            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.app_name)), PICK_IMAGE_REQUEST);
         } else {
-            Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(i, PICK_IMAGE_REQUEST);
         }
     }
@@ -1045,13 +1038,13 @@ getJobSkill(strCategoryId);
         intent.setType("image/*");
         startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_doc_id_proof_REQUEST);*/
 
-        if (Build.VERSION.SDK_INT <19){
+        if (Build.VERSION.SDK_INT < 19) {
             Intent intent = new Intent();
             intent.setType("image/jpeg");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.app_name)),PICK_doc_id_proof_REQUEST);
+            startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.app_name)), PICK_doc_id_proof_REQUEST);
         } else {
-            Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(i, PICK_doc_id_proof_REQUEST);
         }
     }
@@ -1073,31 +1066,34 @@ getJobSkill(strCategoryId);
                     Toast.LENGTH_SHORT).show();
         }
     }
+
     // Method to get the absolute path of the selected image from its URI
     @SuppressLint("ResourceType")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==2)
-        {
-            working_organization_name=data.getStringExtra("Organization");
-          //  Toast.makeText(this, "Name"+message, Toast.LENGTH_SHORT).show();
+        if (requestCode == 2) {
+            working_organization_name = data.getStringExtra("Organization");
+            if (working_organization_name != null) {
 
-            if(working_organization_name.equals("no")){
-                working_organization_name="";
-                binding.recyclerOrganization.setVisibility(View.GONE);
-            }else {
-                binding.recyclerOrganization.setVisibility(View.VISIBLE);
-                int numberOfColumns = 2;
-                ArrayList<String> myList = new ArrayList<String>(Arrays.asList(working_organization_name.split("#")));
+                if (working_organization_name.equals("no")) {
+                    working_organization_name = "";
+                    binding.recyclerOrganization.setVisibility(View.GONE);
+                } else {
+                    binding.recyclerOrganization.setVisibility(View.VISIBLE);
+                    int numberOfColumns = 2;
+                    ArrayList<String> myList = new ArrayList<String>(Arrays.asList(working_organization_name.split("#")));
 
-                binding.recyclerOrganization.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-                OrganizationAdapter adapter = new OrganizationAdapter(this, myList);
+                    binding.recyclerOrganization.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+                    OrganizationAdapter adapter = new OrganizationAdapter(this, myList);
 
-                binding.recyclerOrganization.setAdapter(adapter);
-
+                    binding.recyclerOrganization.setAdapter(adapter);
+                }
+            } else {
             }
+            //  Toast.makeText(this, "Name"+message, Toast.LENGTH_SHORT).show();
+
         }
 
         if (requestCode == PICK_IMAGE_REQUEST) {
@@ -1105,14 +1101,14 @@ getJobSkill(strCategoryId);
 
 
                 Uri uri = data.getData();
-              //  File file = new File(uri.getPath());//create path from uri
-              //  final String[] split = file.getPath().split(":");//split the path.
+                //  File file = new File(uri.getPath());//create path from uri
+                //  final String[] split = file.getPath().split(":");//split the path.
 
                 try {
-                  //  profilefilepath = PathUtil.getPath(PersonalInfoActivity.this, uri);
+                    //  profilefilepath = PathUtil.getPath(PersonalInfoActivity.this, uri);
 
                     File finalFile = new File(PathUtil.getPath(GetPersonalInfoActivity.this, uri));
-                    profilefilepath= finalFile.getAbsolutePath();
+                    profilefilepath = finalFile.getAbsolutePath();
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
@@ -1133,20 +1129,21 @@ getJobSkill(strCategoryId);
 
 
             }
-        } if (requestCode == PICK_doc_REQUEST) {
+        }
+        if (requestCode == PICK_doc_REQUEST) {
             if (resultCode == RESULT_OK) {
 
                 Uri uri = data.getData();
                 String uriString = uri.toString();
                 File myFile = new File(uri.getPath());
 
-                File finalFile = new File(FileHelper.getRealPathFromURI(GetPersonalInfoActivity.this,uri));
-                resumepath= finalFile.getPath();
+                File finalFile = new File(FileHelper.getRealPathFromURI(GetPersonalInfoActivity.this, uri));
+                resumepath = finalFile.getPath();
                 binding.txtdoc.setText(resumepath);
 
 
             }
-            }
+        }
         if (requestCode == PICK_doc_id_proof_REQUEST) {
             if (resultCode == RESULT_OK) {
                 selected_id_proof_uri = data.getData();                                                         // Get the image file URI
@@ -1156,11 +1153,11 @@ getJobSkill(strCategoryId);
                 final String[] split = file.getPath().split(":");//split the path.
 
                 try {
-                   // idprooffilePath = PathUtil.getPath(PersonalInfoActivity.this, uri);
+                    // idprooffilePath = PathUtil.getPath(PersonalInfoActivity.this, uri);
 
 
                     File finalFile = new File(PathUtil.getPath(GetPersonalInfoActivity.this, uri));
-                    idprooffilePath= finalFile.getPath();
+                    idprooffilePath = finalFile.getPath();
                 } catch (URISyntaxException e) {
                     e.printStackTrace();
                 }
@@ -1169,7 +1166,7 @@ getJobSkill(strCategoryId);
             }
         }
 
-        }
+    }
 
 
 //-----------------Annual Salary List------------------------------------------------------------
@@ -1188,27 +1185,26 @@ getJobSkill(strCategoryId);
 
                 if (response.isSuccessful()) {
                     // binding.progressInfo.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
-                        annualList=response.body().getData();
+                        annualList = response.body().getData();
 
-                        if(annualList.size()>0){
+                        if (annualList.size() > 0) {
                             sp_annual_income.add("Select Annual");
-                            for(int i=0;i<annualList.size();i++){
+                            for (int i = 0; i < annualList.size(); i++) {
 
-                                sp_annual_income.add(annualList.get(i).getSalary() +" LPA");
+                                sp_annual_income.add(annualList.get(i).getSalary() + " LPA");
                                 // spinner_state_list.add(model);
 
                                 binding.spAnnual.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                                         strAnnual=(String)binding.spAnnual.getSelectedItem();
-
-
+                                        strAnnual = (String) binding.spAnnual.getSelectedItem();
 
 
                                     }
+
                                     @Override
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -1216,11 +1212,10 @@ getJobSkill(strCategoryId);
                                 });
                             }
 
-                            ArrayAdapter<String> adp=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_annual_income);
+                            ArrayAdapter<String> adp = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_annual_income);
                             binding.spAnnual.setAdapter(adp);
                             adp.notifyDataSetChanged();
                         }
-
 
 
                     } else {
@@ -1255,18 +1250,18 @@ getJobSkill(strCategoryId);
             public void onResponse(Call<InterestedCategoryResponse> call, Response<InterestedCategoryResponse> response) {
                 sp_division_list.clear();
                 if (response.isSuccessful()) {
-                  
+
                     // binding.progressInfo.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
 
-                        designationList=response.body().getData();
+                        designationList = response.body().getData();
 
 
-                        if(designationList.size()>0){
+                        if (designationList.size() > 0) {
                             //  sp_division_list.add("Select Category");
 
-                            for(int i=0;i<designationList.size();i++) {
+                            for (int i = 0; i < designationList.size(); i++) {
 
                                 sp_division_list.add(designationList.get(i).getTitle());
 
@@ -1279,10 +1274,10 @@ getJobSkill(strCategoryId);
 
                                             strDivision = designationList.get(i).getTitle();
 
-                                            if(strDivision.equals("Select Category")){
+                                            if (strDivision.equals("Select Category")) {
                                                 binding.cardStream.setVisibility(View.GONE);
 
-                                            }else{
+                                            } else {
                                                 binding.cardStream.setVisibility(View.VISIBLE);
                                                 strCategoryId = designationList.get(i).getId();
 
@@ -1290,7 +1285,7 @@ getJobSkill(strCategoryId);
                                                 getJobSkill(strCategoryId);
                                             }
 
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     }
@@ -1307,7 +1302,6 @@ getJobSkill(strCategoryId);
                             //  adpCategory.notifyDataSetChanged();
 
                         }
-
 
 
                     } else {
@@ -1344,16 +1338,16 @@ getJobSkill(strCategoryId);
                 if (response.isSuccessful()) {
 
                     // binding.progressInfo.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
-                        streamList=response.body().getData();
+                    if (response.body().isSuccess() == true) {
+                        streamList = response.body().getData();
 
-                        if(streamList.size()>0){
+                        if (streamList.size() > 0) {
                             //  sp_stream_list.add("Select Skill");
 
                             binding.spStream.setVisibility(View.GONE);
                             //  binding.spinner4.setVisibility(View.VISIBLE);
 
-                            for(int i=0;i<streamList.size();i++){
+                            for (int i = 0; i < streamList.size(); i++) {
 
                                 sp_stream_list.add(streamList.get(i).getTitle());
 
@@ -1365,16 +1359,17 @@ getJobSkill(strCategoryId);
                                             strSkillId = streamList.get(i).getId();
                                             adaStream.notifyDataSetChanged();
                                             // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
 
                                         }
                                     }
+
                                     @Override
                                     public void onNothingSelected(AdapterView<?> adapterView) {
 
                                     }
                                 });
-                                adaStream=new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item,sp_stream_list);
+                                adaStream = new ArrayAdapter<String>(GetPersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
                                 binding.spStream.setAdapter(adaStream);
                                 //  adaStream.notifyDataSetChanged();
 
@@ -1408,8 +1403,9 @@ getJobSkill(strCategoryId);
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED );
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
+
     private void requestPermissions() {
         permission = new PermissionManager() {
             @Override
@@ -1430,62 +1426,62 @@ getJobSkill(strCategoryId);
         progress_spinner = Utils.LoadingSpinner(this);
         progress_spinner.show();
 
-     //   binding.progresspersonal.setVisibility(View.VISIBLE);
-      if(strDivision.equals("Select Division")){
+        //   binding.progresspersonal.setVisibility(View.VISIBLE);
+        if (strDivision.equals("Select Division")) {
 
-       strDivision="";
-      }else if(strSubject.equals("Select Subject")){
+            strDivision = "";
+        } else if (strSubject.equals("Select Subject")) {
 
-      strSubject="";
-     }else {
+            strSubject = "";
+        } else {
 
-    Map<String, RequestBody> map = new HashMap<>();
+            Map<String, RequestBody> map = new HashMap<>();
 
-    map.put("user_id", Utils.getRequestBodyParameter(userid));
-    map.put("name_prefix", Utils.getRequestBodyParameter(strprefix));
-    map.put("gender", Utils.getRequestBodyParameter(strGender));
-    map.put("date_of_birth", Utils.getRequestBodyParameter(strbirthdate));
-    map.put("state_id", Utils.getRequestBodyParameter(strStateid));
-    map.put("city_id", Utils.getRequestBodyParameter(Cityid));
-    // map.put("alternate_mobile", Utils.getRequestBodyParameter(binding.someEdit6.getText().toString().trim()));
-    MultipartBody.Part strresume = null;
-    if (resumepath != null) {
-        File serviceImageUri = new File(resumepath);
-        RequestBody fbody = RequestBody.create(serviceImageUri, MediaType.parse("application/pdf"));
-        strresume = MultipartBody.Part.createFormData("resume", serviceImageUri.getName(), fbody);
-    }
+            map.put("user_id", Utils.getRequestBodyParameter(userid));
+            map.put("name_prefix", Utils.getRequestBodyParameter(strprefix));
+            map.put("gender", Utils.getRequestBodyParameter(strGender));
+            map.put("date_of_birth", Utils.getRequestBodyParameter(strbirthdate));
+            map.put("state_id", Utils.getRequestBodyParameter(strStateid));
+            map.put("city_id", Utils.getRequestBodyParameter(Cityid));
+            // map.put("alternate_mobile", Utils.getRequestBodyParameter(binding.someEdit6.getText().toString().trim()));
+            MultipartBody.Part strresume = null;
+            if (resumepath != null) {
+                File serviceImageUri = new File(resumepath);
+                RequestBody fbody = RequestBody.create(serviceImageUri, MediaType.parse("application/pdf"));
+                strresume = MultipartBody.Part.createFormData("resume", serviceImageUri.getName(), fbody);
+            }
 
-    // Parsing any Media type file
+            // Parsing any Media type file
 
-    MultipartBody.Part strIdProof = null;
-    if (idprooffilePath != null) {
-        File serviceImageUri = new File(idprooffilePath);
-        RequestBody fbody = RequestBody.create(serviceImageUri, MediaType.parse("image*/"));
-        strIdProof = MultipartBody.Part.createFormData("id_proof", idprooffilePath, fbody);
-    }
+            MultipartBody.Part strIdProof = null;
+            if (idprooffilePath != null) {
+                File serviceImageUri = new File(idprooffilePath);
+                RequestBody fbody = RequestBody.create(serviceImageUri, MediaType.parse("image*/"));
+                strIdProof = MultipartBody.Part.createFormData("id_proof", idprooffilePath, fbody);
+            }
 
-    MultipartBody.Part strprofileimg = null;
-    if (profilefilepath != null) {
-        File serviceImageUri = new File(profilefilepath);
-        RequestBody fbody = RequestBody.create(serviceImageUri, MediaType.parse("image*/"));
-        strprofileimg = MultipartBody.Part.createFormData("profile_image", profilefilepath, fbody);
-    }
+            MultipartBody.Part strprofileimg = null;
+            if (profilefilepath != null) {
+                File serviceImageUri = new File(profilefilepath);
+                RequestBody fbody = RequestBody.create(serviceImageUri, MediaType.parse("image*/"));
+                strprofileimg = MultipartBody.Part.createFormData("profile_image", profilefilepath, fbody);
+            }
 
-    map.put("interested_field", Utils.getRequestBodyParameter(strInterested_id));
-    map.put("experience", Utils.getRequestBodyParameter(strfre_exp));
-    map.put("category_id", Utils.getRequestBodyParameter(strCategoryId));
-    map.put("skill_id", Utils.getRequestBodyParameter(strSkillId));
-    map.put("organization_name", Utils.getRequestBodyParameter(binding.edtOrganizationName.getText().toString().trim()));
-    map.put("alternate_mobile", Utils.getRequestBodyParameter(binding.someEdit6.getText().toString().trim()));
+            map.put("interested_field", Utils.getRequestBodyParameter(strInterested_id));
+            map.put("experience", Utils.getRequestBodyParameter(strfre_exp));
+            map.put("category_id", Utils.getRequestBodyParameter(strCategoryId));
+            map.put("skill_id", Utils.getRequestBodyParameter(strSkillId));
+            map.put("organization_name", Utils.getRequestBodyParameter(binding.edtOrganizationName.getText().toString().trim()));
+            map.put("alternate_mobile", Utils.getRequestBodyParameter(binding.someEdit6.getText().toString().trim()));
 
-          map.put("name", Utils.getRequestBodyParameter(binding.edtName.getText().toString().trim()));
+            map.put("name", Utils.getRequestBodyParameter(binding.edtName.getText().toString().trim()));
 
-    map.put("first_job_month", Utils.getRequestBodyParameter(str_first_job_month));
-    map.put("first_job_year", Utils.getRequestBodyParameter(str_first_job_year));
-    map.put("annual_salary", Utils.getRequestBodyParameter(strAnnual));
-    map.put("are_you_working_with_these_group", Utils.getRequestBodyParameter(str_are_you_work));
-    map.put("working_organization", Utils.getRequestBodyParameter(working_organization_name));
-    map.put("lecture_video_link", Utils.getRequestBodyParameter(binding.edtVideoLink.getText().toString().trim()));
+            map.put("first_job_month", Utils.getRequestBodyParameter(str_first_job_month));
+            map.put("first_job_year", Utils.getRequestBodyParameter(str_first_job_year));
+            map.put("annual_salary", Utils.getRequestBodyParameter(strAnnual));
+            map.put("are_you_working_with_these_group", Utils.getRequestBodyParameter(str_are_you_work));
+            map.put("working_organization", Utils.getRequestBodyParameter(working_organization_name));
+            map.put("lecture_video_link", Utils.getRequestBodyParameter(binding.edtVideoLink.getText().toString().trim()));
        /* MultipartBody.Part serviceImage1 = null;
         if (selectedImage != null) {
             File serviceImageUri = new File(selectedImage.getPath());
@@ -1493,75 +1489,74 @@ getJobSkill(strCategoryId);
             serviceImage1 = MultipartBody.Part.createFormData("image", serviceImageUri.getName(), fbody);
         }
 */
-    ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
-    //Call<SignUpResponse> resultCall = apiInterface.callSignupApi(map,body);
-    Call<CommonResponse> resultCall = apiInterface.callPersonalInformation(map, strresume, strIdProof, strprofileimg);
+            //Call<SignUpResponse> resultCall = apiInterface.callSignupApi(map,body);
+            Call<CommonResponse> resultCall = apiInterface.callPersonalInformation(map, strresume, strIdProof, strprofileimg);
 //Log.e("MAP DTA",map.toString());
-    resultCall.enqueue(new Callback<CommonResponse>() {
-        @Override
-        public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-            if (response.isSuccessful()) {
-                //binding.progresspersonal.setVisibility(View.GONE);
-                progress_spinner.dismiss();
-                if (response.body().isSuccess() == true) {
+            resultCall.enqueue(new Callback<CommonResponse>() {
+                @Override
+                public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+                    if (response.isSuccessful()) {
+                        //binding.progresspersonal.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+                        if (response.body().isSuccess() == true) {
 
-                    AlertDialog.Builder logoutDialog = new AlertDialog.Builder(GetPersonalInfoActivity.this,R.style.AlertDialogTheme)
-                            .setTitle(R.string.app_name)
+                            AlertDialog.Builder logoutDialog = new AlertDialog.Builder(GetPersonalInfoActivity.this, R.style.AlertDialogTheme)
+                                    .setTitle(R.string.app_name)
 
-                            .setMessage("Your Profile has been update successfully.")
-                            .setIcon(R.drawable.shakti_consultant_logo)
-                            .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    AppPrefrences.setExperience(GetPersonalInfoActivity.this,strfre_exp);
+                                    .setMessage("Your Profile has been update successfully.")
+                                    .setIcon(R.drawable.shakti_consultant_logo)
+                                    .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            AppPrefrences.setExperience(GetPersonalInfoActivity.this, strfre_exp);
 
-                                    finish();
+                                            finish();
 
 
-                                }
-                            });
-                    logoutDialog.show();
+                                        }
+                                    });
+                            logoutDialog.show();
 
-                //finish();
+                            //finish();
 
-                } else {
-                    //   pd_loading.setVisibility(View.GONE);
-                   // binding.progresspersonal.setVisibility(View.GONE);
-                    progress_spinner.dismiss();
+                        } else {
+                            //   pd_loading.setVisibility(View.GONE);
+                            // binding.progresspersonal.setVisibility(View.GONE);
+                            progress_spinner.dismiss();
 
-                    Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(), Snackbar.LENGTH_LONG)
-                            .setActionTextColor(Color.RED)
-                            .show();
+                            Snackbar.make(findViewById(android.R.id.content), response.body().getMessage(), Snackbar.LENGTH_LONG)
+                                    .setActionTextColor(Color.RED)
+                                    .show();
 
-                    // Utils.showFailureDialog(MyProfileActivity.this, "Please try later");
+                            // Utils.showFailureDialog(MyProfileActivity.this, "Please try later");
+
+                        }
+                    } else {
+                        Toast.makeText(GetPersonalInfoActivity.this, "ERROR" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        //
+                    }
 
                 }
-            } else {
-                Toast.makeText(GetPersonalInfoActivity.this, "ERROR" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
 
-                //
-            }
+                @Override
+                public void onFailure(Call<CommonResponse> call, Throwable t) {
+                    // pd_loading.setVisibility(View.GONE);
+                    // binding.progresspersonal.setVisibility(View.GONE);
+                    progress_spinner.dismiss();
 
+                    Toast.makeText(GetPersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-
-        @Override
-        public void onFailure(Call<CommonResponse> call, Throwable t) {
-            // pd_loading.setVisibility(View.GONE);
-           // binding.progresspersonal.setVisibility(View.GONE);
-            progress_spinner.dismiss();
-
-            Toast.makeText(GetPersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    });
-}
 
     }
 
 
-
-    public void getPersonalInformation () {
-       // binding.progresspersonal.setVisibility(View.VISIBLE);
+    public void getPersonalInformation() {
+        // binding.progresspersonal.setVisibility(View.VISIBLE);
         Dialog progress_spinner;
         progress_spinner = Utils.LoadingSpinner(this);
         progress_spinner.show();
@@ -1578,7 +1573,7 @@ getJobSkill(strCategoryId);
             public void onResponse(Call<GetPersonalInformationResponse> call, Response<GetPersonalInformationResponse> response) {
 
                 if (response.isSuccessful()) {
-                 //   binding.progresspersonal.setVisibility(View.GONE);
+                    //   binding.progresspersonal.setVisibility(View.GONE);
                     progress_spinner.dismiss();
                     if (response.body().isSuccess() == true) {
                         Log.e("User ID", response.body().getData().getId());
@@ -1588,24 +1583,24 @@ getJobSkill(strCategoryId);
                         binding.progressemployee.setText(content);
                         //Toast.makeText(SignInActivity.this, "Detail"+personal, Toast.LENGTH_SHORT).show();
                    */
-                    //    strbirthdate=response.body().getData().getDate_of_birth();
+                        //    strbirthdate=response.body().getData().getDate_of_birth();
 
-                       // Log.e("BDAY",strbirthdate);
-                        strGender=response.body().getData().getGender();
-                        strprefix=response.body().getData().getName_prefix();
-                        strStateid=response.body().getData().getState_id();
-                        strInterested_id=response.body().getData().getInterested_field();
-                        strfre_exp=response.body().getData().getExperience();
-                        strstate=response.body().getData().getState();
-                        strcity=response.body().getData().getCity();
-                        strCategoryId=response.body().getData().getCategory_id();
-                        Cityid=response.body().getData().getCity_id();
-                        strSkillId=response.body().getData().getSkill_id();
-                        strAnnual=response.body().getData().getAnnual_salary();
-                        str_first_job_month=response.body().getData().getFirst_job_month();
-                        str_first_job_year=response.body().getData().getFirst_job_year();
-                        strbirthdate=response.body().getData().getDate_of_birth();
-                        String Worrkingname=response.body().getData().getWorking_organization();
+                        // Log.e("BDAY",strbirthdate);
+                        strGender = response.body().getData().getGender();
+                        strprefix = response.body().getData().getName_prefix();
+                        strStateid = response.body().getData().getState_id();
+                        strInterested_id = response.body().getData().getInterested_field();
+                        strfre_exp = response.body().getData().getExperience();
+                        strstate = response.body().getData().getState();
+                        strcity = response.body().getData().getCity();
+                        strCategoryId = response.body().getData().getCategory_id();
+                        Cityid = response.body().getData().getCity_id();
+                        strSkillId = response.body().getData().getSkill_id();
+                        strAnnual = response.body().getData().getAnnual_salary();
+                        str_first_job_month = response.body().getData().getFirst_job_month();
+                        str_first_job_year = response.body().getData().getFirst_job_year();
+                        strbirthdate = response.body().getData().getDate_of_birth();
+                        String Worrkingname = response.body().getData().getWorking_organization();
 
                         try {
                             if (Worrkingname.equals("NA") || Worrkingname.equals(null)) {
@@ -1633,25 +1628,25 @@ getJobSkill(strCategoryId);
 
                                 binding.recyclerOrganization.setAdapter(adapter);
                             }
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
 
                         }
                         // working_organization_name=response.body().getData().getWorked_organization();
                         Picasso.get()
-                                .load(ApiClient.Photourl+response.body().getData().getProfile_image())
+                                .load(ApiClient.Photourl + response.body().getData().getProfile_image())
                                 .memoryPolicy(MemoryPolicy.NO_CACHE)
 
                                 .into(binding.imageView6);
-                       // getJobSkill(response.body().getData().getCategory_id());
+                        // getJobSkill(response.body().getData().getCategory_id());
                         binding.edtName.setText(response.body().getData().getName());
                         binding.txtbday.setText(response.body().getData().getDate_of_birth());
                         binding.edtMobile.setText(response.body().getData().getPhone());
                         binding.txtdoc.setText(response.body().getData().getResume());
                         binding.uploadProof.setText(response.body().getData().getId_proof());
                         binding.edtVideoLink.setText(response.body().getData().getLecture_video_link());
-                       // binding.spState.setSelection(sp_state_name_list.indexOf(response.body().getData().getState()));
-                      //  binding.spCity.setSelection(sp_city_name_list.indexOf(response.body().getData().getCity()));
+                        // binding.spState.setSelection(sp_state_name_list.indexOf(response.body().getData().getState()));
+                        //  binding.spCity.setSelection(sp_city_name_list.indexOf(response.body().getData().getCity()));
                         binding.spDivision.setSelection(sp_division_list.indexOf(response.body().getData().getCategoryname()));
                         binding.spStream.setSelection(sp_stream_list.indexOf(response.body().getData().getSkillname()));
 
@@ -1664,21 +1659,21 @@ getJobSkill(strCategoryId);
 
                         //  strInterested_id=response.body().getData().getInterested_field();
 
-                        if(response.body().getData().getInterested_field().equals("1")){
+                        if (response.body().getData().getInterested_field().equals("1")) {
 
                             binding.radioTeaching.setChecked(true);
                             getInterenstedFiledAPi("1");
-                        }else{
+                        } else {
 
                             binding.radioNonTeaching.setChecked(true);
                             getInterenstedFiledAPi("2");
 
                         }
 
-                        if(response.body().getData().getExperience().equals("Fresher")){
+                        if (response.body().getData().getExperience().equals("Fresher")) {
 
                             binding.radioFresher.setChecked(true);
-                        }else{
+                        } else {
 
                             binding.radioExperienced.setChecked(true);
 
@@ -1691,14 +1686,13 @@ getJobSkill(strCategoryId);
                         String[] gender = getResources().getStringArray(R.array.test1);
                         binding.spGender.setSelection(Arrays.asList(gender).indexOf(response.body().getData().getGender()));
 
-   String[] firstmonth = getResources().getStringArray(R.array.month);
+                        String[] firstmonth = getResources().getStringArray(R.array.month);
                         binding.spfirstJobMonth.setSelection(Arrays.asList(firstmonth).indexOf(response.body().getData().getFirst_job_month()));
 
-   String[] firstyear = getResources().getStringArray(R.array.year);
+                        String[] firstyear = getResources().getStringArray(R.array.year);
                         binding.spfirstjobyear.setSelection(Arrays.asList(firstyear).indexOf(response.body().getData().getFirst_job_year()));
 
                         binding.spAnnual.setSelection(sp_annual_income.indexOf(response.body().getData().getAnnual_salary()));
-
 
 
                     } else {
@@ -1712,7 +1706,7 @@ getJobSkill(strCategoryId);
 
             @Override
             public void onFailure(Call<GetPersonalInformationResponse> call, Throwable t) {
-             //   binding.progresspersonal.setVisibility(View.GONE);
+                //   binding.progresspersonal.setVisibility(View.GONE);
                 progress_spinner.dismiss();
 
                 Utils.showFailureDialog(GetPersonalInfoActivity.this, "Something went wrong!");

@@ -53,15 +53,16 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class JobDescriptionActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    int year,month,day;
-    EditText date1,date2;
-    String strdate1="",strdate2="";
+    int year, month, day;
+    EditText date1, date2;
+    String strdate1 = "", strdate2 = "";
 
     ActivityJobDescriptionBinding binding;
     DatePickerDialog datePickerDialog;
-    String job_id,skill_name,skill_id="";
+    String job_id, skill_name, skill_id = "";
     boolean isSelected;
     ConnectionDetector cd;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +70,10 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
         binding = ActivityJobDescriptionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         job_id = getIntent().getStringExtra("job_id");
-   //     Toast.makeText(this, ""+job_id, Toast.LENGTH_SHORT).show();
+        //     Toast.makeText(this, ""+job_id, Toast.LENGTH_SHORT).show();
         skill_name = getIntent().getStringExtra("skill_name");
         skill_id = getIntent().getStringExtra("skill_id");
-cd=new ConnectionDetector(JobDescriptionActivity.this);
+        cd = new ConnectionDetector(JobDescriptionActivity.this);
         if (!cd.isConnectingToInternet()) {
             Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
@@ -80,15 +81,15 @@ cd=new ConnectionDetector(JobDescriptionActivity.this);
         } else {
 
             binding.textView50.setText(skill_name);
-binding.imgShare.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-         share(getBitmapFromView(binding.nest, binding.nest.getChildAt(0).getHeight(), binding.nest.getChildAt(0).getWidth()));
+            binding.imgShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    share(getBitmapFromView(binding.nest, binding.nest.getChildAt(0).getHeight(), binding.nest.getChildAt(0).getWidth()));
 
-       // share(screenShot());
+                    // share(screenShot());
 
-    }
-});
+                }
+            });
 
             getJobDetailApi();
             datePickerDialog = new DatePickerDialog(
@@ -124,8 +125,6 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
             });
 
 
-
-
             binding.imgBackArrow.setOnClickListener(v -> {
                 onBackPressed();
                 overridePendingTransition(R.anim.slide_in_left,
@@ -133,12 +132,11 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
             });
 
 
-
         }
     }
 
 
-    private void setButtonSelected(AppCompatButton buttonToSelect, AppCompatButton buttonToDeselect){
+    private void setButtonSelected(AppCompatButton buttonToSelect, AppCompatButton buttonToDeselect) {
         buttonToSelect.setBackgroundResource(R.drawable.custom_button_bg);
         buttonToSelect.setTextColor(Color.parseColor("#FFFFFF"));
 
@@ -147,13 +145,14 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
     }
 
 
-    private boolean setImageSelected(ImageView imageToSelect,ImageView imageToDeSelect){
+    private boolean setImageSelected(ImageView imageToSelect, ImageView imageToDeSelect) {
 
 
         imageToSelect.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.main_text_color));
         imageToDeSelect.setColorFilter(ContextCompat.getColor(getApplicationContext(), R.color.black));
         return true;
     }
+
 
     public void getJobDetailApi() {
         Dialog progress_spinner;
@@ -163,9 +162,8 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
         //  binding.progressBardetail.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("job_id", job_id);
-        map.put("user_id",AppPrefrences.getUserid(JobDescriptionActivity.this));
+        map.put("user_id", AppPrefrences.getUserid(JobDescriptionActivity.this));
         map.put("skill_id", AppPrefrences.getSkillId(JobDescriptionActivity.this));
-
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -182,53 +180,46 @@ binding.imgShare.setOnClickListener(new View.OnClickListener() {
                     binding.const1.setVisibility(View.VISIBLE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
                       /*  GridLayoutManager linearLayoutManager = new GridLayoutManager(JobsListActivity.this,2);
                         binding.recycleSkillList.setLayoutManager(linearLayoutManager);
                         JobSkillListAdapter adapter=new JobSkillListAdapter(JobsListActivity.this,response.body().getData());
                         binding.recycleSkillList.setAdapter(adapter);
                         binding.recycleSkillList.getAdapter().notifyDataSetChanged();
-
 */
 
-   binding.tvrange.setText(response.body().getData().get(0).getStarting_salary()+"-"+response.body().getData().get(0).getMaximum_salary()+" LPA");
-binding.tvExperience.setText(response.body().getData().get(0).getWork_experience());
-binding.tvLocation.setText(response.body().getData().get(0).getLocation());
-binding.textView51.setText(response.body().getData().get(0).getJob_description());
-binding.tvdocans.setText(response.body().getData().get(0).getDocument_required());
-binding.tvimportant.setText(response.body().getData().get(0).getImportant_instructions());
+                        binding.tvrange.setText(response.body().getData().get(0).getStarting_salary() + "-" + response.body().getData().get(0).getMaximum_salary() + " LPA");
+                        binding.tvExperience.setText(response.body().getData().get(0).getWork_experience());
+                        binding.tvLocation.setText(response.body().getData().get(0).getLocation());
+                        binding.textView51.setText(response.body().getData().get(0).getJob_description());
+                        binding.tvdocans.setText(response.body().getData().get(0).getDocument_required());
+                        binding.tvimportant.setText(response.body().getData().get(0).getImportant_instructions());
 
-if(response.body().getData().get(0).getApplied_status()==0){
+                        if (response.body().getData().get(0).getApplied_status() == 0) {
 
-    binding.btnApply.setVisibility(View.VISIBLE);
-    binding.btnApplied.setVisibility(View.GONE);
+                            binding.btnApply.setVisibility(View.VISIBLE);
+                            binding.btnApplied.setVisibility(View.GONE);
 
-}else{
-    binding.btnApply.setVisibility(View.GONE);
-    binding.btnApplied.setVisibility(View.VISIBLE);
-
-
-}
+                        } else {
+                            binding.btnApply.setVisibility(View.GONE);
+                            binding.btnApplied.setVisibility(View.VISIBLE);
+                        }
                         binding.btnApply.setOnClickListener(v -> {
-                           // showSubscriptionDialog(response.body().getData().get(0).getId());
+                            // showSubscriptionDialog(response.body().getData().get(0).getId());
 
-                            if(response.body().getData().get(0).getPackage_balance().equals("0")){
+                            if (response.body().getData().get(0).getPackage_balance().equals("0")) {
                                 showSubscriptionDialog(response.body().getData().get(0).getId());
-                            }else{
-
-
+                            } else {
                                 showDateDialog();
-
                             }
-
                         });
                     } else {
-                     //   binding.progressBardetail.setVisibility(View.GONE);
+                        //   binding.progressBardetail.setVisibility(View.GONE);
                         progress_spinner.dismiss();
-binding.const1.setVisibility(View.GONE);
+                        binding.const1.setVisibility(View.GONE);
                         //lemprtNotification.setVisibility(View.VISIBLE);
-                         Utils.showFailureDialog(JobDescriptionActivity.this, "No Data Found");
+                        Utils.showFailureDialog(JobDescriptionActivity.this, "No Data Found");
                     }
                 }
             }
@@ -238,7 +229,7 @@ binding.const1.setVisibility(View.GONE);
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-              //  binding.progressBardetail.setVisibility(View.GONE);
+                //  binding.progressBardetail.setVisibility(View.GONE);
                 progress_spinner.dismiss();
 
                 Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
@@ -349,75 +340,74 @@ binding.const1.setVisibility(View.GONE);
 
     }
 
-        public void getApplyJob(String date1,String date2,Dialog dialog) {
-            //binding.progressContatc.setVisibility(View.VISIBLE);
-            Dialog progress_spinner;
-            progress_spinner = Utils.LoadingSpinner(this);
-            progress_spinner.show();
+    public void getApplyJob(String date1, String date2, Dialog dialog) {
+        //binding.progressContatc.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
 
-            Map<String, String> map = new HashMap<>();
-            map.put("user_id", AppPrefrences.getUserid(JobDescriptionActivity.this));
-            map.put("job_id", job_id);
-            map.put("interview_date_1", date1);
-            map.put("interview_date_2", date2);
-
-
-            ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
-
-            Call<CommonResponse> resultCall = apiInterface.callApplyJob(map);
-
-            resultCall.enqueue(new Callback<CommonResponse>() {
-                @Override
-                public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
-                    progress_spinner.dismiss();
-                    if (response.isSuccessful()) {
-                        //binding.progressContatc.setVisibility(View.GONE);
-                        dialog.dismiss();
-                        //  lemprtNotification.setVisibility(View.GONE);
-                        if (response.body().isSuccess()==true) {
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", AppPrefrences.getUserid(JobDescriptionActivity.this));
+        map.put("job_id", job_id);
+        map.put("interview_date_1", date1);
+        map.put("interview_date_2", date2);
 
 
-                            AlertDialog.Builder logoutDialog = new AlertDialog.Builder(JobDescriptionActivity.this,R.style.AlertDialogTheme)
-                                    .setTitle(R.string.app_name)
-                                    .setMessage("Your job has been applied successfully.")
-                                    .setCancelable(false)
-                                    .setIcon(R.drawable.shakti_consultant_logo)
-                                    .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            showConfirmationDialog();
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<CommonResponse> resultCall = apiInterface.callApplyJob(map);
+
+        resultCall.enqueue(new Callback<CommonResponse>() {
+            @Override
+            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+                progress_spinner.dismiss();
+                if (response.isSuccessful()) {
+                    //binding.progressContatc.setVisibility(View.GONE);
+                    dialog.dismiss();
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess() == true) {
+
+
+                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(JobDescriptionActivity.this, R.style.AlertDialogTheme)
+                                .setTitle(R.string.app_name)
+                                .setMessage("Your job has been applied successfully.")
+                                .setCancelable(false)
+                                .setIcon(R.drawable.shakti_consultant_logo)
+                                .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        showConfirmationDialog();
                                       /*  binding.edtEmail.setText("");
                                         binding.edtName.setText("");
                                         binding.edtText.setText("");*/
-                                        }
-                                    });
-                            logoutDialog.show();
-                        } else {
-                            //binding.progressContatc.setVisibility(View.GONE);
-                            progress_spinner.dismiss();
+                                    }
+                                });
+                        logoutDialog.show();
+                    } else {
+                        //binding.progressContatc.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
 
-                            //lemprtNotification.setVisibility(View.VISIBLE);
-                            Utils.showFailureDialog(JobDescriptionActivity.this, response.message());
-                        }
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        Utils.showFailureDialog(JobDescriptionActivity.this, response.message());
                     }
                 }
+            }
 
-                @Override
-                public void onFailure(Call<CommonResponse> call, Throwable t) {
+            @Override
+            public void onFailure(Call<CommonResponse> call, Throwable t) {
 
-                    //  lemprtNotification.setVisibility(View.VISIBLE);
-                    //    pd_loading.setVisibility(View.GONE);
-                    // binding.progressContatc.setVisibility(View.GONE);
-                    progress_spinner.dismiss();
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+                // binding.progressContatc.setVisibility(View.GONE);
+                progress_spinner.dismiss();
 
-                    //Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
-                }
-            });
-        }
+                //Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
+            }
+        });
+    }
 
 
-
-    private void showConfirmationDialog(){
+    private void showConfirmationDialog() {
         Dialog dialog = new Dialog(JobDescriptionActivity.this);
         dialog.setContentView(R.layout.dialog_interview_further_process);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -431,16 +421,16 @@ binding.const1.setVisibility(View.GONE);
         ok.setOnClickListener(v -> {
             dialog.dismiss();
 
-            Intent i=new Intent(JobDescriptionActivity.this, MainActivity.class);
+            Intent i = new Intent(JobDescriptionActivity.this, MainActivity.class);
             startActivity(i);
-         finish();
+            finish();
 
         });
 
         faq.setOnClickListener(v -> {
             dialog.dismiss();
 
-            Intent i=new Intent(JobDescriptionActivity.this, FAQActivity.class);
+            Intent i = new Intent(JobDescriptionActivity.this, FAQActivity.class);
             startActivity(i);
             finish();
         });
@@ -448,8 +438,7 @@ binding.const1.setVisibility(View.GONE);
     }
 
 
-
-    private void showSubscriptionDialog(String job_id){
+    private void showSubscriptionDialog(String job_id) {
         Dialog dialog = new Dialog(JobDescriptionActivity.this);
         dialog.setContentView(R.layout.dialog_subscription_plan);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -463,8 +452,8 @@ binding.const1.setVisibility(View.GONE);
             //startActivity(new Intent(getApplicationContext(), ApplyJobPackageActivity.class));
 
 
-            Intent i=new Intent(JobDescriptionActivity.this,ApplyJobPackageActivity.class);
-            i.putExtra("job_id",job_id);
+            Intent i = new Intent(JobDescriptionActivity.this, PackageActivity.class);
+            i.putExtra("job_id", job_id);
             startActivity(i);
         });
 
@@ -473,7 +462,6 @@ binding.const1.setVisibility(View.GONE);
             //showDateDialog();
         });
     }
-
 
 
 //    private void showDateDialog(){
@@ -546,7 +534,7 @@ binding.const1.setVisibility(View.GONE);
 
     public void getSimilarJobList() {
 
-              Dialog progress_spinner;
+        Dialog progress_spinner;
         progress_spinner = Utils.LoadingSpinner(this);
         progress_spinner.show();
 
@@ -566,21 +554,20 @@ binding.const1.setVisibility(View.GONE);
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                  //  binding.progressBardetail.setVisibility(View.GONE);
+                    //  binding.progressBardetail.setVisibility(View.GONE);
                     progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(JobDescriptionActivity.this);
                         binding.recyclerView7.setLayoutManager(linearLayoutManager);
-                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(JobDescriptionActivity.this,response.body().getData());
+                        JobSkillWiseListAdapter adapter = new JobSkillWiseListAdapter(JobDescriptionActivity.this, response.body().getData());
                         binding.recyclerView7.setAdapter(adapter);
                         binding.recyclerView7.getAdapter().notifyDataSetChanged();
 
 
-
                     } else {
-                      //  binding.progressBardetail.setVisibility(View.GONE);
+                        //  binding.progressBardetail.setVisibility(View.GONE);
                         progress_spinner.dismiss();
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
@@ -594,10 +581,10 @@ binding.const1.setVisibility(View.GONE);
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-            //    binding.progressBardetail.setVisibility(View.GONE);
+                //    binding.progressBardetail.setVisibility(View.GONE);
                 progress_spinner.dismiss();
 
-               // Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
+                // Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
             }
         });
     }
@@ -605,16 +592,16 @@ binding.const1.setVisibility(View.GONE);
     private Bitmap screenShot() {
         View rootView = getWindow().getDecorView().findViewById(R.id.nest); //Here also I have taken ScrollView too.
 
-        Bitmap bitmap = Bitmap.createBitmap(rootView.getWidth() , rootView.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(rootView.getWidth(), rootView.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         rootView.draw(canvas);
         return bitmap;
     }
 
-    private void share(Bitmap bitmap){
-        String pathofBmp=
+    private void share(Bitmap bitmap) {
+        String pathofBmp =
                 MediaStore.Images.Media.insertImage(getContentResolver(),
-                        bitmap,"title", null);
+                        bitmap, "title", null);
         Uri uri = Uri.parse(pathofBmp);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
@@ -623,11 +610,12 @@ binding.const1.setVisibility(View.GONE);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(shareIntent, "hello hello"));
     }
-    private Bitmap getBitmapFromView(View view,int height,int width) {
-        Bitmap bitmap = Bitmap.createBitmap(width, height,Bitmap.Config.ARGB_8888);
+
+    private Bitmap getBitmapFromView(View view, int height, int width) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-        Drawable bgDrawable =view.getBackground();
-        if (bgDrawable!=null)
+        Drawable bgDrawable = view.getBackground();
+        if (bgDrawable != null)
             bgDrawable.draw(canvas);
         else
             canvas.drawColor(Color.WHITE);

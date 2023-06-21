@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.cashfree.pg.CFPaymentService;
 import com.cashfree.pg.ui.gpay.GooglePayStatusListener;
 
@@ -30,7 +31,6 @@ import static com.cashfree.pg.CFPaymentService.PARAM_ORDER_NOTE;
 import static com.cashfree.pg.CFPaymentService.PARAM_PAYMENT_OPTION;
 import static com.cashfree.pg.CFPaymentService.PARAM_UPI_VPA;
 import static com.cashfree.pg.CFPaymentService.PARAM_WALLET_CODE;
-
 
 public class PaymentInrigationNew extends AppCompatActivity {
 
@@ -68,7 +68,6 @@ public class PaymentInrigationNew extends AppCompatActivity {
 
     public void onClick(View view) {
 
-
         /*
          * stage allows you to switch between sandboxed and production servers
          * for CashFree Payment Gateway. The possible values are
@@ -89,7 +88,7 @@ public class PaymentInrigationNew extends AppCompatActivity {
         if (view.getId() == R.id.phonePe_exists) {
             Toast.makeText(
                     PaymentInrigationNew.this,
-                    CFPaymentService.getCFPaymentServiceInstance().doesPhonePeExist(PaymentInrigationNew.this, stage)+"",
+                    CFPaymentService.getCFPaymentServiceInstance().doesPhonePeExist(PaymentInrigationNew.this, stage) + "",
                     Toast.LENGTH_SHORT).show();
             return;
         } else if (view.getId() == R.id.gpay_ready) {
@@ -98,6 +97,7 @@ public class PaymentInrigationNew extends AppCompatActivity {
                 public void isReady() {
                     Toast.makeText(PaymentInrigationNew.this, "Ready", Toast.LENGTH_SHORT).show();
                 }
+
                 @Override
                 public void isNotReady() {
                     Toast.makeText(PaymentInrigationNew.this, "Not Ready", Toast.LENGTH_SHORT).show();
@@ -112,7 +112,6 @@ public class PaymentInrigationNew extends AppCompatActivity {
          * READ THIS TO GENERATE TOKEN: https://docs.cashfree.com/docs/android-sdk#step-3-generate-token-from-backend
          */
         String token = "C39JCN4MzUIJiOicGbhJCLiQ1VKJiOiAXe0Jye.svQfiQGZxgzN2UzYmFWOzYjI6ICdsF2cfJCL2ITNzkjNzcjNxojIwhXZiwiIS5USiojI5NmblJnc1NkclRmcvJCLxojI05Wdv1WQyVGZy9mIsISMiojIklkclRmcvJye.8gRgHHu_7s3xjXp_FFTfPDQJ1t53qg3rrWT5W5aQTDqqEYoZrNSQMd4UY39uCldlXR";
-
 
         CFPaymentService cfPaymentService = CFPaymentService.getCFPaymentServiceInstance();
         cfPaymentService.setOrientation(0);
@@ -130,6 +129,7 @@ public class PaymentInrigationNew extends AppCompatActivity {
              * @param color2 text color and icon color of toolbar
              * @param hideOrderId If true hides order Id from the toolbar
              */
+
             case R.id.web: {
                 cfPaymentService.doPayment(PaymentInrigationNew.this, getInputParams(), token, stage, "#784BD2", "#FFFFFF", false);
 //                 cfPaymentService.doPayment(MainActivity.this, params, token, stage);
@@ -145,7 +145,7 @@ public class PaymentInrigationNew extends AppCompatActivity {
              *              PROD for production, TEST for testing.
              */
             case R.id.upi: {
-//                                cfPaymentService.selectUpiClient("com.google.android.apps.nbu.paisa.user");
+//           cfPaymentService.selectUpiClient("com.google.android.apps.nbu.paisa.user");
                 cfPaymentService.upiPayment(PaymentInrigationNew.this, getInputParams(), token, stage);
                 break;
             }
@@ -169,7 +169,6 @@ public class PaymentInrigationNew extends AppCompatActivity {
     }
 
     private Map<String, String> getInputParams() {
-
         /*
          * appId will be available to you at CashFree Dashboard. This is a unique
          * identifier for your app. Please replace this appId with your appId.

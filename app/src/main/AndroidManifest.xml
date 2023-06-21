@@ -46,9 +46,6 @@
             android:name=".AppliedJobActivity"
             android:exported="false" />
         <activity
-            android:name=".PaymentIntegration"
-            android:exported="false" />
-        <activity
             android:name=".RejectedApplicationActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -265,6 +262,7 @@
             android:name=".PaymentInrigationNew"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity android:name=".CheckoutActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

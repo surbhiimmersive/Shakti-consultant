@@ -49,7 +49,6 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         cd = new ConnectionDetector(SignInActivity.this);
 
-
         binding.tvForgotPassword.setOnClickListener(v -> {
             startActivity(new Intent(SignInActivity.this, ForgotPasswordActivity.class));
         });
@@ -159,8 +158,6 @@ public class SignInActivity extends AppCompatActivity {
 
                             overridePendingTransition(R.anim.slide_in_right,
                                     R.anim.slide_out_left);
-
-
                         } else if (employee.equals("0")) {
 
                             if (experience.equals("Fresher")) {

@@ -28,6 +28,8 @@ import com.shakticonsultant.responsemodel.NotificationResponse;
 import com.shakticonsultant.responsemodel.OrganizationResponse;
 import com.shakticonsultant.responsemodel.OurClientResponse;
 import com.shakticonsultant.responsemodel.PackageResponse;
+import com.shakticonsultant.responsemodel.PaymentIntentDetailResponse;
+import com.shakticonsultant.responsemodel.PaymentIntentResponse;
 import com.shakticonsultant.responsemodel.ProfileResponse;
 import com.shakticonsultant.responsemodel.ScheduleInterviewResponse;
 import com.shakticonsultant.responsemodel.ShortListResponse;
@@ -126,6 +128,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<PackageResponse> callPackageList(@FieldMap Map<String, String> params);
 
+    @POST("userActivePackage ")
+    @FormUrlEncoded
+    Call<PackageResponse> callUserActivePackage(@FieldMap Map<String, String> params);
+
     @GET("faqList")
     Call<FaqsResponse> callFaqsList();
 
@@ -145,6 +151,13 @@ public interface ApiInterface {
     @POST("jobDetails")
     @FormUrlEncoded
     Call<JobDetailResponse> callJobDetail(@FieldMap Map<String, String> params);
+
+
+    //https://shakticonsultant.com/superadmin/api/paymentIntent
+    @POST("paymentIntent")
+    @FormUrlEncoded
+    Call<PaymentIntentResponse> CallCreateToken(@FieldMap Map<String, String> params);
+
 
     @POST("interviewSchedules")
     @FormUrlEncoded

@@ -30,12 +30,13 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     ActivityForgotPasswordBinding binding;
     ApiInterface apiInterface;
     ConnectionDetector cd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityForgotPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        cd=new ConnectionDetector(ForgotPasswordActivity.this);
+        cd = new ConnectionDetector(ForgotPasswordActivity.this);
 
         /* show keyboard */
         ShowHideKeyboard.showKeyboard(binding.edittextMobileNumber);
@@ -56,9 +57,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                             .setActionTextColor(Color.RED)
                             .show();
-                }
-                else
-                if (binding.edittextMobileNumber.getText().toString().trim().equals("")){
+                } else if (binding.edittextMobileNumber.getText().toString().trim().equals("")) {
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter mobile number.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
                     View sbView = snackbar.getView();
@@ -66,9 +65,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                     snackbar.show();
 
-                }
-
-                else if(!binding.edittextMobileNumber.getText().toString().matches(MobilePattern)) {
+                } else if (!binding.edittextMobileNumber.getText().toString().matches(MobilePattern)) {
 
                     Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please enter valid 10 digit phone number.", Snackbar.LENGTH_LONG)
                             .setAction("Action", null);
@@ -77,8 +74,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                     snackbar.show();
 
-                }
-                else{
+                } else {
 
                     forgetApi();
 
@@ -90,11 +86,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
 
 
-
-
     }
-
-
 
 
     public void forgetApi() {
@@ -115,22 +107,16 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     binding.progressBar.setVisibility(View.GONE);
                     if (response.body().getMessage().equals("OTP sent successfully")) {
-Intent i=new Intent(ForgotPasswordActivity.this,PasswordResetActivity.class);
-i.putExtra("userid",response.body().getData().getUser_id());
-startActivity(i);
-                       // startActivity(new Intent(ForgotPasswordActivity.this, PasswordResetActivity.class));
-                    }  else {
+                        Intent i = new Intent(ForgotPasswordActivity.this, PasswordResetActivity.class);
+                        i.putExtra("userid", response.body().getData().getUser_id());
+                        startActivity(i);
+                        // startActivity(new Intent(ForgotPasswordActivity.this, PasswordResetActivity.class));
+                    } else {
                         Utils.showFailureDialog(ForgotPasswordActivity.this, response.body().getMessage());
-
-
                     }
-                }else{
-
+                } else {
                     binding.progressBar.setVisibility(View.GONE);
-
                     Utils.showFailureDialog(ForgotPasswordActivity.this, "Record not found");
-
-
                 }
             }
 

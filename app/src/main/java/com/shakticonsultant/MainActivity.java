@@ -5,16 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.navigation.ui.NavigationViewKt;
 
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,24 +18,20 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.shakticonsultant.databinding.ActivityMainBinding;
-import com.shakticonsultant.responsemodel.AboutResponse;
 import com.shakticonsultant.responsemodel.ProfileResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.AppPrefrences;
-import com.shakticonsultant.utils.Utils;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,14 +52,20 @@ public class MainActivity extends AppCompatActivity {
     TextView tvname, tvemail, tvmobile, textView36;
     ImageView imageView14;
 
+    private static final int REQUEST_CODE_LOCATION = 9544;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         String userid = getIntent().getStringExtra("userid");
+
+
+
+// Since the Terminal is a singleton, you can call getInstance whenever you need it
+        // Terminal.getInstance();
 
         //  Toast.makeText(this, "" + AppPrefrences.getUserid(MainActivity.this), Toast.LENGTH_SHORT).show();
         /* Navigation Drawer */
@@ -131,10 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in_right,
                         R.anim.slide_out_left);
-
             }
         });
-
     }
 
     public void setUpNavigation() {
@@ -166,6 +161,22 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.navigation_drawer);
         drawer.closeDrawers();
     }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_CODE_LOCATION && grantResults.length > 0
+                && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            throw new RuntimeException("Location services are required in order to " +
+                    "connect to a reader.");
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

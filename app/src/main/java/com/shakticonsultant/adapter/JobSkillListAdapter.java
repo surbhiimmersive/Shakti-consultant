@@ -57,8 +57,6 @@ public class JobSkillListAdapter extends RecyclerView.Adapter<JobSkillListAdapte
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
-
-
         viewHolder.tvTitle.setText(list.get(position).getTitle());
       //  viewHolder.tvDate.setText(list.get(position).getIcon());
 

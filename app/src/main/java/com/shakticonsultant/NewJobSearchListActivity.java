@@ -36,10 +36,10 @@ public class NewJobSearchListActivity extends AppCompatActivity {
     private Boolean txtoneSelected = false;
     private Boolean txttwoSelected = false;
     private Boolean txtthreeSelected = false;
-String skill_id;
-String skill_name;
-ConnectionDetector cd;
-    String city,experience,min_salary,max_salary;
+    String skill_id;
+    String skill_name;
+    ConnectionDetector cd;
+    String city, experience, min_salary, max_salary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +62,19 @@ ConnectionDetector cd;
             max_salary = getIntent().getStringExtra("max_salary");
 
 
-            Log.e("SKILLID",skill_id);
-            Log.e("skill_name",skill_name);
-            Log.e("city",city);
-            Log.e("min_salary",min_salary);
-            Log.e("max_salary",max_salary);
+            Log.e("SKILLID", skill_id);
+            Log.e("skill_name", skill_name);
+            Log.e("city", city);
+            Log.e("min_salary", min_salary);
+            Log.e("max_salary", max_salary);
 
             binding.textView47.setText(skill_name);
 
-Log.e("DATA",skill_id);
-Log.e("skill_name",skill_name);
-Log.e("experience",experience);
-Log.e("min_salary",min_salary);
-Log.e("max_salary",max_salary);
+            Log.e("DATA", skill_id);
+            Log.e("skill_name", skill_name);
+            Log.e("experience", experience);
+            Log.e("min_salary", min_salary);
+            Log.e("max_salary", max_salary);
 
 
             binding.imageBackArrow.setOnClickListener(v -> {
@@ -91,13 +91,14 @@ Log.e("max_salary",max_salary);
 
         }
     }
+
     public void getJobFilterData() {
         binding.progressBarSkillWise.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
 
 
         map.put("location", city);
-        map.put("min_salary",min_salary);
+        map.put("min_salary", min_salary);
         map.put("max_salary", max_salary);
         map.put("experience", experience);
         map.put("skill_id", skill_id);
@@ -116,7 +117,7 @@ Log.e("max_salary",max_salary);
                     binding.progressBarSkillWise.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
                         binding.tvEmpty.setVisibility(View.GONE);
                         binding.imgEmpty.setVisibility(View.GONE);
                         binding.imageView23.setVisibility(View.VISIBLE);
@@ -124,16 +125,15 @@ Log.e("max_salary",max_salary);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewJobSearchListActivity.this);
                         binding.recyclerJobSkillWiseList.setLayoutManager(linearLayoutManager);
-                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(NewJobSearchListActivity.this,response.body().getData());
+                        JobSkillWiseListAdapter adapter = new JobSkillWiseListAdapter(NewJobSearchListActivity.this, response.body().getData());
                         binding.recyclerJobSkillWiseList.setAdapter(adapter);
                         binding.recyclerJobSkillWiseList.getAdapter().notifyDataSetChanged();
-
 
 
                     } else {
                         binding.progressBarSkillWise.setVisibility(View.GONE);
                         binding.tvEmpty.setVisibility(View.VISIBLE);
-                       binding.imgEmpty.setVisibility(View.VISIBLE);
+                        binding.imgEmpty.setVisibility(View.VISIBLE);
                         binding.imageView23.setVisibility(View.GONE);
                         binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), response.body().getMessage(), Snackbar.LENGTH_LONG)
@@ -145,7 +145,7 @@ Log.e("max_salary",max_salary);
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
-                }else{
+                } else {
                     binding.progressBarSkillWise.setVisibility(View.GONE);
                     binding.tvEmpty.setVisibility(View.VISIBLE);
                     binding.imgEmpty.setVisibility(View.VISIBLE);
@@ -173,13 +173,13 @@ Log.e("max_salary",max_salary);
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==2)
-        {
-            try{
+        if (requestCode == 2) {
+            try {
                 city = data.getStringExtra("city");
                 experience = data.getStringExtra("experience");
                 min_salary = data.getStringExtra("min_salary");
@@ -189,10 +189,9 @@ Log.e("max_salary",max_salary);
                 //Toast.makeText(this, "Name"+experience, Toast.LENGTH_SHORT).show();
 
                 getJobFilterData();
+            } catch (Exception e) {
             }
-            catch (Exception e){}
         }
-
 
 
     }
