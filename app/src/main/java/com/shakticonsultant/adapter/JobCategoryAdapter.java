@@ -56,7 +56,7 @@ public class JobCategoryAdapter extends RecyclerView.Adapter<JobCategoryAdapter.
 
 
         viewHolder.tvTitle.setText(list.get(position).getTitle());
-      //  viewHolder.tvDate.setText(list.get(position).getIcon());
+        //  viewHolder.tvDate.setText(list.get(position).getIcon());
 
        /* Picasso.get()
                 .load(ApiClient.Photourl+list.get(position).getIcon())
@@ -64,25 +64,25 @@ public class JobCategoryAdapter extends RecyclerView.Adapter<JobCategoryAdapter.
                 .centerCrop()
                 .into(viewHolder.imgIcon);*/
         Picasso.get()
-                .load(ApiClient.Photourl+list.get(position).getIcon())
+                .load(ApiClient.Photourl + list.get(position).getIcon())
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(viewHolder.imgIcon);
 
 
         viewHolder.lJobCategory.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+            @Override
+            public void onClick(View view) {
 
-Intent i=new Intent(context,JobsListActivity.class);
-i.putExtra("category_id",list.get(position).getId());
-i.putExtra("category_name",list.get(position).getTitle());
-context.startActivity(i);
-        ((Activity)context).overridePendingTransition(R.anim.slide_in_right,
-                R.anim.slide_out_left);
-     //   context.startActivity(new Intent(context, JobsListActivity.class));
+                Intent i = new Intent(context, JobsListActivity.class);
+                i.putExtra("category_id", list.get(position).getId());
+                i.putExtra("category_name", list.get(position).getTitle());
+                context.startActivity(i);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_right,
+                        R.anim.slide_out_left);
+                //   context.startActivity(new Intent(context, JobsListActivity.class));
 
-    }
-});
+            }
+        });
     }
 
     // inner class to hold a reference to each item of RecyclerView
@@ -111,7 +111,7 @@ context.startActivity(i);
         return list.size();
     }
 
-    public  void clear(){
+    public void clear() {
         int size = list.size();
         list.clear();
 

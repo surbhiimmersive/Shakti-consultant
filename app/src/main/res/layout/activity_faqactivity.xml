@@ -9,8 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        >
+        android:paddingBottom="20dp">
 
         <ImageView
             android:id="@+id/img_back_arrow"
@@ -30,11 +29,11 @@
             android:layout_marginTop="25dp"
             android:fontFamily="@font/roboto"
             android:text="FAQ"
-            android:textStyle="bold"
-
             android:textAllCaps="true"
+
             android:textColor="@color/main_text_color"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -84,8 +83,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerFaqs"
             android:layout_width="match_parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView74"
-            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textView74"></androidx.recyclerview.widget.RecyclerView>
 
 
         <ProgressBar
@@ -97,8 +96,8 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/textView74"
             app:layout_constraintHorizontal_bias="0.523"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.8" />
 

@@ -53,10 +53,10 @@ public class SpecificFacultyJobActivity extends AppCompatActivity {
     private Boolean txtoneSelected = false;
     private Boolean txttwoSelected = false;
     private Boolean txtthreeSelected = false;
-String skill_id;
-String skill_name;
-ConnectionDetector cd;
-    String city,experience,min_salary,max_salary;
+    String skill_id;
+    String skill_name;
+    ConnectionDetector cd;
+    String city, experience, min_salary, max_salary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +70,10 @@ ConnectionDetector cd;
             Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
                     .show();
-        }else {
+        } else {
             skill_id = getIntent().getStringExtra("skill_id");
 
-AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
+            AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this, skill_id);
             skill_name = getIntent().getStringExtra("skill_name");
             binding.textView47.setText(skill_name);
             binding.imageBackArrow.setOnClickListener(v -> {
@@ -145,7 +145,7 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
     */
 
     public void getJobSkillWiseList() {
-          //binding.progressBarSkillWise.setVisibility(View.VISIBLE);
+        //binding.progressBarSkillWise.setVisibility(View.VISIBLE);
 
 
         Dialog progress_spinner;
@@ -166,10 +166,10 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                 //   binding.progressBarSkillWise.setVisibility(View.GONE);
+                    //   binding.progressBarSkillWise.setVisibility(View.GONE);
                     progress_spinner.dismiss();
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
                         binding.tvEmpty.setVisibility(View.GONE);
                         binding.imgEmpty.setVisibility(View.GONE);
                         binding.imageView23.setVisibility(View.VISIBLE);
@@ -177,10 +177,9 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SpecificFacultyJobActivity.this);
                         binding.recyclerJobSkillWiseList.setLayoutManager(linearLayoutManager);
-                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(SpecificFacultyJobActivity.this,response.body().getData());
+                        JobSkillWiseListAdapter adapter = new JobSkillWiseListAdapter(SpecificFacultyJobActivity.this, response.body().getData());
                         binding.recyclerJobSkillWiseList.setAdapter(adapter);
                         binding.recyclerJobSkillWiseList.getAdapter().notifyDataSetChanged();
-
 
 
                     } else {
@@ -195,7 +194,7 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
-                }else{
+                } else {
                     progress_spinner.dismiss();
 
                     //  binding.progressBarSkillWise.setVisibility(View.GONE);
@@ -214,9 +213,9 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-               // binding.progressBarSkillWise.setVisibility(View.GONE);
+                // binding.progressBarSkillWise.setVisibility(View.GONE);
 
-            //    Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");
+                //    Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");
             }
         });
     }
@@ -226,17 +225,15 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==2)
-        {
-            city=data.getStringExtra("city");
-            experience=data.getStringExtra("experience");
-            min_salary=data.getStringExtra("min_salary");
-            max_salary=data.getStringExtra("max_salary");
-             //Toast.makeText(this, "Name"+experience, Toast.LENGTH_SHORT).show();
+        if (requestCode == 2) {
+            city = data.getStringExtra("city");
+            experience = data.getStringExtra("experience");
+            min_salary = data.getStringExtra("min_salary");
+            max_salary = data.getStringExtra("max_salary");
+            //Toast.makeText(this, "Name"+experience, Toast.LENGTH_SHORT).show();
 
             getJobFilterData();
         }
-
 
 
     }
@@ -249,7 +246,7 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
         //  binding.progressBarSkillWise.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
         map.put("location", city);
-        map.put("min_salary",min_salary);
+        map.put("min_salary", min_salary);
         map.put("max_salary", max_salary);
         map.put("experience", experience);
         map.put("user_id", AppPrefrences.getUserid(SpecificFacultyJobActivity.this));
@@ -264,11 +261,11 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
             public void onResponse(Call<JobSkillWiseListResponse> call, Response<JobSkillWiseListResponse> response) {
 
                 if (response.isSuccessful()) {
-                 //   binding.progressBarSkillWise.setVisibility(View.GONE);
+                    //   binding.progressBarSkillWise.setVisibility(View.GONE);
                     progress_spinner.dismiss();
 
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
                         binding.tvEmpty.setVisibility(View.GONE);
                         binding.imgEmpty.setVisibility(View.GONE);
                         binding.imageView23.setVisibility(View.VISIBLE);
@@ -276,19 +273,18 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SpecificFacultyJobActivity.this);
                         binding.recyclerJobSkillWiseList.setLayoutManager(linearLayoutManager);
-                        JobSkillWiseListAdapter adapter=new JobSkillWiseListAdapter(SpecificFacultyJobActivity.this,response.body().getData());
+                        JobSkillWiseListAdapter adapter = new JobSkillWiseListAdapter(SpecificFacultyJobActivity.this, response.body().getData());
                         binding.recyclerJobSkillWiseList.setAdapter(adapter);
                         binding.recyclerJobSkillWiseList.getAdapter().notifyDataSetChanged();
 
 
-
                     } else {
-                      //  binding.progressBarSkillWise.setVisibility(View.GONE);
+                        //  binding.progressBarSkillWise.setVisibility(View.GONE);
                         binding.tvEmpty.setVisibility(View.VISIBLE);
-                       binding.imgEmpty.setVisibility(View.VISIBLE);
+                        binding.imgEmpty.setVisibility(View.VISIBLE);
                         binding.imageView23.setVisibility(View.GONE);
                         binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
-                       // Utils.showFailureDialog(SpecificFacultyJobActivity.this, response.body().getMessage());
+                        // Utils.showFailureDialog(SpecificFacultyJobActivity.this, response.body().getMessage());
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), response.body().getMessage(), Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
                         View sbView = snackbar.getView();
@@ -298,7 +294,7 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
-                }else{
+                } else {
                     progress_spinner.dismiss();
 
                     //  binding.progressBarSkillWise.setVisibility(View.GONE);
@@ -306,7 +302,7 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
                     binding.imgEmpty.setVisibility(View.VISIBLE);
                     binding.imageView23.setVisibility(View.GONE);
                     binding.recyclerJobSkillWiseList.setVisibility(View.GONE);
-                  //  Utils.showFailureDialog(SpecificFacultyJobActivity.this, response.body().getMessage());
+                    //  Utils.showFailureDialog(SpecificFacultyJobActivity.this, response.body().getMessage());
 
 
                 }
@@ -318,7 +314,7 @@ AppPrefrences.setCategoryId(SpecificFacultyJobActivity.this,skill_id);
 
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
-               // binding.progressBarSkillWise.setVisibility(View.GONE);
+                // binding.progressBarSkillWise.setVisibility(View.GONE);
                 Utils.showFailureDialog(SpecificFacultyJobActivity.this, t.getMessage());
 
                 // Utils.showFailureDialog(SpecificFacultyJobActivity.this, "Something went wrong!");

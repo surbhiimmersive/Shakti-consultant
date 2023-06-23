@@ -204,7 +204,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     //binding.progressContatc.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess() == true) {
-                        showActivePackageDialog("Completed", "Payment Completed");
+                        showActivePackageDialog("Completed", "Payment Completed !!");
                     } else {
                         //binding.progressContatc.setVisibility(View.GONE);
                         progress_spinner.dismiss();

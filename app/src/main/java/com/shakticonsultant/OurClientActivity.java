@@ -42,10 +42,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OurClientActivity extends AppCompatActivity  {
+public class OurClientActivity extends AppCompatActivity {
     private ViewPager viewPager;
     ActivityOurClientBinding binding;
-ConnectionDetector cd;
+    ConnectionDetector cd;
     private List<OurClientDatumResponse> sliderDatumResponses = new ArrayList<>();
 
     @Override
@@ -54,27 +54,22 @@ ConnectionDetector cd;
         binding = ActivityOurClientBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        cd = new ConnectionDetector(OurClientActivity.this);
+        binding.imgOurback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
 
+        viewPager = binding.viewpager;
+        cd = new ConnectionDetector(OurClientActivity.this);
 
         if (!cd.isConnectingToInternet()) {
             Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
                     .show();
         } else {
-
-
-            binding.imgOurback.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-
-                    onBackPressed();
-                    overridePendingTransition(R.anim.slide_in_left,
-                            R.anim.slide_out_right);
-                }
-            });
-            viewPager= binding.viewpager;
             getSliderApi();
         }
 
@@ -89,7 +84,7 @@ ConnectionDetector cd;
 
         // pd_loading.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-      //  map.put("position", "Main slider");
+        //  map.put("position", "Main slider");
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -102,7 +97,7 @@ ConnectionDetector cd;
                 if (response.isSuccessful()) {
                     //  pd_loading.setVisibility(View.GONE);
                     progress_spinner.dismiss();
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
                         sliderDatumResponses = response.body().getData();
                         if (sliderDatumResponses != null && sliderDatumResponses.size() > 0) {
 
@@ -111,8 +106,6 @@ ConnectionDetector cd;
 
                             Timer timer = new Timer();
                             timer.scheduleAtFixedRate(new SliderTimer(), 3000, 5000);
-
-
 
 
                         } else {

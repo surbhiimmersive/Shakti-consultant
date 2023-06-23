@@ -69,17 +69,22 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
         super.onCreate(savedInstanceState);
         binding = ActivityJobDescriptionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         job_id = getIntent().getStringExtra("job_id");
         //     Toast.makeText(this, ""+job_id, Toast.LENGTH_SHORT).show();
         skill_name = getIntent().getStringExtra("skill_name");
         skill_id = getIntent().getStringExtra("skill_id");
+
+        if (getIntent().getStringExtra("call") != null) {
+            showDateDialog();
+        }
+
         cd = new ConnectionDetector(JobDescriptionActivity.this);
         if (!cd.isConnectingToInternet()) {
             Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                     .setActionTextColor(Color.RED)
                     .show();
         } else {
-
             binding.textView50.setText(skill_name);
             binding.imgShare.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,11 +135,14 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
                 overridePendingTransition(R.anim.slide_in_left,
                         R.anim.slide_out_right);
             });
-
-
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
 
     private void setButtonSelected(AppCompatButton buttonToSelect, AppCompatButton buttonToDeselect) {
         buttonToSelect.setBackgroundResource(R.drawable.custom_button_bg);
@@ -209,8 +217,9 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
                             // showSubscriptionDialog(response.body().getData().get(0).getId());
 
                             if (response.body().getData().get(0).getPackage_balance().equals("0")) {
-                                showSubscriptionDialog(response.body().getData().get(0).getId());
+                                showSubscriptionDialog(job_id, skill_name);
                             } else {
+                                // onCreateCall=false;
                                 showDateDialog();
                             }
                         });
@@ -438,7 +447,7 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
     }
 
 
-    private void showSubscriptionDialog(String job_id) {
+    private void showSubscriptionDialog(String job_id, String skill_name) {
         Dialog dialog = new Dialog(JobDescriptionActivity.this);
         dialog.setContentView(R.layout.dialog_subscription_plan);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -454,7 +463,10 @@ public class JobDescriptionActivity extends AppCompatActivity implements DatePic
 
             Intent i = new Intent(JobDescriptionActivity.this, PackageActivity.class);
             i.putExtra("job_id", job_id);
+            i.putExtra("skill_name", skill_name);
+
             startActivity(i);
+            //   finish();
         });
 
         cancel.setOnClickListener(v -> {

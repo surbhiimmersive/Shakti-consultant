@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         String userid = getIntent().getStringExtra("userid");
 
 
-
 // Since the Terminal is a singleton, you can call getInstance whenever you need it
         // Terminal.getInstance();
 
@@ -252,8 +251,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (item.getItemId() == R.id.drawerour_client) {
             startActivity(new Intent(getApplicationContext(), OurClientActivity.class));
-            overridePendingTransition(
-                    R.anim.slide_in_right, R.anim.slide_out_left);
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         } else if (item.getItemId() == R.id.drawer_jobs) {
             new Handler().postDelayed(new Runnable() {

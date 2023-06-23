@@ -1,5 +1,6 @@
 package com.shakticonsultant;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.LinearLayoutCompat;
@@ -13,11 +14,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,6 +51,7 @@ import retrofit2.Response;
 
 public class PackageActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, PackageListAdapter.OnItemClickListener {
     ActivityPackageBinding binding;
+
     DatePickerDialog datePickerDialog;
     ConnectionDetector cd;
 
@@ -55,10 +59,12 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
 
     PaymentSheet paymentSheet;
     int package_id;
+    String job_id, skill_name;
 
     String paymentIntentClientSecret;
     String amount;
     PaymentSheet.CustomerConfiguration customerConfig;
+    String strdate1 = "", strdate2 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +86,13 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
                     PackageActivity.this, this, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONDAY),
                     Calendar.getInstance().get(Calendar.DATE));
 */
+
+
+            if (getIntent().getExtras() != null) {
+                job_id = getIntent().getStringExtra("job_id");
+                skill_name = getIntent().getStringExtra("skill_name");
+            }
+
             binding.imgBackArrow.setOnClickListener(v -> {
                 onBackPressed();
                 overridePendingTransition(R.anim.slide_in_left,
@@ -190,6 +203,13 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
             }
         });
 
+
+        if (job_id != null && !job_id.isEmpty()) {
+            button.setText("Back to Job ");
+        } else {
+            button.setText("Search more Job");
+        }
+
         if (status.equals("Completed")) {
             //imageView25.setImageDrawable(R.drawable.pay_success);
             imageView25.setImageDrawable(getResources().getDrawable(R.drawable.pay_success));
@@ -202,20 +222,203 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(PackageActivity.this, MainActivity.class);
-                startActivity(i);
-                finish();
+                if (job_id != null && !job_id.isEmpty()) {
+
+                    Intent i = new Intent(PackageActivity.this, JobDescriptionActivity.class);
+                    i.putExtra("job_id", job_id);
+                    i.putExtra("skill_name", skill_name);
+                    i.putExtra("call", "Package");
+                    startActivity(i);
+                    finish();
+                } else {
+                    Intent i = new Intent(PackageActivity.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
+    }
 
+    EditText date1, date2;
+    int year, month, day;
+
+    private void showDateDialog() {
+        Dialog dialog = new Dialog(PackageActivity.this);
+        dialog.setContentView(R.layout.dialog_select_interview_date);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+        dialog.show();
+        date1 = dialog.findViewById(R.id.btn_select_date_1);
+        date2 = dialog.findViewById(R.id.btn_select_date_2);
+        AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
+        AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
+
+        date1.setOnClickListener(v -> {
+            final Calendar c = Calendar.getInstance();
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(PackageActivity.this, R.style.DatePickerTheme,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            date1.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            strdate1 = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+                        }
+                    }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+            //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            datePickerDialog.show();
+        });
+
+        date2.setOnClickListener(v -> {
+            //datePickerDialog.show();
+
+            final Calendar c = Calendar.getInstance();
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
+
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(PackageActivity.this, R.style.DatePickerTheme,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            //  currentdatejoining = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                            date2.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                            strdate2 = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                        }
+                    }, year, month, day);
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+            //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+            datePickerDialog.show();
+        });
+
+        confirm.setOnClickListener(v -> {
+
+
+            if (date1.getText().toString().trim().equals("")) {
+                Snackbar snackbar = Snackbar.make(v, "Please Select First Prefered Date.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                snackbar.show();
+                //   Toast.makeText(context, "Please Select First Prefered Date", Toast.LENGTH_SHORT).show();
+            } else if (date2.getText().toString().trim().equals("")) {
+                Snackbar snackbar = Snackbar.make(v, "Please Select Second Prefered Date.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                snackbar.show();
+                //  Toast.makeText(context, "Please Select Second Prefered Date ", Toast.LENGTH_SHORT).show();
+            } else if (date1.getText().toString().trim().equals(date2.getText().toString().trim())) {
+                Snackbar snackbar = Snackbar.make(v, "Please Select Different Dates.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                snackbar.show();
+                // Toast.makeText(context, "Please Select Different Dates", Toast.LENGTH_SHORT).show();
+
+            } else {
+
+                getApplyJob(strdate1, strdate2, dialog);
+                // dialog.dismiss();
+            }
+            //showConfirmationDialog();
+        });
+
+        cancel.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+
+    }
+
+    public void getApplyJob(String date1, String date2, Dialog dialog) {
+        //binding.progressContatc.setVisibility(View.VISIBLE);
+        Dialog progress_spinner;
+        progress_spinner = Utils.LoadingSpinner(this);
+        progress_spinner.show();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id", AppPrefrences.getUserid(PackageActivity.this));
+        map.put("job_id", job_id);
+        map.put("interview_date_1", date1);
+        map.put("interview_date_2", date2);
+
+
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<CommonResponse> resultCall = apiInterface.callApplyJob(map);
+
+        resultCall.enqueue(new Callback<CommonResponse>() {
+            @Override
+            public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
+                progress_spinner.dismiss();
+                if (response.isSuccessful()) {
+                    //binding.progressContatc.setVisibility(View.GONE);
+                    dialog.dismiss();
+                    //  lemprtNotification.setVisibility(View.GONE);
+                    if (response.body().isSuccess() == true) {
+
+
+                        AlertDialog.Builder logoutDialog = new AlertDialog.Builder(PackageActivity.this, R.style.AlertDialogTheme)
+                                .setTitle(R.string.app_name)
+                                .setMessage("Your job has been applied successfully.")
+                                .setCancelable(false)
+                                .setIcon(R.drawable.shakti_consultant_logo)
+                                .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        showConfirmationDialog();
+                                      /*  binding.edtEmail.setText("");
+                                        binding.edtName.setText("");
+                                        binding.edtText.setText("");*/
+                                    }
+                                });
+                        logoutDialog.show();
+                    } else {
+                        //binding.progressContatc.setVisibility(View.GONE);
+                        progress_spinner.dismiss();
+
+                        //lemprtNotification.setVisibility(View.VISIBLE);
+                        Utils.showFailureDialog(PackageActivity.this, response.message());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommonResponse> call, Throwable t) {
+
+                //  lemprtNotification.setVisibility(View.VISIBLE);
+                //    pd_loading.setVisibility(View.GONE);
+                // binding.progressContatc.setVisibility(View.GONE);
+                progress_spinner.dismiss();
+
+                //Utils.showFailureDialog(JobDescriptionActivity.this, "Something went wrong!");
+            }
+        });
     }
 
 
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult) {
         if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
-            showActivePackageDialog("Canceled", "Payment Canceled ");
+            job_id = "";
+            showActivePackageDialog("Canceled", "Payment Cancelled ");
             //  Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
         } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
+            job_id = "";
             showActivePackageDialog("Failed", "Payment Failed");
             //  Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
         } else {
@@ -241,8 +444,8 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
     }
 
     public void getSubscriptionApi() {
-        Log.d("getSubscriptionApi","getSubscriptionApi1");
-        Log.d("getSubscriptionApi",""+package_id);
+        Log.d("getSubscriptionApi", "getSubscriptionApi1");
+        Log.d("getSubscriptionApi", "" + package_id);
         //binding.progressContatc.setVisibility(View.VISIBLE);
 
         Map<String, String> map = new HashMap<>();
@@ -259,20 +462,20 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onResponse(Call<CommonResponse> call, Response<CommonResponse> response) {
 
-                Log.d("getSubscriptionApi",""+response);
+                Log.d("getSubscriptionApi", "" + response);
 
                 if (response.isSuccessful()) {
-                    Log.d("getSubscriptionApi","isSuccessful");
-                     //  progress_spinner.dismiss();
+                    Log.d("getSubscriptionApi", "isSuccessful");
+                    //  progress_spinner.dismiss();
                     //binding.progressContatc.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);
                     if (response.body().isSuccess()) {
-                        Log.d("getSubscriptionApi","isSuccess");
+                        Log.d("getSubscriptionApi", "isSuccess");
                         showActivePackageDialog("Completed", "Payment Completed");
                     } else {
-                        Log.d("getSubscriptionApi","false");
+                        Log.d("getSubscriptionApi", "false");
                         //binding.progressContatc.setVisibility(View.GONE);
-                    //    progress_spinner.dismiss();
+                        //    progress_spinner.dismiss();
                     }
                 }
             }
@@ -283,40 +486,10 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
                 //  lemprtNotification.setVisibility(View.VISIBLE);
                 //    pd_loading.setVisibility(View.GONE);
                 // binding.progressContatc.setVisibility(View.GONE);
-               // progress_spinner.dismiss();
+                // progress_spinner.dismiss();
 
                 // Utils.showFailureDialog(context, "Something went wrong!");
             }
-        });
-    }
-
-
-    private void showDateDialog() {
-        Dialog dialog = new Dialog(PackageActivity.this);
-        dialog.setContentView(R.layout.dialog_select_interview_date);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialog.show();
-
-        AppCompatButton date1 = dialog.findViewById(R.id.btn_select_date_1);
-        AppCompatButton date2 = dialog.findViewById(R.id.btn_select_date_2);
-        AppCompatButton confirm = dialog.findViewById(R.id.btn_confirm_date);
-        AppCompatButton cancel = dialog.findViewById(R.id.btn_cancel_date);
-
-        date1.setOnClickListener(v -> {
-            datePickerDialog.show();
-        });
-
-        date2.setOnClickListener(v -> {
-            datePickerDialog.show();
-        });
-
-        confirm.setOnClickListener(v -> {
-            dialog.dismiss();
-            showConfirmationDialog();
-        });
-
-        cancel.setOnClickListener(v -> {
-            dialog.dismiss();
         });
     }
 

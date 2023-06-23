@@ -35,10 +35,11 @@ import retrofit2.Response;
 
 public class JobsListActivity extends AppCompatActivity {
 
-ActivityJobsListBinding binding;
-String category_id;
-String category_name;
-ConnectionDetector cd;
+    ActivityJobsListBinding binding;
+    String category_id;
+    String category_name;
+    ConnectionDetector cd;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,14 +79,14 @@ ConnectionDetector cd;
         });*/
             getJobSkillList();
         }
-binding.imageView16.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+        binding.imageView16.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        startActivity(new Intent(JobsListActivity.this, NotificationActivity.class));
+                startActivity(new Intent(JobsListActivity.this, NotificationActivity.class));
 
-    }
-});
+            }
+        });
     }
 
     @Override
@@ -107,7 +108,7 @@ binding.imageView16.setOnClickListener(new View.OnClickListener() {
 
         //   binding.progressBarSkill.setVisibility(View.VISIBLE);
         Map<String, String> map = new HashMap<>();
-         map.put("category_id", category_id);
+        map.put("category_id", category_id);
 
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -119,34 +120,33 @@ binding.imageView16.setOnClickListener(new View.OnClickListener() {
             public void onResponse(Call<JobSkillResponse> call, Response<JobSkillResponse> response) {
 
                 if (response.isSuccessful()) {
-                   // binding.progressBarSkill.setVisibility(View.GONE);
+                    // binding.progressBarSkill.setVisibility(View.GONE);
 
                     //  lemprtNotification.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
                         progress_spinner.dismiss();
                         binding.lEmpty.setVisibility(View.GONE);
                         binding.recycleSkillList.setVisibility(View.VISIBLE);
 
-                        GridLayoutManager linearLayoutManager = new GridLayoutManager(JobsListActivity.this,2);
+                        GridLayoutManager linearLayoutManager = new GridLayoutManager(JobsListActivity.this, 2);
                         binding.recycleSkillList.setLayoutManager(linearLayoutManager);
-                        JobSkillListAdapter adapter=new JobSkillListAdapter(JobsListActivity.this,response.body().getData());
+                        JobSkillListAdapter adapter = new JobSkillListAdapter(JobsListActivity.this, response.body().getData());
                         binding.recycleSkillList.setAdapter(adapter);
                         binding.recycleSkillList.getAdapter().notifyDataSetChanged();
 
 
-
                     } else {
-                       // binding.progressBarSkill.setVisibility(View.GONE);
+                        // binding.progressBarSkill.setVisibility(View.GONE);
                         progress_spinner.dismiss();
 
                         //lemprtNotification.setVisibility(View.VISIBLE);
                         // Utils.showFailureDialog(NotificationActivity.this, "No Data Found");
                     }
-                }else{
-                 //   binding.progressBarSkill.setVisibility(View.GONE);
+                } else {
+                    //   binding.progressBarSkill.setVisibility(View.GONE);
 
-binding.lEmpty.setVisibility(View.VISIBLE);
-binding.recycleSkillList.setVisibility(View.GONE);
+                    binding.lEmpty.setVisibility(View.VISIBLE);
+                    binding.recycleSkillList.setVisibility(View.GONE);
                     progress_spinner.dismiss();
 
                 }

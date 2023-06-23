@@ -58,25 +58,25 @@ public class JobSkillListAdapter extends RecyclerView.Adapter<JobSkillListAdapte
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
         viewHolder.tvTitle.setText(list.get(position).getTitle());
-      //  viewHolder.tvDate.setText(list.get(position).getIcon());
+        //  viewHolder.tvDate.setText(list.get(position).getIcon());
 
         Picasso.get()
-                .load(ApiClient.Photourl+list.get(position).getIcon())
+                .load(ApiClient.Photourl + list.get(position).getIcon())
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(viewHolder.imgIcon);
 
-viewHolder.lJobCategory.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+        viewHolder.lJobCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-Intent i=new Intent(context,SpecificFacultyJobActivity.class);
-i.putExtra("skill_id",list.get(position).getId());
-i.putExtra("skill_name",list.get(position).getTitle());
-context.startActivity(i);
-        ((Activity)context).overridePendingTransition(R.anim.slide_in_right,
-                R.anim.slide_out_left);
-    }
-});
+                Intent i = new Intent(context, SpecificFacultyJobActivity.class);
+                i.putExtra("skill_id", list.get(position).getId());
+                i.putExtra("skill_name", list.get(position).getTitle());
+                context.startActivity(i);
+                ((Activity) context).overridePendingTransition(R.anim.slide_in_right,
+                        R.anim.slide_out_left);
+            }
+        });
     }
 
     // inner class to hold a reference to each item of RecyclerView
@@ -105,7 +105,7 @@ context.startActivity(i);
         return list.size();
     }
 
-    public  void clear(){
+    public void clear() {
         int size = list.size();
         list.clear();
 

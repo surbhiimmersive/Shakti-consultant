@@ -18,9 +18,9 @@
             android:orientation="horizontal"
             android:weightSum="1"
             android:layout_marginTop="25dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="25dp"
             android:gravity="center"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             tools:ignore="MissingConstraints">
 
             <ImageView

@@ -11,84 +11,84 @@
         android:layout_height="wrap_content"
         android:paddingBottom="20dp">
 
-
-<LinearLayout
-    android:id="@+id/l1"
-    android:layout_width="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center"
-
-    android:layout_height="wrap_content"
-    tools:ignore="MissingConstraints">
-
         <LinearLayout
+            android:id="@+id/l1"
             android:layout_width="match_parent"
-            android:layout_weight="0.4"
-            android:layout_marginTop="10dp"
-android:layout_marginLeft="15dp"
-            android:layout_gravity="center"
+            android:layout_height="50dp"
+            android:gravity="center"
 
-            android:layout_height="wrap_content">
-    <ImageView
-        android:id="@+id/image_back_arrow"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
 
-        android:src="@drawable/ic_baseline_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.4">
+
+                <ImageView
+                    android:id="@+id/image_back_arrow"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+
+                    android:src="@drawable/ic_baseline_arrow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView47"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.2"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="Physics Faculty Jobsdsdsdsdsdsdsddsds"
+                android:textAllCaps="true"
+                android:textColor="@color/main_text_color"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/image_back_arrow"
+                app:layout_constraintEnd_toStartOf="@+id/image_view_filter"
+                app:layout_constraintStart_toEndOf="@+id/image_back_arrow"
+                app:layout_constraintTop_toTopOf="@+id/image_back_arrow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="0.4"
+                android:gravity="right">
+
+                <ImageView
+                    android:id="@+id/image_view_filter"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="30dp"
+                    android:src="@drawable/slider"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </LinearLayout>
+
+
         </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView47"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Physics Faculty Jobsdsdsdsdsdsdsddsds"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:layout_weight="0.2"
-android:singleLine="true"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/main_text_color"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/image_back_arrow"
-        app:layout_constraintEnd_toStartOf="@+id/image_view_filter"
-        app:layout_constraintStart_toEndOf="@+id/image_back_arrow"
-        app:layout_constraintTop_toTopOf="@+id/image_back_arrow" />
-
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_weight="0.4"
-android:layout_gravity="right"
-       android:gravity="right"
-       android:layout_height="wrap_content">
-       <ImageView
-           android:id="@+id/image_view_filter"
-           android:layout_width="25dp"
-           android:layout_height="25dp"
-           android:layout_marginTop="25dp"
-           android:visibility="visible"
-           android:layout_marginEnd="30dp"
-           android:src="@drawable/slider"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintTop_toTopOf="parent" />
-
-
-   </LinearLayout>
-
-
-</LinearLayout>
 
 
         <ImageView
             android:id="@+id/imageView23"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:visibility="gone"
             android:layout_marginTop="25dp"
             android:src="@drawable/jobs_recommended"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,9 +117,9 @@ android:layout_gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30sp"
-android:visibility="gone"
-            android:layout_marginEnd="30sp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="30sp"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/imageView23" />
 
 
@@ -134,8 +134,8 @@ android:visibility="gone"
             android:text="No Record Found"
             android:textColor="@color/purple_500"
             android:textSize="16sp"
-            app:flow_horizontalBias="3.0"
             android:visibility="gone"
+            app:flow_horizontalBias="3.0"
             app:flow_verticalBias="1"
             app:layout_constraintTop_toBottomOf="@+id/imgEmpty"
             tools:ignore="MissingConstraints"
@@ -148,8 +148,8 @@ android:visibility="gone"
             android:layout_gravity="center"
             android:layout_marginTop="104dp"
             android:padding="10dp"
-            android:visibility="gone"
             android:src="@drawable/box"
+            android:visibility="gone"
             app:flow_horizontalBias="3.0"
             app:flow_verticalBias="3"
             app:layout_constraintTop_toBottomOf="@+id/l1"
