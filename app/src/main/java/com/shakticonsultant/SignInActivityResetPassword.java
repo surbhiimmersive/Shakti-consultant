@@ -25,7 +25,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignInActivityResetPassword extends AppCompatActivity {
-    String  firebaseToken;
+    String firebaseToken;
     ActivitySignInBinding binding;
     ApiInterface apiInterface;
     ConnectionDetector cd;
@@ -42,7 +42,7 @@ public class SignInActivityResetPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-cd=new ConnectionDetector(SignInActivityResetPassword.this);
+        cd = new ConnectionDetector(SignInActivityResetPassword.this);
 
 
         binding.tvForgotPassword.setOnClickListener(v -> {
@@ -59,9 +59,7 @@ cd=new ConnectionDetector(SignInActivityResetPassword.this);
                 Snackbar.make(findViewById(android.R.id.content), "Internet Connection not available..", Snackbar.LENGTH_LONG)
                         .setActionTextColor(Color.RED)
                         .show();
-            }
-            else
-            if (binding.edtEmail.getText().toString().equals("") || !binding.edtEmail.getText().toString().matches(emailPattern)) {
+            } else if (binding.edtEmail.getText().toString().equals("") || !binding.edtEmail.getText().toString().matches(emailPattern)) {
 
                 Snackbar snackbar = Snackbar.make(binding.getRoot(), "The valid email is required.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null);
@@ -70,26 +68,21 @@ cd=new ConnectionDetector(SignInActivityResetPassword.this);
 
                 snackbar.show();
 
+            } else if (binding.edtPassword.getText().toString().trim().equals("")) {
+
+                Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password is required.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null);
+                View sbView = snackbar.getView();
+                sbView.setBackgroundColor(getColor(R.color.purple_200));
+
+                snackbar.show();
+
+            } else {
+
+                loginAPicall();
+                // loginAPicall(binding.edtEmail.getText().toString().trim(),binding.edtPassword.getText().toString().trim());
             }
-
- else
-    if(binding.edtPassword.getText().toString().trim().equals("")) {
-
-        Snackbar snackbar = Snackbar.make(binding.getRoot(), "The password is required.", Snackbar.LENGTH_LONG)
-                .setAction("Action", null);
-        View sbView = snackbar.getView();
-        sbView.setBackgroundColor(getColor(R.color.purple_200));
-
-        snackbar.show();
-
-    }
-
-            else{
-
-        loginAPicall();
-               // loginAPicall(binding.edtEmail.getText().toString().trim(),binding.edtPassword.getText().toString().trim());
-            }
-                // startActivity(new Intent(SignInActivity.this, MainActivity.class));
+            // startActivity(new Intent(SignInActivity.this, MainActivity.class));
         });
 
     }
@@ -114,23 +107,23 @@ cd=new ConnectionDetector(SignInActivityResetPassword.this);
 
                 if (response.isSuccessful()) {
                     binding.idLoadingPB.setVisibility(View.GONE);
-                    if (response.body().isSuccess()==true) {
+                    if (response.body().isSuccess() == true) {
 
-                               // startActivity(new Intent(SignInActivity.this, MainActivity.class));
+                        // startActivity(new Intent(SignInActivity.this, MainActivity.class));
 
-                        AppPrefrences.setUserid(SignInActivityResetPassword.this,response.body().getData().getId());
+                        AppPrefrences.setUserid(SignInActivityResetPassword.this, response.body().getData().getId());
 
-                        AppPrefrences.setLogin_status(SignInActivityResetPassword.this,true);
-                        AppPrefrences.setLocation(SignInActivityResetPassword.this,response.body().getData().getLocation());
-                        AppPrefrences.setName(SignInActivityResetPassword.this,response.body().getData().getName());
-                        AppPrefrences.setMobile(SignInActivityResetPassword.this,response.body().getData().getMobile());
-                        AppPrefrences.setMail(SignInActivityResetPassword.this,response.body().getData().getEmail());
-                        AppPrefrences.setProfileImg(SignInActivityResetPassword.this,response.body().getData().getProfile_img());
-                        AppPrefrences.setSkillId(SignInActivityResetPassword.this,response.body().getData().getSkill_id());
-                        AppPrefrences.setCategoryId(SignInActivityResetPassword.this,response.body().getData().getCategory_id());
+                        AppPrefrences.setLogin_status(SignInActivityResetPassword.this, true);
+                        AppPrefrences.setLocation(SignInActivityResetPassword.this, response.body().getData().getLocation());
+                        AppPrefrences.setName(SignInActivityResetPassword.this, response.body().getData().getName());
+                        AppPrefrences.setMobile(SignInActivityResetPassword.this, response.body().getData().getMobile());
+                        AppPrefrences.setMail(SignInActivityResetPassword.this, response.body().getData().getEmail());
+                        AppPrefrences.setProfileImg(SignInActivityResetPassword.this, response.body().getData().getProfile_img());
+                        AppPrefrences.setSkillId(SignInActivityResetPassword.this, response.body().getData().getSkill_id());
+                        AppPrefrences.setCategoryId(SignInActivityResetPassword.this, response.body().getData().getCategory_id());
 
                         Intent i = new Intent(SignInActivityResetPassword.this, ResetPasswordActivity.class);
-                       // i.putExtra("userid",response.body().getData().getId());
+                        // i.putExtra("userid",response.body().getData().getId());
 
                         startActivity(i);
                         finish();
@@ -144,7 +137,7 @@ cd=new ConnectionDetector(SignInActivityResetPassword.this);
 
 
                     }
-                }else{
+                } else {
                     binding.idLoadingPB.setVisibility(View.GONE);
 
                     Utils.showFailureDialog(SignInActivityResetPassword.this, "Please enter valid email & password");

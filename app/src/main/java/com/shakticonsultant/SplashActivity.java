@@ -25,15 +25,12 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         FirebaseApp.initializeApp(this);
         firebasetoken();
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -49,10 +46,6 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }
-              /*  startActivity(new Intent(SplashActivity.this, SignInActivity.class));
-                finish();*/
-//                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//                finish();
             }
         }, 2000);
 

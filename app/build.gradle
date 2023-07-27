@@ -11,8 +11,8 @@ android {
         applicationId "com.shakticonsultant"
         minSdk 23
         targetSdk 33
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -89,7 +89,6 @@ dependencies {
 
     //Stripe
     implementation 'com.stripe:stripe-android:20.25.5'
-
 
 
 }

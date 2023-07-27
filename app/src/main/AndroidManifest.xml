@@ -11,15 +11,18 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
-            <data android:scheme="upi" android:host="pay"/>
+            <data
+                android:host="pay"
+                android:scheme="upi" />
         </intent>
         <package android:name="com.android.chrome" />
     </queries>
@@ -72,13 +75,14 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>>
+        </activity>
+        >
         <activity
             android:name=".ContactUsActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ScheduleInterviewActivity"
             android:exported="false"
@@ -107,9 +111,9 @@
             android:name=".GetPersonalInfoActivity"
             android:exported="false"
 
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".EditProfileActivity"
             android:exported="false"
@@ -117,15 +121,15 @@
         <activity
             android:name=".GetAcademicDetailsActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".GetEmployeeHistoryActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".NewJobSearchListActivity"
             android:exported="false"
@@ -147,15 +151,15 @@
         <activity
             android:name=".SearchJobFilterActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".JobFiltersActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".JobsListActivity"
             android:exported="true"
@@ -175,27 +179,27 @@
         <activity
             android:name=".EmployeeHistoryActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".AcademicDetailsActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".PersonalInfoActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"
 
-            android:screenOrientation="portrait" />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".PasswordResetActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 
-<activity
+        <activity
             android:name=".OrganizationDailog"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -258,7 +262,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-  <activity
+        <activity
             android:name=".PaymentInrigationNew"
             android:exported="true"
             android:screenOrientation="portrait" />
@@ -283,7 +287,7 @@
 
         <service
             android:name=".firebase.FirebaseMsg"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -292,14 +296,18 @@
 
         <service
             android:name="com.google.firebase.components.ComponentDiscoveryService"
-            android:directBootAware="true" android:exported="false" >
+            android:directBootAware="true"
+            android:exported="false">
 
-            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
 
-            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
                 android:value="com.google.firebase.components.ComponentRegistrar" />
         </service>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

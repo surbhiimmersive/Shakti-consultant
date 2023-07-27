@@ -693,7 +693,6 @@
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="15dp"
-
             android:layout_marginEnd="30dp"
             android:background="@drawable/custom_edittext_bg"
             app:cardCornerRadius="8dp"
@@ -717,10 +716,8 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:entries="@array/test5"
-
                 android:gravity="center"
                 android:spinnerMode="dialog"
-
                 />
         </androidx.cardview.widget.CardView>
 

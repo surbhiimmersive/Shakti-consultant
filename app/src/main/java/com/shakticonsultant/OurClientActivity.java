@@ -1,40 +1,26 @@
 package com.shakticonsultant;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.DatePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.shakticonsultant.adapter.ImageViewPagerAdapter;
 import com.shakticonsultant.adapter.OurClientAdapter;
-import com.shakticonsultant.adapter.PackageListAdapter;
 import com.shakticonsultant.databinding.ActivityOurClientBinding;
-import com.shakticonsultant.databinding.ActivityPackageBinding;
 import com.shakticonsultant.responsemodel.OurClientDatumResponse;
 import com.shakticonsultant.responsemodel.OurClientResponse;
-import com.shakticonsultant.responsemodel.PackageResponse;
-import com.shakticonsultant.responsemodel.SliderDatumResponse;
-import com.shakticonsultant.responsemodel.SliderResponse;
 import com.shakticonsultant.retrofit.ApiClient;
 import com.shakticonsultant.retrofit.ApiInterface;
 import com.shakticonsultant.utils.ConnectionDetector;
 import com.shakticonsultant.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -72,19 +58,12 @@ public class OurClientActivity extends AppCompatActivity {
         } else {
             getSliderApi();
         }
-
-
     }
-
 
     public void getSliderApi() {
         Dialog progress_spinner;
         progress_spinner = Utils.LoadingSpinner(this);
         progress_spinner.show();
-
-        // pd_loading.setVisibility(View.VISIBLE);
-        Map<String, String> map = new HashMap<>();
-        //  map.put("position", "Main slider");
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -93,11 +72,13 @@ public class OurClientActivity extends AppCompatActivity {
         resultCall.enqueue(new Callback<OurClientResponse>() {
             @Override
             public void onResponse(Call<OurClientResponse> call, Response<OurClientResponse> response) {
+                Log.d("responseresponse", "" + response.isSuccessful());
 
                 if (response.isSuccessful()) {
                     //  pd_loading.setVisibility(View.GONE);
                     progress_spinner.dismiss();
                     if (response.body().isSuccess() == true) {
+                        binding.lEmpty.setVisibility(View.GONE);
                         sliderDatumResponses = response.body().getData();
                         if (sliderDatumResponses != null && sliderDatumResponses.size() > 0) {
 
@@ -106,17 +87,18 @@ public class OurClientActivity extends AppCompatActivity {
 
                             Timer timer = new Timer();
                             timer.scheduleAtFixedRate(new SliderTimer(), 3000, 5000);
-
-
                         } else {
                             progress_spinner.dismiss();
 
                             // Utils.showFailureDialog(getActivity(), "Please search valid keyword");
                         }
+                    } else {
+                        progress_spinner.dismiss();
+                        binding.lEmpty.setVisibility(View.VISIBLE);
+                        // Utils.showFailureDialog(getActivity(), "Please search valid keyword");
                     }
                 }
             }
-
 
             @Override
 
@@ -130,7 +112,6 @@ public class OurClientActivity extends AppCompatActivity {
     }
 
     private class SliderTimer extends TimerTask {
-
         @Override
         public void run() {
             try {

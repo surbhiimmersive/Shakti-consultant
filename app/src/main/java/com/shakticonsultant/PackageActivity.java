@@ -51,7 +51,6 @@ import retrofit2.Response;
 
 public class PackageActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, PackageListAdapter.OnItemClickListener {
     ActivityPackageBinding binding;
-
     DatePickerDialog datePickerDialog;
     ConnectionDetector cd;
 
@@ -60,7 +59,6 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
     PaymentSheet paymentSheet;
     int package_id;
     String job_id, skill_name;
-
     String paymentIntentClientSecret;
     String amount;
     PaymentSheet.CustomerConfiguration customerConfig;
@@ -130,8 +128,7 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
                     //response.body().getData().get(0).getStarting_salary()
 
                     try {
-                        customerConfig = new PaymentSheet.CustomerConfiguration(
-                                response.body().getData().get(0).getcustomer(),
+                        customerConfig = new PaymentSheet.CustomerConfiguration(response.body().getData().get(0).getcustomer(),
                                 response.body().getData().get(0).getephemeralKey());
 
                         paymentIntentClientSecret = response.body().getData().get(0).getPaymentIntent();
@@ -527,7 +524,6 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
         Map<String, String> map = new HashMap<>();
         map.put("user_id", AppPrefrences.getUserid(PackageActivity.this));
 
-
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         Call<PackageResponse> resultCall = apiInterface.callPackageList(map);
@@ -535,8 +531,9 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
         resultCall.enqueue(new Callback<PackageResponse>() {
             @Override
             public void onResponse(Call<PackageResponse> call, Response<PackageResponse> response) {
-
+                Log.d("isSuccessful", response.toString());
                 if (response.isSuccessful()) {
+
                     progress_spinner.dismiss();
                     //  binding.progressBarpackage.setVisibility(View.GONE);
                     //  lemprtNotification.setVisibility(View.GONE);

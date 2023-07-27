@@ -10,40 +10,38 @@
     <LinearLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30sp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="1"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="5sp"
-        android:gravity="center"
-        android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
 
         <ImageView
             android:id="@+id/img_back_arrow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="5sp"
+            android:layout_marginTop="10dp"
             android:layout_weight="0.9"
-            android:src="@drawable/ic_baseline_arrow"
-            />
+            android:src="@drawable/ic_baseline_arrow" />
 
         <TextView
             android:id="@+id/textView47"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rejected Application"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:textStyle="bold"
-
-            android:layout_weight="0.1"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10sp"
+            android:layout_weight="0.1"
+
+            android:gravity="center"
+            android:text="Rejected Application"
             android:textAllCaps="true"
             android:textColor="@color/main_text_color"
             android:textSize="18sp"
-            />
+            android:textStyle="bold" />
 
 
     </LinearLayout>
@@ -55,8 +53,8 @@
         android:layout_height="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="30dp"
-        android:visibility="gone"
         android:src="@drawable/slider"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -83,8 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView23"
-       />
+        app:layout_constraintTop_toBottomOf="@+id/imageView23" />
 
     <ProgressBar
         android:id="@+id/progressrejected"
@@ -92,43 +89,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/loading_img"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/imageView23"
         app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintRight_toRightOf="parent"
-        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.5" />
+
     <LinearLayout
         android:id="@+id/lEmpty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/l1"
-        android:orientation="vertical"
         android:layout_marginBottom="20dp"
-        android:visibility="gone"
         android:gravity="center"
-        >
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:padding="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_gravity="center"
-            android:src="@drawable/box"
-            ></ImageView>
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:src="@drawable/box"></ImageView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Record Found"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_margin="5dp"
-            android:textSize="16sp"
+            android:gravity="center"
+            android:text="No Record Found"
             android:textColor="@color/purple_500"
-            ></TextView>
+            android:textSize="16sp"></TextView>
 
 
     </LinearLayout>

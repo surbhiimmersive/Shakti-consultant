@@ -202,7 +202,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
             name = getIntent().getStringExtra("name");
             mobile = getIntent().getStringExtra("mobile");
 
-
             binding.button.setBackground(getResources().getDrawable(R.drawable.custom_item_bg));
 
             binding.edtName.setText(name);
@@ -694,6 +693,10 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     if (binding.radioNonTeaching.isChecked()) {
                         strInterested_id = "2";
 
+                        strStream = "";
+                        strSkillId = "";
+                      //  binding.spDivision.setText("Select skill");
+
                         binding.radioNonTeaching.setTextColor(getResources().getColor(R.color.main_text_color));
                         binding.radioTeaching.setTextColor(getResources().getColor(R.color.black));
 
@@ -704,11 +707,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
                         strSubject = "";
                         binding.cardStream.setVisibility(View.GONE);
 
-
                     }
                 }
             });
-
 
             binding.radioExperienceGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
@@ -1352,6 +1353,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         //  binding.progressInfo.setVisibility(View.VISIBLE);
         Dialog progress_spinner;
         progress_spinner = Utils.LoadingSpinner(this);
+
         progress_spinner.show();
 
         Map<String, String> map = new HashMap<>();

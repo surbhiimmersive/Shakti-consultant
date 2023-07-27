@@ -128,7 +128,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<PackageResponse> callPackageList(@FieldMap Map<String, String> params);
 
-    @POST("userActivePackage ")
+    @POST("userActivePackage")
     @FormUrlEncoded
     Call<PackageResponse> callUserActivePackage(@FieldMap Map<String, String> params);
 

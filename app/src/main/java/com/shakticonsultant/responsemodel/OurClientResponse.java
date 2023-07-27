@@ -6,15 +6,14 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-public class OurClientResponse implements Serializable
-{
+public class OurClientResponse implements Serializable {
 
     @SerializedName("success")
-@Expose
-private boolean success;
+    @Expose
+    private boolean success;
     @SerializedName("message")
-@Expose
-private String message;
+    @Expose
+    private String message;
     @SerializedName("data")
     @Expose
     private List<OurClientDatumResponse> data = null;

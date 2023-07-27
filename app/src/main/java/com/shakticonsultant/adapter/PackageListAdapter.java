@@ -129,7 +129,7 @@ public class PackageListAdapter extends RecyclerView.Adapter<PackageListAdapter.
                 AlertDialog.Builder logoutDialog = new AlertDialog.Builder(context, R.style.AlertDialogTheme)
                         .setTitle(R.string.app_name)
 
-                        .setMessage("Details  \n" + list.get(position).getDescription())
+                        .setMessage("\n" + list.get(position).getDescription())
                         .setIcon(R.drawable.shakti_consultant_logo)
                         .setPositiveButton(Html.fromHtml("<font color='#BB274D'>Ok</font>"), new DialogInterface.OnClickListener() {
                             @Override

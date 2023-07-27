@@ -26,7 +26,7 @@ public class ApiClient extends Application {
 
     private static Retrofit retrofit = null;
 
-    public static String Photourl = "https://superadmin.shakticonsultant.com/";
+    public static String Photourl = "https://shakticonsultant.com/superadmin/";
 
     @Override
     public void onCreate() {
@@ -51,7 +51,7 @@ public class ApiClient extends Application {
                 })
                 .build();
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://superadmin.shakticonsultant.com/api/")
+                .baseUrl("https://shakticonsultant.com/superadmin/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();

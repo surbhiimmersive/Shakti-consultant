@@ -208,14 +208,12 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                 }
             });
 
-
             binding.edtState.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
                     dialog.setContentView(R.layout.skill_selection);
                     dialog.show();
-
 
                     AppCompatButton btnok = dialog.findViewById(R.id.btnok);
                     spSkill = dialog.findViewById(R.id.spEmployeeStream);
@@ -389,7 +387,12 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                     Dialog dialog = new Dialog(GetPersonalInfoActivity.this);
                     dialog.setContentView(R.layout.skill_selection);
                     dialog.setCancelable(false);
-                    dialog.show();
+
+                    if(sp_stream_list.size()>0){
+                        dialog.show();
+                    }else {
+                        Toast.makeText(GetPersonalInfoActivity.this, "No Skill found for selected category", Toast.LENGTH_SHORT).show();
+                    }
 
 
                     AppCompatButton btnok = dialog.findViewById(R.id.btnok);
@@ -407,8 +410,6 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                             binding.edtSkill.setText(strStream);
 
                             adaStream.notifyDataSetChanged();
-
-
                         }
 
                         @Override
@@ -792,6 +793,13 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                     if (binding.radioNonTeaching.isChecked()) {
                         binding.radioNonTeaching.setTextColor(getResources().getColor(R.color.main_text_color));
                         binding.radioTeaching.setTextColor(getResources().getColor(R.color.black));
+
+                        strStream = "";
+                        strSkillId = "";
+                        binding.edtSkill.setText("Select skill");
+                        if( adaStream!=null){adaStream.notifyDataSetChanged();}
+
+
 
                         binding.cardDivision.setVisibility(View.VISIBLE);
                         binding.cardStream.setVisibility(View.VISIBLE);

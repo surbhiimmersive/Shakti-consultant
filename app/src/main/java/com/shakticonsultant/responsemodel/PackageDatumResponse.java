@@ -10,9 +10,7 @@ public class PackageDatumResponse implements Serializable {
     @SerializedName("id")
     @Expose
     private int id;
-    @SerializedName("package_id")
-    @Expose
-    private int package_id;
+
     @SerializedName("heading")
     @Expose
     private String heading;
@@ -58,14 +56,6 @@ public class PackageDatumResponse implements Serializable {
 
     public String getDescription() {
         return description;
-    }
-
-    public int getPackage_id() {
-        return package_id;
-    }
-
-    public void setPackage_id(int package_id) {
-        this.package_id = package_id;
     }
 
     public void setNo_of_jobs(String no_of_jobs) {
