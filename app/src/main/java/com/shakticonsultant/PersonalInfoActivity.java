@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.BuildConfig;
 import com.shakticonsultant.adapter.JobSkillListAdapter;
 import com.shakticonsultant.adapter.OrganizationAdapter;
 import com.shakticonsultant.databinding.ActivityPersonalInfoBinding;
@@ -134,7 +135,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.MANAGE_EXTERNAL_STORAGE,
     };
     List<StateDatumResponse> statelist = new ArrayList<>();
     List<AnnualDatumResponse> annualList = new ArrayList<>();
@@ -155,6 +157,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
     private static final String IMAGE_DIRECTORY = "/demonuts_upload_gallery";
     ConnectionDetector cd;
     String name;
+    Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,7 +187,12 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     },
                     1
             );
-           /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+
+
+
+
+            /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
 
                     // If you don't have access, launch a new activity to show the user the system's dialog
@@ -213,7 +221,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     Dialog dialog = new Dialog(PersonalInfoActivity.this);
                     dialog.setContentView(R.layout.skill_selection);
                     dialog.show();
-
 
                     AppCompatButton btnok = dialog.findViewById(R.id.btnok);
                     spSkill = dialog.findViewById(R.id.spEmployeeStream);
@@ -430,7 +437,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                         sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                         snackbar.show();
-
                     } else if (binding.txtbday.getText().toString().equals("")) {
                         Snackbar snackbar = Snackbar.make(binding.getRoot(), "Please select DOB.", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null);
@@ -438,7 +444,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                         sbView.setBackgroundColor(getColor(R.color.purple_200));
 
                         snackbar.show();
-
                     } else if (minAdultAge.before(userAge)) {
                         binding.txtbday.setText("");
 
@@ -695,8 +700,15 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
                         strStream = "";
                         strSkillId = "";
-                      //  binding.spDivision.setText("Select skill");
+                        sp_stream_list.clear();
 
+                        sp_stream_list.add("Select Skill");
+                        if (adaStream == null) {
+                            adaStream = new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_stream_list);
+                            binding.spStream.setAdapter(adaStream);
+                        } else {
+                            adaStream.notifyDataSetChanged();
+                        }
                         binding.radioNonTeaching.setTextColor(getResources().getColor(R.color.main_text_color));
                         binding.radioTeaching.setTextColor(getResources().getColor(R.color.black));
 
@@ -706,7 +718,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                         getInterenstedFiledAPi("2");
                         strSubject = "";
                         binding.cardStream.setVisibility(View.GONE);
-
                     }
                 }
             });
@@ -1053,8 +1064,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 //    binding.imageView8.setVisibility(View.VISIBLE);
                 binding.imageView6.setImageBitmap(bitmap);
                 binding.imgEdit.setVisibility(View.VISIBLE);
-
-
             }
         }
         if (requestCode == PICK_doc_REQUEST) {
@@ -1165,9 +1174,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         });
     }
 
-
     //////--------Interrested Filed-----------------------
-
 
     public void getInterenstedFiledAPi(String strfiled) {
         //  binding.progressInfo.setVisibility(View.VISIBLE);
@@ -1195,7 +1202,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
                         designationList = response.body().getData();
 
-
                         if (designationList.size() > 0) {
                             //  sp_division_list.add("Select Category");
 
@@ -1203,18 +1209,14 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
                                 sp_division_list.add(designationList.get(i).getTitle());
 
-
                                 binding.spDivision.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         try {
-
-
                                             strDivision = designationList.get(i).getTitle();
 
                                             if (strDivision.equals("Select Category")) {
                                                 binding.cardStream.setVisibility(View.GONE);
-
                                             } else {
                                                 binding.cardStream.setVisibility(View.VISIBLE);
                                                 strCategoryId = designationList.get(i).getId();
@@ -1222,7 +1224,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                                                 adpCategory.notifyDataSetChanged();
                                                 getJobSkill(strCategoryId);
                                             }
-
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
@@ -1261,7 +1262,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
         });
     }
 
-
     public void dahsboardInterenstedFiledAPi(String strfiled) {
         //  binding.progressInfo.setVisibility(View.VISIBLE);
 
@@ -1284,10 +1284,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
                         designationList = response.body().getData();
 
-
                         if (designationList.size() > 0) {
                             //  sp_division_list.add("Select Category");
-
                             for (int i = 0; i < designationList.size(); i++) {
 
                                 sp_division_list.add(designationList.get(i).getTitle());
@@ -1297,13 +1295,10 @@ public class PersonalInfoActivity extends AppCompatActivity {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         try {
-
-
                                             strDivision = designationList.get(i).getTitle();
 
                                             if (strDivision.equals("Select Category")) {
                                                 binding.cardStream.setVisibility(View.GONE);
-
                                             } else {
                                                 binding.cardStream.setVisibility(View.VISIBLE);
                                                 strCategoryId = designationList.get(i).getId();
@@ -1325,9 +1320,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                             }
                             adpCategory = new ArrayAdapter<String>(PersonalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, sp_division_list);
                             binding.spDivision.setAdapter(adpCategory);
-
-                            //  adpCategory.notifyDataSetChanged();
-
                         }
 
 
@@ -1347,7 +1339,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void getJobSkill(String category_id) {
         //  binding.progressInfo.setVisibility(View.VISIBLE);
@@ -1372,6 +1363,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     // binding.progressInfo.setVisibility(View.GONE);
                     if (response.body().isSuccess() == true) {
                         streamList = response.body().getData();
+                        Log.d("streamListstreamList", streamList.toString());
 
                         if (streamList.size() > 0) {
                             //  sp_stream_list.add("Select Skill");
@@ -1387,8 +1379,12 @@ public class PersonalInfoActivity extends AppCompatActivity {
                                     @Override
                                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                                         try {
-                                            strStream = streamList.get(i).getTitle();
-                                            strSkillId = streamList.get(i).getId();
+                                            if (!sp_stream_list.get(i).equalsIgnoreCase("Select Skill")) {
+                                                strStream = streamList.get(i).getTitle();
+                                                strSkillId = streamList.get(i).getId();
+                                            } else {
+                                                //  Toast.makeText(PersonalInfoActivity.this, "No Skill found for selected category", Toast.LENGTH_SHORT).show();
+                                            }
                                             adaStream.notifyDataSetChanged();
                                             // Toast.makeText(PersonalInfoActivity.this, "city"+id, Toast.LENGTH_SHORT).show();
                                         } catch (Exception e) {
@@ -1407,6 +1403,9 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
                             }
 
+
+                        } else {
+                            Toast.makeText(PersonalInfoActivity.this, "No Skill found for selected category", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -1437,7 +1436,8 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
 
     private void requestPermissions() {
@@ -1447,6 +1447,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 List<String> permssions = new ArrayList<>();
                 permssions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
                 permssions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                permssions.add(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
                 permssions.add(Manifest.permission.CAMERA);
                 return permssions;
             }
@@ -1567,7 +1568,36 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     // pd_loading.setVisibility(View.GONE);
                     binding.progresspersonal.setVisibility(View.GONE);
 
-                    //  Toast.makeText(PersonalInfoActivity.this, "ERROR" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                   try{
+                       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                           if (!Environment.isExternalStorageManager()) {
+                               snackbar.make(findViewById(android.R.id.content), "Permission needed!", Snackbar.LENGTH_INDEFINITE)
+                                       .setAction("Settings", new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                               /* Intent intent = new Intent();
+                                intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                                Uri uri = Uri.fromParts("package", this.getPackageName(), null);
+                                intent.setData(uri);
+                                startActivity(intent);*/
+
+                                               try {
+                                                   Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+                                                   Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri);
+                                                   startActivity(intent);
+                                               } catch (Exception ex) {
+                                                   Intent intent = new Intent();
+                                                   intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                                                   startActivity(intent);
+                                               }
+                                           }
+                                       })
+                                       .show();
+
+                           }
+                       }
+                   }
+                   catch (Exception e){}
                 }
             });
         }

@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <TextView
             android:id="@+id/textView11"
             android:layout_width="0dp"
@@ -709,6 +708,7 @@
                 android:spinnerMode="dialog"
                 android:entries="@array/test4"
                 />-->
+
             <Spinner
                 android:id="@+id/spDivision"
                 android:layout_width="match_parent"
@@ -717,8 +717,8 @@
                 android:backgroundTint="@android:color/holo_red_dark"
                 android:entries="@array/test5"
                 android:gravity="center"
-                android:spinnerMode="dialog"
-                />
+                android:spinnerMode="dialog" />
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -1230,7 +1230,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
             </LinearLayout>
         </LinearLayout>

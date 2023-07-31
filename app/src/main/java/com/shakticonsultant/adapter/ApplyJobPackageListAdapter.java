@@ -180,7 +180,6 @@ public class ApplyJobPackageListAdapter extends RecyclerView.Adapter<ApplyJobPac
             tvSubscriptiondays = (TextView) itemLayoutView.findViewById(R.id.tvSubscriptiondays);
             tvJobs = (TextView) itemLayoutView.findViewById(R.id.tvJobs);
             layout_diamond_package = (ConstraintLayout) itemLayoutView.findViewById(R.id.layout_diamond_package);
-
         }
     }
 
@@ -236,7 +235,6 @@ public class ApplyJobPackageListAdapter extends RecyclerView.Adapter<ApplyJobPac
             year = c.get(Calendar.YEAR);
             month = c.get(Calendar.MONTH);
             day = c.get(Calendar.DAY_OF_MONTH);
-
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(context, R.style.DatePickerTheme,
                     new DatePickerDialog.OnDateSetListener() {

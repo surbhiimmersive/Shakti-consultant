@@ -246,7 +246,6 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                     spSkill.setAdapter(adspinnerStatep);
                     adspinnerStatep.notifyDataSetChanged();
 
-
                     btnok.setOnClickListener(v -> {
 
                         if (strstate.equals("Select State")) {
@@ -388,9 +387,9 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                     dialog.setContentView(R.layout.skill_selection);
                     dialog.setCancelable(false);
 
-                    if(sp_stream_list.size()>0){
+                    if (sp_stream_list.size() > 0) {
                         dialog.show();
-                    }else {
+                    } else {
                         Toast.makeText(GetPersonalInfoActivity.this, "No Skill found for selected category", Toast.LENGTH_SHORT).show();
                     }
 
@@ -797,8 +796,9 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                         strStream = "";
                         strSkillId = "";
                         binding.edtSkill.setText("Select skill");
-                        if( adaStream!=null){adaStream.notifyDataSetChanged();}
-
+                        if (adaStream != null) {
+                            adaStream.notifyDataSetChanged();
+                        }
 
 
                         binding.cardDivision.setVisibility(View.VISIBLE);
@@ -1265,7 +1265,6 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
 
                         designationList = response.body().getData();
 
-
                         if (designationList.size() > 0) {
                             //  sp_division_list.add("Select Category");
 
@@ -1310,8 +1309,6 @@ public class GetPersonalInfoActivity extends AppCompatActivity {
                             //  adpCategory.notifyDataSetChanged();
 
                         }
-
-
                     } else {
                         // binding.progressInfo.setVisibility(View.GONE);
 

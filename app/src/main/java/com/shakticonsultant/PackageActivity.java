@@ -77,15 +77,12 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
                     .setActionTextColor(Color.RED)
                     .show();
         } else {
-
             getPackageListApi();
             getUserPackageActiveApi();
            /* datePickerDialog = new DatePickerDialog(
                     PackageActivity.this, this, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONDAY),
                     Calendar.getInstance().get(Calendar.DATE));
 */
-
-
             if (getIntent().getExtras() != null) {
                 job_id = getIntent().getStringExtra("job_id");
                 skill_name = getIntent().getStringExtra("skill_name");
@@ -171,12 +168,11 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PackageActivity.this);
         recyclerpackage.setLayoutManager(linearLayoutManager);
-        PackageListAdapter adapter = new PackageListAdapter(PackageActivity.this, response_public.body().getData().get(0));
+        PackageListAdapter adapter = new PackageListAdapter(PackageActivity.this, response_public.body().getData().get(0), job_id);
         recyclerpackage.setAdapter(adapter);
         recyclerpackage.getAdapter().notifyDataSetChanged();
 
     }
-
 
     private void showActivePackageDialog(String status, String payment_status) {
 
@@ -542,7 +538,7 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PackageActivity.this);
                         binding.recyclerpackage.setLayoutManager(linearLayoutManager);
                         PackageListAdapter adapter = new PackageListAdapter(PackageActivity.this, response.body().getData(),
-                                PackageActivity.this);
+                                PackageActivity.this, job_id);
                         binding.recyclerpackage.setAdapter(adapter);
                         binding.recyclerpackage.getAdapter().notifyDataSetChanged();
 
@@ -612,6 +608,9 @@ public class PackageActivity extends AppCompatActivity implements DatePickerDial
 
     @Override
     public void onItemClick(int package_id, String amount) {
+
+        Log.d("onItemClickamount", amount);
+
         this.package_id = package_id;
         this.amount = amount;
 

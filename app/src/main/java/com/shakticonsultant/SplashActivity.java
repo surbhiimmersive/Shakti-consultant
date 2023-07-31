@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
                     Intent i = new Intent(SplashActivity.this, SignInActivity.class);
                     startActivity(i);
                     finish();
-                }else {
+                } else {
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();
@@ -50,7 +50,6 @@ public class SplashActivity extends AppCompatActivity {
         }, 2000);
 
     }
-
 
     public void firebasetoken() {
 
@@ -69,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
                         // Log and toast
                         String msg = token;
                         //Log.e("Shikhamsg", msg);
-                        AppPrefrences.setUserToken(SplashActivity.this,msg);
+                        AppPrefrences.setUserToken(SplashActivity.this, msg);
                         //Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_SHORT).show();
 
                         // Toast.makeText(SplashActivity.this, msg, Toast.LENGTH_SHORT).show();

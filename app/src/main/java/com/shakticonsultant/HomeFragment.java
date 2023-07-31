@@ -41,11 +41,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
     boolean homeclose = true;
     private List<SliderDatumResponse> sliderDatumResponses = new ArrayList<>();
@@ -105,7 +100,6 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(getLayoutInflater());
 
-
         dotsRecyclerView = binding.dotsRecyclerView;
         viewPager = binding.viewpager;
        /*  adapter=new ImageViewPagerAdapter(getContext(),);
@@ -120,7 +114,6 @@ public class HomeFragment extends Fragment {
         binding.openDrawer.setOnClickListener(v -> {
             ((MainActivity) getActivity()).openDrawer();
         });
-
 
         // for testing
        /* binding.textView39.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +133,6 @@ public class HomeFragment extends Fragment {
         binding.imageViewSearch.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), SearchJobActivity.class));
         });
-
 
         binding.btnAllJob.setOnClickListener(v -> {
             setButtonSelected(binding.btnAllJob, binding.btnLatestJob);
@@ -307,7 +299,6 @@ public class HomeFragment extends Fragment {
     }
 
     private class SliderTimer extends TimerTask {
-
         @Override
         public void run() {
             try {
@@ -338,7 +329,6 @@ public class HomeFragment extends Fragment {
         //  map.put("location", AppPrefrences.getLocation(getActivity()));
         map.put("location", "7");
         map.put("user_id", AppPrefrences.getUserid(getActivity()));
-
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
@@ -409,7 +399,6 @@ public class HomeFragment extends Fragment {
         Map<String, String> map = new HashMap<>();
         //map.put("location", "7");
         map.put("user_id", AppPrefrences.getUserid(getActivity()));
-
 
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 

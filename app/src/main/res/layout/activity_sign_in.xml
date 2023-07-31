@@ -52,37 +52,37 @@
             android:background="@drawable/custom_edittext_bg"
             android:fontFamily="@font/poppins_regular"
             android:hint="John@gmail.com"
-            android:singleLine="true"
             android:inputType="textEmailAddress"
-
             android:maxLength="40"
+
             android:outlineProvider="paddedBounds"
             android:paddingStart="10dp"
+            android:singleLine="true"
             android:textColor="@color/input_text_color"
             android:textColorHint="@color/hint_color"
             android:textSize="14sp" />
 
         <TextView
             android:layout_width="wrap_content"
-            android:singleLine="true"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_medium"
+            android:singleLine="true"
             android:text="Password"
             android:textColor="@color/text_color"
             android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextInputLayout_password"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="5dp"
-            app:boxStrokeWidth="0dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
-            app:boxStrokeWidthFocused="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:hintEnabled="false"
             android:elegantTextHeight="true"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView1"
@@ -93,16 +93,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:background="@drawable/custom_edittext_bg"
+                android:elegantTextHeight="true"
                 android:fontFamily="@font/poppins_medium"
                 android:hint="* * * * * * * *"
-                android:maxLength="15"
-                android:paddingTop="12dp"
-                android:outlineProvider="paddedBounds"
                 android:inputType="textPassword"
-                android:elegantTextHeight="true"
-                app:hintTextColor="@color/hint_color"
+                android:maxLength="15"
+                android:outlineProvider="paddedBounds"
+                android:paddingTop="12dp"
                 android:textColor="@color/input_text_color"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                app:hintTextColor="@color/hint_color" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -159,10 +159,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Doesn't have an account?"
-        android:textSize="16sp"
-        android:textColor="#555555"
         android:fontFamily="@font/roboto"
+        android:text="Doesn't have an account?"
+        android:textColor="#555555"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_sign_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -173,25 +173,25 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:indeterminateDrawable="@drawable/loading_img"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/btn_sign_in"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
-<!--
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/idLoadingPB"
-        android:visibility="gone"
+    <!--
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/idLoadingPB"
+            android:visibility="gone"
 
-        android:foregroundGravity="center"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/btn_sign_in"
-        ></ProgressBar>-->
+            android:foregroundGravity="center"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/btn_sign_in"
+            ></ProgressBar>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
