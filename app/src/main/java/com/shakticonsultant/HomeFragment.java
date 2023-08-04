@@ -236,7 +236,6 @@ public class HomeFragment extends Fragment {
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         Call<SliderResponse> resultCall = apiInterface.callSliderApi(map);
-
         resultCall.enqueue(new Callback<SliderResponse>() {
             @Override
             public void onResponse(Call<SliderResponse> call, Response<SliderResponse> response) {

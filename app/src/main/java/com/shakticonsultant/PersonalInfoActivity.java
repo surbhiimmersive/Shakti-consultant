@@ -136,7 +136,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.MANAGE_EXTERNAL_STORAGE,
     };
     List<StateDatumResponse> statelist = new ArrayList<>();
     List<AnnualDatumResponse> annualList = new ArrayList<>();
@@ -942,9 +941,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
     // Method for starting the activity for selecting image from phone storage
     public void pick(View view) {
         verifyStoragePermissions(PersonalInfoActivity.this);
-       /* Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Open Gallery"), PICK_IMAGE_REQUEST);*/
+
         if (Build.VERSION.SDK_INT < 19) {
             Intent intent = new Intent();
             intent.setType("image/jpeg");
@@ -977,6 +974,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         verifyStoragePermissions(PersonalInfoActivity.this);
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("application/pdf");
+
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -1041,43 +1039,58 @@ public class PersonalInfoActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
 
 
-                Uri uri = data.getData();
-                //  File file = new File(uri.getPath());//create path from uri
-                //  final String[] split = file.getPath().split(":");//split the path.
+                if (data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+                    // Handle the selected media URI
 
-                try {
-                    //  profilefilepath = PathUtil.getPath(PersonalInfoActivity.this, uri);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        if (!Environment.isExternalStorageManager()) {
+                            grantPersistableUriPermissions(uri);
+                        }
+                    }
 
-                    File finalFile = new File(PathUtil.getPath(PersonalInfoActivity.this, uri));
-                    profilefilepath = finalFile.getAbsolutePath();
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
+
+                   /* try {
+                        int takeFlags = intent.getFlags();
+                        takeFlags &= (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        getContext().getContentResolver().takePersistableUriPermission(uri, takeFlags);
+                    } catch (SecurityException e) {
+                        Log.e("", e.toString());
+                    }*/
+
+                    try {
+                        //  profilefilepath = PathUtil.getPath(PersonalInfoActivity.this, uri);
+
+                        File finalFile = new File(PathUtil.getPath(PersonalInfoActivity.this, uri));
+                        profilefilepath = finalFile.getAbsolutePath();
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //  binding.imageView7.setVisibility(View.VISIBLE);
+                    //    binding.imageView8.setVisibility(View.VISIBLE);
+                    binding.imageView6.setImageBitmap(bitmap);
+                    binding.imgEdit.setVisibility(View.VISIBLE);
                 }
 
-                Bitmap bitmap = null;
-                try {
-                    bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                //  binding.imageView7.setVisibility(View.VISIBLE);
-                //    binding.imageView8.setVisibility(View.VISIBLE);
-                binding.imageView6.setImageBitmap(bitmap);
-                binding.imgEdit.setVisibility(View.VISIBLE);
+
             }
         }
         if (requestCode == PICK_doc_REQUEST) {
             if (resultCode == RESULT_OK) {
-
+                //  if (data != null && data.getData() != null) {
                 Uri uri = data.getData();
-                String uriString = uri.toString();
-                File myFile = new File(uri.getPath());
+                getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
                 File finalFile = new File(FileHelper.getRealPathFromURI(PersonalInfoActivity.this, uri));
                 resumepath = finalFile.getPath();
                 binding.txtdoc.setText(finalFile.getName());
-
-
             }
         }
         if (requestCode == PICK_doc_id_proof_REQUEST) {
@@ -1085,6 +1098,13 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 selected_id_proof_uri = data.getData();                                                         // Get the image file URI
 
                 Uri uri = data.getData();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    if (!Environment.isExternalStorageManager()) {
+                        grantPersistableUriPermissions(uri);
+                    }
+                }
+
                 File file = new File(uri.getPath());//create path from uri
                 final String[] split = file.getPath().split(":");//split the path.
 
@@ -1104,9 +1124,30 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
             }
         }
-
     }
 
+
+    private void grantPersistableUriPermissions(Uri uri) {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                getApplicationContext().grantUriPermission(getApplicationContext().getPackageName(), uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            } catch (IllegalArgumentException e) {
+                // on Kitkat api only 0x3 is allowed (FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION)
+                getApplicationContext().grantUriPermission(getApplicationContext().getPackageName(), uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            } catch (SecurityException e) {
+                Log.e("", e.toString());
+            }
+
+
+            //  getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+       /* final int takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
+        getContentResolver().takePersistableUriPermission(uri, takeFlags);*/
+        }
+
+    }
 
 //-----------------Annual Salary List------------------------------------------------------------
 
@@ -1436,8 +1477,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
                         Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
     }
 
     private void requestPermissions() {
@@ -1447,7 +1487,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 List<String> permssions = new ArrayList<>();
                 permssions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
                 permssions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                permssions.add(Manifest.permission.MANAGE_EXTERNAL_STORAGE);
                 permssions.add(Manifest.permission.CAMERA);
                 return permssions;
             }
@@ -1568,18 +1607,18 @@ public class PersonalInfoActivity extends AppCompatActivity {
                     // pd_loading.setVisibility(View.GONE);
                     binding.progresspersonal.setVisibility(View.GONE);
 
-                   try{
+                  /* try{
                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                            if (!Environment.isExternalStorageManager()) {
                                snackbar.make(findViewById(android.R.id.content), "Permission needed!", Snackbar.LENGTH_INDEFINITE)
                                        .setAction("Settings", new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-                               /* Intent intent = new Intent();
+                               *//* Intent intent = new Intent();
                                 intent.setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
                                 Uri uri = Uri.fromParts("package", this.getPackageName(), null);
                                 intent.setData(uri);
-                                startActivity(intent);*/
+                                startActivity(intent);*//*
 
                                                try {
                                                    Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
@@ -1597,7 +1636,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                            }
                        }
                    }
-                   catch (Exception e){}
+                   catch (Exception e){}*/
                 }
             });
         }

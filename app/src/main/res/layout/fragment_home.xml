@@ -94,7 +94,7 @@
         android:layout_height="0.5dp"
         android:layout_marginTop="5dp"
         android:background="@color/green_50"
-        app:layout_constraintTop_toBottomOf="@+id/l1"></View>
+        app:layout_constraintTop_toBottomOf="@+id/l1"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -126,29 +126,9 @@
                     android:layout_marginLeft="5sp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="5sp"
-                    android:layout_marginBottom="10sp"></androidx.viewpager.widget.ViewPager>
+                    android:layout_marginBottom="10sp"/>
 
-                <!--                <com.denzcoskun.imageslider.ImageSlider-->
-                <!--                    android:id="@+id/image_slider"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="170dp"-->
-                <!--                    app:iss_auto_cycle="true"-->
-                <!--                    app:iss_period="1000"-->
-                <!--                    app:iss_delay="0"/>-->
-
-
-                <!--            <ImageView-->
-                <!--                android:layout_toRightOf="@+id/imageView18"-->
-                <!--                android:id="@+id/imageView19"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="170dp"-->
-                <!--                android:layout_marginTop="15dp"-->
-                <!--                android:src="@drawable/slider_img"-->
-                <!--                app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                app:layout_constraintHorizontal_bias="0.5"-->
-                <!--                app:layout_constraintStart_toStartOf="parent"-->
-                <!--                app:layout_constraintTop_toTopOf="parent" />-->
-            </RelativeLayout>
+                </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/dotsRecyclerView"
